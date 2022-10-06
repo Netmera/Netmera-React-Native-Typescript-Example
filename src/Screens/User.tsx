@@ -19,7 +19,7 @@ const User = () => {
     const [msisdn, setMsisdn] = useState('');
     const [gender, setGender] = useState(NetmeraUser.GENDER_NOT_SPECIFIED);
 
-    const sendUserUpdate = () => { //done
+    const sendUserUpdate = () => {
         const user = new MyNetmeraUser()
 
         // Set Default Attributes

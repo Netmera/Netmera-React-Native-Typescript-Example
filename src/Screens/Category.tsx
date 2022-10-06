@@ -20,7 +20,7 @@ const Category = () => {
 
     const categoryStates = ["ALL", "DELETED", "READ_OR_UNREAD", "READ", "UNREAD"];
 
-    const fetchCategory = async () => {//done
+    const fetchCategory = async () => {
         try {
             const netmeraCategoryFilter = new NetmeraCategoryFilter()
             netmeraCategoryFilter.status = categoryState
@@ -33,7 +33,7 @@ const Category = () => {
         }
     }
 
-    const fetchNextCategoryPage = async () => {//done
+    const fetchNextCategoryPage = async () => {
         try {
             const categories = await Netmera.fetchNextCategoryPage()
             setCategories(categories)
@@ -43,13 +43,13 @@ const Category = () => {
         }
     }
 
-    const handlePushObject = async () => {//done
+    const handlePushObject = async () => {
         if (categories !== undefined && categories.length > 0) {
             Netmera.handleLastMessage(categories[0].categoryName)
         }
     }
 
-    const updateStatusCategories = async () => {//done
+    const updateStatusCategories = async () => {
         if (categoryState === Netmera.PUSH_OBJECT_STATUS_ALL) {
             Alert.alert("Error", "Please select different status than all!!")
             console.log("Please select different status than all!!")
@@ -94,7 +94,7 @@ const Category = () => {
         }
     }
 
-    const getUserCategoryPreferenceList = () => {//done
+    const getUserCategoryPreferenceList = () => {
         Netmera.getUserCategoryPreferenceList().then((response) => {
             setCategories(response)
             console.log("User Category Preference List: " + response)
@@ -103,7 +103,7 @@ const Category = () => {
         });
     };
 
-    const setUserCategoryPreference = (item: NMCategoryPreference) => {//done
+    const setUserCategoryPreference = (item: NMCategoryPreference) => {
         Netmera.setUserCategoryPreference(item.categoryId, !item.optInStatus).then(() => {
             console.log("Successfully set user category preference list")
             setTimeout(() => {

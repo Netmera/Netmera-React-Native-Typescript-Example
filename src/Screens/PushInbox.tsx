@@ -22,7 +22,7 @@ const PushInbox = () => {
 
   const states = ["ALL", "DELETED", "READ_OR_UNREAD", "READ", "UNREAD"];
 
-  const fetchInbox = async () => {//done
+  const fetchInbox = async () => {
     try {
       const netmeraInboxFilter = new NetmeraInboxFilter();
       netmeraInboxFilter.status = inboxState;
@@ -35,7 +35,7 @@ const PushInbox = () => {
     }
   };
 
-  const fetchNextPage = async () => {//done
+  const fetchNextPage = async () => {
     try {
       const inbox = await Netmera.fetchNextPage();
       setInbox(inbox);
@@ -45,7 +45,7 @@ const PushInbox = () => {
     }
   };
 
-  const updateAll = async () => {//done
+  const updateAll = async () => {
     if (!inbox !== undefined) {
       if (inboxState === Netmera.PUSH_OBJECT_STATUS_ALL) {
         Alert.alert("Error", "Please select different status than all!!");
@@ -64,7 +64,7 @@ const PushInbox = () => {
   };
 
   // Handles first push object
-  const handlePushObject = async () => {//done
+  const handlePushObject = async () => {
     if (inbox !== undefined && inbox.length > 0) {
       Netmera.handlePushObject(inbox[0].pushId);
     }
@@ -85,7 +85,7 @@ const PushInbox = () => {
   };
 
   // Returns push object count by selected status.
-  const countForStatus = async () => {//done
+  const countForStatus = async () => {
     try {
       const count = await Netmera.countForStatus(inboxState);
       setStatusCount(count.toString());
@@ -95,7 +95,7 @@ const PushInbox = () => {
   };
 
   // Update first two push object status to "UNREAD".
-  const inboxUpdateStatus = async () => {//done
+  const inboxUpdateStatus = async () => {
     if (inbox === undefined || inbox.length < 2) {
       Alert.alert("Error", "Push objects count is less then 2!");
       console.log("Push objects count is less then 2!");
@@ -109,7 +109,7 @@ const PushInbox = () => {
   };
 
   // Returns inbox count by selected status.
-  const inboxCountForStatus = async () => {//done
+  const inboxCountForStatus = async () => {
     try {
       const filter = new NMInboxStatusCountFilter();
       filter.nmInboxStatus = inboxState;

@@ -16,39 +16,39 @@ const Settings = () => {
         }
     }, [])
 
-    const pushEnabledCheck = async () => {//done
+    const pushEnabledCheck = async () => {
         setIsPushEnabled("Is Push Enabled: " + await Netmera.isPushEnabled())
     }
 
-    const enablePush = () => {//done
+    const enablePush = () => {
         Netmera.enablePush()
     }
 
-    const disablePush = () => {//done
+    const disablePush = () => {
         Netmera.disablePush()
     }
 
-    const disablePopupPresentation = () => {//done
+    const disablePopupPresentation = () => {
         Netmera.disablePopupPresentation()
     }
 
-    const enablePopupPresentation = () => {//done
+    const enablePopupPresentation = () => {
         Netmera.enablePopupPresentation()
     }
 
-    const requestPermissionsForLocation = () => {//done
+    const requestPermissionsForLocation = () => {
         Netmera.requestPermissionsForLocation();
     }
 
-    const setNetmeraMaxActiveRegions = () => {//done
+    const setNetmeraMaxActiveRegions = () => {
         Netmera.setNetmeraMaxActiveRegions(10)
     }
 
-    const turnOffSendingEventAndUserUpdate = () => {//done
+    const turnOffSendingEventAndUserUpdate = () => {
         Netmera.turnOffSendingEventAndUserUpdate(false)
     }
 
-    const getCurrentExternalId = async () => {//done
+    const getCurrentExternalId = async () => {
         setIsPushEnabled("Current External Id: " + await Netmera.currentExternalId())
     };
 

@@ -17,7 +17,7 @@ import {
 
 const Event = () => {
 
-    const sendLoginEvent = () => { //done
+    const sendLoginEvent = () => {
         const loginEvent = new LoginEvent()
         loginEvent.userId = "TestUserId"
         loginEvent.userIda = 21893718239812738
@@ -25,19 +25,19 @@ const Event = () => {
         Netmera.sendEvent(loginEvent)
     }
 
-    const sendRegisterEvent = () => {//done
+    const sendRegisterEvent = () => {
         const registerEvent = new RegisterEvent();
         Netmera.sendEvent(registerEvent)
     }
 
-    const sendViewCartEvent = () => {//done
+    const sendViewCartEvent = () => {
         const viewCartEvent = new ViewCartEvent();
         viewCartEvent.subTotal = 96.7;
         viewCartEvent.itemCount = 9;
         Netmera.sendEvent(viewCartEvent)
     }
 
-    const sendPurchaseEvent = () => { //done
+    const sendPurchaseEvent = () => {
         const netmeraLineItem = new NetmeraLineItem();
         netmeraLineItem.brandId = "TestBrandID";
         netmeraLineItem.brandName = "TestBrandName";
@@ -66,7 +66,7 @@ const Event = () => {
         Netmera.sendEvent(purchaseEvent)
     }
 
-    const sendCustomEvent = () => {//done
+    const sendCustomEvent = () => {
         // Custom event
         const testEvent = new TestEvent();
         testEvent.testAttribute = "TestAttribute";
