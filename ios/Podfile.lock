@@ -369,7 +369,7 @@ PODS:
     - React-perflogger (= 0.68.2)
   - RNCPicker (2.4.4):
     - React-Core
-  - RNNetmera (1.4.3):
+  - RNNetmera (1.4.6):
     - Netmera (= 3.14.10-WithoutDependency)
     - React
   - RNScreens (3.17.0):
@@ -583,7 +583,7 @@ SPEC CHECKSUMS:
   React-runtimeexecutor: b960b687d2dfef0d3761fbb187e01812ebab8b23
   ReactCommon: 095366164a276d91ea704ce53cb03825c487a3f2
   RNCPicker: 0b65be85fe7954fbb2062ef079e3d1cde252d888
-  RNNetmera: b8303131cd7d278a4e9e3c3ad67105d40fb436a3
+  RNNetmera: 4f21d5debb4d89823aa58c60c528c6d66be01655
   RNScreens: 0df01424e9e0ed7827200d6ed1087ddd06c493f9
   SocketRocket: fccef3f9c5cedea1353a9ef6ada904fde10d6608
   Yoga: 99652481fcd320aefa4a7ef90095b95acd181952
