@@ -2,21 +2,22 @@
  * Copyright (c) 2022 Inomera Research.
  */
 
-import React, {useState} from "react";
-import {Alert, FlatList, Text, TouchableHighlight, View} from "react-native";
+import React, { useState } from "react";
+import { Alert, FlatList, Text, TouchableHighlight, View } from "react-native";
 import styles from "../Style";
 import {
     Netmera,
     NetmeraCategory,
     NetmeraCategoryFilter,
-    NMCategoryPreference
+    NMCategoryPreference,
+    NMInboxStatus
 } from "react-native-netmera";
 import SelectDropdown from "react-native-select-dropdown";
 
 const Category = () => {
 
     const [categories, setCategories] = useState<any[]>([])
-    const [categoryState, setCategoryState] = useState(Netmera.PUSH_OBJECT_STATUS_ALL)
+    const [categoryState, setCategoryState] = useState(NMInboxStatus.STATUS_ALL)
 
     const categoryStates = ["ALL", "DELETED", "READ_OR_UNREAD", "READ", "UNREAD"];
 
@@ -50,7 +51,7 @@ const Category = () => {
     }
 
     const updateStatusCategories = async () => {
-        if (categoryState === Netmera.PUSH_OBJECT_STATUS_ALL) {
+        if (categoryState === NMInboxStatus.STATUS_ALL) {
             Alert.alert("Error", "Please select different status than all!!")
             console.log("Please select different status than all!!")
             return
@@ -65,7 +66,7 @@ const Category = () => {
 
         Netmera.updateStatusByCategories(0, count, categoryState).then(() => {
             console.log("Category object status was changed successfully.")
-        }).catch((error) => {
+        }).catch((error: Error) => {
             console.log("error: " + error)
         })
     }
@@ -73,23 +74,23 @@ const Category = () => {
     const updateCategoryState = (value: any) => {
         switch (value) {
             case "ALL":
-                setCategoryState(Netmera.PUSH_OBJECT_STATUS_ALL)
+                setCategoryState(NMInboxStatus.STATUS_ALL)
                 break;
 
             case "DELETED":
-                setCategoryState(Netmera.PUSH_OBJECT_STATUS_DELETED)
+                setCategoryState(NMInboxStatus.STATUS_DELETED)
                 break;
 
             case "READ_OR_UNREAD":
-                setCategoryState(Netmera.PUSH_OBJECT_STATUS_READ_OR_UNREAD)
+                setCategoryState(NMInboxStatus.STATUS_READ_OR_UNREAD)
                 break;
 
             case "READ":
-                setCategoryState(Netmera.PUSH_OBJECT_STATUS_READ)
+                setCategoryState(NMInboxStatus.STATUS_READ)
                 break;
 
             case "UNREAD":
-                setCategoryState(Netmera.PUSH_OBJECT_STATUS_UNREAD)
+                setCategoryState(NMInboxStatus.STATUS_UNREAD)
                 break;
         }
     }
@@ -104,13 +105,13 @@ const Category = () => {
     };
 
     const setUserCategoryPreference = (item: NMCategoryPreference) => {
-        Netmera.setUserCategoryPreference(item.categoryId, !item.optInStatus).then(() => {
+        item.categoryId && Netmera.setUserCategoryPreference(item.categoryId, !item.optInStatus).then(() => {
             console.log("Successfully set user category preference list")
             setTimeout(() => {
                 getUserCategoryPreferenceList()
             }, 500)
 
-        }).catch((error) => {
+        }).catch((error: Error) => {
             console.log("error: " + error)
         });
     };
