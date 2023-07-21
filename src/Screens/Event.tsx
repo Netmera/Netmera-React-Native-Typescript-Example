@@ -14,8 +14,11 @@ import {
     TestEvent,
     ViewCartEvent
 } from "../Models/Events";
+import { useDeeplinkUrl } from '../Hooks/useDeeplinkUrl';
 
 const Event = () => {
+    // Use hook to listen deeplink urls
+    const {deeplinkUrl} = useDeeplinkUrl();
 
     const sendLoginEvent = () => {
         const loginEvent = new LoginEvent()
@@ -90,6 +93,9 @@ const Event = () => {
             <TouchableHighlight style={styles.button} onPress={() => sendCustomEvent()}>
                 <Text style={styles.buttonText}>Custom Text Event</Text>
             </TouchableHighlight>
+            {deeplinkUrl && (
+                <Text style={{marginTop: 10}}>The deep link is: {deeplinkUrl}</Text>
+            )}
         </View>
     )
 };
