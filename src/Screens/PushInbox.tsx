@@ -255,7 +255,7 @@ const PushInbox = () => {
         renderItem={({ item, index }) => {
           return getInboxItem(item, index);
         }}
-        keyExtractor={item => item.pushInstanceId ?? ""}
+        keyExtractor={(item, index) => item.pushInstanceId ?? index.toString()}
         contentContainerStyle={{ width: "100%", justifyContent: "center" }}
         style={{ width: "100%" }}
       />
