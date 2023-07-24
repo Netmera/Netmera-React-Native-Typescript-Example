@@ -7,12 +7,12 @@ export const useDeeplinkUrl = () => {
   const EVENT_NAME = 'url';
 
   useEffect(() => {
-    // If the app is already open, the app is foregrounded and a Linking 'url' event is fired
+    // If the app is already open, it will pass to the foreground state and Linking 'url' event will be triggered.
     Linking.addEventListener(EVENT_NAME, ({url}) => {
       setDeeplinkUrl(url);
     });
 
-    // If the app is not already open, it is opened and the url is passed in as the initialURL
+    // If the app is not already open, it will be launched and the URL will be passed as 'initialUrl'.
     const getUrlAsync = async () => {
       const initialUrl = await Linking.getInitialURL();
       setDeeplinkUrl(initialUrl);
