@@ -103,7 +103,7 @@ const PushInbox = () => {
     }
     Netmera.inboxUpdateStatus(0, 2, NMInboxStatus.STATUS_UNREAD).then(() => {
       console.log("2 push object status was changed successfully.");
-    }).catch((error) => {
+    }).catch((error: any) => {
       console.log("error: " + error);
     });
   };
@@ -255,7 +255,7 @@ const PushInbox = () => {
         renderItem={({ item, index }) => {
           return getInboxItem(item, index);
         }}
-        keyExtractor={item => item.pushInstanceId}
+        keyExtractor={(item, index) => item.pushInstanceId ?? index.toString()}
         contentContainerStyle={{ width: "100%", justifyContent: "center" }}
         style={{ width: "100%" }}
       />

@@ -15,7 +15,6 @@ export const onPushReceive = async message => {
 };
 
 export const onPushOpen = async message => {
-  await Linking.openURL("https://initialcode.com.tr")
   console.log('onPushOpen: ', message);
 };
 
