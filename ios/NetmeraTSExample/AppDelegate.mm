@@ -6,17 +6,24 @@
 #import <RNNetmera/RNNetmeraRCTEventEmitter.h>
 #import <RNNetmera/RNNetmeraUtils.h>
 #import <RNNetmera/RNNetmera.h>
+#import <React/RCTLinkingManager.h>
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-
-  self.moduleName = @"RnDiffApp";
+  self.moduleName = @"NetmeraTSExample";
   // You can add your custom initial props in the dictionary below.
   // They will be passed down to the ViewController used by React Native.
   self.initialProps = @{};
-   return [super application:application didFinishLaunchingWithOptions:launchOptions];
+  
+  // Init Netmera
+  [RNNetmera logging: YES];
+  [RNNetmera initNetmera:[RNCConfig envFor:@"NETMERA_API_KEY"]]; // Replace this with your own NETMERA API KEY.
+  [RNNetmera requestPushNotificationAuthorization];
+  [RNNetmera setPushDelegate:self];
+
+  return [super application:application didFinishLaunchingWithOptions:launchOptions];
 }
 
 
