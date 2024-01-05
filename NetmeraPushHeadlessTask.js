@@ -6,7 +6,13 @@
 
 import { Linking } from "react-native";
 
+export class Token {
+  static token;
+}
+
 export const onPushRegister = async message => {
+  Token.token = message;
+  console.log(Token.token);
   console.log('onPushRegister: ', message);
 };
 
