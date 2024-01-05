@@ -4,7 +4,7 @@
 
 import React from 'react';
 import {Text, TouchableHighlight, View} from "react-native";
-import styles from '../Style'
+import styles from '../../Style'
 import {Netmera} from "react-native-netmera";
 import {
     CustomPurchaseEvent,
@@ -13,8 +13,8 @@ import {
     RegisterEvent,
     TestEvent,
     ViewCartEvent
-} from "../Models/Events";
-import { useDeeplinkUrl } from '../Hooks/useDeeplinkUrl';
+} from "../../Models/Events";
+import { useDeeplinkUrl } from '../../Hooks/useDeeplinkUrl';
 
 const Event = () => {
     // Use hook to listen deeplink urls

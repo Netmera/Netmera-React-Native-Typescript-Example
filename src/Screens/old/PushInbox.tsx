@@ -4,7 +4,7 @@
 
 import React, { useState } from "react";
 import { Alert, FlatList, Text, TouchableHighlight, View } from "react-native";
-import styles from "../Style";
+import styles from "../../Style";
 import {
   Netmera,
   NetmeraInboxFilter,

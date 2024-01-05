@@ -4,7 +4,7 @@
 
 import React, {useEffect, useState} from "react";
 import {Platform, Text, TouchableHighlight, View} from "react-native";
-import styles from "../Style";
+import styles from "../../Style";
 import {Netmera} from "react-native-netmera";
 
 const Settings = () => {
