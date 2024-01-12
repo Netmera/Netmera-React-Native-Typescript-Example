@@ -1,5 +1,6 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {
+    Platform,
     SafeAreaView,
     ScrollView,
     StyleSheet,
@@ -17,24 +18,54 @@ const enum PushState {
     DisablePush = 'DisablePush'
 }
 
+const enum PopUpPresentationState {
+    EnablePopUpPresentation = 'EnablePopUpPresentation',
+    DisablePopUpPresentation = 'DisablePopUpPresentation',
+}
+
 const Dashboard = ({navigation}: any) => {
-
     const [pushState, setPushState] = useState<PushState>(PushState.DisablePush);
+    const [popUpPresentationState, setPopUpPresentationState] = useState<PopUpPresentationState>(PopUpPresentationState.DisablePopUpPresentation);
 
-    const categoryInboxTest = () => {
-        navigation.navigate("CategoryInboxTest");
-    }
+    useEffect(() => {
+        if (Platform.OS === 'ios') {
+            Netmera.requestPushNotificationAuthorization();
+        }
+    }, [])
 
-    const commerceEventTest = () => {
-        navigation.navigate("CommerceEventTest");
-    }
+    useEffect(() => {
+        if(popUpPresentationState === PopUpPresentationState.DisablePopUpPresentation){
+            Netmera.disablePopupPresentation();
+        } else {
+            Netmera.enablePopupPresentation();
+        }
+    }, [popUpPresentationState]);
+
+    useEffect(() => {
+        if(pushState === PushState.DisablePush){
+            Netmera.disablePush();
+        } else {
+            Netmera.enablePush();
+        }
+    }, [pushState]);
 
     const coupons = () => {
         navigation.navigate("Coupons");
     }
 
+    const currentExternalId = async () =>
+        Toast.show({
+            type: 'info',
+            text1: "Current External Id: " + await Netmera.currentExternalId(),
+            position: "bottom",
+        });
+
     const disableData = () => {
         Netmera.stopDataTransfer();
+    }
+
+    const disablePopUpPresentation = () => {
+        setPopUpPresentationState(popUpPresentationState === PopUpPresentationState.DisablePopUpPresentation ? PopUpPresentationState.EnablePopUpPresentation: PopUpPresentationState.DisablePopUpPresentation);
     }
 
     const disablePush = () => {
@@ -49,24 +80,18 @@ const Dashboard = ({navigation}: any) => {
         Netmera.requestPermissionsForLocation()
     }
 
-    const enablePushNotification = () => {
-        Netmera.enablePush();
-    }
-
     const events = () => {
         navigation.navigate("Events");
     }
 
-    const generalEventTest = () => {
-        navigation.navigate("GeneralEventTest");
-    }
-
-    const mediaEventTest = () => {
-        navigation.navigate("MediaEventTest");
-    }
-
-    const pushInboxTest = () => {
-        navigation.navigate("PushInboxTest");
+    const isPushEnabled = async () =>
+        Toast.show({
+            type: 'info',
+            text1: "Is Push Enabled: " + await Netmera.isPushEnabled(),
+            position: "bottom",
+        });
+    const setNetmeraMaxActiveRegion = () => {
+        Netmera.setNetmeraMaxActiveRegions(10)
     }
 
     const toastPushTest = () =>
@@ -76,11 +101,9 @@ const Dashboard = ({navigation}: any) => {
             position: "bottom",
         });
 
-
-    const updateUserTest = () => {
-        navigation.navigate("UpdateUserTest");
+    const turnOffSendingEventAndUserUpdate = () => {
+        Netmera.turnOffSendingEventAndUserUpdate(false)
     }
-
 
     const buttons = [
         {
@@ -92,44 +115,36 @@ const Dashboard = ({navigation}: any) => {
             method: coupons
         },
         {
-            name: 'ENABLE PUSH NOTIFICATION',
-            method: enablePushNotification
+            name: 'CURRENT EXTERNAL ID',
+            method: currentExternalId
         },
         {
             name: 'EVENTS',
             method: events
         },
         {
-            name: 'PUSH INBOX TEST',
-            method: pushInboxTest
-        },
-        {
-            name: 'CATEGORY INBOX TEST',
-            method: categoryInboxTest
-        },
-        {
-            name: 'UPDATE USER TEST',
-            method: updateUserTest
-        },
-        {
-            name: 'COMMERCE EVENT TEST',
-            method: commerceEventTest
-        },
-        {
-            name: 'MEDIA EVENT TEST',
-            method: mediaEventTest
-        },
-        {
-            name: 'GENERAL EVENT TEST',
-            method: generalEventTest,
+            name: 'IS PUSH ENABLED',
+            method: isPushEnabled
         },
         {
             name: pushState === PushState.EnablePush ? 'ENABLE PUSH': 'DISABLE PUSH',
             method: disablePush
         },
         {
+            name: popUpPresentationState === PopUpPresentationState.EnablePopUpPresentation ? 'ENABLE PRESENTATION STATE': 'DISABLE PRESENTATION STATE',
+            method: disablePopUpPresentation
+        },
+        {
+            name: 'SET NETMERA MAX ACTIVE REGION',
+            method: setNetmeraMaxActiveRegion
+        },
+        {
             name: 'TOAST PUSH TOKEN',
             method: toastPushTest
+        },
+        {
+            name: 'TURN OFF SENDING EVENT AND USER UPDATE',
+            method: turnOffSendingEventAndUserUpdate
         },
     ];
 

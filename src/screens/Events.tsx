@@ -1,11 +1,7 @@
-/*
- * Copyright (c) 2022 Inomera Research.
- */
-
-import React from 'react';
-import {Text, TouchableHighlight, View} from "react-native";
-import styles from '../../Style'
-import {Netmera} from "react-native-netmera";
+import React from "react";
+import {SafeAreaView, StyleSheet, Text, TouchableOpacity, View} from "react-native";
+import Colors from "../Colors";
+import {useDeeplinkUrl} from "../hooks/useDeeplinkUrl";
 import {
     CustomPurchaseEvent,
     LoginEvent,
@@ -13,12 +9,16 @@ import {
     RegisterEvent,
     TestEvent,
     ViewCartEvent
-} from "../../Models/Events";
-import { useDeeplinkUrl } from '../../Hooks/useDeeplinkUrl';
+} from "../models/Events";
+import {Netmera} from "react-native-netmera";
 
-const Event = () => {
-    // Use hook to listen deeplink urls
+const Events = ({navigation}:any) => {
+
     const {deeplinkUrl} = useDeeplinkUrl();
+
+    const category = () => {
+        navigation.navigate('Category')
+    }
 
     const sendLoginEvent = () => {
         const loginEvent = new LoginEvent()
@@ -26,6 +26,14 @@ const Event = () => {
         loginEvent.userIda = 21893718239812738
         loginEvent.userIdax = "21893718239812738"
         Netmera.sendEvent(loginEvent)
+    }
+
+    const pushInbox = () => {
+        navigation.navigate('PushInbox')
+    }
+
+    const userEvent = () => {
+        navigation.navigate('User');
     }
 
     const sendRegisterEvent = () => {
@@ -76,28 +84,80 @@ const Event = () => {
         Netmera.sendEvent(testEvent);
     }
 
-    return (
-        <View style={styles.container}>
-            <TouchableHighlight style={styles.button} onPress={() => sendLoginEvent()}>
-                <Text style={styles.buttonText}>Login Event</Text>
-            </TouchableHighlight>
-            <TouchableHighlight style={styles.button} onPress={() => sendRegisterEvent()}>
-                <Text style={styles.buttonText}>Register Event</Text>
-            </TouchableHighlight>
-            <TouchableHighlight style={styles.button} onPress={() => sendViewCartEvent()}>
-                <Text style={styles.buttonText}>View Cart Event</Text>
-            </TouchableHighlight>
-            <TouchableHighlight style={styles.button} onPress={() => sendPurchaseEvent()}>
-                <Text style={styles.buttonText}>Purchase Event</Text>
-            </TouchableHighlight>
-            <TouchableHighlight style={styles.button} onPress={() => sendCustomEvent()}>
-                <Text style={styles.buttonText}>Custom Text Event</Text>
-            </TouchableHighlight>
-            {deeplinkUrl && (
-                <Text style={{marginTop: 10}}>The deep link is: {deeplinkUrl}</Text>
-            )}
-        </View>
-    )
-};
+    const buttons = [
+        {
+            name: 'CATEGORY',
+            method: category
+        },
+        {
+            name: 'LOGIN EVENT',
+            method: sendLoginEvent
+        },
+        {
+            name: 'REGISTER EVENT',
+            method: sendRegisterEvent
+        },
+        {
+            name: 'VIEW CART EVENT',
+            method: sendViewCartEvent
+        },
+        {
+            name: 'PURCHASE EVENT',
+            method: sendPurchaseEvent
+        },
+        {
+            name: 'CUSTOM TEXT EVENT',
+            method: sendCustomEvent
+        },
+        {
+            name: 'PUSH INBOX',
+            method: pushInbox
+        },
+        {
+            name: 'USER',
+            method: userEvent
+        },
+    ];
 
-export default Event;
+
+
+    return(
+        <SafeAreaView style={styles.container}>
+            {
+                buttons.map((item, index)=> {
+                    return(
+                        <TouchableOpacity style={styles.button} onPress={item.method} key={index} activeOpacity={0.6}>
+                            <Text style={styles.text}>{item.name}</Text>
+                        </TouchableOpacity>
+                    );
+                })
+            }
+        </SafeAreaView>
+    );
+}
+
+
+const styles = StyleSheet.create({
+    button: {
+        marginVertical: 5,
+        marginHorizontal: 35,
+        borderRadius: 4,
+        alignItems:"center",
+        justifyContent: "center",
+        paddingVertical: 10,
+        backgroundColor: Colors.primary
+    },
+
+    container:{
+      flex: 1,
+      justifyContent: "center"
+    },
+
+    text: {
+        fontWeight: '600',
+        fontSize: 13,
+        color: Colors.white
+    }
+});
+
+export default Events;

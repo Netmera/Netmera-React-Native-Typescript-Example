@@ -4,11 +4,11 @@
 
 import React, {useState} from "react";
 import {Platform, SafeAreaView, ScrollView, Text, TextInput, TouchableHighlight, View} from "react-native";
-import styles from "../../Style";
+import styles from "../Style";
 import {Picker} from "@react-native-picker/picker";
 import {Netmera, NMUserGender} from "react-native-netmera";
-import MyNetmeraUser from "../../Models/MyNetmeraUser";
-import Colors from "../../Colors";
+import MyNetmeraUser from "../models/MyNetmeraUser";
+import Colors from "../Colors";
 
 const User = () => {
 

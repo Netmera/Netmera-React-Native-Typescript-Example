@@ -2,7 +2,13 @@ import React, {useEffect, useState} from "react";
 import {StyleSheet, Text, TouchableOpacity, View} from "react-native";
 import SelectDropdown from "react-native-select-dropdown";
 import Colors from "../Colors";
-import {DoubleButtonGroup} from "./PushInboxTest";
+
+export interface DoubleButtonGroup {
+    firstButtonText: string;
+    firstButtonEvent: () => void;
+    secondButtonText: string;
+    secondButtonEvent: () => void
+}
 
 const CategoryInboxTest = () => {
 
