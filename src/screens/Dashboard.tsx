@@ -194,7 +194,7 @@ const styles = StyleSheet.create({
 
     deviceTokenContainer: {
         flexDirection: "row",
-        marginLeft: 15,
+        marginHorizontal: 15,
         marginTop: 5,
     },
 
@@ -208,7 +208,7 @@ const styles = StyleSheet.create({
         fontWeight: '300',
         fontSize: 13,
         color: Colors.black,
-        marginLeft: 15,
+        marginHorizontal: 15,
     }
 });
 export default Dashboard;
