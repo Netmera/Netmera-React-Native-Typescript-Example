@@ -7,5 +7,5 @@ export default {
   darker: '#222',
   black: '#000',
   buttonColor: '#48BBEC',
-  orange: '#FF7F00'
+  orange: '#FF7F00',
 };

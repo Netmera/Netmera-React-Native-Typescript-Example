@@ -12,7 +12,6 @@ NETMERA is a Mobile Application Engagement Platform. We offer a series of develo
 
 ### Manual installation
 
-
 #### iOS
 
 1. In XCode, in the project navigator, right click `Libraries` ➜ `Add Files to [your project's name]`
@@ -23,8 +22,10 @@ NETMERA is a Mobile Application Engagement Platform. We offer a series of develo
 #### Android
 
 1. Open up `android/app/src/main/java/[...]/MainActivity.java`
+
 - Add `import com.netmera.reactnativesdk.RNNetmeraPackage;` to the imports at the top of the file
 - Add `new RNNetmeraPackage()` to the list returned by the `getPackages()` method
+
 2. Append the following lines to `android/settings.gradle`:
    ```
    include ':react-native-netmera'
@@ -39,11 +40,11 @@ For both native sides(Android & iOS) you don't have to include extra Netmera SDK
 
 ### Setup - Android Part
 
-1) Create and register your app in [Firebase console](https://firebase.google.com/).
+1. Create and register your app in [Firebase console](https://firebase.google.com/).
 
-2) Download `google-services.json` file and place it into android/app/ folder.
+2. Download `google-services.json` file and place it into android/app/ folder.
 
-3) In your project's build gradle file, add the following dependency.
+3. In your project's build gradle file, add the following dependency.
 
 ```
 buildscript {
@@ -71,31 +72,31 @@ allprojects {
 }
 ```
 
-4) In your app's build gradle file, add the following dependency.
+4. In your app's build gradle file, add the following dependency.
 
 ```
 
  dependencies {
- 
+
      implementation 'androidx.core:core:1.1.0'
-     
+
  }
 ```
 
-5) Add the following into the top of app's build.gradle file
+5. Add the following into the top of app's build.gradle file
 
 ```
 apply plugin: 'com.google.gms.google-services'
 apply plugin: 'com.huawei.agconnect'
 ```
 
-6) Create an application class as shown below.
+6. Create an application class as shown below.
 
 - Initialize Netmera SDK in your Application class.
 
-``` 
+```
     public class MainApplication extends Application {
-    
+
         @Override
         public void onCreate() {
             super.onCreate();
@@ -110,7 +111,7 @@ apply plugin: 'com.huawei.agconnect'
     }
 ```
 
-7) Create a new `NetmeraPushHeadlessTask.js` inside your React Native project.
+7. Create a new `NetmeraPushHeadlessTask.js` inside your React Native project.
 
 ```
 export const onPushRegister = async (message) => {
@@ -138,7 +139,7 @@ export const onCarouselObjectSelected = async (message) => {
 };
 ```
 
-8) Init `NetmeraBroadcastReceiver` inside your `index.js` file.
+8. Init `NetmeraBroadcastReceiver` inside your `index.js` file.
 
 ```
 import {
@@ -158,12 +159,12 @@ Netmera.initBroadcastReceiver(
     onPushButtonClicked,
     onCarouselObjectSelected
 )
-   
+
 // This should be called after Netmera.initBroadcastReceiver method.
 AppRegistry.registerComponent(appName, () => App);
 ```
 
-9) If you have custom Firebase Messaging integration, please see usage below.
+9. If you have custom Firebase Messaging integration, please see usage below.
 
 ```
 messaging()
@@ -179,7 +180,7 @@ messaging().onMessage(async remoteMessage => {
 });
 ```
 
-10) If you have custom Huawei Messaging integration, please see usage below.
+10. If you have custom Huawei Messaging integration, please see usage below.
 
 ```
 HmsPushInstanceId.getToken("")
@@ -199,13 +200,13 @@ HmsPushEvent.onRemoteMessageReceived(event => {
 
 ### Setup - iOS Part
 
-1) Navigate to ios folder in your terminal and run the following command.
+1. Navigate to ios folder in your terminal and run the following command.
 
 ```
 $ pod install
 ```
 
-2) If you want to use Android alike message sending from iOS to react native please consider shaping your AppDelegate class as following.
+2. If you want to use Android alike message sending from iOS to react native please consider shaping your AppDelegate class as following.
 
 ```
 #import "AppDelegate.h"
@@ -217,14 +218,14 @@ $ pod install
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-  
+
   // Init Netmera
   [RNNetmera logging: YES];
   [RNNetmera initNetmera:[ReactNativeConfig envFor:@"NETMERA_API_KEY"]]; // Replace this with your own NETMERA API KEY.
   [RNNetmera requestPushNotificationAuthorization];
   [RNNetmera setPushDelegate:self];
   [Netmera setAppGroupName:@"group.com.netmerareactnativeexample"]; // Set your app group name
-  
+
   return YES;
 }
 
@@ -257,14 +258,16 @@ $ pod install
 @end
 
 ```
+
 For example if you trigger `[RNNetmeraRCTEventEmitter onPushReceive: @{@"userInfo" : notification.request.content.userInfo}]` from AppDelegate, in the react native part the following method will be triggered.
+
 ```
 export const onPushReceive = async (message) => {
     console.log("onPushReceive: ", message);
 };
 ```
 
-3) In order to use iOS10 Media Push, follow the instructions in [Netmera Product Hub.](https://developer.netmera.com/en/IOS/Push-Notifications#using-ios10-media-push)
+3. In order to use iOS10 Media Push, follow the instructions in [Netmera Product Hub.](https://developer.netmera.com/en/IOS/Push-Notifications#using-ios10-media-push)
 
    ```
    // For receiving Media Push, you must add Netmera pods to top of your Podfile
@@ -335,6 +338,7 @@ updateUser() {
     Netmera.sendEvent(purchaseEvent)
   }
 ```
+
 ##### Netmera Inbox Examples
 
 ```

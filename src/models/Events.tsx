@@ -2,7 +2,7 @@
  * Copyright (c) 2022 Inomera Research.
  */
 
-import {NetmeraEvent} from "react-native-netmera";
+import {NetmeraEvent} from 'react-native-netmera';
 
 class LoginEvent extends NetmeraEvent {
   code = 'n:cl';

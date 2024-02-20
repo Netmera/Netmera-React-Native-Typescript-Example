@@ -2,25 +2,24 @@
  * Copyright (c) 2022 Inomera Research.
  */
 
-import React, { useState } from "react";
-import { Alert, FlatList, Text, TouchableHighlight, View } from "react-native";
-import styles from "../Style";
+import React, {useState} from 'react';
+import {Alert, FlatList, Text, TouchableHighlight, View} from 'react-native';
+import styles from '../Style';
 import {
   Netmera,
   NetmeraInboxFilter,
   NetmeraPushInbox,
   NMInboxStatus,
-  NMInboxStatusCountFilter
-} from "react-native-netmera";
-import SelectDropdown from "react-native-select-dropdown";
+  NMInboxStatusCountFilter,
+} from 'react-native-netmera';
+import SelectDropdown from 'react-native-select-dropdown';
 
 const PushInbox = () => {
-
   const [inbox, setInbox] = useState<NetmeraPushInbox[]>([]);
   const [inboxState, setInboxState] = useState(NMInboxStatus.STATUS_ALL);
-  const [statusCount, setStatusCount] = useState("0");
+  const [statusCount, setStatusCount] = useState('0');
 
-  const states = ["ALL", "DELETED", "READ_OR_UNREAD", "READ", "UNREAD"];
+  const states = ['ALL', 'DELETED', 'READ_OR_UNREAD', 'READ', 'UNREAD'];
 
   const fetchInbox = async () => {
     try {
@@ -28,10 +27,10 @@ const PushInbox = () => {
       netmeraInboxFilter.status = inboxState;
       netmeraInboxFilter.pageSize = 2; // Fetch two push object
       const inbox = await Netmera.fetchInbox(netmeraInboxFilter);
-      console.log("inbox", inbox);
+      console.log('inbox', inbox);
       setInbox(inbox);
     } catch (e) {
-      console.log("error", e);
+      console.log('error', e);
     }
   };
 
@@ -39,26 +38,26 @@ const PushInbox = () => {
     try {
       const inbox = await Netmera.fetchNextPage();
       setInbox(inbox);
-      console.log("inbox", inbox);
+      console.log('inbox', inbox);
     } catch (e) {
-      console.log("error", e);
+      console.log('error', e);
     }
   };
 
   const updateAll = async () => {
     if (!inbox !== undefined) {
       if (inboxState === NMInboxStatus.STATUS_ALL) {
-        Alert.alert("Error", "Please select different status than all!!");
-        console.log("Please select different status than all!!");
+        Alert.alert('Error', 'Please select different status than all!!');
+        console.log('Please select different status than all!!');
         return;
       }
 
       try {
         Netmera.updateAll(inboxState)
           .then(() => fetchInbox())
-          .catch((error: any) => console.log("error: " + error));
+          .catch((error: any) => console.log('error: ' + error));
       } catch (error) {
-        console.log("error: " + error);
+        console.log('error: ' + error);
       }
     }
   };
@@ -75,7 +74,10 @@ const PushInbox = () => {
     if (inbox !== undefined && inbox.length > 0) {
       for (let i = 0; i < inbox.length; i++) {
         const element = inbox[i];
-        if (element.interactiveActions && element.interactiveActions.length > 0) {
+        if (
+          element.interactiveActions &&
+          element.interactiveActions.length > 0
+        ) {
           const action = JSON.parse(element.interactiveActions[0].toString());
           Netmera.handleInteractiveAction(action.id);
           return;
@@ -90,22 +92,24 @@ const PushInbox = () => {
       const count = await Netmera.countForStatus(inboxState);
       setStatusCount(count.toString());
     } catch (error) {
-      console.log("error: " + error);
+      console.log('error: ' + error);
     }
   };
 
   // Update first two push object status to "UNREAD".
   const inboxUpdateStatus = async () => {
     if (inbox === undefined || inbox.length < 2) {
-      Alert.alert("Error", "Push objects count is less then 2!");
-      console.log("Push objects count is less then 2!");
+      Alert.alert('Error', 'Push objects count is less then 2!');
+      console.log('Push objects count is less then 2!');
       return;
     }
-    Netmera.inboxUpdateStatus(0, 2, NMInboxStatus.STATUS_UNREAD).then(() => {
-      console.log("2 push object status was changed successfully.");
-    }).catch((error: any) => {
-      console.log("error: " + error);
-    });
+    Netmera.inboxUpdateStatus(0, 2, NMInboxStatus.STATUS_UNREAD)
+      .then(() => {
+        console.log('2 push object status was changed successfully.');
+      })
+      .catch((error: any) => {
+        console.log('error: ' + error);
+      });
   };
 
   // Returns inbox count by selected status.
@@ -116,37 +120,45 @@ const PushInbox = () => {
       filter.includeExpired = true;
       const nmInboxStatusCount = await Netmera.getInboxCountForStatus(filter);
 
-      let countStatusText = "ALL: " + nmInboxStatusCount[NMInboxStatus.STATUS_ALL] + ", " +
-        "READ: " + nmInboxStatusCount[NMInboxStatus.STATUS_READ] + ", " +
-        "UNREAD: " + nmInboxStatusCount[NMInboxStatus.STATUS_UNREAD] + ", " +
-        "DELETED: " + nmInboxStatusCount[NMInboxStatus.STATUS_DELETED];
+      let countStatusText =
+        'ALL: ' +
+        nmInboxStatusCount[NMInboxStatus.STATUS_ALL] +
+        ', ' +
+        'READ: ' +
+        nmInboxStatusCount[NMInboxStatus.STATUS_READ] +
+        ', ' +
+        'UNREAD: ' +
+        nmInboxStatusCount[NMInboxStatus.STATUS_UNREAD] +
+        ', ' +
+        'DELETED: ' +
+        nmInboxStatusCount[NMInboxStatus.STATUS_DELETED];
 
       setStatusCount(countStatusText);
-      console.log("nmInboxStatusCount: ", countStatusText);
+      console.log('nmInboxStatusCount: ', countStatusText);
     } catch (e) {
-      console.log("error", e);
+      console.log('error', e);
     }
   };
 
   const updateInboxState = (value: any) => {
     switch (value) {
-      case "ALL":
+      case 'ALL':
         setInboxState(NMInboxStatus.STATUS_ALL);
         break;
 
-      case "DELETED":
+      case 'DELETED':
         setInboxState(NMInboxStatus.STATUS_DELETED);
         break;
 
-      case "READ_OR_UNREAD":
+      case 'READ_OR_UNREAD':
         setInboxState(NMInboxStatus.STATUS_READ_OR_UNREAD);
         break;
 
-      case "READ":
+      case 'READ':
         setInboxState(NMInboxStatus.STATUS_READ);
         break;
 
-      case "UNREAD":
+      case 'UNREAD':
         setInboxState(NMInboxStatus.STATUS_UNREAD);
         break;
     }
@@ -154,28 +166,61 @@ const PushInbox = () => {
 
   const getInboxItem = (item: NetmeraPushInbox, index: number) => {
     return (
-      <View style={{ paddingHorizontal: 10, width: "100%" }}>
-        <Text>Title: {item.title === undefined ? "null" : item.title}</Text>
-        <Text>Subtitle: {item.subtitle === undefined ? "null" : item.subtitle}</Text>
-        <Text>Push Type: {item.pushType === undefined ? "null" : item.pushType}</Text>
-        <Text>Push Id: {item.pushId === undefined ? "null" : item.pushId}</Text>
-        <Text>Push Instance
-          Id: {item.pushInstanceId === undefined ? "null" : item.pushInstanceId}</Text>
-        <Text>Send Date: {item.sendDate === undefined ? "null" : item.sendDate}</Text>
-        <Text>Inbox Status: {item.inboxStatus === undefined ? "null" : item.inboxStatus}</Text>
-        <Text>Action Deeplink
-          Url: {item.deepLink === undefined ? "null" : item.deepLink}</Text>
-        <Text>Action Web Page
-          Url: {item.webPage === undefined ? "null" : item.webPage}</Text>
-        <Text>External Id: {item.externalId === undefined ? "null" : item.externalId}</Text>
-        <Text>Media Attachment
-          Url: {item.mediaAttachmentURL === undefined ? "null" : item.mediaAttachmentURL}</Text>
-        <Text>Categories: {item.categories === undefined ? "null" : JSON.stringify(item.categories)}</Text>
-        <Text>Custom Json: {item.customJson === undefined ? "null" : JSON.stringify(item.customJson)}</Text>
-        {index !== inbox.length - 1 ?
-          <View style={styles.divider} /> :
-          <View style={{ marginBottom: 15 }} />
-        }
+      <View style={{paddingHorizontal: 10, width: '100%'}}>
+        <Text>Title: {item.title === undefined ? 'null' : item.title}</Text>
+        <Text>
+          Subtitle: {item.subtitle === undefined ? 'null' : item.subtitle}
+        </Text>
+        <Text>
+          Push Type: {item.pushType === undefined ? 'null' : item.pushType}
+        </Text>
+        <Text>Push Id: {item.pushId === undefined ? 'null' : item.pushId}</Text>
+        <Text>
+          Push Instance Id:{' '}
+          {item.pushInstanceId === undefined ? 'null' : item.pushInstanceId}
+        </Text>
+        <Text>
+          Send Date: {item.sendDate === undefined ? 'null' : item.sendDate}
+        </Text>
+        <Text>
+          Inbox Status:{' '}
+          {item.inboxStatus === undefined ? 'null' : item.inboxStatus}
+        </Text>
+        <Text>
+          Action Deeplink Url:{' '}
+          {item.deepLink === undefined ? 'null' : item.deepLink}
+        </Text>
+        <Text>
+          Action Web Page Url:{' '}
+          {item.webPage === undefined ? 'null' : item.webPage}
+        </Text>
+        <Text>
+          External Id:{' '}
+          {item.externalId === undefined ? 'null' : item.externalId}
+        </Text>
+        <Text>
+          Media Attachment Url:{' '}
+          {item.mediaAttachmentURL === undefined
+            ? 'null'
+            : item.mediaAttachmentURL}
+        </Text>
+        <Text>
+          Categories:{' '}
+          {item.categories === undefined
+            ? 'null'
+            : JSON.stringify(item.categories)}
+        </Text>
+        <Text>
+          Custom Json:{' '}
+          {item.customJson === undefined
+            ? 'null'
+            : JSON.stringify(item.customJson)}
+        </Text>
+        {index !== inbox.length - 1 ? (
+          <View style={styles.divider} />
+        ) : (
+          <View style={{marginBottom: 15}} />
+        )}
       </View>
     );
   };
@@ -187,63 +232,78 @@ const PushInbox = () => {
           <SelectDropdown
             data={states}
             buttonStyle={styles.dropdown}
-            buttonTextStyle={{ fontSize: 13 }}
-            rowTextStyle={{ fontSize: 13 }}
-            dropdownStyle={{ width: "50%" }}
-            dropdownIconPosition={"right"}
+            buttonTextStyle={{fontSize: 13}}
+            rowTextStyle={{fontSize: 13}}
+            dropdownStyle={{width: '50%'}}
+            dropdownIconPosition={'right'}
             defaultValueByIndex={0}
-            onSelect={(value) => updateInboxState(value)}
-            buttonTextAfterSelection={(item) => item}
-            rowTextForSelection={(item) => {
+            onSelect={value => updateInboxState(value)}
+            buttonTextAfterSelection={item => item}
+            rowTextForSelection={item => {
               return item;
-            }} />
+            }}
+          />
         </View>
 
         <View style={styles.rowItem}>
-          <TouchableHighlight style={[styles.button, styles.inboxButton]} onPress={() => fetchInbox()}>
+          <TouchableHighlight
+            style={[styles.button, styles.inboxButton]}
+            onPress={() => fetchInbox()}>
             <Text style={styles.buttonText}>Fetch Inbox</Text>
           </TouchableHighlight>
         </View>
         <View style={styles.rowItem}>
-          <TouchableHighlight style={[styles.button, styles.inboxButton]} onPress={() => fetchNextPage()}>
+          <TouchableHighlight
+            style={[styles.button, styles.inboxButton]}
+            onPress={() => fetchNextPage()}>
             <Text style={styles.buttonText}>Fetch Next Page</Text>
           </TouchableHighlight>
         </View>
-
       </View>
       <View style={styles.row}>
         <View style={styles.rowItem}>
-          <TouchableHighlight style={[styles.button, styles.inboxButton]} onPress={() => updateAll()}>
+          <TouchableHighlight
+            style={[styles.button, styles.inboxButton]}
+            onPress={() => updateAll()}>
             <Text style={styles.buttonText}>Update All</Text>
           </TouchableHighlight>
         </View>
         <View style={styles.rowItem}>
-          <TouchableHighlight style={[styles.button, styles.inboxButton]}
-                              onPress={() => inboxUpdateStatus()}>
-            <Text style={styles.buttonText}>Update Status (Unread 2 elem.)</Text>
+          <TouchableHighlight
+            style={[styles.button, styles.inboxButton]}
+            onPress={() => inboxUpdateStatus()}>
+            <Text style={styles.buttonText}>
+              Update Status (Unread 2 elem.)
+            </Text>
           </TouchableHighlight>
         </View>
         <View style={styles.rowItem}>
-          <TouchableHighlight style={[styles.button, styles.inboxButton]}
-                              onPress={() => inboxCountForStatus()}>
+          <TouchableHighlight
+            style={[styles.button, styles.inboxButton]}
+            onPress={() => inboxCountForStatus()}>
             <Text style={styles.buttonText}>Inbox Count For Status</Text>
           </TouchableHighlight>
         </View>
       </View>
       <View style={styles.row}>
         <View style={styles.rowItem}>
-          <TouchableHighlight style={[styles.button, styles.inboxButton]} onPress={() => countForStatus()}>
+          <TouchableHighlight
+            style={[styles.button, styles.inboxButton]}
+            onPress={() => countForStatus()}>
             <Text style={styles.buttonText}>Count For Status</Text>
           </TouchableHighlight>
         </View>
         <View style={styles.rowItem}>
-          <TouchableHighlight style={[styles.button, styles.inboxButton]} onPress={() => handlePushObject()}>
+          <TouchableHighlight
+            style={[styles.button, styles.inboxButton]}
+            onPress={() => handlePushObject()}>
             <Text style={styles.buttonText}>Handle Push Object</Text>
           </TouchableHighlight>
         </View>
         <View style={styles.rowItem}>
-          <TouchableHighlight style={[styles.button, styles.inboxButton]}
-                              onPress={() => handleInteractiveAction()}>
+          <TouchableHighlight
+            style={[styles.button, styles.inboxButton]}
+            onPress={() => handleInteractiveAction()}>
             <Text style={styles.buttonText}>Handle Interactive Action</Text>
           </TouchableHighlight>
         </View>
@@ -252,12 +312,12 @@ const PushInbox = () => {
 
       <FlatList
         data={inbox}
-        renderItem={({ item, index }) => {
+        renderItem={({item, index}) => {
           return getInboxItem(item, index);
         }}
         keyExtractor={(item, index) => item.pushInstanceId ?? index.toString()}
-        contentContainerStyle={{ width: "100%", justifyContent: "center" }}
-        style={{ width: "100%" }}
+        contentContainerStyle={{width: '100%', justifyContent: 'center'}}
+        style={{width: '100%'}}
       />
     </View>
   );

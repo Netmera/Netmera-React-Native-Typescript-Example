@@ -4,8 +4,6 @@
 
 // Netmera Push Events
 
-import { Linking } from "react-native";
-
 export class Token {
   static token;
 }
