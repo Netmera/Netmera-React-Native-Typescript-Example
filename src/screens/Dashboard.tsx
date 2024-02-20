@@ -119,6 +119,10 @@ const Dashboard = ({navigation}: any) => {
     navigation.navigate('User');
   };
 
+  const requestPushNotificationAuthorization = () => {
+    Netmera.requestPushNotificationAuthorization();
+  };
+
   const toastPushTest = () =>
     Toast.show({
       type: 'info',
@@ -134,6 +138,10 @@ const Dashboard = ({navigation}: any) => {
     {
       name: 'ENABLE LOCATION & GEOFENCE',
       method: enableLocationAndGeofence,
+    },
+    {
+      name: 'REQUEST PUSH NOTIFICATION AUTHORIZATION',
+      method: requestPushNotificationAuthorization,
     },
     {
       name: 'COUPONS',

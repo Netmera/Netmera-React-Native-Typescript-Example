@@ -7,7 +7,7 @@
  */
 
 import React from 'react';
-import {Platform, StatusBar, Text, View} from 'react-native';
+import { Platform, StatusBar, Text, TouchableOpacity, View } from "react-native";
 import {NavigationContainer} from '@react-navigation/native';
 import {
   createNativeStackNavigator,
@@ -36,15 +36,13 @@ const App = () => {
         </Text>
       </View>
     ),
-    /*
-      TODO: SET PROPERTIES Button
-      headerRight: () => (
-        <TouchableOpacity onPress={()=> console.log("setProperties")}>
+    headerRight: () => (
+      <TouchableOpacity onPress={() => console.log('setProperties')}>
         <Text style={{color: Colors.white}}>SET PROPERTIES</Text>
       </TouchableOpacity>
     ),
-      * */
   };
+
   return (
     <NavigationContainer>
       <StatusBar
