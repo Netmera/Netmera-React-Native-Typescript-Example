@@ -18,27 +18,13 @@ import {
 } from '../models/Events';
 import {Netmera} from 'react-native-netmera';
 
-const Events = ({navigation}: any) => {
-  const {deeplinkUrl} = useDeeplinkUrl();
-
-  const category = () => {
-    navigation.navigate('Category');
-  };
-
+const Events = () => {
   const sendLoginEvent = () => {
     const loginEvent = new LoginEvent();
     loginEvent.userId = 'TestUserId';
     loginEvent.userIda = 21893718239812738;
     loginEvent.userIdax = '21893718239812738';
     Netmera.sendEvent(loginEvent);
-  };
-
-  const pushInbox = () => {
-    navigation.navigate('PushInbox');
-  };
-
-  const userEvent = () => {
-    navigation.navigate('User');
   };
 
   const sendRegisterEvent = () => {
@@ -95,10 +81,6 @@ const Events = ({navigation}: any) => {
 
   const buttons = [
     {
-      name: 'CATEGORY',
-      method: category,
-    },
-    {
       name: 'LOGIN EVENT',
       method: sendLoginEvent,
     },
@@ -117,14 +99,6 @@ const Events = ({navigation}: any) => {
     {
       name: 'CUSTOM TEXT EVENT',
       method: sendCustomEvent,
-    },
-    {
-      name: 'PUSH INBOX',
-      method: pushInbox,
-    },
-    {
-      name: 'USER',
-      method: userEvent,
     },
   ];
 
