@@ -7566,10 +7566,10 @@ react-native-date-picker@^4.3.5:
   resolved "https://registry.yarnpkg.com/react-native-date-picker/-/react-native-date-picker-4.3.5.tgz#81797f874a34a75ce2ff57d2bb1519ee2ac062dd"
   integrity sha512-jKOGCM2AUkRJb+tXYiwFHLfbB1Jh7OWXH4TxhLsuh7DWMXpWgUN3cGlFr3vl7G4wy45raAyPqmsZNSqmMr/98g==
 
-react-native-netmera@^1.6.3:
-  version "1.6.3"
-  resolved "https://registry.yarnpkg.com/react-native-netmera/-/react-native-netmera-1.6.3.tgz#7112d30edb5c180576a3ae5c57f17f15993ac4a7"
-  integrity sha512-SvzNG/om/I2xHKfM/1PZm5NxcsqDKgVcz5eJJOibEaYMJWc0gAXuQOpOj9ZOWBTllO2q/Tb08VjkFhWWxKRTPA==
+react-native-netmera@^1.7.0:
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/react-native-netmera/-/react-native-netmera-1.7.0.tgz#8b4686a9abc50fb01ba02cd143822096055b6ca7"
+  integrity sha512-+flVu9pibYzqFvEyVHiEf1tGTSGg9htEZfVGOCRpVbxFV76YYwvbm4of86kOkgZ/O7TtWK8W37OJGrBGvqFHIQ==
 
 react-native-safe-area-context@^4.1.3:
   version "4.5.0"

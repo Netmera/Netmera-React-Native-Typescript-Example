@@ -17,6 +17,7 @@ import {Picker} from '@react-native-picker/picker';
 import {Netmera, NMUserGender} from 'react-native-netmera';
 import MyNetmeraUser from '../models/MyNetmeraUser';
 import Colors from '../Colors';
+import Toast from 'react-native-toast-message';
 
 const User = () => {
   const [userId, setUserId] = useState('');
@@ -26,7 +27,7 @@ const User = () => {
   const [msisdn, setMsisdn] = useState('');
   const [gender, setGender] = useState(NMUserGender.NOT_SPECIFIED);
 
-  const sendUserUpdate = () => {
+  const sendUserUpdateAsync = () => {
     const user = new MyNetmeraUser();
 
     // Set Default Attributes
@@ -53,6 +54,49 @@ const User = () => {
     user.testName = 'Test Name';
 
     Netmera.updateUser(user);
+  };
+
+  const sendUserUpdateSync = () => {
+    const user = new MyNetmeraUser();
+
+    // Set Default Attributes
+    user.userId = userId;
+
+    if (name !== '') {
+      user.name = name;
+    }
+    if (surname !== '') {
+      user.surname = surname;
+    }
+    if (email !== '') {
+      user.email = email;
+    }
+    if (msisdn !== '') {
+      user.msisdn = msisdn;
+    }
+    if (gender !== null) {
+      user.gender = gender;
+    }
+
+    // Set Custom Attributes
+    user.testGender = MyNetmeraUser.TestGender.TESTGENDER_MALE;
+    user.testName = 'Test Name';
+
+    Netmera.updateUser(user)
+      .then(() => {
+        console.log('User updated successfully!');
+        Toast.show({
+          type: 'success',
+          text1: 'User updated successfully!',
+        });
+      })
+      .catch(error => {
+        console.log(error.code, error.message);
+        Toast.show({
+          type: 'error',
+          text1: error.message,
+        });
+      });
   };
 
   return (
@@ -131,9 +175,16 @@ const User = () => {
 
         <TouchableHighlight
           style={styles.button}
-          onPress={() => sendUserUpdate()}
+          onPress={() => sendUserUpdateSync()}
           underlayColor="#99d9f4">
-          <Text style={styles.buttonText}>Update User</Text>
+          <Text style={styles.buttonText}>Update User Sync</Text>
+        </TouchableHighlight>
+
+        <TouchableHighlight
+          style={styles.button}
+          onPress={() => sendUserUpdateAsync()}
+          underlayColor="#99d9f4">
+          <Text style={styles.buttonText}>Update User Async</Text>
         </TouchableHighlight>
       </ScrollView>
     </SafeAreaView>
