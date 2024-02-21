@@ -74,15 +74,15 @@ PODS:
     - hermes-engine/Pre-built (= 0.72.8)
   - hermes-engine/Pre-built (0.72.8)
   - libevent (2.1.12)
-  - Netmera (3.22.0-WithoutDependency):
-    - Netmera/NetmeraWithAdId (= 3.22.0-WithoutDependency)
-  - Netmera/AdIdSupport (3.22.0-WithoutDependency)
-  - Netmera/Application (3.22.0-WithoutDependency):
-    - NetmeraCore (= 3.22.0-WithoutDependency)
-  - Netmera/NetmeraWithAdId (3.22.0-WithoutDependency):
+  - Netmera (3.23.1-WithoutDependency):
+    - Netmera/NetmeraWithAdId (= 3.23.1-WithoutDependency)
+  - Netmera/AdIdSupport (3.23.1-WithoutDependency)
+  - Netmera/Application (3.23.1-WithoutDependency):
+    - NetmeraCore (= 3.23.1-WithoutDependency)
+  - Netmera/NetmeraWithAdId (3.23.1-WithoutDependency):
     - Netmera/AdIdSupport
     - Netmera/Application
-  - NetmeraCore (3.22.0-WithoutDependency)
+  - NetmeraCore (3.23.1-WithoutDependency)
   - OpenSSL-Universal (1.1.1100)
   - RCT-Folly (2021.07.22.00):
     - boost
@@ -506,10 +506,12 @@ PODS:
     - React-jsi (= 0.72.8)
     - React-logger (= 0.72.8)
     - React-perflogger (= 0.72.8)
+  - RNCAsyncStorage (1.21.0):
+    - React-Core
   - RNCPicker (2.4.9):
     - React-Core
-  - RNNetmera (1.6.3):
-    - Netmera (= 3.22.0-WithoutDependency)
+  - RNNetmera (1.7.0):
+    - Netmera (= 3.23.1-WithoutDependency)
     - React
   - RNScreens (3.20.0):
     - React-Core
@@ -585,6 +587,7 @@ DEPENDENCIES:
   - React-runtimescheduler (from `../node_modules/react-native/ReactCommon/react/renderer/runtimescheduler`)
   - React-utils (from `../node_modules/react-native/ReactCommon/react/utils`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
+  - "RNCAsyncStorage (from `../node_modules/@react-native-async-storage/async-storage`)"
   - "RNCPicker (from `../node_modules/@react-native-picker/picker`)"
   - RNNetmera (from `../node_modules/react-native-netmera`)
   - RNScreens (from `../node_modules/react-native-screens`)
@@ -693,6 +696,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/react/utils"
   ReactCommon:
     :path: "../node_modules/react-native/ReactCommon"
+  RNCAsyncStorage:
+    :path: "../node_modules/@react-native-async-storage/async-storage"
   RNCPicker:
     :path: "../node_modules/@react-native-picker/picker"
   RNNetmera:
@@ -720,8 +725,8 @@ SPEC CHECKSUMS:
   glog: 04b94705f318337d7ead9e6d17c019bd9b1f6b1b
   hermes-engine: 32c50dea8bf400d1414d26cb22a5e8a1ceb66a5e
   libevent: 4049cae6c81cdb3654a443be001fb9bdceff7913
-  Netmera: 603a995d47380667faac78b23328dfbb04dda32e
-  NetmeraCore: 71d2e48237560d713edc6c79387ee741d9d26cae
+  Netmera: 71316ee0481f9755756f3046cf95ae1c08db7345
+  NetmeraCore: ae57251e3e734bbb824385d87466de63373a448d
   OpenSSL-Universal: ebc357f1e6bc71fa463ccb2fe676756aff50e88c
   RCT-Folly: 424b8c9a7a0b9ab2886ffe9c3b041ef628fd4fb1
   RCTRequired: 182d3e71f3ee4edfa87d4bf82eeea61510922b2a
@@ -758,8 +763,9 @@ SPEC CHECKSUMS:
   React-runtimescheduler: 607a5832f8025dfe0d1178e78b447dd6d11bc012
   React-utils: 96f4588532614099a6d67a2b7c5912e1a35d6403
   ReactCommon: c111aa0c8006650d77a651e155f4112f97761dfd
+  RNCAsyncStorage: 618d03a5f52fbccb3d7010076bc54712844c18ef
   RNCPicker: 567de6dc0c6735cf249700d940c80b90b090e4db
-  RNNetmera: 41cbb2abec5730ea03b12c44a098da3468f1dc2c
+  RNNetmera: 24d2a85c24891fed5ba9df8e99b7cc685d5f76c4
   RNScreens: 218801c16a2782546d30bd2026bb625c0302d70f
   SocketRocket: f32cd54efbe0f095c4d7594881e52619cfe80b17
   Yoga: 11d7931afb89721f39cf553a78767b81c7fbea1f
@@ -767,4 +773,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 2614ac770efa2cd8f4d28997e0c29da0671851f8
 
-COCOAPODS: 1.14.3
+COCOAPODS: 1.12.1
