@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {
+  FlatList,
   SafeAreaView,
-  StyleProp,
   StyleSheet,
   Text,
   TextInput,
@@ -9,16 +9,28 @@ import {
   View,
 } from 'react-native';
 import Colors from '../Colors';
-import {Netmera} from 'react-native-netmera';
+import {Netmera, NetmeraCouponObject} from 'react-native-netmera';
+import Toast from 'react-native-toast-message';
 
 const Coupons = () => {
   const [page, setPage] = useState<string>('');
   const [max, setMax] = useState<string>('');
+  const [coupons, setCoupons] = useState<NetmeraCouponObject[]>([]);
 
   const onFetchCouponsPress = () => {
     if (page && max) {
-      //TODO: catch and then statement will be added
-      Netmera.fetchCoupons(Number(page), Number(max));
+      Netmera.fetchCoupons(Number(page), Number(max))
+        .then(_coupons => {
+          console.log(_coupons);
+          setCoupons(_coupons);
+        })
+        .catch(error => {
+          console.log(error.code, error.message);
+          Toast.show({
+            type: 'error',
+            text1: error.message,
+          });
+        });
     }
   };
 
@@ -30,6 +42,7 @@ const Coupons = () => {
             value={page}
             onChangeText={setPage}
             placeholder={'Page'}
+            placeholderTextColor={Colors.black}
             style={styles.placeholder}
           />
           <View style={styles.divider} />
@@ -39,6 +52,7 @@ const Coupons = () => {
             value={max}
             onChangeText={setMax}
             placeholder={'Max'}
+            placeholderTextColor={Colors.black}
             style={styles.placeholder}
           />
           <View style={styles.divider} />
@@ -47,6 +61,32 @@ const Coupons = () => {
       <TouchableOpacity style={styles.button} onPress={onFetchCouponsPress}>
         <Text style={styles.buttonText}>FETCH COUPONS</Text>
       </TouchableOpacity>
+      <FlatList
+        data={coupons}
+        ListEmptyComponent={
+          <Text style={{color: Colors.black}}>No coupon found</Text>
+        }
+        renderItem={({item, index}) => {
+          return (
+            <View key={index}>
+              <Text style={{color: Colors.black}}>
+                Coupon id: {item.couponId}
+              </Text>
+              <Text style={{color: Colors.black}}>
+                Coupon Name: {item.name}
+              </Text>
+              <Text style={{color: Colors.black}}>Code: {item.code}</Text>
+              <Text style={{color: Colors.black}}>
+                Assign Date: {item.assignDate}
+              </Text>
+              <Text style={{color: Colors.black}}>
+                Expire Date: {item.expireDate}
+              </Text>
+            </View>
+          );
+        }}
+        style={styles.couponList}
+      />
     </SafeAreaView>
   );
 };
@@ -69,6 +109,11 @@ const styles = StyleSheet.create({
   content: {
     flexDirection: 'row',
     justifyContent: 'space-around',
+  },
+
+  couponList: {
+    marginTop: 10,
+    marginHorizontal: 10,
   },
 
   divider: {
