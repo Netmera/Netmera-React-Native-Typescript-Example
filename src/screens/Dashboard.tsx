@@ -11,7 +11,7 @@ import {
 import Toast from 'react-native-toast-message';
 import Colors from '../Colors';
 import {Netmera} from 'react-native-netmera';
-import {Token} from '../../NetmeraPushHeadlessTask';
+import {pushToken} from '../../NetmeraPushHeadlessTask';
 
 const enum PushState {
   EnablePush = 'EnablePush',
@@ -24,7 +24,8 @@ const enum PopUpPresentationState {
 }
 
 const Dashboard = ({navigation}: any) => {
-  const [pushState, setPushState] = useState<PushState>(PushState.DisablePush);
+  const [pushState, setPushState] = useState<PushState>(PushState.EnablePush);
+  const [pushTokenString, setPushTokenString] = useState<string>('');
   const [popUpPresentationState, setPopUpPresentationState] =
     useState<PopUpPresentationState>(
       PopUpPresentationState.DisablePopUpPresentation,
@@ -34,6 +35,9 @@ const Dashboard = ({navigation}: any) => {
     if (Platform.OS === 'ios') {
       Netmera.requestPushNotificationAuthorization();
     }
+    setTimeout(() => {
+      setPushTokenString(pushToken);
+    }, 1000);
   }, []);
 
   useEffect(() => {
@@ -45,14 +49,6 @@ const Dashboard = ({navigation}: any) => {
       Netmera.enablePopupPresentation();
     }
   }, [popUpPresentationState]);
-
-  useEffect(() => {
-    if (pushState === PushState.DisablePush) {
-      Netmera.disablePush();
-    } else {
-      Netmera.enablePush();
-    }
-  }, [pushState]);
 
   const currentExternalId = async () =>
     Toast.show({
@@ -74,11 +70,13 @@ const Dashboard = ({navigation}: any) => {
   };
 
   const disablePush = () => {
-    setPushState(
-      pushState === PushState.DisablePush
-        ? PushState.EnablePush
-        : PushState.DisablePush,
-    );
+    if (pushState === PushState.EnablePush) {
+      setPushState(PushState.DisablePush);
+      Netmera.disablePush();
+    } else {
+      setPushState(PushState.EnablePush);
+      Netmera.enablePush();
+    }
   };
 
   const enableData = () => {
@@ -101,7 +99,7 @@ const Dashboard = ({navigation}: any) => {
 
   const navigateToCategory = () => {
     navigation.navigate('Category');
-  }
+  };
 
   const navigateToCoupons = () => {
     navigation.navigate('Coupons');
@@ -126,7 +124,7 @@ const Dashboard = ({navigation}: any) => {
   const toastPushTest = () =>
     Toast.show({
       type: 'info',
-      text1: `Pushtoken :: \`${Token?.token?.pushToken}\``,
+      text1: `Pushtoken :: \`${pushTokenString}\``,
       position: 'bottom',
     });
 
@@ -233,7 +231,7 @@ const Dashboard = ({navigation}: any) => {
         <View style={styles.deviceTokenContainer}>
           <Text style={[styles.text, {color: Colors.black}]}>DEVICE TOKEN</Text>
         </View>
-        <Text style={[styles.tokenText]}>{Token?.token?.pushToken}</Text>
+        <Text style={[styles.tokenText]}>{pushTokenString}</Text>
       </ScrollView>
     </SafeAreaView>
   );

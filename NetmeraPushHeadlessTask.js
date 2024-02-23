@@ -4,13 +4,10 @@
 
 // Netmera Push Events
 
-export class Token {
-  static token;
-}
+export let pushToken;
 
 export const onPushRegister = async message => {
-  Token.token = message;
-  console.log(Token.token);
+  pushToken = message.pushToken;
   console.log('onPushRegister: ', message);
 };
 

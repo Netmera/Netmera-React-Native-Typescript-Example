@@ -17,6 +17,8 @@
   // They will be passed down to the ViewController used by React Native.
   self.initialProps = @{};
   
+  [UNUserNotificationCenter currentNotificationCenter].delegate = self;
+  
   // Init Netmera
   [RNNetmera logging: YES];
   [RNNetmera initNetmera:[RNCConfig envFor:@"NETMERA_API_KEY"]]; // Replace this with your own NETMERA API KEY.
