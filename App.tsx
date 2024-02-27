@@ -21,10 +21,22 @@ import Toast from 'react-native-toast-message';
 import Category from './src/screens/Category';
 import User from './src/screens/User';
 import PushInbox from './src/screens/PushInbox';
+import {Netmera} from 'react-native-netmera';
 
 const Stack = createNativeStackNavigator();
 
 const App = () => {
+  useEffect(() => {
+    Netmera.getInitialURL().then(url => {
+      if (url) {
+        Toast.show({
+          type: 'success',
+          text1: `Initial url: ${url}`,
+        });
+      }
+    });
+  }, []);
+
   const headerOptions: NativeStackNavigationOptions = {
     headerStyle: {
       backgroundColor: Colors.primary,

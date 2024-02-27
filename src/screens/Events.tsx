@@ -1,13 +1,6 @@
 import React from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {SafeAreaView, StyleSheet, Text, TouchableOpacity} from 'react-native';
 import Colors from '../Colors';
-import {useDeeplinkUrl} from '../hooks/useDeeplinkUrl';
 import {
   CustomPurchaseEvent,
   LoginEvent,

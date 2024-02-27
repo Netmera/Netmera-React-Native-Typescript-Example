@@ -510,7 +510,7 @@ PODS:
     - React-Core
   - RNCPicker (2.4.9):
     - React-Core
-  - RNNetmera (1.7.0):
+  - RNNetmera (1.7.1):
     - Netmera (= 3.23.1-WithoutDependency)
     - React
   - RNScreens (3.20.0):
@@ -765,7 +765,7 @@ SPEC CHECKSUMS:
   ReactCommon: c111aa0c8006650d77a651e155f4112f97761dfd
   RNCAsyncStorage: 618d03a5f52fbccb3d7010076bc54712844c18ef
   RNCPicker: 567de6dc0c6735cf249700d940c80b90b090e4db
-  RNNetmera: 24d2a85c24891fed5ba9df8e99b7cc685d5f76c4
+  RNNetmera: 0541d514bef90b5e94b4342e365bdb4980621331
   RNScreens: 218801c16a2782546d30bd2026bb625c0302d70f
   SocketRocket: f32cd54efbe0f095c4d7594881e52619cfe80b17
   Yoga: 11d7931afb89721f39cf553a78767b81c7fbea1f
