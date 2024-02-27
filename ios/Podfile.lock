@@ -82,6 +82,10 @@ PODS:
   - Netmera/NetmeraWithAdId (3.23.1-WithoutDependency):
     - Netmera/AdIdSupport
     - Netmera/Application
+  - Netmera/NotificationContentExtension (3.23.1-WithoutDependency):
+    - NetmeraCore (= 3.23.1-WithoutDependency)
+  - Netmera/NotificationServiceExtension (3.23.1-WithoutDependency):
+    - NetmeraCore (= 3.23.1-WithoutDependency)
   - NetmeraCore (3.23.1-WithoutDependency)
   - OpenSSL-Universal (1.1.1100)
   - RCT-Folly (2021.07.22.00):
@@ -549,6 +553,9 @@ DEPENDENCIES:
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
   - hermes-engine (from `../node_modules/react-native/sdks/hermes-engine/hermes-engine.podspec`)
   - libevent (~> 2.1.12)
+  - Netmera (= 3.23.1-WithoutDependency)
+  - Netmera/NotificationContentExtension (= 3.23.1-WithoutDependency)
+  - Netmera/NotificationServiceExtension (= 3.23.1-WithoutDependency)
   - OpenSSL-Universal (= 1.1.1100)
   - RCT-Folly (from `../node_modules/react-native/third-party-podspecs/RCT-Folly.podspec`)
   - RCTRequired (from `../node_modules/react-native/Libraries/RCTRequired`)
@@ -771,6 +778,6 @@ SPEC CHECKSUMS:
   Yoga: 11d7931afb89721f39cf553a78767b81c7fbea1f
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: 2614ac770efa2cd8f4d28997e0c29da0671851f8
+PODFILE CHECKSUM: 0845f812b5b351b3d5e6cdaa6172a4738c729baf
 
 COCOAPODS: 1.12.1

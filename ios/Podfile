@@ -22,6 +22,10 @@ if linkage != nil
   use_frameworks! :linkage => linkage.to_sym
 end
 
+pod "Netmera", "3.23.1-WithoutDependency"
+pod "Netmera/NotificationServiceExtension", "3.23.1-WithoutDependency"
+pod "Netmera/NotificationContentExtension", "3.23.1-WithoutDependency"
+
 target 'NetmeraTSExample' do
   config = use_native_modules!
 
@@ -57,4 +61,10 @@ target 'NetmeraTSExample' do
       )
     __apply_Xcode_12_5_M1_post_install_workaround(installer)
   end
+end
+
+target 'Netmera_NotificationServiceExtension' do
+end
+
+target 'Netmera_NotificationContentExtension' do
 end

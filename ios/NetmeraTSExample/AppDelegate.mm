@@ -25,6 +25,7 @@
   [Netmera setBaseURL:[SharedPreferencesModule getBaseUrl]];
   [RNNetmera requestPushNotificationAuthorization];
   [RNNetmera setPushDelegate:self];
+  [Netmera setAppGroupName:@"group.com.netmerareactnativeexample"];
 
   return [super application:application didFinishLaunchingWithOptions:launchOptions];
 }
