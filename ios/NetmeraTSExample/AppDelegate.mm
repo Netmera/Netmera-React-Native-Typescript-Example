@@ -21,7 +21,8 @@
   
   // Init Netmera
   [RNNetmera logging: YES];
-  [RNNetmera initNetmera:[RNCConfig envFor:@"NETMERA_API_KEY"]]; // Replace this with your own NETMERA API KEY.
+  [RNNetmera initNetmera: [SharedPreferencesModule getApiKey]]; // Replace [SharedPreferencesModule getApiKey] with your own NETMERA API KEY.
+  [Netmera setBaseURL:[SharedPreferencesModule getBaseUrl]];
   [RNNetmera requestPushNotificationAuthorization];
   [RNNetmera setPushDelegate:self];
 

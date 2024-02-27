@@ -28,7 +28,7 @@ public class MainApplication extends Application implements ReactApplication {
                 protected List<ReactPackage> getPackages() {
                     @SuppressWarnings("UnnecessaryLocalVariable")
                     List<ReactPackage> packages = new PackageList(this).getPackages();
-                    // Packages that cannot be autolinked yet can be added manually here, for example:
+                    packages.add(new SharedPreferencesPackage());
                     return packages;
                 }
 
@@ -66,7 +66,8 @@ public class MainApplication extends Application implements ReactApplication {
         RNNetmeraConfiguration netmeraConfiguration = new RNNetmeraConfiguration.Builder()
                 .firebaseSenderId(BuildConfig.FIREBASE_SENDER_ID)
                 .huaweiSenderId(BuildConfig.HMS_SENDER_ID)
-                .apiKey(BuildConfig.NETMERA_API_KEY) // This is for enabling Netmera logs.
+                .apiKey(SharedPreferencesModule.getApiKey(this)) // This is for enabling Netmera logs.
+                .baseUrl(SharedPreferencesModule.getBaseUrl(this))
                 .logging(true) //this is for enabled logging
                 .build(this);
         RNNetmera.initNetmera(netmeraConfiguration);

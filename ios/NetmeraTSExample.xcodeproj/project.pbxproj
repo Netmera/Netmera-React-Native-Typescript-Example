@@ -15,6 +15,7 @@
 		52FEE23B2B3C525000878099 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 52FEE23A2B3C525000878099 /* GoogleService-Info.plist */; };
 		7699B88040F8A987B510C191 /* libPods-NetmeraTSExample-NetmeraTSExampleTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-NetmeraTSExample-NetmeraTSExampleTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		C9C49F942B887FE500C13F7B /* SharedPreferencesModule.m in Sources */ = {isa = PBXBuildFile; fileRef = C9C49F932B887FE500C13F7B /* SharedPreferencesModule.m */; };
 		FCA398A92A72C70A00CC8FFA /* nm_push_sound.wav in Resources */ = {isa = PBXBuildFile; fileRef = FCA398A82A72C70A00CC8FFA /* nm_push_sound.wav */; };
 /* End PBXBuildFile section */
 
@@ -47,6 +48,8 @@
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = NetmeraTSExample/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-NetmeraTSExample-NetmeraTSExampleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NetmeraTSExample-NetmeraTSExampleTests.release.xcconfig"; path = "Target Support Files/Pods-NetmeraTSExample-NetmeraTSExampleTests/Pods-NetmeraTSExample-NetmeraTSExampleTests.release.xcconfig"; sourceTree = "<group>"; };
 		C99ACF0228DB35830019E1B4 /* NetmeraTSExample.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = NetmeraTSExample.entitlements; path = NetmeraTSExample/NetmeraTSExample.entitlements; sourceTree = "<group>"; };
+		C9C49F912B887F8500C13F7B /* SharedPreferencesModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SharedPreferencesModule.h; sourceTree = "<group>"; };
+		C9C49F932B887FE500C13F7B /* SharedPreferencesModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SharedPreferencesModule.m; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		FCA398A82A72C70A00CC8FFA /* nm_push_sound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = nm_push_sound.wav; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -100,6 +103,8 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
+				C9C49F912B887F8500C13F7B /* SharedPreferencesModule.h */,
+				C9C49F932B887FE500C13F7B /* SharedPreferencesModule.m */,
 			);
 			name = NetmeraTSExample;
 			sourceTree = "<group>";
@@ -423,6 +428,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */,
+				C9C49F942B887FE500C13F7B /* SharedPreferencesModule.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
