@@ -12,6 +12,7 @@ import Toast from 'react-native-toast-message';
 import Colors from '../Colors';
 import {Netmera} from 'react-native-netmera';
 import {pushToken} from '../../NetmeraPushHeadlessTask';
+import {isIos} from '../helpers/DeviceUtils';
 
 const enum PushState {
   EnablePush = 'EnablePush',
@@ -32,7 +33,7 @@ const Dashboard = ({navigation}: any) => {
     );
 
   useEffect(() => {
-    if (Platform.OS === 'ios') {
+    if (isIos()) {
       Netmera.requestPushNotificationAuthorization();
     }
     setTimeout(() => {

@@ -1,17 +1,19 @@
 import {
   Dimensions,
   Modal,
-  NativeModules, Platform,
+  NativeModules,
+  Platform,
   StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
-  View
-} from "react-native";
+  View,
+} from 'react-native';
 import React, {FC, useState} from 'react';
 import Colors from './Colors';
 import Config from 'react-native-config';
 import {Netmera} from 'react-native-netmera';
+import {isAndroid} from './helpers/DeviceUtils';
 
 const {SharedPreferencesModule} = NativeModules;
 
@@ -42,7 +44,7 @@ const SetPropertiesModal: FC<SetPropertiesModelPropTypes> = ({
 
   const onPress = () => {
     if (baseUrl !== '' && apiKey !== '') {
-      if (Platform.OS === 'android') {
+      if (isAndroid()) {
         Netmera.skipAppConfigAndSetBaseUrl(baseUrl);
       } else {
         Netmera.setBaseUrl(baseUrl);

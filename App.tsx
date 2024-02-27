@@ -6,7 +6,7 @@
  * @flow strict-local
  */
 
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from 'react';
 import {Platform, StatusBar, Text, TouchableOpacity, View} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {
@@ -23,6 +23,7 @@ import User from './src/screens/User';
 import PushInbox from './src/screens/PushInbox';
 import SetPropertiesModal from './src/SetPropertiesModal';
 import {Netmera} from 'react-native-netmera';
+import {isIos} from './src/helpers/DeviceUtils';
 
 const Stack = createNativeStackNavigator();
 
@@ -60,9 +61,7 @@ const App = () => {
 
   return (
     <NavigationContainer>
-      <StatusBar
-        barStyle={Platform.OS === 'ios' ? 'dark-content' : 'light-content'}
-      />
+      <StatusBar barStyle={isIos() ? 'dark-content' : 'light-content'} />
       <Stack.Navigator initialRouteName={'Dashboard'}>
         <Stack.Screen name={'Category'} component={Category} />
         <Stack.Screen name={'Coupons'} component={Coupons} />

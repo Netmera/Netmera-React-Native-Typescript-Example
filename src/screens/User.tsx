@@ -18,6 +18,7 @@ import {Netmera, NMUserGender} from 'react-native-netmera';
 import MyNetmeraUser from '../models/MyNetmeraUser';
 import Colors from '../Colors';
 import Toast from 'react-native-toast-message';
+import {isIos} from '../helpers/DeviceUtils';
 
 const User = () => {
   const [userId, setUserId] = useState('');
@@ -155,10 +156,7 @@ const User = () => {
         </Text>
         <View style={styles.picker}>
           <Picker
-            style={[
-              {color: Colors.black},
-              Platform.OS === 'ios' ? {height: '35%'} : null,
-            ]}
+            style={[{color: Colors.black}, isIos() ? {height: '35%'} : null]}
             itemStyle={{fontSize: 13}}
             mode={'dropdown'}
             selectedValue={gender}
