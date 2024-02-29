@@ -4,9 +4,10 @@
 
 // Netmera Push Events
 
-import { Linking } from "react-native";
+export let pushToken;
 
 export const onPushRegister = async message => {
+  pushToken = message.pushToken;
   console.log('onPushRegister: ', message);
 };
 

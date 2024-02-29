@@ -1,0 +1,14 @@
+# Ignore .github:
+.github/
+
+# Ignore all iOS files:
+ios/
+
+# Ignore all Android files:
+android/
+
+/node_modules
+/.bundle
+/.vscode
+/__tests__
+/vendor

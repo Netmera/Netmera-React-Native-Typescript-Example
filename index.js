@@ -24,4 +24,6 @@ Netmera.initBroadcastReceiver(
   onCarouselObjectSelected,
 );
 
+Netmera.enablePopupPresentation();
+
 AppRegistry.registerComponent(appName, () => App);
