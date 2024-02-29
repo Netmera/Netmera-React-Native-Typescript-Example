@@ -122,6 +122,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
     borderRadius: 5,
     borderWidth: 1,
+    color: Colors.black,
   },
   popup: {
     width: Dimensions.get('screen').width - 64,
