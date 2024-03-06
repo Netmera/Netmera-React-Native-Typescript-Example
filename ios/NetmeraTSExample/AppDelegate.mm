@@ -68,6 +68,17 @@
   [RNNetmeraRCTEventEmitter onPushRegister: @{@"pushToken" : deviceToken}];
 }
 
+// MARK: Handle Open URL
+
+// Required code block to handle widget URL's in React Native
+- (BOOL)shouldHandleOpenURL:(NSURL *)url forPushObject:(NetmeraPushObject *)object {
+  return NO;
+}
+
+- (void)handleOpenURL:(NSURL *)url forPushObject:(NetmeraPushObject *)object {
+  [RNNetmeraRCTEventEmitter handleOpenURL:url forPushObject:object];
+}
+
 // MARK: Deeplink Method
 
 -(BOOL)application:(UIApplication *)application openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {

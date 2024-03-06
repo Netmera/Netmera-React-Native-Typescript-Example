@@ -39,13 +39,21 @@ const App = () => {
         });
       }
     });
+
+    Netmera.onWidgetUrlTriggered(url => {
+      console.log('Netmera triggered widget url: ', url);
+      Toast.show({
+        type: 'success',
+        text1: `Widget URL handle by app: ${url}`,
+      });
+    });
   }, []);
 
   const headerOptions: NativeStackNavigationOptions = {
     headerStyle: {
       backgroundColor: Colors.primary,
     },
-    headerTitle: props => (
+    headerTitle: () => (
       <View style={{justifyContent: 'flex-start', flex: 1}}>
         <Text style={{fontWeight: '500', fontSize: 18, color: Colors.white}}>
           {'ReactTSExample'}

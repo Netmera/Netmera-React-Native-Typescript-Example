@@ -2,7 +2,6 @@ import {
   Dimensions,
   Modal,
   NativeModules,
-  Platform,
   StyleSheet,
   Text,
   TextInput,

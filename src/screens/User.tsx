@@ -4,7 +4,6 @@
 
 import React, {useState} from 'react';
 import {
-  Platform,
   SafeAreaView,
   ScrollView,
   Text,
