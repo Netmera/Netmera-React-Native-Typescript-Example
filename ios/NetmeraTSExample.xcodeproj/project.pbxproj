@@ -987,7 +987,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = 1.7.1;
+				MARKETING_VERSION = "1.7.2-beta01";
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.netmerareactnativeexample.Netmera-NotificationServiceExtension";
@@ -1030,7 +1030,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = 1.7.1;
+				MARKETING_VERSION = "1.7.2-beta01";
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.netmerareactnativeexample.Netmera-NotificationServiceExtension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1076,7 +1076,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = 1.7.1;
+				MARKETING_VERSION = "1.7.2-beta01";
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.netmerareactnativeexample.Netmera-NotificationContentExtension";
@@ -1121,7 +1121,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = 1.7.1;
+				MARKETING_VERSION = "1.7.2-beta01";
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.netmerareactnativeexample.Netmera-NotificationContentExtension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
