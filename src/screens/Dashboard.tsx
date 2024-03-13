@@ -115,7 +115,7 @@ const Dashboard = ({navigation}: any) => {
   };
 
   const navigateToPushInbox = () => {
-    navigation.navigate('Coupons');
+    navigation.navigate('PushInbox');
   };
 
   const navigateToUser = () => {
