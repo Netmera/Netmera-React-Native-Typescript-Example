@@ -19,8 +19,8 @@ const enum PushState {
 }
 
 const enum PopUpPresentationState {
-  EnablePopUpPresentation = 'EnablePopUpPresentation',
-  DisablePopUpPresentation = 'DisablePopUpPresentation',
+  PopUpPresentationEnabled = 'PopUpPresentationEnabled',
+  PopUpPresentationDisabled = 'PopUpPresentationDisabled',
 }
 
 const Dashboard = ({navigation}: any) => {
@@ -28,7 +28,7 @@ const Dashboard = ({navigation}: any) => {
   const [pushTokenString, setPushTokenString] = useState<string>('');
   const [popUpPresentationState, setPopUpPresentationState] =
     useState<PopUpPresentationState>(
-      PopUpPresentationState.DisablePopUpPresentation,
+      PopUpPresentationState.PopUpPresentationEnabled,
     );
 
   useLayoutEffect(() => {
@@ -46,16 +46,6 @@ const Dashboard = ({navigation}: any) => {
     }, 1000);
   }, []);
 
-  useEffect(() => {
-    if (
-      popUpPresentationState === PopUpPresentationState.DisablePopUpPresentation
-    ) {
-      Netmera.disablePopupPresentation();
-    } else {
-      Netmera.enablePopupPresentation();
-    }
-  }, [popUpPresentationState]);
-
   const currentExternalId = async () =>
     Toast.show({
       type: 'info',
@@ -67,12 +57,20 @@ const Dashboard = ({navigation}: any) => {
     Netmera.stopDataTransfer();
   };
 
-  const disablePopUpPresentation = () => {
-    setPopUpPresentationState(
-      popUpPresentationState === PopUpPresentationState.DisablePopUpPresentation
-        ? PopUpPresentationState.EnablePopUpPresentation
-        : PopUpPresentationState.DisablePopUpPresentation,
-    );
+  const disableOrEnablePopUpPresentation = () => {
+    if (
+      popUpPresentationState === PopUpPresentationState.PopUpPresentationEnabled
+    ) {
+      Netmera.disablePopupPresentation();
+      setPopUpPresentationState(
+        PopUpPresentationState.PopUpPresentationDisabled,
+      );
+    } else {
+      Netmera.enablePopupPresentation();
+      setPopUpPresentationState(
+        PopUpPresentationState.PopUpPresentationEnabled,
+      );
+    }
   };
 
   const disablePush = () => {
@@ -184,10 +182,10 @@ const Dashboard = ({navigation}: any) => {
     {
       name:
         popUpPresentationState ===
-        PopUpPresentationState.EnablePopUpPresentation
+        PopUpPresentationState.PopUpPresentationDisabled
           ? 'ENABLE PRESENTATION STATE'
           : 'DISABLE PRESENTATION STATE',
-      method: disablePopUpPresentation,
+      method: disableOrEnablePopUpPresentation,
     },
     {
       name: 'SET NETMERA MAX ACTIVE REGION',
