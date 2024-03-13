@@ -26,6 +26,18 @@ RCT_EXPORT_METHOD(setBaseUrl:(NSString *)value) {
   [defaults synchronize];
 }
 
+RCT_EXPORT_METHOD(getApiKey:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
+  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+  NSString *value = [defaults stringForKey:KEY_API_KEY];
+  resolve(value);
+}
+
+RCT_EXPORT_METHOD(getBaseUrl:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
+  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+  NSString *value = [defaults stringForKey:KEY_BASE_URL];
+  resolve(value);
+}
+
 + (NSString *) getApiKey {
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
   NSString *value = [defaults stringForKey:KEY_API_KEY];

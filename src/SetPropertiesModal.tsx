@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, {FC, useState} from 'react';
+import React, {FC, useLayoutEffect, useState} from 'react';
 import Colors from './Colors';
 import Config from 'react-native-config';
 import {Netmera} from 'react-native-netmera';
@@ -27,6 +27,15 @@ const SetPropertiesModal: FC<SetPropertiesModelPropTypes> = ({
 }) => {
   const [baseUrl, setBaseUrl] = useState<string>('');
   const [apiKey, setApiKey] = useState<string>('');
+
+  useLayoutEffect(() => {
+    SharedPreferencesModule.getApiKey().then((value: any) => {
+      setApiKey(value.toString());
+    });
+    SharedPreferencesModule.getBaseUrl().then((value: any) => {
+      setBaseUrl(value.toString());
+    });
+  }, []);
 
   const onLongPress = () => {
     if (baseUrl === 'b' && apiKey === 'b') {
