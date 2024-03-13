@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useLayoutEffect, useState} from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -14,8 +14,8 @@ import {pushToken} from '../../NetmeraPushHeadlessTask';
 import {isIos} from '../helpers/DeviceUtils';
 
 const enum PushState {
-  EnablePush = 'EnablePush',
-  DisablePush = 'DisablePush',
+  PushEnabled = 'PushEnabled',
+  PushDisabled = 'PushDisabled',
 }
 
 const enum PopUpPresentationState {
@@ -24,12 +24,18 @@ const enum PopUpPresentationState {
 }
 
 const Dashboard = ({navigation}: any) => {
-  const [pushState, setPushState] = useState<PushState>(PushState.EnablePush);
+  const [pushState, setPushState] = useState<PushState>(PushState.PushEnabled);
   const [pushTokenString, setPushTokenString] = useState<string>('');
   const [popUpPresentationState, setPopUpPresentationState] =
     useState<PopUpPresentationState>(
       PopUpPresentationState.DisablePopUpPresentation,
     );
+
+  useLayoutEffect(() => {
+    Netmera.isPushEnabled().then(enabled => {
+      setPushState(enabled ? PushState.PushEnabled : PushState.PushDisabled);
+    });
+  }, []);
 
   useEffect(() => {
     if (isIos()) {
@@ -70,11 +76,11 @@ const Dashboard = ({navigation}: any) => {
   };
 
   const disablePush = () => {
-    if (pushState === PushState.EnablePush) {
-      setPushState(PushState.DisablePush);
+    if (pushState === PushState.PushEnabled) {
+      setPushState(PushState.PushDisabled);
       Netmera.disablePush();
     } else {
-      setPushState(PushState.EnablePush);
+      setPushState(PushState.PushEnabled);
       Netmera.enablePush();
     }
   };
@@ -93,6 +99,7 @@ const Dashboard = ({navigation}: any) => {
       text1: 'Is Push Enabled: ' + (await Netmera.isPushEnabled()),
       position: 'bottom',
     });
+
   const setNetmeraMaxActiveRegion = () => {
     Netmera.setNetmeraMaxActiveRegions(10);
   };
@@ -170,7 +177,8 @@ const Dashboard = ({navigation}: any) => {
       method: isPushEnabled,
     },
     {
-      name: pushState === PushState.EnablePush ? 'DISABLE PUSH' : 'ENABLE PUSH',
+      name:
+        pushState === PushState.PushEnabled ? 'DISABLE PUSH' : 'ENABLE PUSH',
       method: disablePush,
     },
     {
