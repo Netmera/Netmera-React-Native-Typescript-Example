@@ -90,7 +90,7 @@ const Events = () => {
       method: sendPurchaseEvent,
     },
     {
-      name: 'CUSTOM TEXT EVENT',
+      name: 'CUSTOM TEST EVENT',
       method: sendCustomEvent,
     },
   ];

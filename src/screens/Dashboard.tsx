@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useLayoutEffect, useState} from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -14,22 +14,28 @@ import {pushToken} from '../../NetmeraPushHeadlessTask';
 import {isIos} from '../helpers/DeviceUtils';
 
 const enum PushState {
-  EnablePush = 'EnablePush',
-  DisablePush = 'DisablePush',
+  PushEnabled = 'PushEnabled',
+  PushDisabled = 'PushDisabled',
 }
 
 const enum PopUpPresentationState {
-  EnablePopUpPresentation = 'EnablePopUpPresentation',
-  DisablePopUpPresentation = 'DisablePopUpPresentation',
+  PopUpPresentationEnabled = 'PopUpPresentationEnabled',
+  PopUpPresentationDisabled = 'PopUpPresentationDisabled',
 }
 
 const Dashboard = ({navigation}: any) => {
-  const [pushState, setPushState] = useState<PushState>(PushState.EnablePush);
+  const [pushState, setPushState] = useState<PushState>(PushState.PushEnabled);
   const [pushTokenString, setPushTokenString] = useState<string>('');
   const [popUpPresentationState, setPopUpPresentationState] =
     useState<PopUpPresentationState>(
-      PopUpPresentationState.DisablePopUpPresentation,
+      PopUpPresentationState.PopUpPresentationEnabled,
     );
+
+  useLayoutEffect(() => {
+    Netmera.isPushEnabled().then(enabled => {
+      setPushState(enabled ? PushState.PushEnabled : PushState.PushDisabled);
+    });
+  }, []);
 
   useEffect(() => {
     if (isIos()) {
@@ -39,16 +45,6 @@ const Dashboard = ({navigation}: any) => {
       setPushTokenString(pushToken);
     }, 1000);
   }, []);
-
-  useEffect(() => {
-    if (
-      popUpPresentationState === PopUpPresentationState.DisablePopUpPresentation
-    ) {
-      Netmera.disablePopupPresentation();
-    } else {
-      Netmera.enablePopupPresentation();
-    }
-  }, [popUpPresentationState]);
 
   const currentExternalId = async () =>
     Toast.show({
@@ -61,20 +57,28 @@ const Dashboard = ({navigation}: any) => {
     Netmera.stopDataTransfer();
   };
 
-  const disablePopUpPresentation = () => {
-    setPopUpPresentationState(
-      popUpPresentationState === PopUpPresentationState.DisablePopUpPresentation
-        ? PopUpPresentationState.EnablePopUpPresentation
-        : PopUpPresentationState.DisablePopUpPresentation,
-    );
+  const disableOrEnablePopUpPresentation = () => {
+    if (
+      popUpPresentationState === PopUpPresentationState.PopUpPresentationEnabled
+    ) {
+      Netmera.disablePopupPresentation();
+      setPopUpPresentationState(
+        PopUpPresentationState.PopUpPresentationDisabled,
+      );
+    } else {
+      Netmera.enablePopupPresentation();
+      setPopUpPresentationState(
+        PopUpPresentationState.PopUpPresentationEnabled,
+      );
+    }
   };
 
-  const disablePush = () => {
-    if (pushState === PushState.EnablePush) {
-      setPushState(PushState.DisablePush);
+  const changePushState = () => {
+    if (pushState === PushState.PushEnabled) {
+      setPushState(PushState.PushDisabled);
       Netmera.disablePush();
     } else {
-      setPushState(PushState.EnablePush);
+      setPushState(PushState.PushEnabled);
       Netmera.enablePush();
     }
   };
@@ -93,6 +97,7 @@ const Dashboard = ({navigation}: any) => {
       text1: 'Is Push Enabled: ' + (await Netmera.isPushEnabled()),
       position: 'bottom',
     });
+
   const setNetmeraMaxActiveRegion = () => {
     Netmera.setNetmeraMaxActiveRegions(10);
   };
@@ -110,7 +115,7 @@ const Dashboard = ({navigation}: any) => {
   };
 
   const navigateToPushInbox = () => {
-    navigation.navigate('Coupons');
+    navigation.navigate('PushInbox');
   };
 
   const navigateToUser = () => {
@@ -170,16 +175,17 @@ const Dashboard = ({navigation}: any) => {
       method: isPushEnabled,
     },
     {
-      name: pushState === PushState.EnablePush ? 'DISABLE PUSH' : 'ENABLE PUSH',
-      method: disablePush,
+      name:
+        pushState === PushState.PushEnabled ? 'DISABLE PUSH' : 'ENABLE PUSH',
+      method: changePushState,
     },
     {
       name:
         popUpPresentationState ===
-        PopUpPresentationState.EnablePopUpPresentation
+        PopUpPresentationState.PopUpPresentationDisabled
           ? 'ENABLE PRESENTATION STATE'
           : 'DISABLE PRESENTATION STATE',
-      method: disablePopUpPresentation,
+      method: disableOrEnablePopUpPresentation,
     },
     {
       name: 'SET NETMERA MAX ACTIVE REGION',

@@ -3,6 +3,7 @@ package com.netmerareactnativeexample;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
@@ -35,6 +36,16 @@ public class SharedPreferencesModule extends ReactContextBaseJavaModule {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(KEY_BASE_URL, url);
         editor.apply();
+    }
+
+    @ReactMethod
+    public void getApiKey(Promise promise) {
+        promise.resolve(sharedPreferences.getString(KEY_API_KEY, ""));
+    }
+
+    @ReactMethod
+    public void getBaseUrl(Promise promise) {
+        promise.resolve(sharedPreferences.getString(KEY_BASE_URL, ""));
     }
 
     public static String getBaseUrl(Context context) {
