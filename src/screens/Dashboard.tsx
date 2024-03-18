@@ -73,7 +73,7 @@ const Dashboard = ({navigation}: any) => {
     }
   };
 
-  const disablePush = () => {
+  const changePushState = () => {
     if (pushState === PushState.PushEnabled) {
       setPushState(PushState.PushDisabled);
       Netmera.disablePush();
@@ -177,7 +177,7 @@ const Dashboard = ({navigation}: any) => {
     {
       name:
         pushState === PushState.PushEnabled ? 'DISABLE PUSH' : 'ENABLE PUSH',
-      method: disablePush,
+      method: changePushState,
     },
     {
       name:
