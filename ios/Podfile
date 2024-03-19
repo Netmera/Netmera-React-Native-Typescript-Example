@@ -22,9 +22,9 @@ if linkage != nil
   use_frameworks! :linkage => linkage.to_sym
 end
 
-pod "Netmera", "3.23.3-WithoutDependency"
-pod "Netmera/NotificationServiceExtension", "3.23.3-WithoutDependency"
-pod "Netmera/NotificationContentExtension", "3.23.3-WithoutDependency"
+pod "Netmera", "3.23.4-WithoutDependency"
+pod "Netmera/NotificationServiceExtension", "3.23.4-WithoutDependency"
+pod "Netmera/NotificationContentExtension", "3.23.4-WithoutDependency"
 
 target 'NetmeraTSExample' do
   config = use_native_modules!

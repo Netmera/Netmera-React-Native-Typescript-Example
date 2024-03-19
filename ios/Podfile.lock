@@ -74,19 +74,19 @@ PODS:
     - hermes-engine/Pre-built (= 0.72.8)
   - hermes-engine/Pre-built (0.72.8)
   - libevent (2.1.12)
-  - Netmera (3.23.3-WithoutDependency):
-    - Netmera/NetmeraWithAdId (= 3.23.3-WithoutDependency)
-  - Netmera/AdIdSupport (3.23.3-WithoutDependency)
-  - Netmera/Application (3.23.3-WithoutDependency):
-    - NetmeraCore (= 3.23.3-WithoutDependency)
-  - Netmera/NetmeraWithAdId (3.23.3-WithoutDependency):
+  - Netmera (3.23.4-WithoutDependency):
+    - Netmera/NetmeraWithAdId (= 3.23.4-WithoutDependency)
+  - Netmera/AdIdSupport (3.23.4-WithoutDependency)
+  - Netmera/Application (3.23.4-WithoutDependency):
+    - NetmeraCore (= 3.23.4-WithoutDependency)
+  - Netmera/NetmeraWithAdId (3.23.4-WithoutDependency):
     - Netmera/AdIdSupport
     - Netmera/Application
-  - Netmera/NotificationContentExtension (3.23.3-WithoutDependency):
-    - NetmeraCore (= 3.23.3-WithoutDependency)
-  - Netmera/NotificationServiceExtension (3.23.3-WithoutDependency):
-    - NetmeraCore (= 3.23.3-WithoutDependency)
-  - NetmeraCore (3.23.3-WithoutDependency)
+  - Netmera/NotificationContentExtension (3.23.4-WithoutDependency):
+    - NetmeraCore (= 3.23.4-WithoutDependency)
+  - Netmera/NotificationServiceExtension (3.23.4-WithoutDependency):
+    - NetmeraCore (= 3.23.4-WithoutDependency)
+  - NetmeraCore (3.23.4-WithoutDependency)
   - OpenSSL-Universal (1.1.1100)
   - RCT-Folly (2021.07.22.00):
     - boost
@@ -514,8 +514,8 @@ PODS:
     - React-Core
   - RNCPicker (2.4.9):
     - React-Core
-  - RNNetmera (1.7.2-beta01):
-    - Netmera (= 3.23.3-WithoutDependency)
+  - RNNetmera (1.7.3-beta01):
+    - Netmera (= 3.23.4-WithoutDependency)
     - React
   - RNScreens (3.20.0):
     - React-Core
@@ -553,9 +553,9 @@ DEPENDENCIES:
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
   - hermes-engine (from `../node_modules/react-native/sdks/hermes-engine/hermes-engine.podspec`)
   - libevent (~> 2.1.12)
-  - Netmera (= 3.23.3-WithoutDependency)
-  - Netmera/NotificationContentExtension (= 3.23.3-WithoutDependency)
-  - Netmera/NotificationServiceExtension (= 3.23.3-WithoutDependency)
+  - Netmera (= 3.23.4-WithoutDependency)
+  - Netmera/NotificationContentExtension (= 3.23.4-WithoutDependency)
+  - Netmera/NotificationServiceExtension (= 3.23.4-WithoutDependency)
   - OpenSSL-Universal (= 1.1.1100)
   - RCT-Folly (from `../node_modules/react-native/third-party-podspecs/RCT-Folly.podspec`)
   - RCTRequired (from `../node_modules/react-native/Libraries/RCTRequired`)
@@ -732,8 +732,8 @@ SPEC CHECKSUMS:
   glog: 791fe035093b84822da7f0870421a25839ca7870
   hermes-engine: aa2a71bd0fd5c18850f7c54eb83571c5dd5fd187
   libevent: 4049cae6c81cdb3654a443be001fb9bdceff7913
-  Netmera: e0cd17f590a365f0f1f691ad7a427cdcfc9ae0ba
-  NetmeraCore: 6eac838adf4ade35c34f259d918e98900c4501bb
+  Netmera: a9202b9281587958045fe9f08d430fdf11835ae5
+  NetmeraCore: 947c6c5f80a99b21ad3abd575f313083fd9774a5
   OpenSSL-Universal: ebc357f1e6bc71fa463ccb2fe676756aff50e88c
   RCT-Folly: 85766c3226c7ec638f05ad7cb3cf6a268d6c4241
   RCTRequired: 182d3e71f3ee4edfa87d4bf82eeea61510922b2a
@@ -772,12 +772,12 @@ SPEC CHECKSUMS:
   ReactCommon: c111aa0c8006650d77a651e155f4112f97761dfd
   RNCAsyncStorage: 618d03a5f52fbccb3d7010076bc54712844c18ef
   RNCPicker: 567de6dc0c6735cf249700d940c80b90b090e4db
-  RNNetmera: c0c43f2cb2598ad5d2cdd9504a50ee1cca68d904
+  RNNetmera: a90d94720ed7b4db1984a5f4763bb6298b94e3d3
   RNScreens: 218801c16a2782546d30bd2026bb625c0302d70f
   SocketRocket: f32cd54efbe0f095c4d7594881e52619cfe80b17
   Yoga: 11d7931afb89721f39cf553a78767b81c7fbea1f
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: c6ec7a7243cecfbfc009571dfa9b6ab190720450
+PODFILE CHECKSUM: a54d725add1b9b1d594df7185e1658320389061f
 
-COCOAPODS: 1.12.1
+COCOAPODS: 1.15.2
