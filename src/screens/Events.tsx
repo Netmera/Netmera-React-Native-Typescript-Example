@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {SafeAreaView, StyleSheet, Text, TouchableOpacity} from 'react-native';
 import Colors from '../Colors';
 import {
@@ -12,16 +12,24 @@ import {
 import {Netmera} from 'react-native-netmera';
 
 const Events = () => {
+  const [revenue, setRevenue] = useState<string>('');
+
   const sendLoginEvent = () => {
     const loginEvent = new LoginEvent();
     loginEvent.userId = 'TestUserId';
     loginEvent.userIda = 21893718239812738;
     loginEvent.userIdax = '21893718239812738';
+    if (revenue) {
+      loginEvent.revenue = Number(revenue);
+    }
     Netmera.sendEvent(loginEvent);
   };
 
   const sendRegisterEvent = () => {
     const registerEvent = new RegisterEvent();
+    if (revenue) {
+      registerEvent.revenue = Number(revenue);
+    }
     Netmera.sendEvent(registerEvent);
   };
 
@@ -29,6 +37,9 @@ const Events = () => {
     const viewCartEvent = new ViewCartEvent();
     viewCartEvent.subTotal = 96.7;
     viewCartEvent.itemCount = 9;
+    if (revenue) {
+      viewCartEvent.revenue = Number(revenue);
+    }
     Netmera.sendEvent(viewCartEvent);
   };
 
@@ -62,6 +73,9 @@ const Events = () => {
 
     // Set custom attributes
     purchaseEvent.installment = '5';
+    if (revenue) {
+      purchaseEvent.revenue = Number(revenue);
+    }
     Netmera.sendEvent(purchaseEvent);
   };
 
@@ -69,6 +83,9 @@ const Events = () => {
     // Custom event
     const testEvent = new TestEvent();
     testEvent.testAttribute = 'TestAttribute';
+    if (revenue) {
+      testEvent.revenue = Number(revenue);
+    }
     Netmera.sendEvent(testEvent);
   };
 
