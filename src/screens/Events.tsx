@@ -1,5 +1,11 @@
 import React, {useState} from 'react';
-import {SafeAreaView, StyleSheet, Text, TouchableOpacity} from 'react-native';
+import {
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+} from 'react-native';
 import Colors from '../Colors';
 import {
   CustomPurchaseEvent,
@@ -114,6 +120,15 @@ const Events = () => {
 
   return (
     <SafeAreaView style={styles.container}>
+      <TextInput
+        placeholder={'Revenue'}
+        placeholderTextColor={Colors.dark}
+        style={styles.revenueInput}
+        value={revenue}
+        autoCapitalize={'none'}
+        keyboardType="numeric"
+        onChangeText={value => setRevenue(value)}
+      />
       {buttons.map((item, index) => {
         return (
           <TouchableOpacity
@@ -143,6 +158,17 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
+  },
+
+  revenueInput: {
+    alignSelf: 'center',
+    color: Colors.black,
+    borderColor: Colors.dark,
+    borderWidth: 1,
+    borderRadius: 5,
+    width: '80%',
+    height: 40,
+    marginBottom: 5,
   },
 
   text: {
