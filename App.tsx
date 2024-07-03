@@ -24,6 +24,7 @@ import PushInbox from './src/screens/PushInbox';
 import SetPropertiesModal from './src/SetPropertiesModal';
 import {Netmera} from 'react-native-netmera';
 import {isIos} from './src/helpers/DeviceUtils';
+import messaging from '@react-native-firebase/messaging';
 
 const Stack = createNativeStackNavigator();
 
@@ -46,6 +47,27 @@ const App = () => {
         type: 'success',
         text1: `Widget URL handle by app: ${url}`,
       });
+    });
+
+    messaging()
+      .getToken()
+      .then((pushToken: string) => {
+        console.log('pushToken: ' + pushToken);
+        Netmera.onNetmeraNewToken(pushToken);
+      });
+
+    messaging().onMessage(async remoteMessage => {
+      console.log(JSON.stringify(remoteMessage));
+      if (
+        Netmera.isNetmeraRemoteMessage(
+          remoteMessage.data as {[key: string]: string},
+        )
+      ) {
+        Netmera.onNetmeraFirebasePushMessageReceived(
+          remoteMessage.from,
+          remoteMessage.data as {[key: string]: string},
+        );
+      }
     });
   }, []);
 
