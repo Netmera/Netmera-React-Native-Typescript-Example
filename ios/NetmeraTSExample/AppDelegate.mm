@@ -16,14 +16,13 @@
   // You can add your custom initial props in the dictionary below.
   // They will be passed down to the ViewController used by React Native.
   self.initialProps = @{};
-  
+
   [UNUserNotificationCenter currentNotificationCenter].delegate = self;
-  
+
   // Init Netmera
   [RNNetmera logging: YES];
   [RNNetmera initNetmera: [SharedPreferencesModule getApiKey]]; // Replace [SharedPreferencesModule getApiKey] with your own NETMERA API KEY.
   [Netmera setBaseURL:[SharedPreferencesModule getBaseUrl]];
-  [RNNetmera requestPushNotificationAuthorization];
   [RNNetmera setPushDelegate:self];
   [Netmera setAppGroupName:@"group.com.netmerareactnativeexample"];
 
@@ -32,6 +31,10 @@
 
 
 - (NSURL *)sourceURLForBridge:(RCTBridge *)bridge
+{
+  return [self bundleURL];
+}
+- (NSURL *)bundleURL
 {
 #if DEBUG
   return [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index"];

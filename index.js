@@ -14,6 +14,7 @@ import {
   onPushReceive,
   onPushRegister,
 } from './NetmeraPushHeadlessTask';
+import messaging from '@react-native-firebase/messaging';
 
 Netmera.initBroadcastReceiver(
   onPushRegister,
@@ -23,6 +24,16 @@ Netmera.initBroadcastReceiver(
   onPushButtonClicked,
   onCarouselObjectSelected,
 );
+
+messaging().setBackgroundMessageHandler(async remoteMessage => {
+  console.log('Message handled in the background!', remoteMessage);
+  if (Netmera.isNetmeraRemoteMessage(remoteMessage.data)) {
+    Netmera.onNetmeraFirebasePushMessageReceived(
+      remoteMessage.from,
+      remoteMessage.data,
+    );
+  }
+});
 
 Netmera.enablePopupPresentation();
 
