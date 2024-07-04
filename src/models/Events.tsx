@@ -24,11 +24,11 @@ class LoginEvent extends NetmeraEvent {
   }
 }
 
-class RegisterEvent {
+class RegisterEvent extends NetmeraEvent {
   code = 'n:rg';
 }
 
-class ViewCartEvent {
+class ViewCartEvent extends NetmeraEvent {
   code = 'n:vt';
 
   private er: any;
@@ -43,7 +43,7 @@ class ViewCartEvent {
   }
 }
 
-class PurchaseEvent {
+class PurchaseEvent extends NetmeraEvent {
   code = 'n:ph';
 
   private ek: string | undefined;
@@ -173,7 +173,7 @@ class CustomPurchaseEvent extends PurchaseEvent {
 }
 
 // Custom Event
-class TestEvent {
+class TestEvent extends NetmeraEvent {
   code = 'ral';
 
   private ea: string | undefined;

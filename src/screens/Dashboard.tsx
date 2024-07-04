@@ -137,6 +137,10 @@ const Dashboard = ({navigation}: any) => {
     Netmera.turnOffSendingEventAndUserUpdate(false);
   };
 
+  const kill = () => {
+    Netmera.kill();
+  };
+
   const buttons = [
     {
       name: 'ENABLE LOCATION & GEOFENCE',
@@ -198,6 +202,10 @@ const Dashboard = ({navigation}: any) => {
     {
       name: 'TURN OFF SENDING EVENT AND USER UPDATE',
       method: turnOffSendingEventAndUserUpdate,
+    },
+    {
+      name: 'KILL NETMERA',
+      method: kill,
     },
   ];
 
