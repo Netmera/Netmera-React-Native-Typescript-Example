@@ -54,9 +54,3 @@ yarn-error.log
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
-
-# Services Files
-.env
-/android/app/agconnect-services.json
-/android/app/google-services.json
-/ios/NetmeraTSExample/GoogleService-Info.plist
