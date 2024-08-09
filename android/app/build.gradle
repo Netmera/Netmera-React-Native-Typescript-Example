@@ -82,7 +82,7 @@ android {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
-        versionName "1.7.6-beta04"
+        versionName "1.7.7-beta01"
     }
 
     signingConfigs {

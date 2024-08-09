@@ -7,6 +7,7 @@
 #import <RNNetmera/RNNetmeraUtils.h>
 #import <RNNetmera/RNNetmera.h>
 #import <React/RCTLinkingManager.h>
+#import <Firebase.h>
 
 @implementation AppDelegate
 
@@ -25,6 +26,8 @@
   [Netmera setBaseURL:[SharedPreferencesModule getBaseUrl]];
   [RNNetmera setPushDelegate:self];
   [Netmera setAppGroupName:@"group.com.netmerareactnativeexample"];
+  
+  [FIRApp configure];
 
   return [super application:application didFinishLaunchingWithOptions:launchOptions];
 }

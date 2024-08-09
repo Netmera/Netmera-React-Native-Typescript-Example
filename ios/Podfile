@@ -13,9 +13,9 @@ if linkage != nil
   use_frameworks! :linkage => linkage.to_sym
 end
 
-pod "Netmera", "3.23.7-WithoutDependency"
-pod "Netmera/NotificationServiceExtension", "3.23.7-WithoutDependency"
-pod "Netmera/NotificationContentExtension", "3.23.7-WithoutDependency"
+pod "Netmera", "3.23.11-WithoutDependency"
+pod "Netmera/NotificationServiceExtension", "3.23.11-WithoutDependency"
+pod "Netmera/NotificationContentExtension", "3.23.11-WithoutDependency"
 
 target 'NetmeraTSExample' do
   config = use_native_modules!
@@ -43,6 +43,11 @@ target 'NetmeraTSExample' do
         :mac_catalyst_enabled => false,
         # :ccache_enabled => true
       )
+      installer.pods_project.targets.each do |target|
+       target.build_configurations.each do |config|
+        config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '12.0'
+       end
+      end
   end
 end
 
