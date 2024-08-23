@@ -1259,7 +1259,7 @@ PODS:
     - FirebaseCoreExtension
     - React-Core
     - RNFBApp
-  - RNNetmera (1.7.7-beta02):
+  - RNNetmera (1.7.8-beta01):
     - Netmera (= 3.23.11-WithoutDependency)
     - React
   - RNScreens (3.32.0):
@@ -1575,7 +1575,7 @@ SPEC CHECKSUMS:
   RNCPicker: 567de6dc0c6735cf249700d940c80b90b090e4db
   RNFBApp: 9acbe359ef3559d6f8ca5c350db471f2b352f98a
   RNFBMessaging: b82ef70d252500d3ad104284c0c7f8e1cd22b51e
-  RNNetmera: 25fca5b4666400151491f0388213221b0e902369
+  RNNetmera: bbc925aaa0eb7fa36d390c5ea29291bf0fe11377
   RNScreens: fd2722bcc59f36a629205af8cc7b48e4bc0d09f5
   SocketRocket: abac6f5de4d4d62d24e11868d7a2f427e0ef940d
   Yoga: dafebc41bc66910af33077aaa41078e89fd635bf
