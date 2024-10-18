@@ -3,8 +3,9 @@
  */
 
 import React, {useState} from 'react';
-import {Alert, FlatList, Text, TouchableHighlight, View} from 'react-native';
+import {Alert, FlatList, Text, TouchableHighlight, View, TextInput} from 'react-native';
 import styles from '../Style';
+import Colors from '../Colors';
 import {
   Netmera,
   NetmeraInboxFilter,
@@ -18,6 +19,7 @@ const PushInbox = () => {
   const [inbox, setInbox] = useState<NetmeraPushInbox[]>([]);
   const [inboxState, setInboxState] = useState(NMInboxStatus.STATUS_ALL);
   const [statusCount, setStatusCount] = useState('0');
+  const [categoryList, setCategoryList] = useState('');
 
   const states = ['ALL', 'DELETED', 'READ_OR_UNREAD', 'READ', 'UNREAD'];
 
@@ -118,6 +120,18 @@ const PushInbox = () => {
       const filter = new NMInboxStatusCountFilter();
       filter.nmInboxStatus = inboxState;
       filter.includeExpired = true;
+
+      if (categoryList.trim() !== '') {
+        const stringList = categoryList.split(' ');
+        const invalidInput = stringList.some(item => isNaN(Number(item)));
+        if (invalidInput) {
+          Alert.alert('Error', 'Please enter only numbers separated by spaces.');
+          return;
+        }
+        const intList = stringList.map(item => Number(item)) as number[];
+        filter.categoryList = intList;
+      }
+
       const nmInboxStatusCount = await Netmera.getInboxCountForStatus(filter);
 
       let countStatusText =
@@ -227,6 +241,19 @@ const PushInbox = () => {
 
   return (
     <View style={styles.container}>
+
+
+      <View style={styles.column}>
+      <Text style={styles.text}>Category List:</Text>
+        <TextInput
+          placeholderTextColor={Colors.dark}
+          style={styles.bigTextInput}
+          placeholder="Enter Category List (e.g. 1 2 3)"
+          value={categoryList}
+          onChangeText={setCategoryList}
+        />
+      </View>
+      
       <View style={styles.row}>
         <View style={styles.rowItem}>
           <SelectDropdown

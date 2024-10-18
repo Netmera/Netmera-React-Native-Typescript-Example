@@ -36,6 +36,17 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
   },
 
+  bigTextInput: {
+    color: Colors.black,
+    borderColor: Colors.dark,
+    borderWidth: 1,
+    borderRadius: 10,
+    width: '100%',
+    height: 40,
+    marginVertical: 5,
+    paddingLeft: 10,
+  },
+
   buttonText: {
     fontSize: 13,
     color: 'white',
@@ -60,6 +71,12 @@ const styles = StyleSheet.create({
   dropdown: {
     width: '100%',
     marginTop: 5,
+  },
+
+  column: {
+    flexDirection: 'column',
+    width: '100%',
+    paddingHorizontal: 15,
   },
 
   row: {
