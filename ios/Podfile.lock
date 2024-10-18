@@ -1259,7 +1259,7 @@ PODS:
     - FirebaseCoreExtension
     - React-Core
     - RNFBApp
-  - RNNetmera (1.7.8-beta02):
+  - RNNetmera (1.7.10-beta01):
     - Netmera (= 3.23.11-WithoutDependency)
     - React
   - RNScreens (3.32.0):
