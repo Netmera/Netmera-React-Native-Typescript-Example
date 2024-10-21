@@ -30,9 +30,7 @@ const PushInbox = () => {
       netmeraInboxFilter.pageSize = 2; // Fetch two push object
 
       if (categoryList.trim() !== '') {
-        const stringList = categoryList.split(' ');
-        console.log("ALOOOOO")
-        netmeraInboxFilter.categories = stringList;
+        netmeraInboxFilter.categories = categoryList.split(' ');
       }
 
       const inbox = await Netmera.fetchInbox(netmeraInboxFilter);
