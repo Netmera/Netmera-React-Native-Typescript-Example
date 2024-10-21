@@ -47,6 +47,9 @@ const SetPropertiesModal: FC<SetPropertiesModelPropTypes> = ({
     } else if (baseUrl === 'd' && apiKey === 'd') {
       setBaseUrl(Config.NETMERA_PROD_BASE_URL ?? '');
       setApiKey(Config.NETMERA_PROD_API_KEY ?? '');
+    } else if (baseUrl === 'e' && apiKey === 'e') {
+      setBaseUrl(Config.NETMERA_UAT_BASE_URL ?? '');
+      setApiKey(Config.NETMERA_UAT_API_KEY ?? '');
     }
   };
 

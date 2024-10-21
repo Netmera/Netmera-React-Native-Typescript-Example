@@ -28,6 +28,13 @@ const PushInbox = () => {
       const netmeraInboxFilter = new NetmeraInboxFilter();
       netmeraInboxFilter.status = inboxState;
       netmeraInboxFilter.pageSize = 2; // Fetch two push object
+
+      if (categoryList.trim() !== '') {
+        const stringList = categoryList.split(' ');
+        console.log("ALOOOOO")
+        netmeraInboxFilter.categories = stringList;
+      }
+
       const inbox = await Netmera.fetchInbox(netmeraInboxFilter);
       console.log('inbox', inbox);
       setInbox(inbox);
