@@ -50,11 +50,11 @@ public class SharedPreferencesModule extends ReactContextBaseJavaModule {
 
     public static String getBaseUrl(Context context) {
         SharedPreferences sharedPreferences = context.getSharedPreferences("NetmeraPreferences", Context.MODE_PRIVATE);
-        return sharedPreferences.getString(KEY_BASE_URL, BuildConfig.NETMERA_PREPROD_BASE_URL);
+        return sharedPreferences.getString(KEY_BASE_URL, BuildConfig.NETMERA_UAT_BASE_URL);
     }
 
     public static String getApiKey(Context context) {
         SharedPreferences sharedPreferences = context.getSharedPreferences("NetmeraPreferences", Context.MODE_PRIVATE);
-        return sharedPreferences.getString(KEY_API_KEY, BuildConfig.NETMERA_PREPROD_API_KEY);
+        return sharedPreferences.getString(KEY_API_KEY, BuildConfig.NETMERA_UAT_API_KEY);
     }
 }
