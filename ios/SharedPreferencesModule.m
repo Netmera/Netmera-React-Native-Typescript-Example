@@ -44,7 +44,7 @@ RCT_EXPORT_METHOD(getBaseUrl:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromis
   if (value != nil) {
     return value;
   } else {
-    return [RNCConfig envFor:@"NETMERA_PREPROD_API_KEY"];
+    return [RNCConfig envFor:@"NETMERA_UAT_API_KEY"];
   }
 }
 
@@ -54,7 +54,7 @@ RCT_EXPORT_METHOD(getBaseUrl:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromis
   if (value != nil) {
     return value;
   } else {
-    return [RNCConfig envFor:@"NETMERA_PREPROD_BASE_URL"];
+    return [RNCConfig envFor:@"NETMERA_UAT_BASE_URL"];
   }
 }
 
