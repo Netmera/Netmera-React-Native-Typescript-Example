@@ -11,7 +11,7 @@ import Toast from 'react-native-toast-message';
 import Colors from '../Colors';
 import {Netmera} from 'react-native-netmera';
 import {pushToken} from '../../NetmeraPushHeadlessTask';
-import {isIos} from '../helpers/DeviceUtils';
+import {NotificationPermissionStatus} from 'react-native-netmera/src/models/NotificationPermissionStatus.ts';
 
 const enum PushState {
   PushEnabled = 'PushEnabled',
@@ -38,9 +38,6 @@ const Dashboard = ({navigation}: any) => {
   }, []);
 
   useEffect(() => {
-    if (isIos()) {
-      Netmera.requestPushNotificationAuthorization();
-    }
     setTimeout(() => {
       setPushTokenString(pushToken);
     }, 1000);
@@ -126,6 +123,35 @@ const Dashboard = ({navigation}: any) => {
     Netmera.requestPushNotificationAuthorization();
   };
 
+  const checkNotificationPermission = () => {
+    Netmera.checkNotificationPermission().then(status => {
+      let statusString;
+      switch (status) {
+        case NotificationPermissionStatus.NotDetermined:
+          statusString = 'NOT DETERMINED';
+          break;
+        case NotificationPermissionStatus.Blocked:
+          statusString = 'BLOCKED';
+          break;
+        case NotificationPermissionStatus.Denied:
+          statusString = 'DENIED';
+          break;
+        case NotificationPermissionStatus.Granted:
+          statusString = 'GRANTED';
+          break;
+        default:
+          statusString = 'UNDEFINED';
+          break;
+      }
+
+      Toast.show({
+        type: 'info',
+        text1: `Permission status :: ${statusString}`,
+        position: 'bottom',
+      });
+    });
+  };
+
   const toastPushTest = () =>
     Toast.show({
       type: 'info',
@@ -145,6 +171,10 @@ const Dashboard = ({navigation}: any) => {
     {
       name: 'ENABLE LOCATION & GEOFENCE',
       method: enableLocationAndGeofence,
+    },
+    {
+      name: 'CHECK NOTIFICATION PERMISSION',
+      method: checkNotificationPermission,
     },
     {
       name: 'REQUEST PUSH NOTIFICATION AUTHORIZATION',
