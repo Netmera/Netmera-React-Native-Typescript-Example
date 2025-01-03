@@ -3,7 +3,14 @@
  */
 
 import React, {useState} from 'react';
-import {Alert, FlatList, Text, TouchableHighlight, View, TextInput} from 'react-native';
+import {
+  Alert,
+  FlatList,
+  Text,
+  TouchableHighlight,
+  View,
+  TextInput,
+} from 'react-native';
 import styles from '../Style';
 import Colors from '../Colors';
 import {
@@ -130,7 +137,10 @@ const PushInbox = () => {
         const stringList = categoryList.split(' ');
         const invalidInput = stringList.some(item => isNaN(Number(item)));
         if (invalidInput) {
-          Alert.alert('Error', 'Please enter only numbers separated by spaces.');
+          Alert.alert(
+            'Error',
+            'Please enter only numbers separated by spaces.',
+          );
           return;
         }
         const intList = stringList.map(item => Number(item)) as number[];
@@ -246,10 +256,8 @@ const PushInbox = () => {
 
   return (
     <View style={styles.container}>
-
-
       <View style={styles.column}>
-      <Text style={styles.text}>Category List:</Text>
+        <Text style={styles.text}>Category List:</Text>
         <TextInput
           placeholderTextColor={Colors.dark}
           style={styles.bigTextInput}
@@ -258,7 +266,7 @@ const PushInbox = () => {
           onChangeText={setCategoryList}
         />
       </View>
-      
+
       <View style={styles.row}>
         <View style={styles.rowItem}>
           <SelectDropdown
