@@ -41,6 +41,15 @@ const App = () => {
       }
     });
 
+    Linking.getInitialURL().then(url => {
+      if (url) {
+        Toast.show({
+          type: 'success',
+          text1: `Initial linking url: ${url}`,
+        });
+      }
+    });
+
     Linking.addEventListener('url', event => {
       Toast.show({
         type: 'success',
