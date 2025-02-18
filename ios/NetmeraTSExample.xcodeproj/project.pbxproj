@@ -17,6 +17,8 @@
 		695A86D7FED8F816209083F1 /* Pods_Netmera_NotificationContentExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D4553362CC34DAD2791637B /* Pods_Netmera_NotificationContentExtension.framework */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		841D0F765255C45C9AA6B70D /* Pods_NetmeraTSExample_NetmeraTSExampleTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F725AE5EEBC9792F56ECA61 /* Pods_NetmeraTSExample_NetmeraTSExampleTests.framework */; };
+		C9168B222D636380004C5EC5 /* LiveActivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9168B212D636380004C5EC5 /* LiveActivityManager.swift */; };
+		C9168B252D63675B004C5EC5 /* MyActivityAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9168B242D636734004C5EC5 /* MyActivityAttributes.swift */; };
 		C9C49F942B887FE500C13F7B /* SharedPreferencesModule.m in Sources */ = {isa = PBXBuildFile; fileRef = C9C49F932B887FE500C13F7B /* SharedPreferencesModule.m */; };
 		C9C49FAD2B8DF3CB00C13F7B /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9C49FAC2B8DF3CB00C13F7B /* NotificationService.swift */; };
 		C9C49FB12B8DF3CB00C13F7B /* Netmera_NotificationServiceExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = C9C49FAA2B8DF3CB00C13F7B /* Netmera_NotificationServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -92,6 +94,8 @@
 		89C6BE57DB24E9ADA2F236DE /* Pods-NetmeraTSExample-NetmeraTSExampleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NetmeraTSExample-NetmeraTSExampleTests.release.xcconfig"; path = "Target Support Files/Pods-NetmeraTSExample-NetmeraTSExampleTests/Pods-NetmeraTSExample-NetmeraTSExampleTests.release.xcconfig"; sourceTree = "<group>"; };
 		9D4553362CC34DAD2791637B /* Pods_Netmera_NotificationContentExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Netmera_NotificationContentExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5E080DF58AAB1424FEA6F55 /* Pods-Netmera_NotificationContentExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Netmera_NotificationContentExtension.release.xcconfig"; path = "Target Support Files/Pods-Netmera_NotificationContentExtension/Pods-Netmera_NotificationContentExtension.release.xcconfig"; sourceTree = "<group>"; };
+		C9168B212D636380004C5EC5 /* LiveActivityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveActivityManager.swift; sourceTree = "<group>"; };
+		C9168B242D636734004C5EC5 /* MyActivityAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyActivityAttributes.swift; sourceTree = "<group>"; };
 		C99ACF0228DB35830019E1B4 /* NetmeraTSExample.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = NetmeraTSExample.entitlements; path = NetmeraTSExample/NetmeraTSExample.entitlements; sourceTree = "<group>"; };
 		C9C49F912B887F8500C13F7B /* SharedPreferencesModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SharedPreferencesModule.h; sourceTree = "<group>"; };
 		C9C49F932B887FE500C13F7B /* SharedPreferencesModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SharedPreferencesModule.m; sourceTree = "<group>"; };
@@ -105,6 +109,7 @@
 		C9C49FC22B8E016300C13F7B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		C9C49FC42B8E016300C13F7B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C9C49FCB2B8E023100C13F7B /* Netmera_NotificationContentExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Netmera_NotificationContentExtension.entitlements; sourceTree = "<group>"; };
+		C9D32DD62D63733800BC779B /* NetmeraTSExample-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NetmeraTSExample-Bridging-Header.h"; sourceTree = "<group>"; };
 		DE177862AB4DA6DB198E9306 /* Pods-Netmera_NotificationServiceExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Netmera_NotificationServiceExtension.debug.xcconfig"; path = "Target Support Files/Pods-Netmera_NotificationServiceExtension/Pods-Netmera_NotificationServiceExtension.debug.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		FCA398A82A72C70A00CC8FFA /* nm_push_sound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = nm_push_sound.wav; sourceTree = "<group>"; };
@@ -173,10 +178,13 @@
 				C99ACF0228DB35830019E1B4 /* NetmeraTSExample.entitlements */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.mm */,
+				C9D32DD62D63733800BC779B /* NetmeraTSExample-Bridging-Header.h */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
+				C9168B212D636380004C5EC5 /* LiveActivityManager.swift */,
+				C9168B242D636734004C5EC5 /* MyActivityAttributes.swift */,
 				C9C49F912B887F8500C13F7B /* SharedPreferencesModule.h */,
 				C9C49F932B887FE500C13F7B /* SharedPreferencesModule.m */,
 				4C45C3DF513093901CC0A606 /* PrivacyInfo.xcprivacy */,
@@ -368,7 +376,7 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						LastSwiftMigration = 1120;
+						LastSwiftMigration = 1600;
 					};
 					C9C49FA92B8DF3CB00C13F7B = {
 						CreatedOnToolsVersion = 15.1;
@@ -656,6 +664,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C9168B222D636380004C5EC5 /* LiveActivityManager.swift in Sources */,
+				C9168B252D63675B004C5EC5 /* MyActivityAttributes.swift in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */,
 				C9C49F942B887FE500C13F7B /* SharedPreferencesModule.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
@@ -770,6 +780,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = NetmeraTSExample/NetmeraTSExample.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 95N24W2PH8;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = NetmeraTSExample/Info.plist;
@@ -785,6 +796,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.netmerareactnativeexample;
 				PRODUCT_NAME = NetmeraTSExample;
+				SWIFT_OBJC_BRIDGING_HEADER = "NetmeraTSExample-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -800,6 +812,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = NetmeraTSExample/NetmeraTSExample.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 95N24W2PH8;
 				INFOPLIST_FILE = NetmeraTSExample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -814,6 +827,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.netmerareactnativeexample;
 				PRODUCT_NAME = NetmeraTSExample;
+				SWIFT_OBJC_BRIDGING_HEADER = "NetmeraTSExample-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};

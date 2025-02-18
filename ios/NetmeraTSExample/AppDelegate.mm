@@ -1,6 +1,6 @@
 #import "AppDelegate.h"
 
-
+#import "NetmeraTSExample-Swift.h"
 #import <React/RCTBundleURLProvider.h>
 
 #import <RNNetmera/RNNetmeraRCTEventEmitter.h>
@@ -28,6 +28,11 @@
   [Netmera setAppGroupName:@"group.com.netmerareactnativeexample"];
   
   [FIRApp configure];
+  
+  if (@available(iOS 17.2, *)) {
+    [[LiveActivityManager shared] fetchAllActivities];
+    [[LiveActivityManager shared] getPushToStartToken];
+  }
 
   return [super application:application didFinishLaunchingWithOptions:launchOptions];
 }
