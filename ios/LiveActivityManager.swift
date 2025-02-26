@@ -13,7 +13,7 @@ import Netmera
 import CoreTelephony
 
 /// Typealias for Activity Attributes used in this file
-typealias ActivityType = MyActivityAttributes
+typealias ActivityType = MatchLiveScoreWidgetExtensionAttributes
 
 /// Represents the state of a Live Activity
 @available(iOS 16.2, *)

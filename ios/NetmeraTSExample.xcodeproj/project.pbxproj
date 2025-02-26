@@ -18,7 +18,17 @@
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		841D0F765255C45C9AA6B70D /* Pods_NetmeraTSExample_NetmeraTSExampleTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F725AE5EEBC9792F56ECA61 /* Pods_NetmeraTSExample_NetmeraTSExampleTests.framework */; };
 		C9168B222D636380004C5EC5 /* LiveActivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9168B212D636380004C5EC5 /* LiveActivityManager.swift */; };
-		C9168B252D63675B004C5EC5 /* MyActivityAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9168B242D636734004C5EC5 /* MyActivityAttributes.swift */; };
+		C9A9AFE82D675CB800FE82DF /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9A9AFE72D675CB800FE82DF /* WidgetKit.framework */; };
+		C9A9AFEA2D675CB800FE82DF /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9A9AFE92D675CB800FE82DF /* SwiftUI.framework */; };
+		C9A9AFFB2D675CB900FE82DF /* MatchLiveScoreWidgetExtensionExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = C9A9AFE62D675CB800FE82DF /* MatchLiveScoreWidgetExtensionExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		C9A9B04F2D68AD9C00FE82DF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C9A9B0472D68AD9C00FE82DF /* Assets.xcassets */; };
+		C9A9B0512D68AD9C00FE82DF /* AppIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9A9B0462D68AD9C00FE82DF /* AppIntent.swift */; };
+		C9A9B0522D68AD9C00FE82DF /* MatchLiveScoreWidgetExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9A9B0492D68AD9C00FE82DF /* MatchLiveScoreWidgetExtension.swift */; };
+		C9A9B0532D68AD9C00FE82DF /* MatchLiveScoreWidgetExtensionAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9A9B04A2D68AD9C00FE82DF /* MatchLiveScoreWidgetExtensionAttributes.swift */; };
+		C9A9B0542D68AD9C00FE82DF /* MatchLiveScoreWidgetExtensionBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9A9B04B2D68AD9C00FE82DF /* MatchLiveScoreWidgetExtensionBundle.swift */; };
+		C9A9B0552D68AD9C00FE82DF /* MatchLiveScoreWidgetExtensionControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9A9B04C2D68AD9C00FE82DF /* MatchLiveScoreWidgetExtensionControl.swift */; };
+		C9A9B0562D68AD9C00FE82DF /* MatchLiveScoreWidgetExtensionLiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9A9B04D2D68AD9C00FE82DF /* MatchLiveScoreWidgetExtensionLiveActivity.swift */; };
+		C9A9B0572D68AD9C00FE82DF /* MatchLiveScoreWidgetExtensionAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9A9B04A2D68AD9C00FE82DF /* MatchLiveScoreWidgetExtensionAttributes.swift */; };
 		C9C49F942B887FE500C13F7B /* SharedPreferencesModule.m in Sources */ = {isa = PBXBuildFile; fileRef = C9C49F932B887FE500C13F7B /* SharedPreferencesModule.m */; };
 		C9C49FAD2B8DF3CB00C13F7B /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9C49FAC2B8DF3CB00C13F7B /* NotificationService.swift */; };
 		C9C49FB12B8DF3CB00C13F7B /* Netmera_NotificationServiceExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = C9C49FAA2B8DF3CB00C13F7B /* Netmera_NotificationServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -38,6 +48,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 13B07F861A680F5B00A75B9A;
 			remoteInfo = NetmeraTSExample;
+		};
+		C9A9AFF92D675CB900FE82DF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C9A9AFE52D675CB800FE82DF;
+			remoteInfo = MatchLiveScoreWidgetExtensionExtension;
 		};
 		C9C49FAF2B8DF3CB00C13F7B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -63,6 +80,7 @@
 			dstSubfolderSpec = 13;
 			files = (
 				C9C49FC72B8E016300C13F7B /* Netmera_NotificationContentExtension.appex in Embed App Extensions */,
+				C9A9AFFB2D675CB900FE82DF /* MatchLiveScoreWidgetExtensionExtension.appex in Embed App Extensions */,
 				C9C49FB12B8DF3CB00C13F7B /* Netmera_NotificationServiceExtension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
@@ -95,8 +113,18 @@
 		9D4553362CC34DAD2791637B /* Pods_Netmera_NotificationContentExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Netmera_NotificationContentExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5E080DF58AAB1424FEA6F55 /* Pods-Netmera_NotificationContentExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Netmera_NotificationContentExtension.release.xcconfig"; path = "Target Support Files/Pods-Netmera_NotificationContentExtension/Pods-Netmera_NotificationContentExtension.release.xcconfig"; sourceTree = "<group>"; };
 		C9168B212D636380004C5EC5 /* LiveActivityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveActivityManager.swift; sourceTree = "<group>"; };
-		C9168B242D636734004C5EC5 /* MyActivityAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyActivityAttributes.swift; sourceTree = "<group>"; };
 		C99ACF0228DB35830019E1B4 /* NetmeraTSExample.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = NetmeraTSExample.entitlements; path = NetmeraTSExample/NetmeraTSExample.entitlements; sourceTree = "<group>"; };
+		C9A9AFE62D675CB800FE82DF /* MatchLiveScoreWidgetExtensionExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = MatchLiveScoreWidgetExtensionExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		C9A9AFE72D675CB800FE82DF /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		C9A9AFE92D675CB800FE82DF /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		C9A9B0462D68AD9C00FE82DF /* AppIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIntent.swift; sourceTree = "<group>"; };
+		C9A9B0472D68AD9C00FE82DF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		C9A9B0482D68AD9C00FE82DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C9A9B0492D68AD9C00FE82DF /* MatchLiveScoreWidgetExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchLiveScoreWidgetExtension.swift; sourceTree = "<group>"; };
+		C9A9B04A2D68AD9C00FE82DF /* MatchLiveScoreWidgetExtensionAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchLiveScoreWidgetExtensionAttributes.swift; sourceTree = "<group>"; };
+		C9A9B04B2D68AD9C00FE82DF /* MatchLiveScoreWidgetExtensionBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchLiveScoreWidgetExtensionBundle.swift; sourceTree = "<group>"; };
+		C9A9B04C2D68AD9C00FE82DF /* MatchLiveScoreWidgetExtensionControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchLiveScoreWidgetExtensionControl.swift; sourceTree = "<group>"; };
+		C9A9B04D2D68AD9C00FE82DF /* MatchLiveScoreWidgetExtensionLiveActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchLiveScoreWidgetExtensionLiveActivity.swift; sourceTree = "<group>"; };
 		C9C49F912B887F8500C13F7B /* SharedPreferencesModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SharedPreferencesModule.h; sourceTree = "<group>"; };
 		C9C49F932B887FE500C13F7B /* SharedPreferencesModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SharedPreferencesModule.m; sourceTree = "<group>"; };
 		C9C49FAA2B8DF3CB00C13F7B /* Netmera_NotificationServiceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = Netmera_NotificationServiceExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -129,6 +157,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				1F8F8B7083734940119DC8C7 /* Pods_NetmeraTSExample.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C9A9AFE32D675CB800FE82DF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C9A9AFEA2D675CB800FE82DF /* SwiftUI.framework in Frameworks */,
+				C9A9AFE82D675CB800FE82DF /* WidgetKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -184,7 +221,6 @@
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
 				C9168B212D636380004C5EC5 /* LiveActivityManager.swift */,
-				C9168B242D636734004C5EC5 /* MyActivityAttributes.swift */,
 				C9C49F912B887F8500C13F7B /* SharedPreferencesModule.h */,
 				C9C49F932B887FE500C13F7B /* SharedPreferencesModule.m */,
 				4C45C3DF513093901CC0A606 /* PrivacyInfo.xcprivacy */,
@@ -202,6 +238,8 @@
 				5F725AE5EEBC9792F56ECA61 /* Pods_NetmeraTSExample_NetmeraTSExampleTests.framework */,
 				9D4553362CC34DAD2791637B /* Pods_Netmera_NotificationContentExtension.framework */,
 				2B6EB92ABF96E77B052195AC /* Pods_Netmera_NotificationServiceExtension.framework */,
+				C9A9AFE72D675CB800FE82DF /* WidgetKit.framework */,
+				C9A9AFE92D675CB800FE82DF /* SwiftUI.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -221,6 +259,7 @@
 				00E356EF1AD99517003FC87E /* NetmeraTSExampleTests */,
 				C9C49FAB2B8DF3CB00C13F7B /* Netmera_NotificationServiceExtension */,
 				C9C49FBE2B8E016300C13F7B /* Netmera_NotificationContentExtension */,
+				C9A9B04E2D68AD9C00FE82DF /* MatchLiveScoreWidgetExtension */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				BBD78D7AC51CEA395F1C20DB /* Pods */,
@@ -237,6 +276,7 @@
 				00E356EE1AD99517003FC87E /* NetmeraTSExampleTests.xctest */,
 				C9C49FAA2B8DF3CB00C13F7B /* Netmera_NotificationServiceExtension.appex */,
 				C9C49FB92B8E016300C13F7B /* Netmera_NotificationContentExtension.appex */,
+				C9A9AFE62D675CB800FE82DF /* MatchLiveScoreWidgetExtensionExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -254,6 +294,21 @@
 				A5E080DF58AAB1424FEA6F55 /* Pods-Netmera_NotificationContentExtension.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		C9A9B04E2D68AD9C00FE82DF /* MatchLiveScoreWidgetExtension */ = {
+			isa = PBXGroup;
+			children = (
+				C9A9B0462D68AD9C00FE82DF /* AppIntent.swift */,
+				C9A9B0472D68AD9C00FE82DF /* Assets.xcassets */,
+				C9A9B0482D68AD9C00FE82DF /* Info.plist */,
+				C9A9B0492D68AD9C00FE82DF /* MatchLiveScoreWidgetExtension.swift */,
+				C9A9B04A2D68AD9C00FE82DF /* MatchLiveScoreWidgetExtensionAttributes.swift */,
+				C9A9B04B2D68AD9C00FE82DF /* MatchLiveScoreWidgetExtensionBundle.swift */,
+				C9A9B04C2D68AD9C00FE82DF /* MatchLiveScoreWidgetExtensionControl.swift */,
+				C9A9B04D2D68AD9C00FE82DF /* MatchLiveScoreWidgetExtensionLiveActivity.swift */,
+			);
+			path = MatchLiveScoreWidgetExtension;
 			sourceTree = "<group>";
 		};
 		C9C49FAB2B8DF3CB00C13F7B /* Netmera_NotificationServiceExtension */ = {
@@ -320,11 +375,29 @@
 			dependencies = (
 				C9C49FB02B8DF3CB00C13F7B /* PBXTargetDependency */,
 				C9C49FC62B8E016300C13F7B /* PBXTargetDependency */,
+				C9A9AFFA2D675CB900FE82DF /* PBXTargetDependency */,
 			);
 			name = NetmeraTSExample;
 			productName = NetmeraTSExample;
 			productReference = 13B07F961A680F5B00A75B9A /* NetmeraTSExample.app */;
 			productType = "com.apple.product-type.application";
+		};
+		C9A9AFE52D675CB800FE82DF /* MatchLiveScoreWidgetExtensionExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C9A9AFFF2D675CB900FE82DF /* Build configuration list for PBXNativeTarget "MatchLiveScoreWidgetExtensionExtension" */;
+			buildPhases = (
+				C9A9AFE22D675CB800FE82DF /* Sources */,
+				C9A9AFE32D675CB800FE82DF /* Frameworks */,
+				C9A9AFE42D675CB800FE82DF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MatchLiveScoreWidgetExtensionExtension;
+			productName = MatchLiveScoreWidgetExtensionExtension;
+			productReference = C9A9AFE62D675CB800FE82DF /* MatchLiveScoreWidgetExtensionExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 		C9C49FA92B8DF3CB00C13F7B /* Netmera_NotificationServiceExtension */ = {
 			isa = PBXNativeTarget;
@@ -368,7 +441,7 @@
 		83CBB9F71A601CBA00E9B192 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1510;
+				LastSwiftUpdateCheck = 1600;
 				LastUpgradeCheck = 1210;
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
@@ -377,6 +450,9 @@
 					};
 					13B07F861A680F5B00A75B9A = {
 						LastSwiftMigration = 1600;
+					};
+					C9A9AFE52D675CB800FE82DF = {
+						CreatedOnToolsVersion = 16.0;
 					};
 					C9C49FA92B8DF3CB00C13F7B = {
 						CreatedOnToolsVersion = 15.1;
@@ -403,6 +479,7 @@
 				00E356ED1AD99517003FC87E /* NetmeraTSExampleTests */,
 				C9C49FA92B8DF3CB00C13F7B /* Netmera_NotificationServiceExtension */,
 				C9C49FB82B8E016300C13F7B /* Netmera_NotificationContentExtension */,
+				C9A9AFE52D675CB800FE82DF /* MatchLiveScoreWidgetExtensionExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -424,6 +501,14 @@
 				FCA398A92A72C70A00CC8FFA /* nm_push_sound.wav in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				FE706143BA027CB21C03A090 /* PrivacyInfo.xcprivacy in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C9A9AFE42D675CB800FE82DF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C9A9B04F2D68AD9C00FE82DF /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -665,10 +750,23 @@
 			buildActionMask = 2147483647;
 			files = (
 				C9168B222D636380004C5EC5 /* LiveActivityManager.swift in Sources */,
-				C9168B252D63675B004C5EC5 /* MyActivityAttributes.swift in Sources */,
+				C9A9B0572D68AD9C00FE82DF /* MatchLiveScoreWidgetExtensionAttributes.swift in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */,
 				C9C49F942B887FE500C13F7B /* SharedPreferencesModule.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C9A9AFE22D675CB800FE82DF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C9A9B0512D68AD9C00FE82DF /* AppIntent.swift in Sources */,
+				C9A9B0522D68AD9C00FE82DF /* MatchLiveScoreWidgetExtension.swift in Sources */,
+				C9A9B0532D68AD9C00FE82DF /* MatchLiveScoreWidgetExtensionAttributes.swift in Sources */,
+				C9A9B0542D68AD9C00FE82DF /* MatchLiveScoreWidgetExtensionBundle.swift in Sources */,
+				C9A9B0552D68AD9C00FE82DF /* MatchLiveScoreWidgetExtensionControl.swift in Sources */,
+				C9A9B0562D68AD9C00FE82DF /* MatchLiveScoreWidgetExtensionLiveActivity.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -695,6 +793,11 @@
 			isa = PBXTargetDependency;
 			target = 13B07F861A680F5B00A75B9A /* NetmeraTSExample */;
 			targetProxy = 00E356F41AD99517003FC87E /* PBXContainerItemProxy */;
+		};
+		C9A9AFFA2D675CB900FE82DF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C9A9AFE52D675CB800FE82DF /* MatchLiveScoreWidgetExtensionExtension */;
+			targetProxy = C9A9AFF92D675CB900FE82DF /* PBXContainerItemProxy */;
 		};
 		C9C49FB02B8DF3CB00C13F7B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -775,7 +878,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3B4392A12AC88292D35C810B /* Pods-NetmeraTSExample.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = NetmeraTSExample/NetmeraTSExample.entitlements;
@@ -788,7 +890,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = "1.8.0-beta02";
+				MARKETING_VERSION = "1.8.0-beta04";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -807,7 +909,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5709B34CF0A7D63546082F79 /* Pods-NetmeraTSExample.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = NetmeraTSExample/NetmeraTSExample.entitlements;
@@ -819,7 +920,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = "1.8.0-beta02";
+				MARKETING_VERSION = "1.8.0-beta04";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -1008,6 +1109,92 @@
 				SDKROOT = iphoneos;
 				USE_HERMES = true;
 				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		C9A9AFFC2D675CB900FE82DF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 95N24W2PH8;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MatchLiveScoreWidgetExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = MatchLiveScoreWidgetExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.netmerareactnativeexample.MatchLiveScoreWidgetExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		C9A9AFFD2D675CB900FE82DF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 95N24W2PH8;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MatchLiveScoreWidgetExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = MatchLiveScoreWidgetExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.netmerareactnativeexample.MatchLiveScoreWidgetExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -1215,6 +1402,15 @@
 			buildConfigurations = (
 				83CBBA201A601CBA00E9B192 /* Debug */,
 				83CBBA211A601CBA00E9B192 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C9A9AFFF2D675CB900FE82DF /* Build configuration list for PBXNativeTarget "MatchLiveScoreWidgetExtensionExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C9A9AFFC2D675CB900FE82DF /* Debug */,
+				C9A9AFFD2D675CB900FE82DF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
