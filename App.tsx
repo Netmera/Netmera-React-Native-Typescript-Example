@@ -7,7 +7,7 @@
  */
 
 import React, {useEffect, useState} from 'react';
-import {StatusBar, Text, TouchableOpacity, View} from 'react-native';
+import {Linking, StatusBar, Text, TouchableOpacity, View} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {
   createNativeStackNavigator,
@@ -39,6 +39,22 @@ const App = () => {
           text1: `Initial url: ${url}`,
         });
       }
+    });
+
+    Linking.getInitialURL().then(url => {
+      if (url) {
+        Toast.show({
+          type: 'success',
+          text1: `Initial linking url: ${url}`,
+        });
+      }
+    });
+
+    Linking.addEventListener('url', event => {
+      Toast.show({
+        type: 'success',
+        text1: `Foreground url: ${event.url}`,
+      });
     });
 
     Netmera.onWidgetUrlTriggered(url => {
