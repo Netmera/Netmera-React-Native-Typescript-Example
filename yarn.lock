@@ -7536,10 +7536,10 @@ react-native-netmera@^1.8.0-beta02:
   resolved "https://registry.yarnpkg.com/react-native-netmera/-/react-native-netmera-1.8.0.tgz#60648d53508e171530996f91ceb1b2f97f0850b1"
   integrity sha512-jwDXM93BMt33AR3c+2atwVw67fuz7FubVL7Mnc2w/l/V5do/GwSfbra7+sCO6gaBcpr7p4CPJ/HXdCrEtZCVTg==
 
-react-native-safe-area-context@^4.10.4:
-  version "4.14.1"
-  resolved "https://registry.yarnpkg.com/react-native-safe-area-context/-/react-native-safe-area-context-4.14.1.tgz#980c3c9db02a2314fa8ceb07f614728802320367"
-  integrity sha512-+tUhT5WBl8nh5+P+chYhAjR470iCByf9z5EYdCEbPaAK3Yfzw+o8VRPnUgmPAKlSccOgQBxx3NOl/Wzckn9ujg==
+react-native-safe-area-context@^5.3.0:
+  version "5.3.0"
+  resolved "https://registry.yarnpkg.com/react-native-safe-area-context/-/react-native-safe-area-context-5.3.0.tgz#272e6786a58aafe3362fde4d3233713b66158179"
+  integrity sha512-glV9bwuozTjf/JDBIBm+ITnukHNaUT3nucgdeADwjtHsfEN3RL5UO6nq99vvdWv5j/O9yCZBvFncM1BBQ+UvpQ==
 
 react-native-screens@^3.31.1:
   version "3.36.0"
