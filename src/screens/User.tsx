@@ -8,9 +8,9 @@ import {
   ScrollView,
   Text,
   TextInput,
-  TouchableHighlight,
-  View,
-} from 'react-native';
+  TouchableHighlight, TouchableOpacity,
+  View
+} from "react-native";
 import styles from '../Style';
 import {Picker} from '@react-native-picker/picker';
 import {Netmera, NMUserGender} from 'react-native-netmera';

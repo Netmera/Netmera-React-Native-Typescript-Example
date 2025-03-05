@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 10,
     width: '60%',
-    height: '10%',
+    height: 50,
     marginBottom: 10,
     paddingLeft: 10,
   },
@@ -66,6 +66,7 @@ const styles = StyleSheet.create({
     width: '50%',
     backgroundColor: Colors.lighter,
     marginBottom: 5,
+    height: 200,
   },
 
   dropdown: {

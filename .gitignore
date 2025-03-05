@@ -30,6 +30,8 @@ build/
 local.properties
 *.iml
 *.hprof
+.kotlin/
+.cxx/
 
 # node.js
 #
