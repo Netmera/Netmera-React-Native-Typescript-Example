@@ -29,10 +29,6 @@ target 'NetmeraTSExample' do
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
 
-  target 'NetmeraTSExampleTests' do
-    inherit! :complete
-    # Pods for testing
-  end
 
 
   post_install do |installer|
