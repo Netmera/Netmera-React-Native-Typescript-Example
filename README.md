@@ -337,9 +337,6 @@ const updateUser = () => {
     user.msisdn = <msisdn>;
     user.gender = <gender>;
 
-    // User update async
-    Netmera.updateUser(user)
-
     // User update sync
     Netmera.updateUser(user)
       .then(() => {
@@ -348,6 +345,20 @@ const updateUser = () => {
       .catch(error => {
         console.log(error.code, error.message);
       });
+}
+```
+
+```
+const updateUserAsync = () => {
+    const user = new NetmeraUser();
+    user.userId = <userId>;
+    user.name = <name>;
+    user.surname = <surname>;
+    user.msisdn = <msisdn>;
+    user.gender = <gender>;
+
+    // User update async
+    Netmera.updateUserAsync(user);
 }
 ```
 
