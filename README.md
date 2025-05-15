@@ -285,6 +285,16 @@ AppRegistry.registerComponent(appName, () => App);
 
 3. If you have custom Firebase Messaging integration, please see usage below.
 
+1- Add the following line to your `AndroidManifest.xml` file inside the `application` tag to remove Netmera's default FCM service
+
+```
+<service
+    android:name="com.netmera.nmfcm.NMFirebaseService"
+    tools:node="remove" />
+```
+
+2- Update `FirebaseMessaging` methods like below
+
 ```
 messaging()
    .getToken(firebase.app().options.messagingSenderId)
@@ -307,6 +317,16 @@ messaging().setBackgroundMessageHandler(async (remoteMessage) => {
 ```
 
 4. If you have custom Huawei Messaging integration, please see usage below.
+
+1- Add the following line to your `AndroidManifest.xml` file inside the `application` tag to remove Netmera's default HMS service
+
+```
+<service
+   android:name="com.netmera.nmhms.NMHuaweiService"
+   tools:node="remove" />
+```
+
+2- Update `HuaweiPushKit` methods like below
 
 ```
 HmsPushInstanceId.getToken("")
