@@ -334,14 +334,27 @@ HmsPushInstanceId.getToken("")
        Netmera.onNetmeraNewToken(result.result)
    })
 
-HmsPushEvent.onRemoteMessageReceived(event => {
-   const remoteMessage = new RNRemoteMessage(event.msg);
-   let data = JSON.parse(remoteMessage.getData())
-   console.log("onRemoteMessageReceived", data)
-   if (Netmera.isNetmeraRemoteMessage(data)) {
-       Netmera.onNetmeraHuaweiPushMessageReceived(remoteMessage.getFrom(), data)
-   }
-})
+HmsPushEvent.onRemoteMessageReceived((event: any) => {
+  const remoteMessage = new RNRemoteMessage(event.msg);
+  let data = JSON.parse(remoteMessage.getData());
+  if (Netmera.isNetmeraRemoteMessage(data)) {
+    Netmera.onNetmeraHuaweiPushMessageReceived(
+      remoteMessage.getFrom(),
+      data,
+    );
+  }
+});
+
+HmsPushMessaging.setBackgroundMessageHandler(async dataMessage => {
+  const remoteMessage = new RNRemoteMessage(dataMessage);
+  let data = JSON.parse(remoteMessage.getData());
+  if (Netmera.isNetmeraRemoteMessage(data)) {
+    Netmera.onNetmeraHuaweiPushMessageReceived(
+        remoteMessage.getFrom(),
+        data,
+    );
+  }
+});
 ```
 
 ### Calling React Native methods
