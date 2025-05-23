@@ -11,6 +11,7 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@hmscore/react-native-hms-push": "^6.12.0-303",
     "@react-native-async-storage/async-storage": "^1.21.0",
     "@react-native-firebase/app": "^20.1.0",
     "@react-native-firebase/messaging": "^20.1.0",

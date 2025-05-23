@@ -2099,6 +2099,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@hmscore/react-native-hms-push@npm:^6.12.0-303":
+  version: 6.12.0-303
+  resolution: "@hmscore/react-native-hms-push@npm:6.12.0-303"
+  peerDependencies:
+    react: ">=16.6.0"
+    react-native: ">=0.60.0 <1.0.x"
+  checksum: 43d4fbaf0385a008a6c0d34cf74f444905be2313fb4ced2e7a561b6c13de53c80810060f82eac94da720499ea8a592fff42417d82a0b798315629d04922d06f6
+  languageName: node
+  linkType: hard
+
 "@humanwhocodes/config-array@npm:^0.13.0":
   version: 0.13.0
   resolution: "@humanwhocodes/config-array@npm:0.13.0"
@@ -8866,6 +8876,7 @@ __metadata:
     "@babel/core": ^7.25.2
     "@babel/preset-env": ^7.25.3
     "@babel/runtime": ^7.25.0
+    "@hmscore/react-native-hms-push": ^6.12.0-303
     "@react-native-async-storage/async-storage": ^1.21.0
     "@react-native-community/cli": 15.0.1
     "@react-native-community/cli-platform-android": 15.0.1

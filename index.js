@@ -15,6 +15,7 @@ import {
   onPushRegister,
 } from './NetmeraPushHeadlessTask';
 import messaging from '@react-native-firebase/messaging';
+import {HmsPushMessaging, RNRemoteMessage} from '@hmscore/react-native-hms-push';
 
 Netmera.initBroadcastReceiver(
   onPushRegister,
@@ -31,6 +32,17 @@ messaging().setBackgroundMessageHandler(async remoteMessage => {
     Netmera.onNetmeraFirebasePushMessageReceived(
       remoteMessage.from,
       remoteMessage.data,
+    );
+  }
+});
+
+HmsPushMessaging.setBackgroundMessageHandler(async dataMessage => {
+  const remoteMessage = new RNRemoteMessage(dataMessage);
+  let data = JSON.parse(remoteMessage.getData());
+  if (Netmera.isNetmeraRemoteMessage(data)) {
+    Netmera.onNetmeraHuaweiPushMessageReceived(
+        remoteMessage.getFrom(),
+        data,
     );
   }
 });
