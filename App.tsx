@@ -25,6 +25,7 @@ import SetPropertiesModal from './src/SetPropertiesModal';
 import {Netmera} from 'react-native-netmera';
 import {isIos} from './src/helpers/DeviceUtils';
 import messaging from '@react-native-firebase/messaging';
+import {HmsPushEvent, HmsPushInstanceId, RNRemoteMessage} from '@hmscore/react-native-hms-push';
 
 const Stack = createNativeStackNavigator();
 
@@ -65,6 +66,7 @@ const App = () => {
       });
     });
 
+    //FCM methods
     messaging()
       .getToken()
       .then((pushToken: string) => {
@@ -86,6 +88,28 @@ const App = () => {
       }
     });
   }, []);
+
+  //HMS methods
+  HmsPushInstanceId.getToken('')
+      .then((result) => {
+        // @ts-ignore
+        Netmera.onNetmeraNewToken(result.result);
+      })
+      .catch((err) => {
+        console.error('[getToken] Error/Exception: ' + JSON.stringify(err));
+      });
+
+  HmsPushEvent.onRemoteMessageReceived((event: any) => {
+    // @ts-ignore
+    const remoteMessage = new RNRemoteMessage(event.msg);
+    let data = JSON.parse(remoteMessage.getData());
+    if (Netmera.isNetmeraRemoteMessage(data)) {
+      Netmera.onNetmeraHuaweiPushMessageReceived(
+          remoteMessage.getFrom(),
+          data,
+      );
+    }
+  });
 
   const headerOptions: NativeStackNavigationOptions = {
     headerStyle: {

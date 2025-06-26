@@ -2099,6 +2099,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@hmscore/react-native-hms-push@npm:^6.12.0-303":
+  version: 6.12.0-303
+  resolution: "@hmscore/react-native-hms-push@npm:6.12.0-303"
+  peerDependencies:
+    react: ">=16.6.0"
+    react-native: ">=0.60.0 <1.0.x"
+  checksum: 43d4fbaf0385a008a6c0d34cf74f444905be2313fb4ced2e7a561b6c13de53c80810060f82eac94da720499ea8a592fff42417d82a0b798315629d04922d06f6
+  languageName: node
+  linkType: hard
+
 "@humanwhocodes/config-array@npm:^0.13.0":
   version: 0.13.0
   resolution: "@humanwhocodes/config-array@npm:0.13.0"
@@ -8866,6 +8876,7 @@ __metadata:
     "@babel/core": ^7.25.2
     "@babel/preset-env": ^7.25.3
     "@babel/runtime": ^7.25.0
+    "@hmscore/react-native-hms-push": ^6.12.0-303
     "@react-native-async-storage/async-storage": ^1.21.0
     "@react-native-community/cli": 15.0.1
     "@react-native-community/cli-platform-android": 15.0.1
@@ -8895,7 +8906,7 @@ __metadata:
     react-native: 0.77.1
     react-native-config: ^1.5.1
     react-native-date-picker: ^4.3.5
-    react-native-netmera: ^1.8.0-beta02
+    react-native-netmera: 1.9.0-beta04
     react-native-safe-area-context: ^5.3.0
     react-native-screens: ^3.31.1
     react-native-select-dropdown: ^1.8.0
@@ -9945,10 +9956,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-netmera@npm:^1.8.0-beta02":
-  version: 1.8.0
-  resolution: "react-native-netmera@npm:1.8.0"
-  checksum: b275cab741691dd7c565d12a30afda8c38e12058bb9ee698f11eb03ed86f7c60716f6efea0f6e49547ef786fc1abcc48cf4f69c28ad4b0ff79c1f5b656918f8e
+"react-native-netmera@npm:1.9.0-beta04":
+  version: 1.9.0-beta04
+  resolution: "react-native-netmera@npm:1.9.0-beta04"
+  checksum: 562ff7f0a136d245ed80e6141cb641885a847d470cc12e12d8af11bf4ed525579def1a60eecf0aa6606032b0d86ffcb9a232101e7d88da1ac6158a8ca839a1bb
   languageName: node
   linkType: hard
 

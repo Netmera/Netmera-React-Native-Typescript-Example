@@ -32,6 +32,7 @@ local.properties
 *.hprof
 .kotlin/
 .cxx/
+android/app/release/
 
 # node.js
 #

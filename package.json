@@ -11,6 +11,7 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@hmscore/react-native-hms-push": "^6.12.0-303",
     "@react-native-async-storage/async-storage": "^1.21.0",
     "@react-native-firebase/app": "^20.1.0",
     "@react-native-firebase/messaging": "^20.1.0",
@@ -25,7 +26,7 @@
     "react-native": "0.77.1",
     "react-native-config": "^1.5.1",
     "react-native-date-picker": "^4.3.5",
-    "react-native-netmera": "^1.8.0-beta02",
+    "react-native-netmera": "1.9.0-beta04",
     "react-native-safe-area-context": "^5.3.0",
     "react-native-screens": "^3.31.1",
     "react-native-select-dropdown": "^1.8.0",

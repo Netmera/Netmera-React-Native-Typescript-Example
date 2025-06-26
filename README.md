@@ -285,6 +285,16 @@ AppRegistry.registerComponent(appName, () => App);
 
 3. If you have custom Firebase Messaging integration, please see usage below.
 
+1- Add the following line to your `AndroidManifest.xml` file inside the `application` tag to remove Netmera's default FCM service
+
+```
+<service
+    android:name="com.netmera.nmfcm.NMFirebaseService"
+    tools:node="remove" />
+```
+
+2- Update `FirebaseMessaging` methods like below
+
 ```
 messaging()
    .getToken(firebase.app().options.messagingSenderId)
@@ -308,20 +318,43 @@ messaging().setBackgroundMessageHandler(async (remoteMessage) => {
 
 4. If you have custom Huawei Messaging integration, please see usage below.
 
+1- Add the following line to your `AndroidManifest.xml` file inside the `application` tag to remove Netmera's default HMS service
+
+```
+<service
+   android:name="com.netmera.nmhms.NMHuaweiService"
+   tools:node="remove" />
+```
+
+2- Update `HuaweiPushKit` methods like below
+
 ```
 HmsPushInstanceId.getToken("")
    .then((result) => {
        Netmera.onNetmeraNewToken(result.result)
    })
 
-HmsPushEvent.onRemoteMessageReceived(event => {
-   const remoteMessage = new RNRemoteMessage(event.msg);
-   let data = JSON.parse(remoteMessage.getData())
-   console.log("onRemoteMessageReceived", data)
-   if (Netmera.isNetmeraRemoteMessage(data)) {
-       Netmera.onNetmeraHuaweiPushMessageReceived(remoteMessage.getFrom(), data)
-   }
-})
+HmsPushEvent.onRemoteMessageReceived((event: any) => {
+  const remoteMessage = new RNRemoteMessage(event.msg);
+  let data = JSON.parse(remoteMessage.getData());
+  if (Netmera.isNetmeraRemoteMessage(data)) {
+    Netmera.onNetmeraHuaweiPushMessageReceived(
+      remoteMessage.getFrom(),
+      data,
+    );
+  }
+});
+
+HmsPushMessaging.setBackgroundMessageHandler(async dataMessage => {
+  const remoteMessage = new RNRemoteMessage(dataMessage);
+  let data = JSON.parse(remoteMessage.getData());
+  if (Netmera.isNetmeraRemoteMessage(data)) {
+    Netmera.onNetmeraHuaweiPushMessageReceived(
+        remoteMessage.getFrom(),
+        data,
+    );
+  }
+});
 ```
 
 ### Calling React Native methods
@@ -337,9 +370,6 @@ const updateUser = () => {
     user.msisdn = <msisdn>;
     user.gender = <gender>;
 
-    // User update async
-    Netmera.updateUser(user)
-
     // User update sync
     Netmera.updateUser(user)
       .then(() => {
@@ -348,6 +378,20 @@ const updateUser = () => {
       .catch(error => {
         console.log(error.code, error.message);
       });
+}
+```
+
+```
+const updateUserAsync = () => {
+    const user = new NetmeraUser();
+    user.userId = <userId>;
+    user.name = <name>;
+    user.surname = <surname>;
+    user.msisdn = <msisdn>;
+    user.gender = <gender>;
+
+    // User update async
+    Netmera.updateUserAsync(user);
 }
 ```
 

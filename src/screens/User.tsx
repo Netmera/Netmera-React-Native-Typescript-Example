@@ -53,10 +53,10 @@ const User = () => {
     user.testGender = MyNetmeraUser.TestGender.TESTGENDER_MALE;
     user.testName = 'Test Name';
 
-    Netmera.updateUser(user);
+    Netmera.updateUserAsync(user);
   };
 
-  const sendUserUpdateSync = () => {
+  const sendUserUpdate = () => {
     const user = new MyNetmeraUser();
 
     // Set Default Attributes
@@ -172,9 +172,9 @@ const User = () => {
 
         <TouchableHighlight
           style={styles.button}
-          onPress={() => sendUserUpdateSync()}
+          onPress={() => sendUserUpdate()}
           underlayColor="#99d9f4">
-          <Text style={styles.buttonText}>Update User Sync</Text>
+          <Text style={styles.buttonText}>Update User</Text>
         </TouchableHighlight>
 
         <TouchableHighlight

@@ -34,5 +34,14 @@
                 <data android:scheme="netmera" />
             </intent-filter>
       </activity>
+
+        <service
+            android:name="com.netmera.nmfcm.NMFirebaseService"
+            tools:node="remove" />
+
+        <service
+            android:name="com.netmera.nmhms.NMHuaweiService"
+            tools:node="remove" />
+
     </application>
 </manifest>
