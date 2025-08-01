@@ -69,19 +69,19 @@ PODS:
     - nanopb/encode (= 2.30910.0)
   - nanopb/decode (2.30910.0)
   - nanopb/encode (2.30910.0)
-  - Netmera (3.25.0-WithoutDependency):
-    - Netmera/NetmeraWithAdId (= 3.25.0-WithoutDependency)
-  - Netmera/AdIdSupport (3.25.0-WithoutDependency)
-  - Netmera/Application (3.25.0-WithoutDependency):
-    - NetmeraCore (= 3.25.0-WithoutDependency)
-  - Netmera/NetmeraWithAdId (3.25.0-WithoutDependency):
+  - Netmera (3.27.0-WithoutDependency):
+    - Netmera/NetmeraWithAdId (= 3.27.0-WithoutDependency)
+  - Netmera/AdIdSupport (3.27.0-WithoutDependency)
+  - Netmera/Application (3.27.0-WithoutDependency):
+    - NetmeraCore (= 3.27.0-WithoutDependency)
+  - Netmera/NetmeraWithAdId (3.27.0-WithoutDependency):
     - Netmera/AdIdSupport
     - Netmera/Application
-  - Netmera/NotificationContentExtension (3.25.0-WithoutDependency):
-    - NetmeraCore (= 3.25.0-WithoutDependency)
-  - Netmera/NotificationServiceExtension (3.25.0-WithoutDependency):
-    - NetmeraCore (= 3.25.0-WithoutDependency)
-  - NetmeraCore (3.25.0-WithoutDependency)
+  - Netmera/NotificationContentExtension (3.27.0-WithoutDependency):
+    - NetmeraCore (= 3.27.0-WithoutDependency)
+  - Netmera/NotificationServiceExtension (3.27.0-WithoutDependency):
+    - NetmeraCore (= 3.27.0-WithoutDependency)
+  - NetmeraCore (3.27.0-WithoutDependency)
   - PromisesObjC (2.4.0)
   - RCT-Folly (2024.11.18.00):
     - boost
@@ -1310,7 +1310,7 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
-  - react-native-safe-area-context (5.3.0):
+  - react-native-safe-area-context (5.5.1):
     - DoubleConversion
     - glog
     - hermes-engine
@@ -1323,8 +1323,8 @@ PODS:
     - React-featureflags
     - React-graphics
     - React-ImageManager
-    - react-native-safe-area-context/common (= 5.3.0)
-    - react-native-safe-area-context/fabric (= 5.3.0)
+    - react-native-safe-area-context/common (= 5.5.1)
+    - react-native-safe-area-context/fabric (= 5.5.1)
     - React-NativeModulesApple
     - React-RCTFabric
     - React-rendererdebug
@@ -1333,7 +1333,7 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
-  - react-native-safe-area-context/common (5.3.0):
+  - react-native-safe-area-context/common (5.5.1):
     - DoubleConversion
     - glog
     - hermes-engine
@@ -1354,7 +1354,7 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
-  - react-native-safe-area-context/fabric (5.3.0):
+  - react-native-safe-area-context/fabric (5.5.1):
     - DoubleConversion
     - glog
     - hermes-engine
@@ -1686,7 +1686,7 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
-  - RNCPicker (2.11.0):
+  - RNCPicker (2.11.1):
     - DoubleConversion
     - glog
     - hermes-engine
@@ -1707,6 +1707,8 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
+  - RNDeviceInfo (14.0.4):
+    - React-Core
   - RNFBApp (20.5.0):
     - Firebase/CoreOnly (= 10.29.0)
     - React-Core
@@ -1715,10 +1717,10 @@ PODS:
     - FirebaseCoreExtension
     - React-Core
     - RNFBApp
-  - RNNetmera (1.9.0-beta04):
-    - Netmera (= 3.25.0-WithoutDependency)
+  - RNNetmera (1.10.0-beta01):
+    - Netmera (= 3.27.0-WithoutDependency)
     - React
-  - RNScreens (3.36.0):
+  - RNScreens (3.37.0):
     - DoubleConversion
     - glog
     - hermes-engine
@@ -1739,9 +1741,9 @@ PODS:
     - ReactCodegen
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
-    - RNScreens/common (= 3.36.0)
+    - RNScreens/common (= 3.37.0)
     - Yoga
-  - RNScreens/common (3.36.0):
+  - RNScreens/common (3.37.0):
     - DoubleConversion
     - glog
     - hermes-engine
@@ -1774,9 +1776,9 @@ DEPENDENCIES:
   - fmt (from `../node_modules/react-native/third-party-podspecs/fmt.podspec`)
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
   - hermes-engine (from `../node_modules/react-native/sdks/hermes-engine/hermes-engine.podspec`)
-  - Netmera (= 3.25.0-WithoutDependency)
-  - Netmera/NotificationContentExtension (= 3.25.0-WithoutDependency)
-  - Netmera/NotificationServiceExtension (= 3.25.0-WithoutDependency)
+  - Netmera (= 3.27.0-WithoutDependency)
+  - Netmera/NotificationContentExtension (= 3.27.0-WithoutDependency)
+  - Netmera/NotificationServiceExtension (= 3.27.0-WithoutDependency)
   - RCT-Folly (from `../node_modules/react-native/third-party-podspecs/RCT-Folly.podspec`)
   - RCT-Folly/Fabric (from `../node_modules/react-native/third-party-podspecs/RCT-Folly.podspec`)
   - RCTDeprecation (from `../node_modules/react-native/ReactApple/Libraries/RCTFoundation/RCTDeprecation`)
@@ -1842,6 +1844,7 @@ DEPENDENCIES:
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
   - "RNCAsyncStorage (from `../node_modules/@react-native-async-storage/async-storage`)"
   - "RNCPicker (from `../node_modules/@react-native-picker/picker`)"
+  - RNDeviceInfo (from `../node_modules/react-native-device-info`)
   - "RNFBApp (from `../node_modules/@react-native-firebase/app`)"
   - "RNFBMessaging (from `../node_modules/@react-native-firebase/messaging`)"
   - RNNetmera (from `../node_modules/react-native-netmera`)
@@ -2006,6 +2009,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-async-storage/async-storage"
   RNCPicker:
     :path: "../node_modules/@react-native-picker/picker"
+  RNDeviceInfo:
+    :path: "../node_modules/react-native-device-info"
   RNFBApp:
     :path: "../node_modules/@react-native-firebase/app"
   RNFBMessaging:
@@ -2034,8 +2039,8 @@ SPEC CHECKSUMS:
   GoogleUtilities: ea963c370a38a8069cc5f7ba4ca849a60b6d7d15
   hermes-engine: ccc24d29d650ea725d582a9a53d57cd417fbdb53
   nanopb: 438bc412db1928dac798aa6fd75726007be04262
-  Netmera: f47f8f873b51beb3167b48fc32ca20a89cdd5623
-  NetmeraCore: 9c44c346dd3541115563c2599c79d7146020e8c5
+  Netmera: 1418b16d2c5b39a62446c8cfff3347f32c723edd
+  NetmeraCore: e794d5bb2c987fec0b469e01c870820ea226bea0
   PromisesObjC: f5707f49cb48b9636751c5b2e7d227e43fba9f47
   RCT-Folly: e78785aa9ba2ed998ea4151e314036f6c49e6d82
   RCTDeprecation: 664055db806cce35c3c1b43c84414dd66e117ae6
@@ -2068,7 +2073,7 @@ SPEC CHECKSUMS:
   React-microtasksnativemodule: c5c04ce22b6437388c02d277cdfc7cffc3103da9
   react-native-config: 644074ab88db883fcfaa584f03520ec29589d7df
   react-native-date-picker: 1232d66db29e0d5e65b41cd794e485ba0b5af419
-  react-native-safe-area-context: 33fadf89988c8813cfac57797a3bc53708863dd1
+  react-native-safe-area-context: c4a660f9f6e460b19c87c2145e95335d59d578e1
   React-nativeconfig: 1290b585850b8465f56f54a48b04968eefed0dd4
   React-NativeModulesApple: 70d76808f994d9f5c51c8d69f63bfacf714800e1
   React-perflogger: c4c3b7c18f8a50cdbe2bcdd2f15705ba029a5a02
@@ -2099,14 +2104,15 @@ SPEC CHECKSUMS:
   ReactCodegen: 90bb8dd83136fc05f54b8aaab40345affc93aeff
   ReactCommon: 8953b677c1d2ed01905f3cd5dced07ead9ec4c8e
   RNCAsyncStorage: 58688c66076453d4d5799057f8f236e099dc5690
-  RNCPicker: 21ca53c5927e9a7ad03eb4712dc55395114ebcc8
+  RNCPicker: 3e07b6e1850d0b06d3ccc6367535f2eb29e6dcd7
+  RNDeviceInfo: d863506092aef7e7af3a1c350c913d867d795047
   RNFBApp: 4e6da65e29a144d20bcb5bf264fc8e2055831bab
   RNFBMessaging: fb5a9b0a3043d5d3e6e9fe7b27b78fcc3a0f753f
-  RNNetmera: 5c650ea48c11ef22e059feccb4fecc45bc4cf4b2
-  RNScreens: 06325e3f30a7c4bbd080572811b9173181be9873
+  RNNetmera: ab73c78d475272f89e83d90c153eb8fc36bee90a
+  RNScreens: 2174e7c45b28303afca1552fcc35e4a6918b0099
   SocketRocket: d4aabe649be1e368d1318fdf28a022d714d65748
   Yoga: 28b8cda182ee3092ff80203da66dcb3ffc8cf401
 
-PODFILE CHECKSUM: 5d024088a79af8802f5a101bdfe14bc98344582a
+PODFILE CHECKSUM: fdbcda6fdaa17dde5a9e3633d6f8b1f7a690cee9
 
 COCOAPODS: 1.16.2
