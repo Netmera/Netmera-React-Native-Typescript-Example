@@ -2,7 +2,7 @@
  * @format
  */
 
-import {AppRegistry} from 'react-native';
+import {AppRegistry, Platform} from 'react-native';
 import App from './App';
 import {name as appName} from './app.json';
 import {Netmera} from 'react-native-netmera';
@@ -16,6 +16,7 @@ import {
 } from './NetmeraPushHeadlessTask';
 import messaging from '@react-native-firebase/messaging';
 import {HmsPushMessaging, RNRemoteMessage} from '@hmscore/react-native-hms-push';
+import DeviceInfo from 'react-native-device-info';
 
 Netmera.initBroadcastReceiver(
   onPushRegister,
@@ -36,16 +37,22 @@ messaging().setBackgroundMessageHandler(async remoteMessage => {
   }
 });
 
-HmsPushMessaging.setBackgroundMessageHandler(async dataMessage => {
-  const remoteMessage = new RNRemoteMessage(dataMessage);
-  let data = JSON.parse(remoteMessage.getData());
-  if (Netmera.isNetmeraRemoteMessage(data)) {
-    Netmera.onNetmeraHuaweiPushMessageReceived(
-        remoteMessage.getFrom(),
-        data,
-    );
-  }
-});
+if (Platform.OS === 'android') {
+  DeviceInfo.hasHms().then((hmsAvailable) => {
+    if (hmsAvailable) {
+      HmsPushMessaging.setBackgroundMessageHandler(async dataMessage => {
+        const remoteMessage = new RNRemoteMessage(dataMessage);
+        let data = JSON.parse(remoteMessage.getData());
+        if (Netmera.isNetmeraRemoteMessage(data)) {
+          Netmera.onNetmeraHuaweiPushMessageReceived(
+              remoteMessage.getFrom(),
+              data,
+          );
+        }
+      });
+    }
+  });
+}
 
 Netmera.enablePopupPresentation();
 

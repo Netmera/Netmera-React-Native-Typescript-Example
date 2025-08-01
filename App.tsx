@@ -23,9 +23,10 @@ import User from './src/screens/User';
 import PushInbox from './src/screens/PushInbox';
 import SetPropertiesModal from './src/SetPropertiesModal';
 import {Netmera} from 'react-native-netmera';
-import {isIos} from './src/helpers/DeviceUtils';
+import {isAndroid, isIos} from './src/helpers/DeviceUtils';
 import messaging from '@react-native-firebase/messaging';
 import {HmsPushEvent, HmsPushInstanceId, RNRemoteMessage} from '@hmscore/react-native-hms-push';
+import DeviceInfo from 'react-native-device-info';
 
 const Stack = createNativeStackNavigator();
 
@@ -89,27 +90,33 @@ const App = () => {
     });
   }, []);
 
-  //HMS methods
-  HmsPushInstanceId.getToken('')
-      .then((result) => {
-        // @ts-ignore
-        Netmera.onNetmeraNewToken(result.result);
-      })
-      .catch((err) => {
-        console.error('[getToken] Error/Exception: ' + JSON.stringify(err));
-      });
+  if (isAndroid()) {
+    DeviceInfo.hasHms().then((hmsAvailable) => {
+      if (hmsAvailable) {
+        //HMS methods
+        HmsPushInstanceId.getToken('')
+            .then((result) => {
+              // @ts-ignore
+              Netmera.onNetmeraNewToken(result.result);
+            })
+            .catch((err) => {
+              console.error('[getToken] Error/Exception: ' + JSON.stringify(err));
+            });
 
-  HmsPushEvent.onRemoteMessageReceived((event: any) => {
-    // @ts-ignore
-    const remoteMessage = new RNRemoteMessage(event.msg);
-    let data = JSON.parse(remoteMessage.getData());
-    if (Netmera.isNetmeraRemoteMessage(data)) {
-      Netmera.onNetmeraHuaweiPushMessageReceived(
-          remoteMessage.getFrom(),
-          data,
-      );
-    }
-  });
+        HmsPushEvent.onRemoteMessageReceived((event: any) => {
+          // @ts-ignore
+          const remoteMessage = new RNRemoteMessage(event.msg);
+          let data = JSON.parse(remoteMessage.getData());
+          if (Netmera.isNetmeraRemoteMessage(data)) {
+            Netmera.onNetmeraHuaweiPushMessageReceived(
+                remoteMessage.getFrom(),
+                data,
+            );
+          }
+        });
+      }
+    });
+  }
 
   const headerOptions: NativeStackNavigationOptions = {
     headerStyle: {
