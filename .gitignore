@@ -33,6 +33,7 @@ local.properties
 .kotlin/
 .cxx/
 android/app/release/
+index.android.bundle
 
 # node.js
 #

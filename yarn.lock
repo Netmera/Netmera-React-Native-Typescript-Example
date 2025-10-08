@@ -8928,7 +8928,7 @@ __metadata:
     react-native-config: ^1.5.1
     react-native-date-picker: ^4.3.5
     react-native-device-info: ^14.0.4
-    react-native-netmera: 1.11.0-beta01
+    react-native-netmera: 1.11.1-beta01
     react-native-safe-area-context: ^5.3.0
     react-native-screens: ^3.31.1
     react-native-select-dropdown: ^1.8.0
@@ -9977,10 +9977,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-netmera@npm:1.11.0-beta01":
-  version: 1.11.0-beta01
-  resolution: "react-native-netmera@npm:1.11.0-beta01"
-  checksum: aaf7484933ad0280ee45c60d97d28382e38ccd7cb520962d46c0a34385608e2f4a0319c99884c51e3ad2dc038a2b74913413d02abced615b2e6ed150f2559503
+"react-native-netmera@npm:1.11.1-beta01":
+  version: 1.11.1-beta01
+  resolution: "react-native-netmera@npm:1.11.1-beta01"
+  checksum: 5b0ad51489f5ebb0ff0fc1669f7dc770371eb7a49209f547b0886bca04f70f6cc7e72526468c93948278569c2393b1112fe395b863a96055997b06a820c42688
   languageName: node
   linkType: hard
 
