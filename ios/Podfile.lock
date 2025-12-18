@@ -69,19 +69,19 @@ PODS:
     - nanopb/encode (= 2.30910.0)
   - nanopb/decode (2.30910.0)
   - nanopb/encode (2.30910.0)
-  - Netmera (3.27.0-WithoutDependency):
-    - Netmera/NetmeraWithAdId (= 3.27.0-WithoutDependency)
-  - Netmera/AdIdSupport (3.27.0-WithoutDependency)
-  - Netmera/Application (3.27.0-WithoutDependency):
-    - NetmeraCore (= 3.27.0-WithoutDependency)
-  - Netmera/NetmeraWithAdId (3.27.0-WithoutDependency):
+  - Netmera (3.27.3-WithoutDependency):
+    - Netmera/NetmeraWithAdId (= 3.27.3-WithoutDependency)
+  - Netmera/AdIdSupport (3.27.3-WithoutDependency)
+  - Netmera/Application (3.27.3-WithoutDependency):
+    - NetmeraCore (= 3.27.3-WithoutDependency)
+  - Netmera/NetmeraWithAdId (3.27.3-WithoutDependency):
     - Netmera/AdIdSupport
     - Netmera/Application
-  - Netmera/NotificationContentExtension (3.27.0-WithoutDependency):
-    - NetmeraCore (= 3.27.0-WithoutDependency)
-  - Netmera/NotificationServiceExtension (3.27.0-WithoutDependency):
-    - NetmeraCore (= 3.27.0-WithoutDependency)
-  - NetmeraCore (3.27.0-WithoutDependency)
+  - Netmera/NotificationContentExtension (3.27.3-WithoutDependency):
+    - NetmeraCore (= 3.27.3-WithoutDependency)
+  - Netmera/NotificationServiceExtension (3.27.3-WithoutDependency):
+    - NetmeraCore (= 3.27.3-WithoutDependency)
+  - NetmeraCore (3.27.3-WithoutDependency)
   - PromisesObjC (2.4.0)
   - RCT-Folly (2024.11.18.00):
     - boost
@@ -1717,8 +1717,8 @@ PODS:
     - FirebaseCoreExtension
     - React-Core
     - RNFBApp
-  - RNNetmera (1.11.1-beta01):
-    - Netmera (= 3.27.0-WithoutDependency)
+  - RNNetmera (1.11.3-beta03):
+    - Netmera (= 3.27.3-WithoutDependency)
     - React
   - RNScreens (3.37.0):
     - DoubleConversion
@@ -1776,9 +1776,9 @@ DEPENDENCIES:
   - fmt (from `../node_modules/react-native/third-party-podspecs/fmt.podspec`)
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
   - hermes-engine (from `../node_modules/react-native/sdks/hermes-engine/hermes-engine.podspec`)
-  - Netmera (= 3.27.0-WithoutDependency)
-  - Netmera/NotificationContentExtension (= 3.27.0-WithoutDependency)
-  - Netmera/NotificationServiceExtension (= 3.27.0-WithoutDependency)
+  - Netmera (= 3.27.3-WithoutDependency)
+  - Netmera/NotificationContentExtension (= 3.27.3-WithoutDependency)
+  - Netmera/NotificationServiceExtension (= 3.27.3-WithoutDependency)
   - RCT-Folly (from `../node_modules/react-native/third-party-podspecs/RCT-Folly.podspec`)
   - RCT-Folly/Fabric (from `../node_modules/react-native/third-party-podspecs/RCT-Folly.podspec`)
   - RCTDeprecation (from `../node_modules/react-native/ReactApple/Libraries/RCTFoundation/RCTDeprecation`)
@@ -2039,8 +2039,8 @@ SPEC CHECKSUMS:
   GoogleUtilities: ea963c370a38a8069cc5f7ba4ca849a60b6d7d15
   hermes-engine: ccc24d29d650ea725d582a9a53d57cd417fbdb53
   nanopb: 438bc412db1928dac798aa6fd75726007be04262
-  Netmera: 1418b16d2c5b39a62446c8cfff3347f32c723edd
-  NetmeraCore: e794d5bb2c987fec0b469e01c870820ea226bea0
+  Netmera: 25ab56ed3d0b795275ec1b82808eae18c68e2955
+  NetmeraCore: 93e2ffdd19231253e45a5f4fed6356d553a01de6
   PromisesObjC: f5707f49cb48b9636751c5b2e7d227e43fba9f47
   RCT-Folly: e78785aa9ba2ed998ea4151e314036f6c49e6d82
   RCTDeprecation: 664055db806cce35c3c1b43c84414dd66e117ae6
@@ -2108,11 +2108,11 @@ SPEC CHECKSUMS:
   RNDeviceInfo: d863506092aef7e7af3a1c350c913d867d795047
   RNFBApp: 4e6da65e29a144d20bcb5bf264fc8e2055831bab
   RNFBMessaging: fb5a9b0a3043d5d3e6e9fe7b27b78fcc3a0f753f
-  RNNetmera: 40a291bde508795cdd983f02418c7c63ad9a2219
+  RNNetmera: f511b76da204fdcd5e500f75ebd2532b627e33ae
   RNScreens: 2174e7c45b28303afca1552fcc35e4a6918b0099
   SocketRocket: d4aabe649be1e368d1318fdf28a022d714d65748
   Yoga: 28b8cda182ee3092ff80203da66dcb3ffc8cf401
 
-PODFILE CHECKSUM: fdbcda6fdaa17dde5a9e3633d6f8b1f7a690cee9
+PODFILE CHECKSUM: 57d0e86b88c57e6cf7366b792f0988b50cd53b28
 
 COCOAPODS: 1.16.2
