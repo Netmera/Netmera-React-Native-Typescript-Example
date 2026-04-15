@@ -21,9 +21,7 @@ class MainApplication : Application(), ReactApplication {
         }
 
         override fun getPackages(): List<ReactPackage> {
-            val packages = PackageList(this).packages.toMutableList()
-            packages.add(SharedPreferencesPackage())
-            return packages
+            return PackageList(this).packages
         }
 
         override fun getJSMainModuleName(): String {
@@ -51,7 +49,7 @@ class MainApplication : Application(), ReactApplication {
         val netmeraConfiguration = RNNetmeraConfiguration.Builder()
             .firebaseSenderId(BuildConfig.FIREBASE_SENDER_ID)
             .huaweiSenderId(BuildConfig.HMS_SENDER_ID)
-            .apiKey("gFtyH_nz5WAWBrHDHVZGclG4W_qB0XRba1aqIfXpmXLuZtIs4D_CU0iIL-uUs-aw")
+            .apiKey(BuildConfig.NETMERA_API_KEY)
             .logging(true) // This is for enabling Netmera logs.
             .build(this)
 

@@ -6,8 +6,8 @@
  * @flow strict-local
  */
 
-import React, {useEffect, useState} from 'react';
-import {Linking, StatusBar, Text, TouchableOpacity, View} from 'react-native';
+import React, {useEffect} from 'react';
+import {Linking, StatusBar, Text, View} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {
   createNativeStackNavigator,
@@ -21,7 +21,6 @@ import Toast from 'react-native-toast-message';
 import Category from './src/screens/Category';
 import User from './src/screens/User';
 import PushInbox from './src/screens/PushInbox';
-import SetPropertiesModal from './src/SetPropertiesModal';
 import {Netmera} from 'react-native-netmera';
 import {isAndroid, isIos} from './src/helpers/DeviceUtils';
 import messaging from '@react-native-firebase/messaging';
@@ -31,8 +30,6 @@ import DeviceInfo from 'react-native-device-info';
 const Stack = createNativeStackNavigator();
 
 const App = () => {
-  const [modalVisibility, setModalVisibility] = useState<boolean>(false);
-
   useEffect(() => {
     Netmera.getInitialURL().then(url => {
       if (url) {
@@ -129,11 +126,6 @@ const App = () => {
         </Text>
       </View>
     ),
-    headerRight: () => (
-      <TouchableOpacity onPress={() => setModalVisibility(true)}>
-        <Text style={{color: Colors.white}}>SET PROPERTIES</Text>
-      </TouchableOpacity>
-    ),
   };
 
   return (
@@ -152,10 +144,6 @@ const App = () => {
         <Stack.Screen name={'User'} component={User} />
       </Stack.Navigator>
       <Toast />
-      <SetPropertiesModal
-        modalVisibility={modalVisibility}
-        onPressCancel={() => setModalVisibility(false)}
-      />
     </NavigationContainer>
   );
 };

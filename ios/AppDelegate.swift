@@ -21,8 +21,7 @@ class AppDelegate: RCTAppDelegate, UNUserNotificationCenterDelegate, NetmeraPush
     }
     
     RNNetmera.logging(true);
-    RNNetmera.initNetmera(SharedPreferencesModule.getApiKey()) // Replace SharedPreferencesModule.getApiKey() with your own NETMERA API KEY.
-    Netmera.setBaseURL(SharedPreferencesModule.getBaseUrl())
+    RNNetmera.initNetmera("gFtyH_nz5WAWBrHDHVZGclG4W_qB0XRba1aqIfXpmXLuZtIs4D_CU0iIL-uUs-aw")
     RNNetmera.setPushDelegate(self)
     Netmera.setAppGroupName("group.com.netmera.demo.reactnative")
 

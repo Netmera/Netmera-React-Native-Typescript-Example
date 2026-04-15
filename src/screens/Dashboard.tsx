@@ -9,9 +9,8 @@ import {
 } from 'react-native';
 import Toast from 'react-native-toast-message';
 import Colors from '../Colors';
-import {Netmera} from 'react-native-netmera';
+import {Netmera, NotificationPermissionStatus} from 'react-native-netmera';
 import {pushToken} from '../../NetmeraPushHeadlessTask';
-import {NotificationPermissionStatus} from 'react-native-netmera/src/models/NotificationPermissionStatus.ts';
 
 const enum PushState {
   PushEnabled = 'PushEnabled',

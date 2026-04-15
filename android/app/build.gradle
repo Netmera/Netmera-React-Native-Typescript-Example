@@ -23,6 +23,9 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.11.1-beta01"
+        buildConfigField "String", "NETMERA_API_KEY", "\"gFtyH_nz5WAWBrHDHVZGclG4W_qB0XRba1aqIfXpmXLuZtIs4D_CU0iIL-uUs-aw\""
+        buildConfigField "String", "FIREBASE_SENDER_ID", "\"850720650930\""
+        buildConfigField "String", "HMS_SENDER_ID", "\"111462617\""
     }
 
     signingConfigs {
@@ -58,5 +61,3 @@ dependencies {
         implementation jscFlavor
     }
 }
-
-apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
