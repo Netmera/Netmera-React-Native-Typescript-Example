@@ -26,11 +26,6 @@ class AppDelegate: RCTAppDelegate, UNUserNotificationCenterDelegate, NetmeraPush
     Netmera.setAppGroupName("group.com.netmera.demo.reactnative")
 
     FirebaseApp.configure()
-    
-    if #available(iOS 17.2, *) {
-      LiveActivityManager.shared.fetchAllActivities()
-      LiveActivityManager.shared.getPushToStartToken()
-    }
 
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }

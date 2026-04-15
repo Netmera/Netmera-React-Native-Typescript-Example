@@ -4,10 +4,6 @@
 <dict>
 	<key>AppGroupName</key>
 	<string>group.com.netmera.demo.reactnative</string>
-	<key>CFBundleExecutable</key>
-	<string></string>
-	<key>CFBundleIdentifier</key>
-	<string></string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>

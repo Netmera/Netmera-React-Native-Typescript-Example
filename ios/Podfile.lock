@@ -1306,7 +1306,7 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
-  - react-native-safe-area-context (5.7.0):
+  - react-native-safe-area-context (5.5.2):
     - DoubleConversion
     - glog
     - hermes-engine
@@ -1319,8 +1319,8 @@ PODS:
     - React-featureflags
     - React-graphics
     - React-ImageManager
-    - react-native-safe-area-context/common (= 5.7.0)
-    - react-native-safe-area-context/fabric (= 5.7.0)
+    - react-native-safe-area-context/common (= 5.5.2)
+    - react-native-safe-area-context/fabric (= 5.5.2)
     - React-NativeModulesApple
     - React-RCTFabric
     - React-rendererdebug
@@ -1329,7 +1329,7 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
-  - react-native-safe-area-context/common (5.7.0):
+  - react-native-safe-area-context/common (5.5.2):
     - DoubleConversion
     - glog
     - hermes-engine
@@ -1350,7 +1350,7 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
-  - react-native-safe-area-context/fabric (5.7.0):
+  - react-native-safe-area-context/fabric (5.5.2):
     - DoubleConversion
     - glog
     - hermes-engine
@@ -1682,7 +1682,7 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
-  - RNCPicker (2.11.4):
+  - RNCPicker (2.11.1):
     - DoubleConversion
     - glog
     - hermes-engine
@@ -2065,7 +2065,7 @@ SPEC CHECKSUMS:
   React-Mapbuffer: 3d1aadd7587192dd863aa5348122e2a0812c44dd
   React-microtasksnativemodule: c5c04ce22b6437388c02d277cdfc7cffc3103da9
   react-native-date-picker: 1232d66db29e0d5e65b41cd794e485ba0b5af419
-  react-native-safe-area-context: bf457bf5b3a617e9a3930d1ecd954a3335303cc7
+  react-native-safe-area-context: c53dbc193c96dfaacde1962d2474ce69c8e689e5
   React-nativeconfig: 1290b585850b8465f56f54a48b04968eefed0dd4
   React-NativeModulesApple: 70d76808f994d9f5c51c8d69f63bfacf714800e1
   React-perflogger: c4c3b7c18f8a50cdbe2bcdd2f15705ba029a5a02
@@ -2096,7 +2096,7 @@ SPEC CHECKSUMS:
   ReactCodegen: 90bb8dd83136fc05f54b8aaab40345affc93aeff
   ReactCommon: 8953b677c1d2ed01905f3cd5dced07ead9ec4c8e
   RNCAsyncStorage: 58688c66076453d4d5799057f8f236e099dc5690
-  RNCPicker: b0f850ca6561e230a76afc196eed1bc6169ba1fe
+  RNCPicker: 3e07b6e1850d0b06d3ccc6367535f2eb29e6dcd7
   RNDeviceInfo: bcce8752b5043a623fe3c26789679b473f705d3c
   RNFBApp: 4e6da65e29a144d20bcb5bf264fc8e2055831bab
   RNFBMessaging: fb5a9b0a3043d5d3e6e9fe7b27b78fcc3a0f753f
