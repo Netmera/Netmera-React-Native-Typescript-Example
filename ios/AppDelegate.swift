@@ -24,8 +24,8 @@ class AppDelegate: RCTAppDelegate, UNUserNotificationCenterDelegate, NetmeraPush
     RNNetmera.initNetmera(SharedPreferencesModule.getApiKey()) // Replace SharedPreferencesModule.getApiKey() with your own NETMERA API KEY.
     Netmera.setBaseURL(SharedPreferencesModule.getBaseUrl())
     RNNetmera.setPushDelegate(self)
-    Netmera.setAppGroupName("group.com.netmerareactnativeexample")
-    
+    Netmera.setAppGroupName("group.com.netmera.demo.reactnative")
+
     FirebaseApp.configure()
     
     if #available(iOS 17.2, *) {

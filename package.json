@@ -27,7 +27,7 @@
     "react-native-config": "^1.5.1",
     "react-native-date-picker": "^4.3.5",
     "react-native-device-info": "^14.0.4",
-    "react-native-netmera": "1.11.3-beta01",
+    "react-native-netmera": "^1.11.4",
     "react-native-safe-area-context": "^5.3.0",
     "react-native-screens": "^3.31.1",
     "react-native-select-dropdown": "^1.8.0",

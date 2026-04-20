@@ -9,21 +9,21 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.netmerareactnativeexample</string>
+	<string>com.netmera.demo.reactnative</string>
 	<key>PROJECT_ID</key>
 	<string>netmera-cross-examples</string>
 	<key>STORAGE_BUCKET</key>
 	<string>netmera-cross-examples.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
-	<false></false>
+	<false/>
 	<key>IS_ANALYTICS_ENABLED</key>
-	<false></false>
+	<false/>
 	<key>IS_APPINVITE_ENABLED</key>
-	<true></true>
+	<true/>
 	<key>IS_GCM_ENABLED</key>
-	<true></true>
+	<true/>
 	<key>IS_SIGNIN_ENABLED</key>
-	<true></true>
+	<true/>
 	<key>GOOGLE_APP_ID</key>
 	<string>1:655729015885:ios:fb5b947093dae64a837004</string>
 </dict>

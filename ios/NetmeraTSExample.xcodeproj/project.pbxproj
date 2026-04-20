@@ -82,6 +82,7 @@
 		13B07F961A680F5B00A75B9A /* NetmeraTSExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NetmeraTSExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = NetmeraTSExample/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = NetmeraTSExample/Info.plist; sourceTree = "<group>"; };
+		23AB23652F964BAF006858F9 /* Netmera_NotificationServiceExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Netmera_NotificationServiceExtension.entitlements; sourceTree = "<group>"; };
 		2B6EB92ABF96E77B052195AC /* Pods_Netmera_NotificationServiceExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Netmera_NotificationServiceExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B4392A12AC88292D35C810B /* Pods-NetmeraTSExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NetmeraTSExample.debug.xcconfig"; path = "Target Support Files/Pods-NetmeraTSExample/Pods-NetmeraTSExample.debug.xcconfig"; sourceTree = "<group>"; };
 		4C45C3DF513093901CC0A606 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xml; name = PrivacyInfo.xcprivacy; path = NetmeraTSExample/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
@@ -270,6 +271,7 @@
 		C9C49FAB2B8DF3CB00C13F7B /* Netmera_NotificationServiceExtension */ = {
 			isa = PBXGroup;
 			children = (
+				23AB23652F964BAF006858F9 /* Netmera_NotificationServiceExtension.entitlements */,
 				C9C49FAC2B8DF3CB00C13F7B /* NotificationService.swift */,
 				C9C49FAE2B8DF3CB00C13F7B /* Info.plist */,
 			);
@@ -695,20 +697,20 @@
 				CODE_SIGN_ENTITLEMENTS = NetmeraTSExample/NetmeraTSExample.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 95N24W2PH8;
+				DEVELOPMENT_TEAM = 6AW8NY58ZS;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = NetmeraTSExample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = "1.11.3-beta01";
+				MARKETING_VERSION = 1.11.3;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.netmerareactnativeexample;
+				PRODUCT_BUNDLE_IDENTIFIER = com.netmera.demo.reactnative;
 				PRODUCT_NAME = NetmeraTSExample;
 				SWIFT_OBJC_BRIDGING_HEADER = "NetmeraTSExample-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -726,19 +728,19 @@
 				CODE_SIGN_ENTITLEMENTS = NetmeraTSExample/NetmeraTSExample.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 95N24W2PH8;
+				DEVELOPMENT_TEAM = 6AW8NY58ZS;
 				INFOPLIST_FILE = NetmeraTSExample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = "1.11.3-beta01";
+				MARKETING_VERSION = 1.11.3;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.netmerareactnativeexample;
+				PRODUCT_BUNDLE_IDENTIFIER = com.netmera.demo.reactnative;
 				PRODUCT_NAME = NetmeraTSExample;
 				SWIFT_OBJC_BRIDGING_HEADER = "NetmeraTSExample-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
@@ -940,7 +942,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = 95N24W2PH8;
+				DEVELOPMENT_TEAM = 6AW8NY58ZS;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -961,7 +963,7 @@
 				MARKETING_VERSION = 1.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.netmerareactnativeexample.MatchLiveScoreWidgetExtension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.netmera.demo.reactnative.liveactivity;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -986,7 +988,7 @@
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = 95N24W2PH8;
+				DEVELOPMENT_TEAM = 6AW8NY58ZS;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1002,7 +1004,7 @@
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MARKETING_VERSION = 1.0;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.netmerareactnativeexample.MatchLiveScoreWidgetExtension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.netmera.demo.reactnative.liveactivity;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1022,10 +1024,11 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = Netmera_NotificationServiceExtension/Netmera_NotificationServiceExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = 95N24W2PH8;
+				DEVELOPMENT_TEAM = 6AW8NY58ZS;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -1043,10 +1046,10 @@
 					"@executable_path/../../Frameworks",
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = "1.8.0-beta01";
+				MARKETING_VERSION = 1.11.3;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.netmerareactnativeexample.Netmera-NotificationServiceExtension";
+				PRODUCT_BUNDLE_IDENTIFIER = com.netmera.demo.reactnative.nse;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
@@ -1068,11 +1071,12 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = Netmera_NotificationServiceExtension/Netmera_NotificationServiceExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = 95N24W2PH8;
+				DEVELOPMENT_TEAM = 6AW8NY58ZS;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1086,9 +1090,9 @@
 					"@executable_path/../../Frameworks",
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = "1.8.0-beta01";
+				MARKETING_VERSION = 1.11.3;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.netmerareactnativeexample.Netmera-NotificationServiceExtension";
+				PRODUCT_BUNDLE_IDENTIFIER = com.netmera.demo.reactnative.nse;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -1113,7 +1117,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = 95N24W2PH8;
+				DEVELOPMENT_TEAM = 6AW8NY58ZS;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -1132,10 +1136,10 @@
 					"@executable_path/../../Frameworks",
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = "1.8.0-beta01";
+				MARKETING_VERSION = 1.11.3;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.netmerareactnativeexample.Netmera-NotificationContentExtension";
+				PRODUCT_BUNDLE_IDENTIFIER = com.netmera.demo.reactnative.nce;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
@@ -1162,7 +1166,7 @@
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = 95N24W2PH8;
+				DEVELOPMENT_TEAM = 6AW8NY58ZS;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1177,9 +1181,9 @@
 					"@executable_path/../../Frameworks",
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = "1.8.0-beta01";
+				MARKETING_VERSION = 1.11.3;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.netmerareactnativeexample.Netmera-NotificationContentExtension";
+				PRODUCT_BUNDLE_IDENTIFIER = com.netmera.demo.reactnative.nce;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
