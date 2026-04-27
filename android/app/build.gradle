@@ -15,10 +15,10 @@ android {
     ndkVersion rootProject.ext.ndkVersion
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
-    namespace "com.netmerareactnativeexample"
+    namespace "com.netmera.demo.reactnative"
 
     defaultConfig {
-        applicationId "com.netmerareactnativeexample"
+        applicationId "com.netmera.demo.reactnative"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

@@ -1,4 +1,4 @@
-package com.netmerareactnativeexample;
+package com.netmera.demo.reactnative;
 
 import androidx.annotation.NonNull;
 

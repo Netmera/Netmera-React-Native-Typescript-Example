@@ -9,4 +9,4 @@
 
 # Add any project specific keep options here:
 
--keep class com.netmerareactnativeexample.BuildConfig { *; }
+-keep class com.netmera.demo.reactnative.BuildConfig { *; }

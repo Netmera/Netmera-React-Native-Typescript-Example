@@ -1,4 +1,4 @@
-package com.netmerareactnativeexample
+package com.netmera.demo.reactnative
 
 import android.app.Application
 import com.facebook.react.PackageList
@@ -51,8 +51,7 @@ class MainApplication : Application(), ReactApplication {
         val netmeraConfiguration = RNNetmeraConfiguration.Builder()
             .firebaseSenderId(BuildConfig.FIREBASE_SENDER_ID)
             .huaweiSenderId(BuildConfig.HMS_SENDER_ID)
-            .apiKey(SharedPreferencesModule.getApiKey(this))
-            .baseUrl(SharedPreferencesModule.getBaseUrl(this))
+            .apiKey("gFtyH_nz5WAWBrHDHVZGclG4W_qB0XRba1aqIfXpmXLuZtIs4D_CU0iIL-uUs-aw")
             .logging(true) // This is for enabling Netmera logs.
             .build(this)
 

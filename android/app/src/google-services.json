@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:655729015885:android:43c13f803d597173837004",
         "android_client_info": {
-          "package_name": "com.netmerareactnativeexample"
+          "package_name": "com.netmera.demo.reactnative"
         }
       },
       "oauth_client": [],

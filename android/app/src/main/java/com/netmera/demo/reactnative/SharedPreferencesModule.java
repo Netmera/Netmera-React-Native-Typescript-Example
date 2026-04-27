@@ -1,4 +1,4 @@
-package com.netmerareactnativeexample;
+package com.netmera.demo.reactnative;
 
 import android.content.Context;
 import android.content.SharedPreferences;

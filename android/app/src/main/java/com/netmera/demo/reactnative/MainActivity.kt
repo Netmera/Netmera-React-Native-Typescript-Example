@@ -1,6 +1,6 @@
-package com.netmerareactnativeexample;
+package com.netmera.demo.reactnative
 
-import android.os.Bundle;
+import android.os.Bundle
 
 import com.facebook.react.ReactActivity
 import com.facebook.react.ReactActivityDelegate
@@ -13,15 +13,11 @@ class MainActivity : ReactActivity() {
         super.onCreate(null)
     }
 
-
-
     /**
      * Returns the instance of the [ReactActivityDelegate]. We use [DefaultReactActivityDelegate]
      * which allows you to enable New Architecture with a single boolean flags [fabricEnabled]
      */
-
     override fun getMainComponentName(): String = "NetmeraTSExample"
-
 
     /**
      * Returns the instance of the {@link ReactActivityDelegate}. Here we use a util class {@link
@@ -29,6 +25,5 @@ class MainActivity : ReactActivity() {
      * (aka React 18) with two boolean flags.
      */
     override fun createReactActivityDelegate(): ReactActivityDelegate =
-            DefaultReactActivityDelegate(this, mainComponentName, fabricEnabled)
+        DefaultReactActivityDelegate(this, mainComponentName, fabricEnabled)
 }
-
