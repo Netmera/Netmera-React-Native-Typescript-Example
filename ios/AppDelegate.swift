@@ -21,7 +21,7 @@ class AppDelegate: RCTAppDelegate, UNUserNotificationCenterDelegate {
     // Call before RNNetmera.initNetmera()
     FirebaseApp.configure()
     
-    RNNetmera.initNetmera()
+    initializeNetmera()
     Netmera.setPushDelegate(self)
 
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
@@ -64,6 +64,15 @@ class AppDelegate: RCTAppDelegate, UNUserNotificationCenterDelegate {
   // MARK: Deeplink Method
   override func application(_ application: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any]) -> Bool {
     return RCTLinkingManager.application(application, open: url, options: options)
+  }
+  
+  private func initializeNetmera() {
+      // Netmera config from iOS Settings (Config/NetmeraConfigProvider)
+      NetmeraConfigProvider.registerSettingsBundleDefaults()
+      let (apiKey, baseUrl) = NetmeraConfigProvider.configFromSettings()
+      
+      let netmeraParams = NetmeraParams(apiKey: apiKey, baseUrl: baseUrl)
+      RNNetmera.initialize(params: netmeraParams)
   }
 }
 

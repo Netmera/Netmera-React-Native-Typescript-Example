@@ -10,6 +10,7 @@ import com.facebook.react.defaults.DefaultReactNativeHost
 import com.facebook.react.soloader.OpenSourceMergedSoMapping
 import com.facebook.soloader.SoLoader
 
+import com.netmera.demo.reactnative.config.NetmeraConfigProvider
 import com.netmera.reactnativesdk.RNNetmera
 import com.netmera.reactnativesdk.RNNetmeraConfiguration
 
@@ -46,11 +47,14 @@ class MainApplication : Application(), ReactApplication {
             DefaultNewArchitectureEntryPoint.load()
         }
 
+        val (apiKey, baseUrl) = NetmeraConfigProvider.configFromPreferences(this)
+
         val netmeraConfiguration = RNNetmeraConfiguration.Builder()
             .firebaseSenderId(BuildConfig.FIREBASE_SENDER_ID)
             .huaweiSenderId(BuildConfig.HMS_SENDER_ID)
-            .apiKey(BuildConfig.NETMERA_API_KEY)
-            .logging(true) // This is for enabling Netmera logs.
+            .apiKey(apiKey)
+            .baseUrl(baseUrl)
+            .logging(true)
             .build(this)
 
         RNNetmera.initNetmera(netmeraConfiguration)

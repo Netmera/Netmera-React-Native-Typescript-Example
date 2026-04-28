@@ -26,6 +26,9 @@
 		C9C49FC72B8E016300C13F7B /* Netmera_NotificationContentExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = C9C49FB92B8E016300C13F7B /* Netmera_NotificationContentExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		FCA398A92A72C70A00CC8FFA /* nm_push_sound.wav in Resources */ = {isa = PBXBuildFile; fileRef = FCA398A82A72C70A00CC8FFA /* nm_push_sound.wav */; };
 		FE706143BA027CB21C03A090 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 4C45C3DF513093901CC0A606 /* PrivacyInfo.xcprivacy */; };
+		AA0001112F96692500F3AC31 /* NetmeraEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000112F96692500F3AC31 /* NetmeraEnvironment.swift */; };
+		AA0002222F96692500F3AC31 /* NetmeraConfigProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000222F96692500F3AC31 /* NetmeraConfigProvider.swift */; };
+		AA0003332F96692500F3AC31 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AA0000332F96692500F3AC31 /* Settings.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,6 +87,9 @@
 		C9A9AFE72D675CB800FE82DF /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		C9A9AFE92D675CB800FE82DF /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		C9C376D32D783A96007FE3A6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		AA0000112F96692500F3AC31 /* NetmeraEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetmeraEnvironment.swift; sourceTree = "<group>"; };
+		AA0000222F96692500F3AC31 /* NetmeraConfigProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetmeraConfigProvider.swift; sourceTree = "<group>"; };
+		AA0000332F96692500F3AC31 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		C9C49FAA2B8DF3CB00C13F7B /* Netmera_NotificationServiceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = Netmera_NotificationServiceExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9C49FAC2B8DF3CB00C13F7B /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		C9C49FAE2B8DF3CB00C13F7B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -143,8 +149,19 @@
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				4C45C3DF513093901CC0A606 /* PrivacyInfo.xcprivacy */,
 				C90035032F96692500F3AC31 /* Netmera-Config.plist */,
+				AA0000442F96692500F3AC31 /* Config */,
+				AA0000332F96692500F3AC31 /* Settings.bundle */,
 			);
 			name = NetmeraTSExample;
+			sourceTree = "<group>";
+		};
+		AA0000442F96692500F3AC31 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				AA0000112F96692500F3AC31 /* NetmeraEnvironment.swift */,
+				AA0000222F96692500F3AC31 /* NetmeraConfigProvider.swift */,
+			);
+			path = Config;
 			sourceTree = "<group>";
 		};
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
@@ -348,6 +365,7 @@
 				FCA398A92A72C70A00CC8FFA /* nm_push_sound.wav in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				FE706143BA027CB21C03A090 /* PrivacyInfo.xcprivacy in Resources */,
+				AA0003332F96692500F3AC31 /* Settings.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -527,6 +545,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				C9C376D42D783AA1007FE3A6 /* AppDelegate.swift in Sources */,
+				AA0001112F96692500F3AC31 /* NetmeraEnvironment.swift in Sources */,
+				AA0002222F96692500F3AC31 /* NetmeraConfigProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
