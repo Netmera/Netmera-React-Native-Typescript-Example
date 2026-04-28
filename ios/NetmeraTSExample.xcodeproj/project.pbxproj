@@ -13,6 +13,9 @@
 		52FEE23B2B3C525000878099 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 52FEE23A2B3C525000878099 /* GoogleService-Info.plist */; };
 		695A86D7FED8F816209083F1 /* Pods_Netmera_NotificationContentExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D4553362CC34DAD2791637B /* Pods_Netmera_NotificationContentExtension.framework */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		C90035042F96692500F3AC31 /* Netmera-Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = C90035032F96692500F3AC31 /* Netmera-Config.plist */; };
+		C90035052F96692500F3AC31 /* Netmera-Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = C90035032F96692500F3AC31 /* Netmera-Config.plist */; };
+		C90035062F96692500F3AC31 /* Netmera-Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = C90035032F96692500F3AC31 /* Netmera-Config.plist */; };
 		C9C376D42D783AA1007FE3A6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9C376D32D783A96007FE3A6 /* AppDelegate.swift */; };
 		C9C49FAD2B8DF3CB00C13F7B /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9C49FAC2B8DF3CB00C13F7B /* NotificationService.swift */; };
 		C9C49FB12B8DF3CB00C13F7B /* Netmera_NotificationServiceExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = C9C49FAA2B8DF3CB00C13F7B /* Netmera_NotificationServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -75,6 +78,8 @@
 		89C6BE57DB24E9ADA2F236DE /* Pods-NetmeraTSExample-NetmeraTSExampleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NetmeraTSExample-NetmeraTSExampleTests.release.xcconfig"; path = "Target Support Files/Pods-NetmeraTSExample-NetmeraTSExampleTests/Pods-NetmeraTSExample-NetmeraTSExampleTests.release.xcconfig"; sourceTree = "<group>"; };
 		9D4553362CC34DAD2791637B /* Pods_Netmera_NotificationContentExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Netmera_NotificationContentExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5E080DF58AAB1424FEA6F55 /* Pods-Netmera_NotificationContentExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Netmera_NotificationContentExtension.release.xcconfig"; path = "Target Support Files/Pods-Netmera_NotificationContentExtension/Pods-Netmera_NotificationContentExtension.release.xcconfig"; sourceTree = "<group>"; };
+		C90035022F9668B700F3AC31 /* Netmera_NotificationServiceExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Netmera_NotificationServiceExtension.entitlements; sourceTree = "<group>"; };
+		C90035032F96692500F3AC31 /* Netmera-Config.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Netmera-Config.plist"; sourceTree = "<group>"; };
 		C99ACF0228DB35830019E1B4 /* NetmeraTSExample.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = NetmeraTSExample.entitlements; path = NetmeraTSExample/NetmeraTSExample.entitlements; sourceTree = "<group>"; };
 		C9A9AFE72D675CB800FE82DF /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		C9A9AFE92D675CB800FE82DF /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
@@ -137,6 +142,7 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				4C45C3DF513093901CC0A606 /* PrivacyInfo.xcprivacy */,
+				C90035032F96692500F3AC31 /* Netmera-Config.plist */,
 			);
 			name = NetmeraTSExample;
 			sourceTree = "<group>";
@@ -208,6 +214,7 @@
 		C9C49FAB2B8DF3CB00C13F7B /* Netmera_NotificationServiceExtension */ = {
 			isa = PBXGroup;
 			children = (
+				C90035022F9668B700F3AC31 /* Netmera_NotificationServiceExtension.entitlements */,
 				C9C49FAC2B8DF3CB00C13F7B /* NotificationService.swift */,
 				C9C49FAE2B8DF3CB00C13F7B /* Info.plist */,
 			);
@@ -336,6 +343,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
+				C90035042F96692500F3AC31 /* Netmera-Config.plist in Resources */,
 				52FEE23B2B3C525000878099 /* GoogleService-Info.plist in Resources */,
 				FCA398A92A72C70A00CC8FFA /* nm_push_sound.wav in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
@@ -347,6 +355,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C90035052F96692500F3AC31 /* Netmera-Config.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -355,6 +364,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C9C49FC32B8E016300C13F7B /* MainInterface.storyboard in Resources */,
+				C90035062F96692500F3AC31 /* Netmera-Config.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -575,6 +585,7 @@
 				DEVELOPMENT_TEAM = 6AW8NY58ZS;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = NetmeraTSExample/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -605,6 +616,7 @@
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 6AW8NY58ZS;
 				INFOPLIST_FILE = NetmeraTSExample/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -813,6 +825,7 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = Netmera_NotificationServiceExtension/Netmera_NotificationServiceExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -827,7 +840,7 @@
 				INFOPLIST_FILE = Netmera_NotificationServiceExtension/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Netmera_NotificationServiceExtension;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -859,6 +872,7 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = Netmera_NotificationServiceExtension/Netmera_NotificationServiceExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
@@ -870,7 +884,7 @@
 				INFOPLIST_FILE = Netmera_NotificationServiceExtension/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Netmera_NotificationServiceExtension;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -916,7 +930,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = Netmera_NotificationContentExtension;
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -961,7 +975,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = Netmera_NotificationContentExtension;
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

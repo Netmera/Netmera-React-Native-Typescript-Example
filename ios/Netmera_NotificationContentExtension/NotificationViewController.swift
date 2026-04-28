@@ -2,17 +2,17 @@
 //  NotificationViewController.swift
 //  Netmera_NotificationContentExtension
 //
-//  Created by Initial Code on 27.02.2024.
-//
 
-import UIKit
 import UserNotifications
 import UserNotificationsUI
 import NetmeraNotificationContentExtension
 
-class NotificationViewController: NetmeraNotificationContentExtension {
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any required interface initialization here.
-    }
+class NotificationViewController: NotificationContentExtension {
+  override func viewDidLoad() {
+    super.viewDidLoad()
+  }
+
+  override func didReceive(_ notification: UNNotification) {
+    super.didReceive(notification)
+  }
 }

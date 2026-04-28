@@ -3,11 +3,11 @@ import React
 import React_RCTAppDelegate
 import ReactAppDependencyProvider
 import RNNetmera
-import Netmera
+import NetmeraNotification
 import Firebase
 
 @main
-class AppDelegate: RCTAppDelegate, UNUserNotificationCenterDelegate, NetmeraPushDelegate {
+class AppDelegate: RCTAppDelegate, UNUserNotificationCenterDelegate {
   override func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
     self.moduleName = "NetmeraTSExample"
     self.dependencyProvider = RCTAppDependencyProvider()
@@ -16,16 +16,13 @@ class AppDelegate: RCTAppDelegate, UNUserNotificationCenterDelegate, NetmeraPush
     // They will be passed down to the ViewController used by React Native.
     self.initialProps = [:]
     
-    if #available(iOS 10.0, *) {
-        UNUserNotificationCenter.current().delegate = self
-    }
+    UNUserNotificationCenter.current().delegate = self
     
-    RNNetmera.logging(true);
-    RNNetmera.initNetmera("gFtyH_nz5WAWBrHDHVZGclG4W_qB0XRba1aqIfXpmXLuZtIs4D_CU0iIL-uUs-aw")
-    RNNetmera.setPushDelegate(self)
-    Netmera.setAppGroupName("group.com.netmera.demo.reactnative")
-
+    // Call before RNNetmera.initNetmera()
     FirebaseApp.configure()
+    
+    RNNetmera.initNetmera()
+    Netmera.setPushDelegate(self)
 
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }
@@ -42,46 +39,40 @@ class AppDelegate: RCTAppDelegate, UNUserNotificationCenterDelegate, NetmeraPush
 #endif
   }
   
-  // MARK: Push Delegate Methods
-
-  // Take push payload for Push clicked:
-  @available(iOS 10.0, *)
-  func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-    let userInfo = response.notification.request.content.userInfo
-
-    if response.actionIdentifier == UNNotificationDismissActionIdentifier {
-        RNNetmeraRCTEventEmitter.onPushDismiss(["userInfo": userInfo])
-    } else if response.actionIdentifier == UNNotificationDefaultActionIdentifier {
-        RNNetmeraRCTEventEmitter.onPushOpen(["userInfo": userInfo])
-    }
-          
+  // Add it if you are using Firebase.
+  func userNotificationCenter(
+    _ center: UNUserNotificationCenter,
+    willPresent notification: UNNotification,
+    withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void
+  ) {
+      if #available(iOS 14, *) {
+        completionHandler([.banner, .list, .badge, .sound])
+      } else {
+        completionHandler([.alert, .badge, .sound])
+      }
+  }
+  
+  // Add it if you are using Firebase.
+  func userNotificationCenter(
+    _ center: UNUserNotificationCenter,
+    didReceive response: UNNotificationResponse,
+    withCompletionHandler completionHandler: @escaping () -> Void
+  ) {
     completionHandler()
-  }
-  
-  // Take push payload for push Received on application foreground:
-  @available(iOS 10.0, *)
-  func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-    completionHandler([UNNotificationPresentationOptions.alert])
-    RNNetmeraRCTEventEmitter.onPushReceive(["userInfo": notification.request.content.userInfo])
-  }
-  
-  override func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-    RNNetmeraRCTEventEmitter.onPushRegister(["pushToken": deviceToken])
-  }
-  
-  // MARK: Handle Open URL
-
-  // Required code block to handle widget URL's in React Native
-  func shouldHandleOpen(_ url: URL!, for object: NetmeraPushObject!) -> Bool {
-    return false
-  }
-
-  func handleOpen(_ url: URL!, for object: NetmeraPushObject!) {
-    RNNetmeraRCTEventEmitter.handleOpen(url, for: object)
   }
 
   // MARK: Deeplink Method
   override func application(_ application: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any]) -> Bool {
     return RCTLinkingManager.application(application, open: url, options: options)
   }
+}
+
+extension AppDelegate: NetmeraPushDelegate {
+    func urlOpeningDecision(for url: URL, push: NetmeraBasePush) -> PushDelegateDecision {
+      .sdkHandles
+    }
+    
+    func openURL(_ url: URL, for push: NetmeraBasePush) {
+      RNNetmeraRCTEventEmitter.openURL(url, forPushObject: push)
+    }
 }

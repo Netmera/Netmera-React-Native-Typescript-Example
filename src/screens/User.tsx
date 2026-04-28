@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 Inomera Research.
+ * Copyright (c) 2026 Netmera Research.
  */
 
 import React, {useState} from 'react';
@@ -8,181 +8,170 @@ import {
   ScrollView,
   Text,
   TextInput,
-  TouchableHighlight, TouchableOpacity,
-  View
-} from "react-native";
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import styles from '../Style';
-import {Picker} from '@react-native-picker/picker';
-import {Netmera, NMUserGender} from 'react-native-netmera';
-import MyNetmeraUser from '../models/MyNetmeraUser';
+import {Netmera, NetmeraUser} from 'react-native-netmera';
 import Colors from '../Colors';
 import Toast from 'react-native-toast-message';
-import {isIos} from '../helpers/DeviceUtils';
+
+function valueFromInput(text: string): string | null {
+  const t = text.trim();
+  if (t.toLowerCase() === 'null') {
+    return null;
+  }
+  return t;
+}
+
+function hasInput(text: string): boolean {
+  return text.trim().length > 0;
+}
+
+function applyUserInputs(
+  user: NetmeraUser,
+  userId: string,
+  email: string,
+  msisdn: string,
+  wpNumber: string,
+): void {
+  if (hasInput(userId)) {
+    user.userId = valueFromInput(userId);
+  }
+  if (hasInput(email)) {
+    user.email = valueFromInput(email);
+  }
+  if (hasInput(msisdn)) {
+    user.msisdn = valueFromInput(msisdn);
+  }
+  if (hasInput(wpNumber)) {
+    user.wpNumber = valueFromInput(wpNumber);
+  }
+}
 
 const User = () => {
   const [userId, setUserId] = useState('');
-  const [name, setName] = useState('');
-  const [surname, setSurname] = useState('');
   const [email, setEmail] = useState('');
   const [msisdn, setMsisdn] = useState('');
-  const [gender, setGender] = useState(NMUserGender.NOT_SPECIFIED);
+  const [wpNumber, setWpNumber] = useState('');
 
-  const sendUserUpdateAsync = () => {
-    const user = new MyNetmeraUser();
+  const identifyUserWithCallback = () => {
+    const user = new NetmeraUser();
+    applyUserInputs(user, userId, email, msisdn, wpNumber);
 
-    // Set Default Attributes
-    user.userId = userId;
-
-    if (name !== '') {
-      user.name = name;
-    }
-    if (surname !== '') {
-      user.surname = surname;
-    }
-    if (email !== '') {
-      user.email = email;
-    }
-    if (msisdn !== '') {
-      user.msisdn = msisdn;
-    }
-    if (gender !== null) {
-      user.gender = gender;
-    }
-
-    // Set Custom Attributes
-    user.testGender = MyNetmeraUser.TestGender.TESTGENDER_MALE;
-    user.testName = 'Test Name';
-
-    Netmera.updateUserAsync(user);
-  };
-
-  const sendUserUpdate = () => {
-    const user = new MyNetmeraUser();
-
-    // Set Default Attributes
-    user.userId = userId;
-
-    if (name !== '') {
-      user.name = name;
-    }
-    if (surname !== '') {
-      user.surname = surname;
-    }
-    if (email !== '') {
-      user.email = email;
-    }
-    if (msisdn !== '') {
-      user.msisdn = msisdn;
-    }
-    if (gender !== null) {
-      user.gender = gender;
-    }
-
-    // Set Custom Attributes
-    user.testGender = MyNetmeraUser.TestGender.TESTGENDER_MALE;
-    user.testName = 'Test Name';
-
-    Netmera.updateUser(user)
-      .then(() => {
-        console.log('User updated successfully!');
+    Netmera.identifyUser(user, (success, error) => {
+      if (success) {
         Toast.show({
           type: 'success',
-          text1: 'User updated successfully!',
+          text1: 'User identified successfully!',
         });
-      })
-      .catch(error => {
-        console.log(error.code, error.message);
+      } else {
         Toast.show({
           type: 'error',
-          text1: error.message,
+          text1: `Identify user failed: ${error?.message ?? 'unknown error'}`,
         });
-      });
+      }
+    });
   };
+
+  const identifyUserFireAndForget = () => {
+    const user = new NetmeraUser();
+    applyUserInputs(user, userId, email, msisdn, wpNumber);
+    Netmera.identifyUser(user);
+  };
+
+  const fieldHint =
+    'Leave empty: not set; type "null": sets null';
 
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView
-        scrollEnabled={true}
+        scrollEnabled
         bounces={false}
         style={styles.scrollView}
-        contentContainerStyle={{alignItems: 'center'}}>
-        <TextInput
-          placeholder={'UserId (optional)'}
-          placeholderTextColor={Colors.dark}
-          style={styles.textInput}
-          value={userId}
-          autoCapitalize={'none'}
-          onChangeText={text => setUserId(text)}
-        />
-        <TextInput
-          placeholder={'Name (optional)'}
-          placeholderTextColor={Colors.dark}
-          style={styles.textInput}
-          value={name}
-          onChangeText={text => setName(text)}
-        />
-        <TextInput
-          placeholder={'Surname (optional)'}
-          placeholderTextColor={Colors.dark}
-          style={styles.textInput}
-          value={surname}
-          onChangeText={text => setSurname(text)}
-        />
-        <TextInput
-          placeholder={'Email (optional)'}
-          placeholderTextColor={Colors.dark}
-          style={styles.textInput}
-          keyboardType={'email-address'}
-          value={email}
-          onChangeText={text => setEmail(text)}
-        />
-        <TextInput
-          placeholder={'Msisdn (optional)'}
-          placeholderTextColor={Colors.dark}
-          style={styles.textInput}
-          keyboardType={'phone-pad'}
-          value={msisdn}
-          onChangeText={text => setMsisdn(text)}
-        />
-        <Text
-          style={{
-            width: '50%',
-            color: Colors.black,
-            textAlign: 'center',
-            marginBottom: 5,
-          }}>
-          Gender (optional)
-        </Text>
-        <View style={styles.picker}>
-          <Picker
-            style={[{color: Colors.black}, isIos() ? {height: '35%'} : null]}
-            itemStyle={{fontSize: 13}}
-            mode={'dropdown'}
-            selectedValue={gender}
-            onValueChange={itemValue => setGender(itemValue)}
-            dropdownIconColor={Colors.black}>
-            <Picker.Item label="MALE" value={NMUserGender.MALE} />
-            <Picker.Item label="FEMALE" value={NMUserGender.FEMALE} />
-            <Picker.Item
-              label="NOT SPECIFIED"
-              value={NMUserGender.NOT_SPECIFIED}
+        contentContainerStyle={{paddingBottom: 24}}>
+        <View style={{paddingHorizontal: 50, width: '100%'}}>
+          <View style={{marginBottom: 12}}>
+            <Text style={{color: Colors.black, fontSize: 14, marginBottom: 4}}>
+              User ID (Optional)
+            </Text>
+            <Text style={{color: Colors.dark, fontSize: 11, marginBottom: 6}}>
+              {fieldHint}
+            </Text>
+            <TextInput
+              placeholder="User ID"
+              placeholderTextColor={Colors.dark}
+              style={styles.bigTextInput}
+              value={userId}
+              autoCapitalize="none"
+              onChangeText={setUserId}
             />
-          </Picker>
+          </View>
+
+          <View style={{marginBottom: 12}}>
+            <Text style={{color: Colors.black, fontSize: 14, marginBottom: 4}}>
+              Email (Optional)
+            </Text>
+            <Text style={{color: Colors.dark, fontSize: 11, marginBottom: 6}}>
+              {fieldHint}
+            </Text>
+            <TextInput
+              placeholder="Email"
+              placeholderTextColor={Colors.dark}
+              style={styles.bigTextInput}
+              keyboardType="email-address"
+              value={email}
+              autoCapitalize="none"
+              onChangeText={setEmail}
+            />
+          </View>
+
+          <View style={{marginBottom: 12}}>
+            <Text style={{color: Colors.black, fontSize: 14, marginBottom: 4}}>
+              Msisdn (Optional)
+            </Text>
+            <Text style={{color: Colors.dark, fontSize: 11, marginBottom: 6}}>
+              {fieldHint}
+            </Text>
+            <TextInput
+              placeholder="Msisdn"
+              placeholderTextColor={Colors.dark}
+              style={styles.bigTextInput}
+              keyboardType="phone-pad"
+              value={msisdn}
+              onChangeText={setMsisdn}
+            />
+          </View>
+
+          <View style={{marginBottom: 12}}>
+            <Text style={{color: Colors.black, fontSize: 14, marginBottom: 4}}>
+              WhatsApp Number (Optional)
+            </Text>
+            <Text style={{color: Colors.dark, fontSize: 11, marginBottom: 6}}>
+              {fieldHint}
+            </Text>
+            <TextInput
+              placeholder="WhatsApp Number"
+              placeholderTextColor={Colors.dark}
+              style={styles.bigTextInput}
+              keyboardType="phone-pad"
+              value={wpNumber}
+              onChangeText={setWpNumber}
+            />
+          </View>
+
+          <TouchableOpacity
+            style={[styles.button, {marginTop: 30, width: '100%'}]}
+            onPress={identifyUserWithCallback}>
+            <Text style={styles.buttonText}>Identify User</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={[styles.button, {marginTop: 30, width: '100%'}]}
+            onPress={identifyUserFireAndForget}>
+            <Text style={styles.buttonText}>Identify User (no callback)</Text>
+          </TouchableOpacity>
         </View>
-
-        <TouchableHighlight
-          style={styles.button}
-          onPress={() => sendUserUpdate()}
-          underlayColor="#99d9f4">
-          <Text style={styles.buttonText}>Update User</Text>
-        </TouchableHighlight>
-
-        <TouchableHighlight
-          style={styles.button}
-          onPress={() => sendUserUpdateAsync()}
-          underlayColor="#99d9f4">
-          <Text style={styles.buttonText}>Update User Async</Text>
-        </TouchableHighlight>
       </ScrollView>
     </SafeAreaView>
   );

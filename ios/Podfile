@@ -13,9 +13,8 @@ if linkage != nil
   use_frameworks! :linkage => linkage.to_sym
 end
 
-pod "Netmera", "3.27.3-WithoutDependency"
-pod "Netmera/NotificationServiceExtension", "3.27.3-WithoutDependency"
-pod "Netmera/NotificationContentExtension", "3.27.3-WithoutDependency"
+pod 'NetmeraNotificationServiceExtension', "4.17.0"
+pod "NetmeraNotificationContentExtension", "4.17.0"
 
 target 'NetmeraTSExample' do
   config = use_native_modules!
@@ -29,6 +28,15 @@ target 'NetmeraTSExample' do
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
 
+  pre_install do |installer|
+    installer.pod_targets.each do |pod|
+      if pod.name.start_with?('Netmera') || pod.name.include?('Swinject')
+        def pod.build_type
+          Pod::BuildType.dynamic_framework
+        end
+      end
+    end
+  end
 
   post_install do |installer|
       # https://github.com/facebook/react-native/blob/main/packages/react-native/scripts/react_native_pods.rb#L197-L202
@@ -39,11 +47,17 @@ target 'NetmeraTSExample' do
         # :ccache_enabled => true
       )
       installer.pods_project.targets.each do |target|
-       target.build_configurations.each do |config|
-        config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '12.0'
-       end
+        # For Netmera
+        if target.name.include?('Swinject')
+          target.build_configurations.each do |config|
+            config.build_settings['BUILD_LIBRARY_FOR_DISTRIBUTION'] = 'YES'
+          end
+        end
+        target.build_configurations.each do |config|
+          config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '15.1'
+        end
       end
-  end
+   end
 end
 
 target 'Netmera_NotificationServiceExtension' do
