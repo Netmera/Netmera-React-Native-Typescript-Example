@@ -21,6 +21,9 @@ import Toast from 'react-native-toast-message';
 import Category from './src/screens/Category';
 import User from './src/screens/User';
 import PushInbox from './src/screens/PushInbox';
+import Settings from './src/screens/Settings';
+import Profile from './src/screens/Profile';
+import Permissions from './src/screens/Permissions';
 import {Netmera} from 'react-native-netmera';
 import {isAndroid, isIos} from './src/helpers/DeviceUtils';
 import messaging from '@react-native-firebase/messaging';
@@ -32,6 +35,7 @@ const Stack = createNativeStackNavigator();
 const App = () => {
   useEffect(() => {
     Netmera.getInitialURL().then(url => {
+      console.log('Netmera initial url: ', url);
       if (url) {
         Toast.show({
           type: 'success',
@@ -41,6 +45,7 @@ const App = () => {
     });
 
     Linking.getInitialURL().then(url => {
+      console.log('Linking initial url: ', url);
       if (url) {
         Toast.show({
           type: 'success',
@@ -50,6 +55,7 @@ const App = () => {
     });
 
     Linking.addEventListener('url', event => {
+      console.log('Linking foreground url: ', event.url);
       Toast.show({
         type: 'success',
         text1: `Foreground url: ${event.url}`,
@@ -142,6 +148,9 @@ const App = () => {
         <Stack.Screen name={'Events'} component={Events} />
         <Stack.Screen name={'PushInbox'} component={PushInbox} />
         <Stack.Screen name={'User'} component={User} />
+        <Stack.Screen name={'Profile'} component={Profile} />
+        <Stack.Screen name={'Settings'} component={Settings} />
+        <Stack.Screen name={'Permissions'} component={Permissions} />
       </Stack.Navigator>
       <Toast />
     </NavigationContainer>

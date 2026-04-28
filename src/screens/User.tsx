@@ -163,13 +163,13 @@ const User = () => {
           <TouchableOpacity
             style={[styles.button, {marginTop: 30, width: '100%'}]}
             onPress={identifyUserWithCallback}>
-            <Text style={styles.buttonText}>Identify User</Text>
+            <Text style={styles.buttonText}>IDENTIFY USER</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
-            style={[styles.button, {marginTop: 30, width: '100%'}]}
+            style={[styles.button, {width: '100%'}]}
             onPress={identifyUserFireAndForget}>
-            <Text style={styles.buttonText}>Identify User (no callback)</Text>
+            <Text style={styles.buttonText}>IDENTIFY USER (No Callback)</Text>
           </TouchableOpacity>
         </View>
       </ScrollView>
