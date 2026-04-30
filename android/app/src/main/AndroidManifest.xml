@@ -37,7 +37,7 @@
 
         <activity
             android:name=".config.NetmeraConfigActivity"
-            android:label="RN Config"
+            android:label="Netmera RN Config"
             android:icon="@mipmap/ic_config_launcher"
             android:exported="true">
             <intent-filter>

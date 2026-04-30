@@ -128,7 +128,7 @@ const App = () => {
     headerTitle: () => (
       <View style={{justifyContent: 'flex-start', flex: 1}}>
         <Text style={{fontWeight: '500', fontSize: 18, color: Colors.white}}>
-          {'ReactTSExample'}
+          {'Netmera React Native Demo'}
         </Text>
       </View>
     ),

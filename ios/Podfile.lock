@@ -1724,7 +1724,7 @@ PODS:
     - FirebaseCoreExtension
     - React-Core
     - RNFBApp
-  - RNNetmera (2.0.0-alpha05):
+  - RNNetmera (2.0.0-beta01):
     - DoubleConversion
     - glog
     - hermes-engine
@@ -2158,7 +2158,7 @@ SPEC CHECKSUMS:
   RNDeviceInfo: bcce8752b5043a623fe3c26789679b473f705d3c
   RNFBApp: 4e6da65e29a144d20bcb5bf264fc8e2055831bab
   RNFBMessaging: fb5a9b0a3043d5d3e6e9fe7b27b78fcc3a0f753f
-  RNNetmera: d4b0014f240403857fcb7ff5b8b1a96881489f92
+  RNNetmera: e333b9514a559dc76ad887a1c755eb60664e09d6
   RNScreens: 2174e7c45b28303afca1552fcc35e4a6918b0099
   SocketRocket: d4aabe649be1e368d1318fdf28a022d714d65748
   Swinject: 6ba81f58fd769c9fd4b8ceced9e25a9cb137cb3c
