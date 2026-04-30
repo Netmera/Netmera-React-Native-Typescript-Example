@@ -71,7 +71,7 @@ class AppDelegate: RCTAppDelegate, UNUserNotificationCenterDelegate {
       NetmeraConfigProvider.registerSettingsBundleDefaults()
       let (apiKey, baseUrl) = NetmeraConfigProvider.configFromSettings()
       
-      let netmeraParams = NetmeraParams(apiKey: apiKey, baseUrl: baseUrl)
+      let netmeraParams = NetmeraParams(apiKey: apiKey, baseUrl: baseUrl, appGroupName: "group.com.netmera.demo.reactnative")
       RNNetmera.initialize(params: netmeraParams)
   }
 }

@@ -13,8 +13,8 @@ if linkage != nil
   use_frameworks! :linkage => linkage.to_sym
 end
 
-pod 'NetmeraNotificationServiceExtension', "4.17.0"
-pod "NetmeraNotificationContentExtension", "4.17.0"
+pod 'NetmeraNotificationServiceExtension', "4.18.0"
+pod "NetmeraNotificationContentExtension", "4.18.0"
 
 target 'NetmeraTSExample' do
   config = use_native_modules!
