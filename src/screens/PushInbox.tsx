@@ -86,17 +86,16 @@ const PushInbox = () => {
   // Handles interactive action of first push object.
   const handleInteractiveAction = async () => {
     if (inbox !== undefined && inbox.length > 0) {
-      for (let i = 0; i < inbox.length; i++) {
-        const element = inbox[i];
+      inbox.map((pushObject: NetmeraPushInbox) => {
         if (
-          element.interactiveActions &&
-          element.interactiveActions.length > 0
+          pushObject.interactiveActions &&
+          pushObject.interactiveActions.length > 0
         ) {
-          const action = JSON.parse(element.interactiveActions[0].toString());
+          const action = pushObject.interactiveActions[0];
+          if (!action?.id) return;
           Netmera.handleInteractiveAction(action.id);
-          return;
         }
-      }
+      });
     }
   };
 

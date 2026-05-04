@@ -94,7 +94,13 @@ const Settings = () => {
   };
 
   const requestPushNotificationAuthorization = () => {
-    Netmera.requestPushNotificationAuthorization();
+    Netmera.requestPushNotificationAuthorization().then(status => {
+      if (status) {
+        setPushState(PushState.PushEnabled);
+      } else {
+        setPushState(PushState.PushDisabled);
+      } 
+    });
   };
 
   const disableOrEnablePopUpPresentation = () => {
