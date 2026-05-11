@@ -18,6 +18,7 @@ import Coupons from './src/screens/Coupons';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import Events from './src/screens/Events';
 import Toast from 'react-native-toast-message';
+import PushEventModal from './src/components/PushEventModal';
 import Category from './src/screens/Category';
 import User from './src/screens/User';
 import PushInbox from './src/screens/PushInbox';
@@ -152,6 +153,7 @@ const App = () => {
         <Stack.Screen name={'Settings'} component={Settings} />
         <Stack.Screen name={'Permissions'} component={Permissions} />
       </Stack.Navigator>
+      <PushEventModal />
       <Toast />
     </NavigationContainer>
   );
