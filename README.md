@@ -2,23 +2,41 @@
 
 NETMERA is a Mobile Application Engagement Platform. We offer a series of development tools and app communication features to help your mobile business ignite and soar.
 
-## Installation
+This is a TypeScript example project demonstrating the integration of the [react-native-netmera](https://github.com/Netmera/Netmera-React-Native) SDK. It covers push notifications (FCM + HMS), in-app messaging, push inbox, analytics events, user identification, user profile attributes, permissions, coupons, geofence/location, and deeplink handling for both Android and iOS.
 
-`yarn add react-native-netmera`
+## Running the Example
 
-or
+**Install dependencies:**
 
-`npm install --save react-native-netmera`
+```
+npm install
+```
 
-#### Link Netmera (for RN versions < 0.60)
+**iOS pods:**
 
-Skip if using React Native version of 0.60 or greater.
+```
+npm run pod-install
+```
 
-React Native: `react-native link react-native-netmera`
+**Start Metro:**
 
-For both native sides (Android & iOS) you don't have to include extra Netmera SDK libraries.
+```
+npm start
+```
 
-### Setup - Android Part
+**Run Android:**
+
+```
+npm run android
+```
+
+**Run iOS:**
+
+```
+npm run ios
+```
+
+## Setup - Android Part
 
 1. Create and register your app in [Firebase console](https://firebase.google.com/).
 
@@ -91,195 +109,187 @@ apply plugin: 'com.huawei.agconnect'
     }
 ```
 
-### Setup - iOS Part
+## Setup - iOS Part
 
-1. Navigate to ios folder in your terminal and run the following command.
+1. Add the following post_install block to the end of your Podfile.
+
+```
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    if target.name.include?('Swinject')
+      target.build_configurations.each do |config|
+        config.build_settings['BUILD_LIBRARY_FOR_DISTRIBUTION'] = 'YES'
+      end
+    end
+  end
+end
+```
+
+2. Navigate to ios folder in your terminal and run the following command.
 
 ```
 $ pod install
 ```
 
-2. Download `GoogleService-Info.plist` file from Firebase and place it into ios/ folder.
-
 3. Enable push notifications for your project
-
    1. If you have not generated a valid push notification certificate yet,
       generate one and then export by following the steps explained in [Configuring Push Notifications section of App Distribution Guide](https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/establishing_a_certificate-based_connection_to_apns#2947597)
    2. Export the generated push certificate in .p12 format and upload to Netmera Dashboard.
    3. Enable Push Notifications capability for your application as explained in [Enable Push Notifications](https://developer.netmera.com/en/IOS/Quick-Start#enable-push-notifications) guide.
    4. Enable Remote notifications background mode for your application as explained in [Configuring Background Modes](https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/pushing_background_updates_to_your_app#2980038) guide.
 
-4. If you want to use Android alike message sending from iOS to react native please consider shaping your AppDelegate class as following.
-
-#### AppDelegate.h
+4. Add the `Netmera-Config.plist` file to your ios/YOUR-APP directory.
 
 ```
-#import <React/RCTBridgeDelegate.h>
-#import <UIKit/UIKit.h>
-#import <Netmera/Netmera.h>
-#import <NetmeraCore/NetmeraPushObject.h>
-#import <UserNotifications/UserNotifications.h>
-
-@interface AppDelegate : UIResponder <UIApplicationDelegate, RCTBridgeDelegate, UNUserNotificationCenterDelegate, NetmeraPushDelegate>
-
-@property (nonatomic, strong) UIWindow *window;
-
-@end
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+    <dict>
+        <key>sdk_params</key>
+        <dict>
+            <key>api_key</key>
+            <string>YOUR-API-KEY</string>
+        </dict>
+    </dict>
+</plist>
 ```
 
-#### AppDelegate.m
-
-- Add the following to the top of AppDelegate.m file.
+- If you are using Netmera on-premises, you must add your server URL as the base_url key inside sdk_params.
 
 ```
-#import <RNNetmera/RNNetmeraRCTEventEmitter.h>
-#import <RNNetmera/RNNetmeraUtils.h>
-#import <RNNetmera/RNNetmera.h>
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+    <dict>
+        <key>sdk_params</key>
+        <dict>
+            ...
+            <key>base_url</key>
+            <string>YOUR-BASE-URL</string>
+        </dict>
+    </dict>
+</plist>
 ```
 
-- Add the following lines into the `didFinishLaunchingWithOptions` method.
+5. Shape your AppDelegate.swift as following.
+
+#### AppDelegate.swift
+
+- Add the following to the top of AppDelegate.swift file.
 
 ```
-
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
-  // Add this line to set notification delegate
-  [UNUserNotificationCenter currentNotificationCenter].delegate = self;
-
-  ...
-
-  // Add these lines to init Netmera
-  [RNNetmera logging: YES]; // This is for enabling Netmera logs.
-  [RNNetmera initNetmera:[<YOUR NETMERA API KEY>]]; // Replace this with your own NETMERA API KEY.
-  [RNNetmera requestPushNotificationAuthorization];
-  [RNNetmera setPushDelegate:self];
-  [Netmera setAppGroupName:<YOUR APP GROUP NAME>]; // Set your app group name
-
-  return YES;
-}
+import RNNetmera
 ```
 
-- Add these methods to between `@implementation AppDelegate` and `@end`.
+- Add the following line into the `didFinishLaunchingWithOptions` method.
 
 ```
-@implementation AppDelegate
-
-...
-
-// MARK: Push Delegate Methods
-
-// Take push payload for Push clicked:
--(void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)(void))completionHandler
-{
-  if ([response.actionIdentifier isEqual:UNNotificationDismissActionIdentifier]) {
-    [RNNetmeraRCTEventEmitter onPushDismiss: @{@"userInfo" : response.notification.request.content.userInfo}];
-  } else if ([response.actionIdentifier isEqual:UNNotificationDefaultActionIdentifier]) {
-    [RNNetmeraRCTEventEmitter onPushOpen: @{@"userInfo" : response.notification.request.content.userInfo}];
-  }
-  completionHandler();
-}
-
-// Take push payload for push Received on application foreground:
--(void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions))completionHandler
-{
-  completionHandler(UNNotificationPresentationOptionAlert);
-  [RNNetmeraRCTEventEmitter onPushReceive: @{@"userInfo" : notification.request.content.userInfo}];
-}
-
-- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
-{
-  if(deviceToken == nil) {
-    return;
-  }
-  [RNNetmeraRCTEventEmitter onPushRegister: @{@"pushToken" : deviceToken}];
-}
-
-@end
-
+RNNetmera.initNetmera()
 ```
 
-For example if you trigger `[RNNetmeraRCTEventEmitter onPushReceive: @{@"userInfo" : notification.request.content.userInfo}]` from AppDelegate, in the react native part the following method will be triggered.
-
-```
-export const onPushReceive = async (message) => {
-    console.log("onPushReceive: ", message);
-};
-```
-
-4. In order to use iOS10 Media Push, follow the instructions in [Netmera Product Hub.](https://developer.netmera.com/en/IOS/Push-Notifications#using-ios10-media-push) Differently, you should add the pods to the top of the `Podfile` as below.
+6. In order to use iOS10 Media Push, follow the instructions in [Netmera Product Hub.](https://user.netmera.com/netmera-developer-guide/platforms/ios/new-ios-swift/push-notifications/media-push) Differently, you should add the pods to the top of the `Podfile` as below.
 
    ```
    // For receiving Media Push, you must add Netmera pods to top of your Podfile.
-   pod "Netmera", "3.24.7-WithoutDependency"
-   pod "Netmera/NotificationServiceExtension", "3.24.7-WithoutDependency"
-   pod "Netmera/NotificationContentExtension", "3.24.7-WithoutDependency"
+   pod 'NetmeraNotificationServiceExtension', "4.19.0"
+   pod "NetmeraNotificationContentExtension", "4.19.0"
    ```
 
-5. In order to use the widget URL callback, add these methods to between `@implementation AppDelegate` and `@end`.
+7. In order to use the widget URL callback, add these lines into `AppDelegate.swift` file.
 
-   ```
-   // Required code block to handle widget URL's in React Native
-   - (BOOL)shouldHandleOpenURL:(NSURL *)url forPushObject:(NetmeraPushObject *)object {
-     return NO;
-   }
+```
+import NetmeraNotification
 
-   - (void)handleOpenURL:(NSURL *)url forPushObject:(NetmeraPushObject *)object {
-     [RNNetmeraRCTEventEmitter handleOpenURL:url forPushObject:object];
-   }
-   ```
+...
+  override func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+    ...
+    Netmera.setPushDelegate(self)
+    ..
+  }
+...
 
-### Setup - React Native Part
+extension AppDelegate: NetmeraPushDelegate {
+  func urlOpeningDecision(for url: URL, push: NetmeraNotificationCore.NetmeraBasePush) -> PushDelegateDecision {
+    return .sdkHandles
+  }
+
+  func openURL(_ url: URL, for push: NetmeraNotificationCore.NetmeraBasePush) {
+    RNNetmeraRCTEventEmitter.openURL(url, forPushObject: push)
+  }
+}
+```
+
+## Setup - React Native Part
 
 1. Create a new `NetmeraPushHeadlessTask.ts` inside your React Native project.
 
+```ts
+import type {
+  NetmeraPushObject,
+  NetmeraInteractiveAction,
+  NetmeraCarouselObject,
+} from 'react-native-netmera';
+
+export const onPushRegister = async (data: { pushToken: string }) => {
+  console.log('onPushRegister: ', data);
+};
+
+export const onPushReceive = async (push: NetmeraPushObject) => {
+  console.log('onPushReceive: ', push);
+};
+
+export const onPushOpen = async (push: NetmeraPushObject) => {
+  console.log('onPushOpen: ', push);
+};
+
+export const onPushDismiss = async (push: NetmeraPushObject) => {
+  console.log('onPushDismiss: ', push);
+};
+
+export const onPushButtonClicked = async (
+  push: NetmeraPushObject,
+  action?: NetmeraInteractiveAction
+) => {
+  console.log('onPushButtonClicked: ', push);
+  console.log('Clicked action: ', action);
+};
+
+export const onCarouselObjectSelected = async (
+  push: NetmeraPushObject,
+  carouselItem?: NetmeraCarouselObject
+) => {
+  console.log('onCarouselObjectSelected: ', push);
+  console.log('Selected carousel item: ', carouselItem);
+};
 ```
-export const onPushRegister = async (message: string) => {
-    console.log("onPushRegister: ", message);
-};
 
-export const onPushReceive = async (message: string) => {
-    console.log("onPushReceive: ", message);
-};
+2. Register push lifecycle callbacks inside your `index.js` file.
 
-export const onPushOpen = async (message: string) => {
-    console.log("onPushOpen: ", message);
-};
+```js
+import { AppRegistry } from 'react-native';
+import App from './src/App';
+import { name as appName } from './app.json';
+import { Netmera } from 'react-native-netmera';
 
-export const onPushDismiss = async (message: string) => {
-    console.log("onPushDismiss: ", message);
-};
-
-export const onPushButtonClicked = async (message: string) => {
-    console.log("onPushButtonClicked: ", message);
-};
-
-export const onCarouselObjectSelected = async (message: string) => {
-    console.log("onCarouselObjectSelected: ", message);
-};
-```
-
-2. Init `NetmeraBroadcastReceiver` inside your `index.js` file.
-
-```
 import {
-    onCarouselObjectSelected,
-    onPushButtonClicked,
-    onPushDismiss,
-    onPushOpen,
-    onPushReceive,
-    onPushRegister
-} from "./NetmeraPushHeadlessTask";
+  onCarouselObjectSelected,
+  onPushButtonClicked,
+  onPushDismiss,
+  onPushOpen,
+  onPushReceive,
+  onPushRegister,
+} from './NetmeraPushHeadlessTask';
 
-Netmera.initBroadcastReceiver(
-    onPushRegister,
-    onPushReceive,
-    onPushOpen,
-    onPushDismiss,
-    onPushButtonClicked,
-    onCarouselObjectSelected
-)
+Netmera.setPushLifecycleCallbacks(
+  onPushRegister,
+  onPushReceive,
+  onPushOpen,
+  onPushDismiss,
+  onPushButtonClicked,
+  onCarouselObjectSelected
+);
 
-// This should be called after Netmera.initBroadcastReceiver method.
+// This should be called after Netmera.setPushLifecycleCallbacks.
 AppRegistry.registerComponent(appName, () => App);
 ```
 
@@ -334,7 +344,7 @@ HmsPushInstanceId.getToken("")
        Netmera.onNetmeraNewToken(result.result)
    })
 
-HmsPushEvent.onRemoteMessageReceived((event: any) => {
+HmsPushEvent.onRemoteMessageReceived((event) => {
   const remoteMessage = new RNRemoteMessage(event.msg);
   let data = JSON.parse(remoteMessage.getData());
   if (Netmera.isNetmeraRemoteMessage(data)) {
@@ -357,71 +367,85 @@ HmsPushMessaging.setBackgroundMessageHandler(async dataMessage => {
 });
 ```
 
-### Calling React Native methods
+## Calling React Native methods
 
-##### Update User Example
+##### Identify User Example
 
 ```
-const updateUser = () => {
+const identifyUser = () => {
     const user = new NetmeraUser();
     user.userId = <userId>;
-    user.name = <name>;
-    user.surname = <surname>;
+    user.email = <email>;
     user.msisdn = <msisdn>;
-    user.gender = <gender>;
+    user.wpNumber = <whatsappNumber>;
 
-    // User update sync
-    Netmera.updateUser(user)
-      .then(() => {
-        console.log('User updated successfully!');
-      })
-      .catch(error => {
-        console.log(error.code, error.message);
-      });
+    // Identify user with callback
+    Netmera.identifyUser(user, (success, error) => {
+      if (success) {
+        console.log("User identified successfully")
+      } else {
+        console.error(error?.message)
+      }
+    });
+
+    // Identify user without callback
+    Netmera.identifyUser(user);
 }
 ```
 
-```
-const updateUserAsync = () => {
-    const user = new NetmeraUser();
-    user.userId = <userId>;
-    user.name = <name>;
-    user.surname = <surname>;
-    user.msisdn = <msisdn>;
-    user.gender = <gender>;
+##### Update User Profile Example
 
-    // User update async
-    Netmera.updateUserAsync(user);
-}
+```
+const sendUserProfileUpdate = () => {
+  const userProfile = new NetmeraUserProfile();
+  userProfile.name.set('John');
+  userProfile.surname.set('Doe');
+  userProfile.dateOfBirth.set(new Date().getTime());
+  userProfile.gender.set(Gender.MALE);
+  userProfile.externalSegments.set(['segment1', 'segment2']);
+
+  // Update user profile with callback
+  Netmera.updateUserProfile(userProfile, (success, error) => {
+      if (success) {
+          ...
+        } else {
+          ...
+        }
+  });
+
+  // Update user profile without callback
+  Netmera.updateUserProfile(userProfile);
+};
 ```
 
 ##### Sending Event Examples
 
-You can send your events as follows. For more examples, please see the [example project](https://github.com/Netmera/Netmera-React-Native-Example/blob/master/src/Screens/Event.js).
+You can send your events as follows. For more examples, please see the [Events screen](src/screens/Events.tsx) in this example project.
 
 ```
   const sendLoginEvent = () => {
-    const loginEvent = new LoginEvent();
+    const loginEvent = new NetmeraEventLogin();
     loginEvent.setUserId(<userId>);
     Netmera.sendEvent(loginEvent)
   }
 
   const sendRegisterEvent = () => {
-    const registerEvent = new RegisterEvent();
+    const registerEvent = new NetmeraEventRegister();
+    registerEvent.setUserId(<userId>);
     Netmera.sendEvent(registerEvent)
   }
 
   const sendViewCartEvent = () => {
-    const viewCartEvent = new ViewCartEvent();
-    viewCartEvent.subTotal = <subTotal>;
-    viewCartEvent.itemCount = <itemCount>;
+    const viewCartEvent = new NetmeraEventCartView();
+    viewCartEvent.setSubTotal(<subTotal>);
+    viewCartEvent.setItemCount(<itemCount>);
     Netmera.sendEvent(viewCartEvent)
   }
 ```
 
 ##### Deeplink
 
-In order to manage your deeplinks, use the following method instead of `Linking.getInitialURL`
+In order to manage your deeplinks, use the following method for iOS initial url's
 
 ```
 Netmera.getInitialURL().then(url => {
@@ -431,7 +455,7 @@ Netmera.getInitialURL().then(url => {
  });
 ```
 
-You can use other `Linking` methods as before
+You can use `Linking` methods as before
 
 ##### Widget URL Callback
 
@@ -450,7 +474,10 @@ Note: Notification runtime permissions are required on Android 13 (API 33) or hi
 Therefore, before calling the method, make sure your project targets an API of 33 and above.
 
 ```
- Netmera.requestPushNotificationAuthorization();
+  Netmera.requestPushNotificationAuthorization()
+  .then((isGranted) => {
+    ...
+  });
 ```
 
 You can call the `checkNotificationPermission()` method if you need to know the status of permissions.
@@ -466,7 +493,7 @@ You can call the `checkNotificationPermission()` method if you need to know the 
 
 ##### Netmera Inbox Examples
 
-You can fetch the Netmera inbox as following. For more detailed usage, please see the [example project](https://github.com/Netmera/Netmera-React-Native-Example/blob/master/src/Screens/PushInbox.js).
+You can fetch the Netmera inbox as following. For more detailed usage, please see the [PushInbox screen](src/screens/PushInbox.tsx) in this example project.
 
 ```
  const fetchInbox = async () => {
@@ -484,7 +511,7 @@ You can fetch the Netmera inbox as following. For more detailed usage, please se
 
 ##### Netmera Inbox Category Examples
 
-You can fetch the Netmera category as following. For more detailed usage, please see the [example project](https://github.com/Netmera/Netmera-React-Native-Example/blob/master/src/Screens/Category.js).
+You can fetch the Netmera category as following. For more detailed usage, please see the [Category screen](src/screens/Category.tsx) in this example project.
 
 ```
  const fetchCategory = async () => {
@@ -538,4 +565,4 @@ startDataTransfer() method, the SDK will attempt to resend any requests that wer
  Netmera.startDataTransfer();
 ```
 
-Please explore example project for detailed information.
+Please explore the [source code](src/) of this example project for detailed information.
