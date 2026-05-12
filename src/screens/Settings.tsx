@@ -42,7 +42,7 @@ const Settings = () => {
 
   useEffect(() => {
     setTimeout(() => {
-      setPushTokenString(pushToken);
+      setPushTokenString(pushToken ?? "");
     }, 1000);
   }, []);
 

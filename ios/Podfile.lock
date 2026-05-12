@@ -69,29 +69,29 @@ PODS:
     - nanopb/encode (= 2.30910.0)
   - nanopb/decode (2.30910.0)
   - nanopb/encode (2.30910.0)
-  - NetmeraAdvertisingId (4.18.0):
-    - NetmeraAnalytic (= 4.18.0)
-  - NetmeraAnalytic (4.18.0):
-    - NetmeraSwiftCore (= 4.18.0)
-  - NetmeraAnalyticAutotracking (4.18.0):
-    - NetmeraAnalytic (= 4.18.0)
-  - NetmeraGeofence (4.18.0):
-    - NetmeraLocation (= 4.18.0)
-  - NetmeraLiveActivity (4.18.0):
-    - NetmeraSwiftCore (= 4.18.0)
-  - NetmeraLocation (4.18.0):
-    - NetmeraAnalytic (= 4.18.0)
-  - NetmeraNotification (4.18.0):
-    - NetmeraNotificationCore (= 4.18.0)
-  - NetmeraNotificationContentExtension (4.18.0):
-    - NetmeraNotificationCore (= 4.18.0)
-  - NetmeraNotificationCore (4.18.0):
-    - NetmeraAnalytic (= 4.18.0)
-  - NetmeraNotificationInbox (4.18.0):
-    - NetmeraNotificationCore (= 4.18.0)
-  - NetmeraNotificationServiceExtension (4.18.0):
-    - NetmeraNotificationCore (= 4.18.0)
-  - NetmeraSwiftCore (4.18.0):
+  - NetmeraAdvertisingId (4.19.0):
+    - NetmeraAnalytic (= 4.19.0)
+  - NetmeraAnalytic (4.19.0):
+    - NetmeraSwiftCore (= 4.19.0)
+  - NetmeraAnalyticAutotracking (4.19.0):
+    - NetmeraAnalytic (= 4.19.0)
+  - NetmeraGeofence (4.19.0):
+    - NetmeraLocation (= 4.19.0)
+  - NetmeraLiveActivity (4.19.0):
+    - NetmeraSwiftCore (= 4.19.0)
+  - NetmeraLocation (4.19.0):
+    - NetmeraAnalytic (= 4.19.0)
+  - NetmeraNotification (4.19.0):
+    - NetmeraNotificationCore (= 4.19.0)
+  - NetmeraNotificationContentExtension (4.19.0):
+    - NetmeraNotificationCore (= 4.19.0)
+  - NetmeraNotificationCore (4.19.0):
+    - NetmeraAnalytic (= 4.19.0)
+  - NetmeraNotificationInbox (4.19.0):
+    - NetmeraNotificationCore (= 4.19.0)
+  - NetmeraNotificationServiceExtension (4.19.0):
+    - NetmeraNotificationCore (= 4.19.0)
+  - NetmeraSwiftCore (4.19.0):
     - Swinject (= 2.8.4)
   - PromisesObjC (2.4.0)
   - RCT-Folly (2024.11.18.00):
@@ -1724,18 +1724,18 @@ PODS:
     - FirebaseCoreExtension
     - React-Core
     - RNFBApp
-  - RNNetmera (2.0.0-beta02):
+  - RNNetmera (2.0.0-beta03):
     - DoubleConversion
     - glog
     - hermes-engine
-    - NetmeraAdvertisingId (= 4.18.0)
-    - NetmeraAnalytic (= 4.18.0)
-    - NetmeraAnalyticAutotracking (= 4.18.0)
-    - NetmeraGeofence (= 4.18.0)
-    - NetmeraLiveActivity (= 4.18.0)
-    - NetmeraLocation (= 4.18.0)
-    - NetmeraNotification (= 4.18.0)
-    - NetmeraNotificationInbox (= 4.18.0)
+    - NetmeraAdvertisingId (= 4.19.0)
+    - NetmeraAnalytic (= 4.19.0)
+    - NetmeraAnalyticAutotracking (= 4.19.0)
+    - NetmeraGeofence (= 4.19.0)
+    - NetmeraLiveActivity (= 4.19.0)
+    - NetmeraLocation (= 4.19.0)
+    - NetmeraNotification (= 4.19.0)
+    - NetmeraNotificationInbox (= 4.19.0)
     - RCT-Folly (= 2024.11.18.00)
     - RCTRequired
     - RCTTypeSafety
@@ -1810,8 +1810,8 @@ DEPENDENCIES:
   - fmt (from `../node_modules/react-native/third-party-podspecs/fmt.podspec`)
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
   - hermes-engine (from `../node_modules/react-native/sdks/hermes-engine/hermes-engine.podspec`)
-  - NetmeraNotificationContentExtension (= 4.18.0)
-  - NetmeraNotificationServiceExtension (= 4.18.0)
+  - NetmeraNotificationContentExtension (= 4.19.0)
+  - NetmeraNotificationServiceExtension (= 4.19.0)
   - RCT-Folly (from `../node_modules/react-native/third-party-podspecs/RCT-Folly.podspec`)
   - RCT-Folly/Fabric (from `../node_modules/react-native/third-party-podspecs/RCT-Folly.podspec`)
   - RCTDeprecation (from `../node_modules/react-native/ReactApple/Libraries/RCTFoundation/RCTDeprecation`)
@@ -2080,18 +2080,18 @@ SPEC CHECKSUMS:
   GoogleUtilities: ea963c370a38a8069cc5f7ba4ca849a60b6d7d15
   hermes-engine: ccc24d29d650ea725d582a9a53d57cd417fbdb53
   nanopb: 438bc412db1928dac798aa6fd75726007be04262
-  NetmeraAdvertisingId: 25013cfe50664fa6f088514e3231c945ec4ff036
-  NetmeraAnalytic: e65b6977ccab1910b0bb7240b5d1ebd16f8ee247
-  NetmeraAnalyticAutotracking: 87fae891837ecb7a83fa9fca4fa0725c19992805
-  NetmeraGeofence: c126d35de65a81fb20c7bee5d733323b557fea26
-  NetmeraLiveActivity: aed5a874e253f582ca46b9c064c40d5f539bbaff
-  NetmeraLocation: 439b680fab297362761428b48a0984ecda798958
-  NetmeraNotification: cf0d49673ce1717fb5078f3e4572045584ca34f5
-  NetmeraNotificationContentExtension: abc56d3c5de1a3e4b427f235f744c45a031d36eb
-  NetmeraNotificationCore: 27eafe468e0afe5c899696d5b17688b5ccc2c1e3
-  NetmeraNotificationInbox: 8c47bf131602c882c574ca0e7f97a6a93e2b925c
-  NetmeraNotificationServiceExtension: e0549a4d98fd12b92d43818ad765c8218e9cabaa
-  NetmeraSwiftCore: 5c866ea570273117bbcef486e60ce78fe690261d
+  NetmeraAdvertisingId: 6613fdac6c33cabc8d2848c6a0525fcdc4612d55
+  NetmeraAnalytic: 37f00effa7f28296bd85a851bdb011764be4fdca
+  NetmeraAnalyticAutotracking: dc3d7c5defaa8f0e81b9268e32b3017d3315419f
+  NetmeraGeofence: 73c1190573d4906bd8c179d2d9c03ef6d2e81168
+  NetmeraLiveActivity: d43b5dab020e96c1c37b878692c56ad31a0ec0da
+  NetmeraLocation: 5c8f3c7db098e8a8987fa4e3e4f036a5842b080a
+  NetmeraNotification: 8455d3922b006789973419a2c0807e23cd40f2f7
+  NetmeraNotificationContentExtension: 7f1ecd8a93ee9d7cf85e82c29eac96288cd97f81
+  NetmeraNotificationCore: 8a5bd0b28469b095d235263eb25587797fcaf6c0
+  NetmeraNotificationInbox: 0c293dd88271479409bb95687501a114aa737830
+  NetmeraNotificationServiceExtension: aa1f24bb058aeb4cb871ea3ccb4076fad07a0283
+  NetmeraSwiftCore: 7a9ccdc03194b5dfab960a43fc341b3327ffb865
   PromisesObjC: f5707f49cb48b9636751c5b2e7d227e43fba9f47
   RCT-Folly: e78785aa9ba2ed998ea4151e314036f6c49e6d82
   RCTDeprecation: 664055db806cce35c3c1b43c84414dd66e117ae6
@@ -2158,12 +2158,12 @@ SPEC CHECKSUMS:
   RNDeviceInfo: bcce8752b5043a623fe3c26789679b473f705d3c
   RNFBApp: 4e6da65e29a144d20bcb5bf264fc8e2055831bab
   RNFBMessaging: fb5a9b0a3043d5d3e6e9fe7b27b78fcc3a0f753f
-  RNNetmera: 071beccc1f390c40276d8aa2aa7bece145fccc37
+  RNNetmera: 030fe0e03f2c887fe904c7ab6e70f73e9ab45de9
   RNScreens: 2174e7c45b28303afca1552fcc35e4a6918b0099
   SocketRocket: d4aabe649be1e368d1318fdf28a022d714d65748
   Swinject: 6ba81f58fd769c9fd4b8ceced9e25a9cb137cb3c
   Yoga: 28b8cda182ee3092ff80203da66dcb3ffc8cf401
 
-PODFILE CHECKSUM: 62a46642da8652392492404b36dbb4f8b0ae19cc
+PODFILE CHECKSUM: 19aea91c44feb9769070a4b9b7fbb7147d1bd115
 
 COCOAPODS: 1.16.2

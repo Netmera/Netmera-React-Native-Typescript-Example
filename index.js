@@ -18,7 +18,7 @@ import messaging from '@react-native-firebase/messaging';
 import {HmsPushMessaging, RNRemoteMessage} from '@hmscore/react-native-hms-push';
 import DeviceInfo from 'react-native-device-info';
 
-Netmera.initBroadcastReceiver(
+Netmera.setPushLifecycleCallbacks(
   onPushRegister,
   onPushReceive,
   onPushOpen,
