@@ -297,6 +297,14 @@ const Events = () => {
     Netmera.sendEvent(contentViewEvent);
   };
 
+  const sendGenericEvent = () => {
+    Netmera.sendGenericEvent('fnwha', {
+      productId: '123',
+      amount: 99.99,
+      timestamp: new Date(),
+    });
+  };
+
   const buttons = [
     {
       name: 'LOGIN EVENT',
@@ -385,6 +393,10 @@ const Events = () => {
     {
       name: 'CONTENT VIEW EVENT',
       method: sendContentViewEvent,
+    },
+    {
+      name: 'GENERIC EVENT',
+      method: sendGenericEvent,
     },
   ];
 

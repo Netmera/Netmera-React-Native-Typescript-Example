@@ -13,8 +13,8 @@ import {Netmera, NetmeraCouponObject} from 'react-native-netmera';
 import Toast from 'react-native-toast-message';
 
 const Coupons = () => {
-  const [page, setPage] = useState<string>('');
-  const [max, setMax] = useState<string>('');
+  const [page, setPage] = useState<string>('0');
+  const [max, setMax] = useState<string>('10');
   const [coupons, setCoupons] = useState<NetmeraCouponObject[]>([]);
 
   const onFetchCouponsPress = () => {
@@ -38,6 +38,7 @@ const Coupons = () => {
     <SafeAreaView>
       <View style={styles.content}>
         <View style={styles.inputArea}>
+          <Text style={styles.inputLabel}>Page</Text>
           <TextInput
             value={page}
             onChangeText={setPage}
@@ -48,6 +49,7 @@ const Coupons = () => {
           <View style={styles.divider} />
         </View>
         <View style={styles.inputArea}>
+          <Text style={styles.inputLabel}>Max</Text>
           <TextInput
             value={max}
             onChangeText={setMax}
@@ -126,6 +128,13 @@ const styles = StyleSheet.create({
   inputArea: {
     marginTop: 20,
     paddingHorizontal: 20,
+  },
+
+  inputLabel: {
+    fontWeight: '600',
+    fontSize: 13,
+    color: Colors.black,
+    opacity: 0.7,
   },
 
   placeholder: {

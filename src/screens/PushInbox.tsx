@@ -16,14 +16,14 @@ import Colors from '../Colors';
 import {
   Netmera,
   NetmeraInboxFilter,
-  NetmeraPushInbox,
+  NetmeraPushObject,
   NMInboxStatus,
   NMInboxStatusCountFilter,
 } from 'react-native-netmera';
 import SelectDropdown from 'react-native-select-dropdown';
 
 const PushInbox = () => {
-  const [inbox, setInbox] = useState<NetmeraPushInbox[]>([]);
+  const [inbox, setInbox] = useState<NetmeraPushObject[]>([]);
   const [inboxState, setInboxState] = useState(NMInboxStatus.STATUS_ALL);
   const [statusCount, setStatusCount] = useState('0');
   const [categoryList, setCategoryList] = useState('');
@@ -86,17 +86,16 @@ const PushInbox = () => {
   // Handles interactive action of first push object.
   const handleInteractiveAction = async () => {
     if (inbox !== undefined && inbox.length > 0) {
-      for (let i = 0; i < inbox.length; i++) {
-        const element = inbox[i];
+      inbox.map((pushObject: NetmeraPushObject) => {
         if (
-          element.interactiveActions &&
-          element.interactiveActions.length > 0
+          pushObject.interactiveActions &&
+          pushObject.interactiveActions.length > 0
         ) {
-          const action = JSON.parse(element.interactiveActions[0].toString());
+          const action = pushObject.interactiveActions[0];
+          if (!action?.id) return;
           Netmera.handleInteractiveAction(action.id);
-          return;
         }
-      }
+      });
     }
   };
 
@@ -193,7 +192,7 @@ const PushInbox = () => {
     }
   };
 
-  const getInboxItem = (item: NetmeraPushInbox, index: number) => {
+  const getInboxItem = (item: NetmeraPushObject, index: number) => {
     return (
       <View style={{paddingHorizontal: 10, width: '100%'}}>
         <Text>Title: {item.title === undefined ? 'null' : item.title}</Text>

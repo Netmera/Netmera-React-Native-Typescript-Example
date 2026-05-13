@@ -43,12 +43,6 @@ const Category = () => {
     }
   };
 
-  const handlePushObject = async () => {
-    if (categories !== undefined && categories.length > 0) {
-      Netmera.handleLastMessage(categories[0].categoryName);
-    }
-  };
-
   const updateStatusCategories = async () => {
     if (categoryState === NMInboxStatus.STATUS_ALL) {
       Alert.alert('Error', 'Please select different status than all!!');
@@ -237,11 +231,6 @@ const Category = () => {
       </View>
       <View style={styles.row}>
         <View style={styles.rowItem}>
-          <TouchableHighlight
-            style={[styles.button, styles.inboxButton]}
-            onPress={() => handlePushObject()}>
-            <Text style={styles.buttonText}>Handle Last Message</Text>
-          </TouchableHighlight>
         </View>
         <View style={styles.rowItem}>
           <TouchableHighlight

@@ -6,8 +6,8 @@
  * @flow strict-local
  */
 
-import React, {useEffect, useState} from 'react';
-import {Linking, StatusBar, Text, TouchableOpacity, View} from 'react-native';
+import React, {useEffect} from 'react';
+import {Linking, StatusBar, Text, View} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {
   createNativeStackNavigator,
@@ -18,10 +18,13 @@ import Coupons from './src/screens/Coupons';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import Events from './src/screens/Events';
 import Toast from 'react-native-toast-message';
+import PushEventModal from './src/components/PushEventModal';
 import Category from './src/screens/Category';
 import User from './src/screens/User';
 import PushInbox from './src/screens/PushInbox';
-import SetPropertiesModal from './src/SetPropertiesModal';
+import Settings from './src/screens/Settings';
+import Profile from './src/screens/Profile';
+import Permissions from './src/screens/Permissions';
 import {Netmera} from 'react-native-netmera';
 import {isAndroid, isIos} from './src/helpers/DeviceUtils';
 import messaging from '@react-native-firebase/messaging';
@@ -31,10 +34,9 @@ import DeviceInfo from 'react-native-device-info';
 const Stack = createNativeStackNavigator();
 
 const App = () => {
-  const [modalVisibility, setModalVisibility] = useState<boolean>(false);
-
   useEffect(() => {
     Netmera.getInitialURL().then(url => {
+      console.log('Netmera initial url: ', url);
       if (url) {
         Toast.show({
           type: 'success',
@@ -44,6 +46,7 @@ const App = () => {
     });
 
     Linking.getInitialURL().then(url => {
+      console.log('Linking initial url: ', url);
       if (url) {
         Toast.show({
           type: 'success',
@@ -53,6 +56,7 @@ const App = () => {
     });
 
     Linking.addEventListener('url', event => {
+      console.log('Linking foreground url: ', event.url);
       Toast.show({
         type: 'success',
         text1: `Foreground url: ${event.url}`,
@@ -125,14 +129,9 @@ const App = () => {
     headerTitle: () => (
       <View style={{justifyContent: 'flex-start', flex: 1}}>
         <Text style={{fontWeight: '500', fontSize: 18, color: Colors.white}}>
-          {'ReactTSExample'}
+          {'Netmera React Native Demo'}
         </Text>
       </View>
-    ),
-    headerRight: () => (
-      <TouchableOpacity onPress={() => setModalVisibility(true)}>
-        <Text style={{color: Colors.white}}>SET PROPERTIES</Text>
-      </TouchableOpacity>
     ),
   };
 
@@ -150,12 +149,12 @@ const App = () => {
         <Stack.Screen name={'Events'} component={Events} />
         <Stack.Screen name={'PushInbox'} component={PushInbox} />
         <Stack.Screen name={'User'} component={User} />
+        <Stack.Screen name={'Profile'} component={Profile} />
+        <Stack.Screen name={'Settings'} component={Settings} />
+        <Stack.Screen name={'Permissions'} component={Permissions} />
       </Stack.Navigator>
+      <PushEventModal />
       <Toast />
-      <SetPropertiesModal
-        modalVisibility={modalVisibility}
-        onPressCancel={() => setModalVisibility(false)}
-      />
     </NavigationContainer>
   );
 };

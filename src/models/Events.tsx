@@ -5,7 +5,7 @@
 import { NetmeraEvent, NetmeraEventPurchase } from 'react-native-netmera';
 
 class CustomPurchaseEvent extends NetmeraEventPurchase {
-  code = 'cjpnl';
+  code = 'mxw';
 
   private ea: string | undefined;
 
@@ -17,7 +17,7 @@ class CustomPurchaseEvent extends NetmeraEventPurchase {
 
 // Custom Event
 class TestEvent extends NetmeraEvent {
-  code = 'qlhov';
+  code = "ral"
 
   private ea: string | undefined;
 
