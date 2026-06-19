@@ -4,7 +4,6 @@
 
 import React, {useState} from 'react';
 import {
-  SafeAreaView,
   ScrollView,
   StyleSheet,
   Switch,
@@ -143,7 +142,7 @@ const Profile = () => {
   );
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.content}>
         <Text style={styles.sectionLabel}>Name</Text>
         <TextInput
@@ -226,7 +225,7 @@ const Profile = () => {
           <Text style={styles.buttonText}>UPDATE PROFILE ATTRIBUTES (No Callback)</Text>
         </TouchableOpacity>
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 };
 

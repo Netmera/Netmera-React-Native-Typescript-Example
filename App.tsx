@@ -8,6 +8,7 @@
 
 import React, {useEffect} from 'react';
 import {Linking, StatusBar, Text, View} from 'react-native';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {NavigationContainer} from '@react-navigation/native';
 import {
   createNativeStackNavigator,
@@ -15,7 +16,7 @@ import {
 } from '@react-navigation/native-stack';
 import Dashboard from './src/screens/Dashboard';
 import Coupons from './src/screens/Coupons';
-import {Colors} from 'react-native/Libraries/NewAppScreen';
+import Colors from './src/Colors';
 import Events from './src/screens/Events';
 import Toast from 'react-native-toast-message';
 import PushEventModal from './src/components/PushEventModal';
@@ -27,7 +28,8 @@ import Profile from './src/screens/Profile';
 import Permissions from './src/screens/Permissions';
 import {Netmera} from 'react-native-netmera';
 import {isAndroid, isIos} from './src/helpers/DeviceUtils';
-import messaging from '@react-native-firebase/messaging';
+import { getApp } from '@react-native-firebase/app';
+import { getMessaging, getToken, onMessage } from '@react-native-firebase/messaging';
 import {HmsPushEvent, HmsPushInstanceId, RNRemoteMessage} from '@hmscore/react-native-hms-push';
 import DeviceInfo from 'react-native-device-info';
 
@@ -72,14 +74,13 @@ const App = () => {
     });
 
     //FCM methods
-    messaging()
-      .getToken()
-      .then((pushToken: string) => {
-        console.log('pushToken: ' + pushToken);
-        Netmera.onNetmeraNewToken(pushToken);
-      });
+    const fcmMessaging = getMessaging(getApp());
+    getToken(fcmMessaging).then((pushToken: string) => {
+      console.log('pushToken: ' + pushToken);
+      Netmera.onNetmeraNewToken(pushToken);
+    });
 
-    messaging().onMessage(async remoteMessage => {
+    onMessage(fcmMessaging, async remoteMessage => {
       console.log(JSON.stringify(remoteMessage));
       if (
         Netmera.isNetmeraRemoteMessage(
@@ -136,26 +137,28 @@ const App = () => {
   };
 
   return (
-    <NavigationContainer>
-      <StatusBar barStyle={isIos() ? 'dark-content' : 'light-content'} />
-      <Stack.Navigator initialRouteName={'Dashboard'}>
-        <Stack.Screen name={'Category'} component={Category} />
-        <Stack.Screen name={'Coupons'} component={Coupons} />
-        <Stack.Screen
-          name={'Dashboard'}
-          options={headerOptions}
-          component={Dashboard}
-        />
-        <Stack.Screen name={'Events'} component={Events} />
-        <Stack.Screen name={'PushInbox'} component={PushInbox} />
-        <Stack.Screen name={'User'} component={User} />
-        <Stack.Screen name={'Profile'} component={Profile} />
-        <Stack.Screen name={'Settings'} component={Settings} />
-        <Stack.Screen name={'Permissions'} component={Permissions} />
-      </Stack.Navigator>
-      <PushEventModal />
-      <Toast />
-    </NavigationContainer>
+    <SafeAreaProvider>
+      <NavigationContainer>
+        <StatusBar barStyle={isIos() ? 'dark-content' : 'light-content'} />
+        <Stack.Navigator initialRouteName={'Dashboard'}>
+          <Stack.Screen name={'Category'} component={Category} />
+          <Stack.Screen name={'Coupons'} component={Coupons} />
+          <Stack.Screen
+            name={'Dashboard'}
+            options={headerOptions}
+            component={Dashboard}
+          />
+          <Stack.Screen name={'Events'} component={Events} />
+          <Stack.Screen name={'PushInbox'} component={PushInbox} />
+          <Stack.Screen name={'User'} component={User} />
+          <Stack.Screen name={'Profile'} component={Profile} />
+          <Stack.Screen name={'Settings'} component={Settings} />
+          <Stack.Screen name={'Permissions'} component={Permissions} />
+        </Stack.Navigator>
+        <PushEventModal />
+        <Toast />
+      </NavigationContainer>
+    </SafeAreaProvider>
   );
 };
 

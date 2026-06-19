@@ -4,7 +4,6 @@
 
 import React, {useState} from 'react';
 import {
-  SafeAreaView,
   ScrollView,
   Text,
   TextInput,
@@ -84,7 +83,7 @@ const User = () => {
     'Leave empty: not set; type "null": sets null';
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <ScrollView
         scrollEnabled
         bounces={false}
@@ -173,7 +172,7 @@ const User = () => {
           </TouchableOpacity>
         </View>
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 };
 

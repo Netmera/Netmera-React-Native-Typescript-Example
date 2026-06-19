@@ -3,7 +3,7 @@
  */
 
 import React from 'react';
-import {SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity} from 'react-native';
+import {ScrollView, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import Colors from '../Colors';
 
 const Dashboard = ({navigation}: any) => {
@@ -19,7 +19,7 @@ const Dashboard = ({navigation}: any) => {
   ];
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.content}>
         {buttons.map((item, index) => (
           <TouchableOpacity
@@ -31,7 +31,7 @@ const Dashboard = ({navigation}: any) => {
           </TouchableOpacity>
         ))}
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 };
 

@@ -5,7 +5,6 @@
 import React, {useEffect, useState} from 'react';
 import {
   ActivityIndicator,
-  SafeAreaView,
   StyleSheet,
   Switch,
   Text,
@@ -75,14 +74,14 @@ const Permissions = () => {
 
   if (loading) {
     return (
-      <SafeAreaView style={styles.loadingContainer}>
+      <View style={styles.loadingContainer}>
         <ActivityIndicator size="large" color={Colors.primary} />
-      </SafeAreaView>
+      </View>
     );
   }
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <View style={styles.item}>
         <Text style={styles.label}>Email Permission</Text>
         <Switch
@@ -106,7 +105,7 @@ const Permissions = () => {
           onValueChange={handleWhatsAppPermission}
         />
       </View>
-    </SafeAreaView>
+    </View>
   );
 };
 
