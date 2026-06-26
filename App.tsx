@@ -8,6 +8,7 @@
 
 import React, {useEffect} from 'react';
 import {Linking, StatusBar, Text, View} from 'react-native';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {NavigationContainer} from '@react-navigation/native';
 import {
@@ -26,7 +27,11 @@ import PushInbox from './src/screens/PushInbox';
 import Settings from './src/screens/Settings';
 import Profile from './src/screens/Profile';
 import Permissions from './src/screens/Permissions';
-import {Netmera} from 'react-native-netmera';
+import AutoTracking from './src/screens/AutoTracking';
+import AutoTrackTest from './src/screens/AutoTrackTest';
+import AutoTrackFlatListTest from './src/screens/AutoTrackFlatListTest';
+import StackNavTest from './src/screens/StackNavTest';
+import {Netmera, NetmeraAnalyticProvider} from 'react-native-netmera';
 import {isAndroid, isIos} from './src/helpers/DeviceUtils';
 import { getApp } from '@react-native-firebase/app';
 import { getMessaging, getToken, onMessage } from '@react-native-firebase/messaging';
@@ -137,28 +142,40 @@ const App = () => {
   };
 
   return (
-    <SafeAreaProvider>
-      <NavigationContainer>
-        <StatusBar barStyle={isIos() ? 'dark-content' : 'light-content'} />
-        <Stack.Navigator initialRouteName={'Dashboard'}>
-          <Stack.Screen name={'Category'} component={Category} />
-          <Stack.Screen name={'Coupons'} component={Coupons} />
-          <Stack.Screen
-            name={'Dashboard'}
-            options={headerOptions}
-            component={Dashboard}
-          />
-          <Stack.Screen name={'Events'} component={Events} />
-          <Stack.Screen name={'PushInbox'} component={PushInbox} />
-          <Stack.Screen name={'User'} component={User} />
-          <Stack.Screen name={'Profile'} component={Profile} />
-          <Stack.Screen name={'Settings'} component={Settings} />
-          <Stack.Screen name={'Permissions'} component={Permissions} />
-        </Stack.Navigator>
-        <PushEventModal />
-        <Toast />
-      </NavigationContainer>
-    </SafeAreaProvider>
+    <GestureHandlerRootView style={{flex: 1}}>
+      <SafeAreaProvider>
+        <NetmeraAnalyticProvider>
+          <NavigationContainer>
+            <StatusBar barStyle={isIos() ? 'dark-content' : 'light-content'} />
+            <Stack.Navigator initialRouteName={'Dashboard'}>
+              <Stack.Screen name={'Category'} component={Category} />
+              <Stack.Screen name={'Coupons'} component={Coupons} />
+              <Stack.Screen
+                name={'Dashboard'}
+                options={headerOptions}
+                component={Dashboard}
+              />
+              <Stack.Screen name={'Events'} component={Events} />
+              <Stack.Screen name={'PushInbox'} component={PushInbox} />
+              <Stack.Screen name={'User'} component={User} />
+              <Stack.Screen name={'Profile'} component={Profile} />
+              <Stack.Screen name={'Settings'} component={Settings} />
+              <Stack.Screen name={'Permissions'} component={Permissions} />
+              <Stack.Screen name={'Autotracking'} component={AutoTracking} />
+              <Stack.Screen name={'AutoTrackTest'} component={AutoTrackTest} />
+              <Stack.Screen name={'AutoTrackFlatListTest'} component={AutoTrackFlatListTest} />
+              <Stack.Screen
+                name={'StackNavTest'}
+                component={StackNavTest}
+                options={{headerShown: false}}
+              />
+            </Stack.Navigator>
+            <PushEventModal />
+            <Toast />
+          </NavigationContainer>
+        </NetmeraAnalyticProvider>
+      </SafeAreaProvider>
+    </GestureHandlerRootView>
   );
 };
 

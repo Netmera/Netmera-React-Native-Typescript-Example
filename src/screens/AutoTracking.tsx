@@ -1,22 +1,12 @@
-/*
- * Copyright (c) 2026 Netmera Research.
- */
-
 import React from 'react';
 import {ScrollView, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import Colors from '../Colors';
 
-const Dashboard = ({navigation}: any) => {
+const AutoTracking = ({navigation}: any) => {
   const buttons = [
-    {name: 'USER', route: 'User'},
-    {name: 'PROFILE', route: 'Profile'},
-    {name: 'EVENT', route: 'Events'},
-    {name: 'SETTINGS', route: 'Settings'},
-    {name: 'PUSH INBOX', route: 'PushInbox'},
-    {name: 'CATEGORY', route: 'Category'},
-    {name: 'PERMISSIONS', route: 'Permissions'},
-    {name: 'COUPONS', route: 'Coupons'},
-    {name: 'AUTOTRACKING', route: 'Autotracking'},
+    {name: 'AUTOTRACK TEST', route: 'AutoTrackTest'},
+    {name: 'AUTOTRACK FLATLIST', route: 'AutoTrackFlatListTest'},
+    {name: 'STACK NAV TEST', route: 'StackNavTest'},
   ];
 
   return (
@@ -59,4 +49,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Dashboard;
+export default AutoTracking;
