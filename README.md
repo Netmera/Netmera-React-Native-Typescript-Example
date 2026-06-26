@@ -191,8 +191,8 @@ RNNetmera.initNetmera()
 
    ```
    // For receiving Media Push, you must add Netmera pods to top of your Podfile.
-   pod 'NetmeraNotificationServiceExtension', "4.19.0"
-   pod "NetmeraNotificationContentExtension", "4.19.0"
+   pod 'NetmeraNotificationServiceExtension', "4.23.0"
+   pod "NetmeraNotificationContentExtension", "4.23.0"
    ```
 
 7. In order to use the widget URL callback, add these lines into `AppDelegate.swift` file.
@@ -566,3 +566,88 @@ startDataTransfer() method, the SDK will attempt to resend any requests that wer
 ```
 
 Please explore the [source code](src/) of this example project for detailed information.
+
+## Autotracking
+
+Netmera Autotracking automatically captures screen transitions via **React Navigation** and tap interactions on **official React Native components** (`Pressable`, `TouchableOpacity`, `Switch`, etc.) without requiring manual instrumentation for each event.
+
+### NetmeraAnalyticProvider
+
+Wrap your `NavigationContainer` (or your root component) with `NetmeraAnalyticProvider`. The provider handles both screen tracking and tap tracking based on the configuration received from the Netmera dashboard.
+
+```tsx
+export default function App() {
+  return (
+    <NetmeraAnalyticProvider>
+      <NavigationContainer>
+        {/* your navigators */}
+      </NavigationContainer>
+    </NetmeraAnalyticProvider>
+  );
+}
+```
+
+### React Navigation v6 and below
+
+On **React Navigation v7+** the provider locates the navigation container automatically via the React fiber tree (no extra configuration needed).
+
+On **React Navigation v6 and below** the fiber-based detection is not available. Pass an explicit `navigationRef` prop so the provider can subscribe to screen changes:
+
+```tsx
+import { useNavigationContainerRef, NavigationContainer } from '@react-navigation/native';
+import { NetmeraAnalyticProvider } from 'react-native-netmera';
+
+export default function App() {
+  const navigationRef = useNavigationContainerRef();
+
+  return (
+    <NetmeraAnalyticProvider navigationRef={navigationRef}>
+      <NavigationContainer ref={navigationRef}>
+        {/* your navigators */}
+      </NavigationContainer>
+    </NetmeraAnalyticProvider>
+  );
+}
+```
+
+### Manual action tracking with `Netmera.trackAction`
+
+For components that do not fire standard `onPress` or `onValueChange` events (e.g. third-party dropdowns, custom pickers, gesture-only views), call `Netmera.trackAction` to record the interaction manually.
+
+The method automatically prepends the current screen name to the provided path:
+
+```ts
+import { Netmera } from 'react-native-netmera';
+
+Netmera.trackAction('category-selector|Electronics');
+// → records: "HomeScreen|category-selector|Electronics"
+```
+
+Use the `|` separator to build structured paths (e.g. `component|value`, `list|item-name`).
+
+### Improving tap tracking with `accessibilityLabel` and `testID`
+
+When a tap is detected, Netmera resolves an identifier for the tapped component using the following priority order:
+
+1. **`accessibilityLabel`** — the preferred identifier; human-readable and stable.
+2. **`testID`** — used when `accessibilityLabel` is absent.
+3. **`placeholder`** — for `TextInput` components with no label or testID.
+4. **Child text content** — the text of the first `<Text>` descendant, trimmed to 50 characters.
+
+If none of the above resolves to a non-empty string the tap is not recorded.
+
+Add `accessibilityLabel` to interactive components that would otherwise produce no identifier (icon buttons, image buttons, custom gesture views):
+
+```tsx
+// Icon button — without accessibilityLabel it would produce no identifier
+<Pressable
+  accessibilityLabel="add-to-cart"
+  onPress={handleAddToCart}
+>
+  <CartIcon />
+</Pressable>
+```
+
+> **Recommendation:** Prefer `accessibilityLabel` over relying on child text content. Text content can change with copy updates or localisation, causing tracking paths to shift. An explicit label stays stable across UI changes.
+
+For hands-on examples of autotracking integration, see the [Autotracking screens](src/screens/) in this project (`AutoTrackTest.tsx`, `AutoTrackFlatListTest.tsx`, `StackNavTest.tsx`).
