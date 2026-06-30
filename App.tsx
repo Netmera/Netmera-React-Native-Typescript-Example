@@ -73,6 +73,8 @@ const RootStack = createNativeStackNavigator({
 const Navigation = createStaticNavigation(RootStack);
 
 const App = () => {
+  const navRef = useNavigationContainerRef();
+
   useEffect(() => {
     Netmera.getInitialURL().then(url => {
       console.log('Netmera initial url: ', url);
@@ -163,10 +165,12 @@ const App = () => {
   return (
     <GestureHandlerRootView style={{flex: 1}}>
       <SafeAreaProvider>
-        <StatusBar barStyle={isIos() ? 'dark-content' : 'light-content'} />
-        <Navigation />
-        <PushEventModal />
-        <Toast />
+        <NetmeraAnalyticProvider navigationRef={navRef}>
+          <StatusBar barStyle={isIos() ? 'dark-content' : 'light-content'} />
+          <Navigation ref={navRef} />
+          <PushEventModal />
+          <Toast />
+        </NetmeraAnalyticProvider>
       </SafeAreaProvider>
     </GestureHandlerRootView>
   );

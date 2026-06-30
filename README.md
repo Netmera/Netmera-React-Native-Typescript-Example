@@ -573,25 +573,9 @@ Netmera Autotracking automatically captures screen transitions via **React Navig
 
 ### NetmeraAnalyticProvider
 
-Wrap your `NavigationContainer` (or your root component) with `NetmeraAnalyticProvider`. The provider handles both screen tracking and tap tracking based on the configuration received from the Netmera dashboard.
+Wrap your app with `NetmeraAnalyticProvider` and pass a `navigationRef` so the provider can subscribe to screen changes. The provider handles both screen tracking and tap tracking based on the configuration received from the Netmera dashboard.
 
-```tsx
-export default function App() {
-  return (
-    <NetmeraAnalyticProvider>
-      <NavigationContainer>
-        {/* your navigators */}
-      </NavigationContainer>
-    </NetmeraAnalyticProvider>
-  );
-}
-```
-
-### React Navigation v6 and below
-
-On **React Navigation v7+** the provider locates the navigation container automatically via the React fiber tree (no extra configuration needed).
-
-On **React Navigation v6 and below** the fiber-based detection is not available. Pass an explicit `navigationRef` prop so the provider can subscribe to screen changes:
+**Dynamic API** (React Navigation v6 / v7):
 
 ```tsx
 import { useNavigationContainerRef, NavigationContainer } from '@react-navigation/native';
@@ -609,6 +593,27 @@ export default function App() {
   );
 }
 ```
+
+**Static API** (React Navigation v7):
+
+```tsx
+import { useNavigationContainerRef, createStaticNavigation } from '@react-navigation/native';
+import { NetmeraAnalyticProvider } from 'react-native-netmera';
+
+const Navigation = createStaticNavigation(RootStack);
+
+export default function App() {
+  const navigationRef = useNavigationContainerRef();
+
+  return (
+    <NetmeraAnalyticProvider navigationRef={navigationRef}>
+      <Navigation ref={navigationRef} />
+    </NetmeraAnalyticProvider>
+  );
+}
+```
+
+> **Note:** Use a single `NetmeraAnalyticProvider` per application. The current screen name is stored in a module-level singleton — mounting multiple providers simultaneously will cause them to overwrite each other's screen state.
 
 ### Manual action tracking with `Netmera.trackAction`
 
@@ -632,7 +637,7 @@ When a tap is detected, Netmera resolves an identifier for the tapped component 
 1. **`accessibilityLabel`** — the preferred identifier; human-readable and stable.
 2. **`testID`** — used when `accessibilityLabel` is absent.
 3. **`placeholder`** — for `TextInput` components with no label or testID.
-4. **Child text content** — the text of the first `<Text>` descendant, trimmed to 50 characters.
+4. **Child text content** — the text of the first `<Text>` descendant.
 
 If none of the above resolves to a non-empty string the tap is not recorded.
 
