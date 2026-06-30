@@ -4,9 +4,11 @@
 
 import React from 'react';
 import {ScrollView, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
 import Colors from '../Colors';
 
-const Dashboard = ({navigation}: any) => {
+const Dashboard = () => {
+  const navigation = useNavigation<any>();
   const buttons = [
     {name: 'USER', route: 'User'},
     {name: 'PROFILE', route: 'Profile'},

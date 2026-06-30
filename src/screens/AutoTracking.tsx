@@ -1,8 +1,10 @@
 import React from 'react';
 import {ScrollView, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
 import Colors from '../Colors';
 
-const AutoTracking = ({navigation}: any) => {
+const AutoTracking = () => {
+  const navigation = useNavigation<any>();
   const buttons = [
     {name: 'AUTOTRACK TEST', route: 'AutoTrackTest'},
     {name: 'AUTOTRACK FLATLIST', route: 'AutoTrackFlatListTest'},

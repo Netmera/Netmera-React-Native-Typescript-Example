@@ -10,7 +10,7 @@ import React, {useEffect} from 'react';
 import {Linking, StatusBar, Text, View} from 'react-native';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
-import {NavigationContainer} from '@react-navigation/native';
+import {createStaticNavigation, useNavigationContainerRef} from '@react-navigation/native';
 import {
   createNativeStackNavigator,
   NativeStackNavigationOptions,
@@ -38,7 +38,39 @@ import { getMessaging, getToken, onMessage } from '@react-native-firebase/messag
 import {HmsPushEvent, HmsPushInstanceId, RNRemoteMessage} from '@hmscore/react-native-hms-push';
 import DeviceInfo from 'react-native-device-info';
 
-const Stack = createNativeStackNavigator();
+const headerOptions: NativeStackNavigationOptions = {
+  headerStyle: {
+    backgroundColor: Colors.primary,
+  },
+  headerTitle: () => (
+    <View style={{justifyContent: 'flex-start', flex: 1}}>
+      <Text style={{fontWeight: '500', fontSize: 18, color: Colors.white}}>
+        {'Netmera React Native Demo'}
+      </Text>
+    </View>
+  ),
+};
+
+const RootStack = createNativeStackNavigator({
+  initialRouteName: 'Dashboard',
+  screens: {
+    Dashboard: {screen: Dashboard, options: headerOptions},
+    Category: Category,
+    Coupons: Coupons,
+    Events: Events,
+    PushInbox: PushInbox,
+    User: User,
+    Profile: Profile,
+    Settings: Settings,
+    Permissions: Permissions,
+    Autotracking: AutoTracking,
+    AutoTrackTest: AutoTrackTest,
+    AutoTrackFlatListTest: AutoTrackFlatListTest,
+    StackNavTest: {screen: StackNavTest, options: {headerShown: false}},
+  },
+});
+
+const Navigation = createStaticNavigation(RootStack);
 
 const App = () => {
   useEffect(() => {
@@ -128,52 +160,13 @@ const App = () => {
     });
   }
 
-  const headerOptions: NativeStackNavigationOptions = {
-    headerStyle: {
-      backgroundColor: Colors.primary,
-    },
-    headerTitle: () => (
-      <View style={{justifyContent: 'flex-start', flex: 1}}>
-        <Text style={{fontWeight: '500', fontSize: 18, color: Colors.white}}>
-          {'Netmera React Native Demo'}
-        </Text>
-      </View>
-    ),
-  };
-
   return (
     <GestureHandlerRootView style={{flex: 1}}>
       <SafeAreaProvider>
-        <NetmeraAnalyticProvider>
-          <NavigationContainer>
-            <StatusBar barStyle={isIos() ? 'dark-content' : 'light-content'} />
-            <Stack.Navigator initialRouteName={'Dashboard'}>
-              <Stack.Screen name={'Category'} component={Category} />
-              <Stack.Screen name={'Coupons'} component={Coupons} />
-              <Stack.Screen
-                name={'Dashboard'}
-                options={headerOptions}
-                component={Dashboard}
-              />
-              <Stack.Screen name={'Events'} component={Events} />
-              <Stack.Screen name={'PushInbox'} component={PushInbox} />
-              <Stack.Screen name={'User'} component={User} />
-              <Stack.Screen name={'Profile'} component={Profile} />
-              <Stack.Screen name={'Settings'} component={Settings} />
-              <Stack.Screen name={'Permissions'} component={Permissions} />
-              <Stack.Screen name={'Autotracking'} component={AutoTracking} />
-              <Stack.Screen name={'AutoTrackTest'} component={AutoTrackTest} />
-              <Stack.Screen name={'AutoTrackFlatListTest'} component={AutoTrackFlatListTest} />
-              <Stack.Screen
-                name={'StackNavTest'}
-                component={StackNavTest}
-                options={{headerShown: false}}
-              />
-            </Stack.Navigator>
-            <PushEventModal />
-            <Toast />
-          </NavigationContainer>
-        </NetmeraAnalyticProvider>
+        <StatusBar barStyle={isIos() ? 'dark-content' : 'light-content'} />
+        <Navigation />
+        <PushEventModal />
+        <Toast />
       </SafeAreaProvider>
     </GestureHandlerRootView>
   );
