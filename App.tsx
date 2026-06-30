@@ -8,14 +8,16 @@
 
 import React, {useEffect} from 'react';
 import {Linking, StatusBar, Text, View} from 'react-native';
-import {NavigationContainer} from '@react-navigation/native';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
+import {createStaticNavigation, useNavigationContainerRef} from '@react-navigation/native';
 import {
   createNativeStackNavigator,
   NativeStackNavigationOptions,
 } from '@react-navigation/native-stack';
 import Dashboard from './src/screens/Dashboard';
 import Coupons from './src/screens/Coupons';
-import {Colors} from 'react-native/Libraries/NewAppScreen';
+import Colors from './src/Colors';
 import Events from './src/screens/Events';
 import Toast from 'react-native-toast-message';
 import PushEventModal from './src/components/PushEventModal';
@@ -25,15 +27,54 @@ import PushInbox from './src/screens/PushInbox';
 import Settings from './src/screens/Settings';
 import Profile from './src/screens/Profile';
 import Permissions from './src/screens/Permissions';
-import {Netmera} from 'react-native-netmera';
+import AutoTracking from './src/screens/AutoTracking';
+import AutoTrackTest from './src/screens/AutoTrackTest';
+import AutoTrackFlatListTest from './src/screens/AutoTrackFlatListTest';
+import StackNavTest from './src/screens/StackNavTest';
+import {Netmera, NetmeraAnalyticProvider} from 'react-native-netmera';
 import {isAndroid, isIos} from './src/helpers/DeviceUtils';
-import messaging from '@react-native-firebase/messaging';
+import { getApp } from '@react-native-firebase/app';
+import { getMessaging, getToken, onMessage } from '@react-native-firebase/messaging';
 import {HmsPushEvent, HmsPushInstanceId, RNRemoteMessage} from '@hmscore/react-native-hms-push';
 import DeviceInfo from 'react-native-device-info';
 
-const Stack = createNativeStackNavigator();
+const headerOptions: NativeStackNavigationOptions = {
+  headerStyle: {
+    backgroundColor: Colors.primary,
+  },
+  headerTitle: () => (
+    <View style={{justifyContent: 'flex-start', flex: 1}}>
+      <Text style={{fontWeight: '500', fontSize: 18, color: Colors.white}}>
+        {'Netmera React Native Demo'}
+      </Text>
+    </View>
+  ),
+};
+
+const RootStack = createNativeStackNavigator({
+  initialRouteName: 'Dashboard',
+  screens: {
+    Dashboard: {screen: Dashboard, options: headerOptions},
+    Category: Category,
+    Coupons: Coupons,
+    Events: Events,
+    PushInbox: PushInbox,
+    User: User,
+    Profile: Profile,
+    Settings: Settings,
+    Permissions: Permissions,
+    Autotracking: AutoTracking,
+    AutoTrackTest: AutoTrackTest,
+    AutoTrackFlatListTest: AutoTrackFlatListTest,
+    StackNavTest: {screen: StackNavTest, options: {headerShown: false}},
+  },
+});
+
+const Navigation = createStaticNavigation(RootStack);
 
 const App = () => {
+  const navRef = useNavigationContainerRef();
+
   useEffect(() => {
     Netmera.getInitialURL().then(url => {
       console.log('Netmera initial url: ', url);
@@ -72,14 +113,13 @@ const App = () => {
     });
 
     //FCM methods
-    messaging()
-      .getToken()
-      .then((pushToken: string) => {
-        console.log('pushToken: ' + pushToken);
-        Netmera.onNetmeraNewToken(pushToken);
-      });
+    const fcmMessaging = getMessaging(getApp());
+    getToken(fcmMessaging).then((pushToken: string) => {
+      console.log('pushToken: ' + pushToken);
+      Netmera.onNetmeraNewToken(pushToken);
+    });
 
-    messaging().onMessage(async remoteMessage => {
+    onMessage(fcmMessaging, async remoteMessage => {
       console.log(JSON.stringify(remoteMessage));
       if (
         Netmera.isNetmeraRemoteMessage(
@@ -122,40 +162,17 @@ const App = () => {
     });
   }
 
-  const headerOptions: NativeStackNavigationOptions = {
-    headerStyle: {
-      backgroundColor: Colors.primary,
-    },
-    headerTitle: () => (
-      <View style={{justifyContent: 'flex-start', flex: 1}}>
-        <Text style={{fontWeight: '500', fontSize: 18, color: Colors.white}}>
-          {'Netmera React Native Demo'}
-        </Text>
-      </View>
-    ),
-  };
-
   return (
-    <NavigationContainer>
-      <StatusBar barStyle={isIos() ? 'dark-content' : 'light-content'} />
-      <Stack.Navigator initialRouteName={'Dashboard'}>
-        <Stack.Screen name={'Category'} component={Category} />
-        <Stack.Screen name={'Coupons'} component={Coupons} />
-        <Stack.Screen
-          name={'Dashboard'}
-          options={headerOptions}
-          component={Dashboard}
-        />
-        <Stack.Screen name={'Events'} component={Events} />
-        <Stack.Screen name={'PushInbox'} component={PushInbox} />
-        <Stack.Screen name={'User'} component={User} />
-        <Stack.Screen name={'Profile'} component={Profile} />
-        <Stack.Screen name={'Settings'} component={Settings} />
-        <Stack.Screen name={'Permissions'} component={Permissions} />
-      </Stack.Navigator>
-      <PushEventModal />
-      <Toast />
-    </NavigationContainer>
+    <GestureHandlerRootView style={{flex: 1}}>
+      <SafeAreaProvider>
+        <NetmeraAnalyticProvider navigationRef={navRef}>
+          <StatusBar barStyle={isIos() ? 'dark-content' : 'light-content'} />
+          <Navigation ref={navRef} />
+          <PushEventModal />
+          <Toast />
+        </NetmeraAnalyticProvider>
+      </SafeAreaProvider>
+    </GestureHandlerRootView>
   );
 };
 

@@ -59,3 +59,7 @@ yarn-error.log
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
+
+# VSCode
+.vscode/*
+.claude/

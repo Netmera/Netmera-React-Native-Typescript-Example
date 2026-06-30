@@ -4,7 +4,6 @@
 
 import React, {useEffect, useLayoutEffect, useState} from 'react';
 import {
-  SafeAreaView,
   ScrollView,
   StyleSheet,
   Text,
@@ -156,7 +155,7 @@ const Settings = () => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.content}>
         <TouchableOpacity
           style={styles.button}
@@ -260,7 +259,7 @@ const Settings = () => {
           <Text style={styles.text}>TOAST PUSH TOKEN</Text>
         </TouchableOpacity>
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 };
 

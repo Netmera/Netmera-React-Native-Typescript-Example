@@ -14,7 +14,8 @@ import {
   onPushReceive,
   onPushRegister,
 } from './NetmeraPushHeadlessTask';
-import messaging from '@react-native-firebase/messaging';
+import { getApp } from '@react-native-firebase/app';
+import { getMessaging, setBackgroundMessageHandler } from '@react-native-firebase/messaging';
 import {HmsPushMessaging, RNRemoteMessage} from '@hmscore/react-native-hms-push';
 import DeviceInfo from 'react-native-device-info';
 
@@ -27,7 +28,7 @@ Netmera.setPushLifecycleCallbacks(
   onCarouselObjectSelected,
 );
 
-messaging().setBackgroundMessageHandler(async remoteMessage => {
+setBackgroundMessageHandler(getMessaging(getApp()), async remoteMessage => {
   console.log('Message handled in the background!', remoteMessage);
   if (Netmera.isNetmeraRemoteMessage(remoteMessage.data)) {
     Netmera.onNetmeraFirebasePushMessageReceived(

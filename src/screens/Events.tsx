@@ -1,10 +1,11 @@
 import React, {useState} from 'react';
 import {
-  SafeAreaView, ScrollView,
+  ScrollView,
   StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
+  View,
 } from 'react-native';
 import Colors from '../Colors';
 import { CustomPurchaseEvent, TestEvent } from '../models/Events';
@@ -401,7 +402,7 @@ const Events = () => {
   ];
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <ScrollView style={{marginVertical: 20}}>
         <TextInput
             placeholder={'Revenue'}
@@ -424,7 +425,7 @@ const Events = () => {
           );
         })}
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 };
 

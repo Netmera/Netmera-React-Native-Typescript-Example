@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import {
   FlatList,
-  SafeAreaView,
   StyleSheet,
   Text,
   TextInput,
@@ -35,7 +34,7 @@ const Coupons = () => {
   };
 
   return (
-    <SafeAreaView>
+    <View>
       <View style={styles.content}>
         <View style={styles.inputArea}>
           <Text style={styles.inputLabel}>Page</Text>
@@ -89,7 +88,7 @@ const Coupons = () => {
         }}
         style={styles.couponList}
       />
-    </SafeAreaView>
+    </View>
   );
 };
 const styles = StyleSheet.create({
