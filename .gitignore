@@ -63,3 +63,11 @@ yarn-error.log
 # VSCode
 .vscode/*
 .claude/
+
+# Fastlane secrets
+fastlane/*.json
+fastlane/Netmera_Auth_Key.p8
+fastlane/beta/
+fastlane/.env
+fastlane/report.xml
+beta/
