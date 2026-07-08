@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {
   ScrollView,
   StyleSheet,
+  Switch,
   Text,
   TextInput,
   TouchableOpacity,
@@ -11,6 +12,7 @@ import Colors from '../Colors';
 import { CustomPurchaseEvent, TestEvent } from '../models/Events';
 import {
   Netmera,
+  NetmeraEvent,
   NetmeraEventLogin,
   NetmeraEventRegister,
   NetmeraEventCartView,
@@ -36,6 +38,19 @@ import {
 
 const Events = () => {
   const [revenue, setRevenue] = useState<string>('');
+  const [useGenericMethod, setUseGenericMethod] = useState(false);
+
+  const dispatchEvent = (event: NetmeraEvent) => {
+    if (useGenericMethod) {
+      const {code, ...attributes} = event as any;
+      const cleanedAttributes = Object.fromEntries(
+        Object.entries(attributes).filter(([, value]) => value !== undefined),
+      );
+      Netmera.sendGenericEvent(code, cleanedAttributes);
+    } else {
+      Netmera.sendEvent(event);
+    }
+  };
 
   const sendLoginEvent = () => {
     const loginEvent = new NetmeraEventLogin();
@@ -43,7 +58,7 @@ const Events = () => {
     if (revenue) {
       loginEvent.revenue = Number(revenue);
     }
-    Netmera.sendEvent(loginEvent);
+    dispatchEvent(loginEvent);
   };
 
   const sendRegisterEvent = () => {
@@ -52,7 +67,7 @@ const Events = () => {
     if (revenue) {
       registerEvent.revenue = Number(revenue);
     }
-    Netmera.sendEvent(registerEvent);
+    dispatchEvent(registerEvent);
   };
 
   const sendViewCartEvent = () => {
@@ -62,7 +77,7 @@ const Events = () => {
     if (revenue) {
       viewCartEvent.revenue = Number(revenue);
     }
-    Netmera.sendEvent(viewCartEvent);
+    dispatchEvent(viewCartEvent);
   };
 
   const sendPurchaseEvent = () => {
@@ -98,7 +113,7 @@ const Events = () => {
     if (revenue) {
       purchaseEvent.revenue = Number(revenue);
     }
-    Netmera.sendEvent(purchaseEvent);
+    dispatchEvent(purchaseEvent);
   };
 
   const sendCustomEvent = () => {
@@ -108,7 +123,7 @@ const Events = () => {
     if (revenue) {
       testEvent.revenue = Number(revenue);
     }
-    Netmera.sendEvent(testEvent);
+    dispatchEvent(testEvent);
   };
 
   const sendBannerOpenEvent = () => {
@@ -118,7 +133,7 @@ const Events = () => {
     if (revenue) {
       bannerOpenEvent.revenue = Number(revenue);
     }
-    Netmera.sendEvent(bannerOpenEvent);
+    dispatchEvent(bannerOpenEvent);
   };
 
   const sendBatteryLevelEvent = () => {
@@ -127,7 +142,7 @@ const Events = () => {
     if (revenue) {
       batteryLevelEvent.revenue = Number(revenue);
     }
-    Netmera.sendEvent(batteryLevelEvent);
+    dispatchEvent(batteryLevelEvent);
   };
 
   const sendCategoryViewEvent = () => {
@@ -137,7 +152,7 @@ const Events = () => {
     if (revenue) {
       categoryViewEvent.revenue = Number(revenue);
     }
-    Netmera.sendEvent(categoryViewEvent);
+    dispatchEvent(categoryViewEvent);
   };
 
   const sendInAppPurchaseEvent = () => {
@@ -152,7 +167,7 @@ const Events = () => {
     if (revenue) {
       inAppPurchaseEvent.revenue = Number(revenue);
     }
-    Netmera.sendEvent(inAppPurchaseEvent);
+    dispatchEvent(inAppPurchaseEvent);
   };
 
   const sendScreenViewEvent = () => {
@@ -165,7 +180,7 @@ const Events = () => {
     if (revenue) {
       screenViewEvent.revenue = Number(revenue);
     }
-    Netmera.sendEvent(screenViewEvent);
+    dispatchEvent(screenViewEvent);
   };
 
   const sendSearchEvent = () => {
@@ -175,7 +190,7 @@ const Events = () => {
     if (revenue) {
       searchEvent.revenue = Number(revenue);
     }
-    Netmera.sendEvent(searchEvent);
+    dispatchEvent(searchEvent);
   };
 
   const sendShareEvent = () => {
@@ -185,7 +200,7 @@ const Events = () => {
     if (revenue) {
       shareEvent.revenue = Number(revenue);
     }
-    Netmera.sendEvent(shareEvent);
+    dispatchEvent(shareEvent);
   };
 
   const sendCartAddProductEvent = () => {
@@ -195,7 +210,7 @@ const Events = () => {
     if (revenue) {
       cartAddProductEvent.revenue = Number(revenue);
     }
-    Netmera.sendEvent(cartAddProductEvent);
+    dispatchEvent(cartAddProductEvent);
   };
 
   const sendCartRemoveProductEvent = () => {
@@ -204,7 +219,7 @@ const Events = () => {
     if (revenue) {
       cartRemoveProductEvent.revenue = Number(revenue);
     }
-    Netmera.sendEvent(cartRemoveProductEvent);
+    dispatchEvent(cartRemoveProductEvent);
   };
 
   const sendOrderCancelEvent = () => {
@@ -216,7 +231,7 @@ const Events = () => {
     if (revenue) {
       orderCancelEvent.revenue = Number(revenue);
     }
-    Netmera.sendEvent(orderCancelEvent);
+    dispatchEvent(orderCancelEvent);
   };
 
   const sendProductCommentEvent = () => {
@@ -224,7 +239,7 @@ const Events = () => {
     if (revenue) {
       productCommentEvent.revenue = Number(revenue);
     }
-    Netmera.sendEvent(productCommentEvent);
+    dispatchEvent(productCommentEvent);
   };
 
   const sendProductRateEvent = () => {
@@ -233,7 +248,7 @@ const Events = () => {
     if (revenue) {
       productRateEvent.revenue = Number(revenue);
     }
-    Netmera.sendEvent(productRateEvent);
+    dispatchEvent(productRateEvent);
   };
 
   const sendProductViewEvent = () => {
@@ -241,7 +256,7 @@ const Events = () => {
     if (revenue) {
       productViewEvent.revenue = Number(revenue);
     }
-    Netmera.sendEvent(productViewEvent);
+    dispatchEvent(productViewEvent);
   };
 
   const sendWishListEvent = () => {
@@ -249,7 +264,7 @@ const Events = () => {
     if (revenue) {
       wishListEvent.revenue = Number(revenue);
     }
-    Netmera.sendEvent(wishListEvent);
+    dispatchEvent(wishListEvent);
   };
 
   const sendContentCommentEvent = () => {
@@ -264,7 +279,7 @@ const Events = () => {
     if (revenue) {
       contentCommentEvent.revenue = Number(revenue);
     }
-    Netmera.sendEvent(contentCommentEvent);
+    dispatchEvent(contentCommentEvent);
   };
 
   const sendContentRateEvent = () => {
@@ -280,7 +295,7 @@ const Events = () => {
     if (revenue) {
       contentRateEvent.revenue = Number(revenue);
     }
-    Netmera.sendEvent(contentRateEvent);
+    dispatchEvent(contentRateEvent);
   };
 
   const sendContentViewEvent = () => {
@@ -295,15 +310,7 @@ const Events = () => {
     if (revenue) {
       contentViewEvent.revenue = Number(revenue);
     }
-    Netmera.sendEvent(contentViewEvent);
-  };
-
-  const sendGenericEvent = () => {
-    Netmera.sendGenericEvent('fnwha', {
-      productId: '123',
-      amount: 99.99,
-      timestamp: new Date(),
-    });
+    dispatchEvent(contentViewEvent);
   };
 
   const buttons = [
@@ -395,10 +402,6 @@ const Events = () => {
       name: 'CONTENT VIEW EVENT',
       method: sendContentViewEvent,
     },
-    {
-      name: 'GENERIC EVENT',
-      method: sendGenericEvent,
-    },
   ];
 
   return (
@@ -413,6 +416,10 @@ const Events = () => {
             keyboardType="numeric"
             onChangeText={value => setRevenue(value)}
         />
+        <View style={styles.switchRow}>
+          <Text style={styles.switchLabel}>Use Generic Method</Text>
+          <Switch value={useGenericMethod} onValueChange={setUseGenericMethod} />
+        </View>
         {buttons.map((item, index) => {
           return (
               <TouchableOpacity
@@ -454,6 +461,19 @@ const styles = StyleSheet.create({
     width: '80%',
     height: 40,
     marginBottom: 5,
+  },
+
+  switchRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginHorizontal: 35,
+    marginBottom: 10,
+  },
+
+  switchLabel: {
+    fontSize: 14,
+    color: Colors.black,
   },
 
   text: {
