@@ -36,13 +36,30 @@ const Profile = () => {
   const [segments2, setSegments2] = useState('');
   const [segments2Op, setSegments2Op] = useState<CollectionOperation>('none');
 
-  const [includeCustomAttributes, setIncludeCustomAttributes] = useState(false);
+  const [lastLoginPlatform, setLastLoginPlatform] = useState('');
+  const [lastLoginPlatformOp, setLastLoginPlatformOp] = useState<FieldOperation>('none');
+
+  const [loginCount, setLoginCount] = useState('');
+  const [loginCountOp, setLoginCountOp] = useState<FieldOperation>('none');
+
+  const [isLuckyNumbersEnabled, setIsLuckyNumbersEnabled] = useState(false);
+  const [isLuckyNumbersEnabledOp, setIsLuckyNumbersEnabledOp] =
+    useState<FieldOperation>('none');
+
+  const [luckyNumbers, setLuckyNumbers] = useState('');
+  const [luckyNumbersOp, setLuckyNumbersOp] = useState<CollectionOperation>('none');
 
   const toSegments = (text: string): string[] =>
     text
       .split(',')
       .map(s => s.trim())
       .filter(s => s.length > 0);
+
+  const toNumbers = (text: string): number[] =>
+    text
+      .split(',')
+      .map(s => Number(s.trim()))
+      .filter(n => !isNaN(n));
 
   const buildProfile = (): MyNetmeraUserProfile => {
     const profile = new MyNetmeraUserProfile();
@@ -91,10 +108,34 @@ const Profile = () => {
       profile.externalSegments.remove(segs2);
     }
 
-    if (includeCustomAttributes) {
-      profile.luckyNumbers.set([1, 2, 3]);
-      profile.isLuckyNumbersEnabled.set(true);
-      profile.lastLoginPlatform.set('ReactNative');
+    if (lastLoginPlatformOp === 'set') {
+      profile.lastLoginPlatform.set(lastLoginPlatform);
+    } else if (lastLoginPlatformOp === 'unset') {
+      profile.lastLoginPlatform.unset();
+    }
+
+    const loginCountNum = Number(loginCount);
+    if (loginCountOp === 'set' && loginCount.trim() !== '' && !isNaN(loginCountNum)) {
+      profile.loginCount.set(loginCountNum);
+    } else if (loginCountOp === 'unset') {
+      profile.loginCount.unset();
+    }
+
+    if (isLuckyNumbersEnabledOp === 'set') {
+      profile.isLuckyNumbersEnabled.set(isLuckyNumbersEnabled);
+    } else if (isLuckyNumbersEnabledOp === 'unset') {
+      profile.isLuckyNumbersEnabled.unset();
+    }
+
+    const luckyNums = toNumbers(luckyNumbers);
+    if (luckyNumbersOp === 'set' && luckyNums.length > 0) {
+      profile.luckyNumbers.set(luckyNums);
+    } else if (luckyNumbersOp === 'unset') {
+      profile.luckyNumbers.unset();
+    } else if (luckyNumbersOp === 'add' && luckyNums.length > 0) {
+      profile.luckyNumbers.add(luckyNums);
+    } else if (luckyNumbersOp === 'remove' && luckyNums.length > 0) {
+      profile.luckyNumbers.remove(luckyNums);
     }
 
     return profile;
@@ -203,16 +244,67 @@ const Profile = () => {
           options={['set', 'unset', 'add', 'remove']}
         />
 
+        <View style={styles.divider} />
+        <Text style={styles.groupLabel}>Custom Attributes</Text>
+
+        <Text style={styles.sectionLabel}>Last Login Platform (string)</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Last Login Platform"
+          placeholderTextColor={Colors.dark}
+          value={lastLoginPlatform}
+          onChangeText={setLastLoginPlatform}
+        />
+        <OpButtons
+          value={lastLoginPlatformOp}
+          onChange={setLastLoginPlatformOp}
+          options={['set', 'unset']}
+        />
+
+        <Text style={styles.sectionLabel}>Login Count (number)</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Login Count"
+          placeholderTextColor={Colors.dark}
+          keyboardType="numeric"
+          value={loginCount}
+          onChangeText={setLoginCount}
+        />
+        <OpButtons
+          value={loginCountOp}
+          onChange={setLoginCountOp}
+          options={['set', 'unset']}
+        />
+
         <View style={styles.switchRow}>
-          <Text style={styles.switchLabel}>Include Custom Attributes</Text>
+          <Text style={styles.switchLabel}>Is Lucky Numbers Enabled (boolean)</Text>
           <Switch
-            value={includeCustomAttributes}
-            onValueChange={setIncludeCustomAttributes}
+            value={isLuckyNumbersEnabled}
+            onValueChange={setIsLuckyNumbersEnabled}
           />
         </View>
+        <OpButtons
+          value={isLuckyNumbersEnabledOp}
+          onChange={setIsLuckyNumbersEnabledOp}
+          options={['set', 'unset']}
+        />
+
+        <Text style={styles.sectionLabel}>Lucky Numbers e.g. 0,1,2 (number[])</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Lucky Numbers"
+          placeholderTextColor={Colors.dark}
+          value={luckyNumbers}
+          onChangeText={setLuckyNumbers}
+        />
+        <OpButtons
+          value={luckyNumbersOp}
+          onChange={setLuckyNumbersOp}
+          options={['set', 'unset', 'add', 'remove']}
+        />
 
         <TouchableOpacity
-          style={styles.button}
+          style={[styles.button, {marginTop: 16}]}
           activeOpacity={0.6}
           onPress={updateProfileWithCallback}>
           <Text style={styles.buttonText}>UPDATE PROFILE ATTRIBUTES</Text>
@@ -242,6 +334,18 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     color: Colors.black,
     marginTop: 12,
+    marginBottom: 4,
+  },
+  divider: {
+    marginTop: 16,
+    marginBottom: 4,
+    height: 1,
+    backgroundColor: Colors.light,
+  },
+  groupLabel: {
+    fontSize: 16,
+    fontWeight: '700',
+    color: Colors.black,
     marginBottom: 4,
   },
   input: {

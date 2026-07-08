@@ -8,6 +8,7 @@ export class MyNetmeraUserProfile extends NetmeraUserProfile {
   public luckyNumbers = new NetmeraProfileAttributeCollection<number>();
   public isLuckyNumbersEnabled = new NetmeraProfileAttribute<boolean>();
   public lastLoginPlatform = new NetmeraProfileAttribute<string>();
+  public loginCount = new NetmeraProfileAttribute<number>();
 
   protected getSerializationMap(): Record<string, string> {
     const baseMap = super.getSerializationMap();
@@ -16,6 +17,7 @@ export class MyNetmeraUserProfile extends NetmeraUserProfile {
       luckyNumbers: 'is',
       isLuckyNumbersEnabled: 'qr',
       lastLoginPlatform: 'ya',
+      loginCount: 'oc',
     };
 
     return { ...baseMap, ...customMap };
