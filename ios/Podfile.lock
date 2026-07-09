@@ -30,28 +30,28 @@ PODS:
   - GoogleDataTransport (10.1.0):
     - nanopb (~> 3.30910.0)
     - PromisesObjC (~> 2.4)
-  - GoogleUtilities/AppDelegateSwizzler (8.1.1):
+  - GoogleUtilities/AppDelegateSwizzler (8.1.2):
     - GoogleUtilities/Environment
     - GoogleUtilities/Logger
     - GoogleUtilities/Network
     - GoogleUtilities/Privacy
-  - GoogleUtilities/Environment (8.1.1):
+  - GoogleUtilities/Environment (8.1.2):
     - GoogleUtilities/Privacy
-  - GoogleUtilities/Logger (8.1.1):
+  - GoogleUtilities/Logger (8.1.2):
     - GoogleUtilities/Environment
     - GoogleUtilities/Privacy
-  - GoogleUtilities/Network (8.1.1):
+  - GoogleUtilities/Network (8.1.2):
     - GoogleUtilities/Logger
     - "GoogleUtilities/NSData+zlib"
     - GoogleUtilities/Privacy
     - GoogleUtilities/Reachability
-  - "GoogleUtilities/NSData+zlib (8.1.1)":
+  - "GoogleUtilities/NSData+zlib (8.1.2)":
     - GoogleUtilities/Privacy
-  - GoogleUtilities/Privacy (8.1.1)
-  - GoogleUtilities/Reachability (8.1.1):
+  - GoogleUtilities/Privacy (8.1.2)
+  - GoogleUtilities/Reachability (8.1.2):
     - GoogleUtilities/Logger
     - GoogleUtilities/Privacy
-  - GoogleUtilities/UserDefaults (8.1.1):
+  - GoogleUtilities/UserDefaults (8.1.2):
     - GoogleUtilities/Logger
     - GoogleUtilities/Privacy
   - hermes-engine (250829098.0.14):
@@ -62,29 +62,29 @@ PODS:
     - nanopb/encode (= 3.30910.0)
   - nanopb/decode (3.30910.0)
   - nanopb/encode (3.30910.0)
-  - NetmeraAdvertisingId (4.23.0):
-    - NetmeraAnalytic (= 4.23.0)
-  - NetmeraAnalytic (4.23.0):
-    - NetmeraSwiftCore (= 4.23.0)
-  - NetmeraAnalyticAutotracking (4.23.0):
-    - NetmeraAnalytic (= 4.23.0)
-  - NetmeraGeofence (4.23.0):
-    - NetmeraLocation (= 4.23.0)
-  - NetmeraLiveActivity (4.23.0):
-    - NetmeraSwiftCore (= 4.23.0)
-  - NetmeraLocation (4.23.0):
-    - NetmeraAnalytic (= 4.23.0)
-  - NetmeraNotification (4.23.0):
-    - NetmeraNotificationCore (= 4.23.0)
-  - NetmeraNotificationContentExtension (4.23.0):
-    - NetmeraNotificationCore (= 4.23.0)
-  - NetmeraNotificationCore (4.23.0):
-    - NetmeraAnalytic (= 4.23.0)
-  - NetmeraNotificationInbox (4.23.0):
-    - NetmeraNotificationCore (= 4.23.0)
-  - NetmeraNotificationServiceExtension (4.23.0):
-    - NetmeraNotificationCore (= 4.23.0)
-  - NetmeraSwiftCore (4.23.0):
+  - NetmeraAdvertisingId (4.23.1):
+    - NetmeraAnalytic (= 4.23.1)
+  - NetmeraAnalytic (4.23.1):
+    - NetmeraSwiftCore (= 4.23.1)
+  - NetmeraAnalyticAutotracking (4.23.1):
+    - NetmeraAnalytic (= 4.23.1)
+  - NetmeraGeofence (4.23.1):
+    - NetmeraLocation (= 4.23.1)
+  - NetmeraLiveActivity (4.23.1):
+    - NetmeraSwiftCore (= 4.23.1)
+  - NetmeraLocation (4.23.1):
+    - NetmeraAnalytic (= 4.23.1)
+  - NetmeraNotification (4.23.1):
+    - NetmeraNotificationCore (= 4.23.1)
+  - NetmeraNotificationContentExtension (4.23.1):
+    - NetmeraNotificationCore (= 4.23.1)
+  - NetmeraNotificationCore (4.23.1):
+    - NetmeraAnalytic (= 4.23.1)
+  - NetmeraNotificationInbox (4.23.1):
+    - NetmeraNotificationCore (= 4.23.1)
+  - NetmeraNotificationServiceExtension (4.23.1):
+    - NetmeraNotificationCore (= 4.23.1)
+  - NetmeraSwiftCore (4.23.1):
     - Swinject (= 2.8.4)
   - PromisesObjC (2.4.1)
   - RCTDeprecation (0.86.0)
@@ -2115,16 +2115,16 @@ PODS:
     - ReactCommon/turbomodule/core
     - ReactNativeDependencies
     - Yoga
-  - RNNetmera (2.1.0-beta01):
+  - RNNetmera (2.1.1-alpha01):
     - hermes-engine
-    - NetmeraAdvertisingId (= 4.23.0)
-    - NetmeraAnalytic (= 4.23.0)
-    - NetmeraAnalyticAutotracking (= 4.23.0)
-    - NetmeraGeofence (= 4.23.0)
-    - NetmeraLiveActivity (= 4.23.0)
-    - NetmeraLocation (= 4.23.0)
-    - NetmeraNotification (= 4.23.0)
-    - NetmeraNotificationInbox (= 4.23.0)
+    - NetmeraAdvertisingId (= 4.23.1)
+    - NetmeraAnalytic (= 4.23.1)
+    - NetmeraAnalyticAutotracking (= 4.23.1)
+    - NetmeraGeofence (= 4.23.1)
+    - NetmeraLiveActivity (= 4.23.1)
+    - NetmeraLocation (= 4.23.1)
+    - NetmeraNotification (= 4.23.1)
+    - NetmeraNotificationInbox (= 4.23.1)
     - RCTRequired
     - RCTTypeSafety
     - React-Core
@@ -2198,8 +2198,8 @@ PODS:
 DEPENDENCIES:
   - FBLazyVector (from `../node_modules/react-native/Libraries/FBLazyVector`)
   - hermes-engine (from `../node_modules/react-native/sdks/hermes-engine/hermes-engine.podspec`)
-  - NetmeraNotificationContentExtension (= 4.23.0)
-  - NetmeraNotificationServiceExtension (= 4.23.0)
+  - NetmeraNotificationContentExtension (= 4.23.1)
+  - NetmeraNotificationServiceExtension (= 4.23.1)
   - RCTDeprecation (from `../node_modules/react-native/ReactApple/Libraries/RCTFoundation/RCTDeprecation`)
   - RCTRequired (from `../node_modules/react-native/Libraries/Required`)
   - RCTSwiftUI (from `../node_modules/react-native/ReactApple/RCTSwiftUI`)
@@ -2493,21 +2493,21 @@ SPEC CHECKSUMS:
   FirebaseInstallations: 047343aa91fd6a1ebfa3eb374ddecf36a8aaddfd
   FirebaseMessaging: ed18fb50634e6e85b5d3e77e628c21e2c928cc53
   GoogleDataTransport: aae35b7ea0c09004c3797d53c8c41f66f219d6a7
-  GoogleUtilities: 4f2618a4a1e762a1ee134a1e2323bba9843e06da
+  GoogleUtilities: 766ace00c6b10d8148408f329d10c4f051931850
   hermes-engine: 173667ec2abd983cb022f881e5117befc25deb46
   nanopb: fad817b59e0457d11a5dfbde799381cd727c1275
-  NetmeraAdvertisingId: 20b08b91452fb758ca4a2c07e5ef19ad5eb1011b
-  NetmeraAnalytic: 20a5a26b9889cd7d27b42d8161aca6c536a6cec1
-  NetmeraAnalyticAutotracking: 4c421f700f83bca209c9287157e74bcdfd0d7641
-  NetmeraGeofence: d66971a78c8a33a34ed956be34b41e2f156518f2
-  NetmeraLiveActivity: 624372c1f092d34b3159bd16a49cd803ded4b826
-  NetmeraLocation: 90e8565813136226edd4e95aeb5dc23858b37c71
-  NetmeraNotification: 12662b0f49b5e2db31b275dac53a26751716db0f
-  NetmeraNotificationContentExtension: 7085ad200a970a6647877ca311e10c4e4aea871c
-  NetmeraNotificationCore: 91817d71c44e298272ba19f8e53ad1e3be20bdcd
-  NetmeraNotificationInbox: 28b83aa47ee35cf5e962b5a0c714cbde24861aa9
-  NetmeraNotificationServiceExtension: c60e7e9e9716641fab01afc11be35c63887e2274
-  NetmeraSwiftCore: fdc0f606ef26c76ae53fcfdcd1baedead9c8d3b5
+  NetmeraAdvertisingId: 192b166d762a0399731cfa54314138232810f1cc
+  NetmeraAnalytic: 22884ca5db26b51ce6e3a5b7c03fefb4bb1d16b2
+  NetmeraAnalyticAutotracking: e75a83e53abca87af0750d6a09786de0ca0af9ae
+  NetmeraGeofence: 71110b1d7ae7eeb40a52c50c5a90839c29e42fd2
+  NetmeraLiveActivity: c8884de6840416d90dc3fbc4d9a237d2e496e9d7
+  NetmeraLocation: 561e4c8f9425d6f0346709db11c0549dbb4ab617
+  NetmeraNotification: 2b9ffac23073e5bb911a59eeb402bf19221688da
+  NetmeraNotificationContentExtension: 5e69303198329f5a80bf63525f529a504316e9c0
+  NetmeraNotificationCore: b876da48f4b993666335d2f8c95a9fa7c93c0377
+  NetmeraNotificationInbox: 71303a0d56a2cc730b04e928026ba4ef720195f3
+  NetmeraNotificationServiceExtension: 2ce077ec484573ef158b6549fc4a7d7bab8c089c
+  NetmeraSwiftCore: 9341bb55c67bdd72656545b0ef5af9df5797794b
   PromisesObjC: 752c3227f599e3467650e47ea36f433eeb10c273
   RCTDeprecation: 2a74a2c57675e64419bd89078efde81f7c1de90b
   RCTRequired: 30451112e6fef4e6f31b4e7eee0845156e35e4b0
@@ -2589,11 +2589,11 @@ SPEC CHECKSUMS:
   RNFBApp: ab502c911e5203f22a56998b7ed22e5ecf436da4
   RNFBMessaging: 83417183855f6324900a28a0a007ff4be2f9c08c
   RNGestureHandler: 7ade813d6efb2b650e01afdd54d699bc435843fb
-  RNNetmera: c6fd27ea0d3c4fab6cc22f85b9ce3ea03616c9b9
+  RNNetmera: ff2b34a77cfdc36195e4efcbd9452958f800a963
   RNScreens: 8d318eb8905fa1d3439a1ce5d567f82ae8245657
   Swinject: 6ba81f58fd769c9fd4b8ceced9e25a9cb137cb3c
   Yoga: c30c859b7e9b75e547b600b486fe33165f60de00
 
-PODFILE CHECKSUM: c91f1f9c273179c2ab0954645a3ca68299d871aa
+PODFILE CHECKSUM: ba30e3fcb5b90e8a6e8769afc52f659e970fa541
 
 COCOAPODS: 1.16.2
