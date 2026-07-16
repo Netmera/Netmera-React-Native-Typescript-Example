@@ -4,7 +4,6 @@ import React_RCTAppDelegate
 import ReactAppDependencyProvider
 import RNNetmera
 import NetmeraNotification
-import Firebase
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
@@ -33,9 +32,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     )
     
     UNUserNotificationCenter.current().delegate = self
-    
-    // Call before RNNetmera.initNetmera()
-    FirebaseApp.configure()
     
     initializeNetmera()
     Netmera.setPushDelegate(self)

@@ -33,8 +33,8 @@ import AutoTrackFlatListTest from './src/screens/AutoTrackFlatListTest';
 import StackNavTest from './src/screens/StackNavTest';
 import {Netmera, NetmeraAnalyticProvider} from 'react-native-netmera';
 import {isAndroid, isIos} from './src/helpers/DeviceUtils';
-import { getApp } from '@react-native-firebase/app';
-import { getMessaging, getToken, onMessage } from '@react-native-firebase/messaging';
+// import { getApp } from '@react-native-firebase/app';
+// import { getMessaging, getToken, onMessage } from '@react-native-firebase/messaging';
 import {HmsPushEvent, HmsPushInstanceId, RNRemoteMessage} from '@hmscore/react-native-hms-push';
 import DeviceInfo from 'react-native-device-info';
 
@@ -113,25 +113,25 @@ const App = () => {
     });
 
     //FCM methods
-    const fcmMessaging = getMessaging(getApp());
-    getToken(fcmMessaging).then((pushToken: string) => {
-      console.log('pushToken: ' + pushToken);
-      Netmera.onNetmeraNewToken(pushToken);
-    });
+    // const fcmMessaging = getMessaging(getApp());
+    // getToken(fcmMessaging).then((pushToken: string) => {
+    //   console.log('pushToken: ' + pushToken);
+    //   Netmera.onNetmeraNewToken(pushToken);
+    // });
 
-    onMessage(fcmMessaging, async remoteMessage => {
-      console.log(JSON.stringify(remoteMessage));
-      if (
-        Netmera.isNetmeraRemoteMessage(
-          remoteMessage.data as {[key: string]: string},
-        )
-      ) {
-        Netmera.onNetmeraFirebasePushMessageReceived(
-          remoteMessage.from,
-          remoteMessage.data as {[key: string]: string},
-        );
-      }
-    });
+    // onMessage(fcmMessaging, async remoteMessage => {
+    //   console.log(JSON.stringify(remoteMessage));
+    //   if (
+    //     Netmera.isNetmeraRemoteMessage(
+    //       remoteMessage.data as {[key: string]: string},
+    //     )
+    //   ) {
+    //     Netmera.onNetmeraFirebasePushMessageReceived(
+    //       remoteMessage.from,
+    //       remoteMessage.data as {[key: string]: string},
+    //     );
+    //   }
+    // });
   }, []);
 
   if (isAndroid()) {
