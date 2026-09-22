@@ -8,4 +8,5 @@ export default {
   black: '#000',
   buttonColor: '#48BBEC',
   orange: '#FF7F00',
+  error: '#D9534F',
 };

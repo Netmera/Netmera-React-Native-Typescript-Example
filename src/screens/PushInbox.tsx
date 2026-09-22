@@ -260,7 +260,7 @@ const PushInbox = () => {
         <TextInput
           placeholderTextColor={Colors.dark}
           style={styles.bigTextInput}
-          placeholder="Enter Category List (e.g. 1 2 3)"
+          placeholder="Enter Category Names (e.g. credit expense travel)"
           value={categoryList}
           onChangeText={setCategoryList}
         />

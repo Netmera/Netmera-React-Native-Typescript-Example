@@ -15,7 +15,7 @@ const Dashboard = () => {
     {name: 'EVENT', route: 'Events'},
     {name: 'SETTINGS', route: 'Settings'},
     {name: 'PUSH INBOX', route: 'PushInbox'},
-    {name: 'CATEGORY', route: 'Category'},
+    {name: 'CATEGORY', route: 'CategoryMenu'},
     {name: 'PERMISSIONS', route: 'Permissions'},
     {name: 'COUPONS', route: 'Coupons'},
     {name: 'AUTOTRACKING', route: 'Autotracking'},

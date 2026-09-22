@@ -26,7 +26,7 @@ NetmeraPushHeadlessTask.js  # Push callbacks: onPushRegister/Receive/Open/Dismis
 
 src/
   screens/
-    Dashboard.tsx    # Navigation hub — 8 buttons routing to all feature screens
+    Dashboard.tsx    # Navigation hub — 9 buttons routing to all feature screens
     Settings.tsx     # Utility functions: push enable/disable, popup presentation, location,
                      #   data transfer, kill, device token display
     User.tsx         # User identification (userId, email, msisdn, wpNumber)
@@ -35,7 +35,16 @@ src/
     Events.tsx       # Send analytics events + generic event (Netmera.sendGenericEvent)
     PushInbox.tsx    # Inbox fetch/filter/paginate, status update, count, interactive actions
     Coupons.tsx      # Fetch and display coupons (page + max params)
-    Category.tsx     # Category-related screen
+    Category.tsx     # Category inbox screen (NetmeraCategory fetch/filter + legacy opt-in toggle)
+    CategoryMenu.tsx               # "Category" submenu — Category Inbox / User Category Preferences /
+                                    #   Category Channels
+    UserCategoryPreferences.tsx    # List of user's categories (channel opt-in summary per row) → detail
+    CategoryChannelPreferences.tsx # Per-category detail: "All channels" toggle + per-channel switches
+    CategoryChannelList.tsx        # Static list of NMCategoryChannel values → channel detail
+    ChannelCategories.tsx          # Per-channel detail: category list toggled for that channel only
+  components/
+    PushEventModal.tsx    # In-app modal shown for incoming push events
+    SwitchStatusRow.tsx   # Shared title/subtitle/Switch row used by the category-channel screens
   models/
     Events.tsx            # CustomPurchaseEvent (code: cjpnl), TestEvent (code: qlhov)
     MyNetmeraUser.tsx     # Extended NetmeraUser with custom attributes (testName, testGender)
@@ -44,6 +53,8 @@ src/
                               #   lastLoginPlatform (ya)
   helpers/
     DeviceUtils.ts  # isAndroid(), isIos() helpers
+    CategoryChannelUtils.ts  # NMCategoryChannel dedupe/known-channel checks, RowSaveStatus type
+                              #   shared by the category-channel screens
   hooks/
     useDeeplinkUrl.ts  # Deeplink URL hook
   Colors.ts         # Color constants

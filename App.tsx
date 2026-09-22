@@ -22,6 +22,11 @@ import Events from './src/screens/Events';
 import Toast from 'react-native-toast-message';
 import PushEventModal from './src/components/PushEventModal';
 import Category from './src/screens/Category';
+import CategoryMenu from './src/screens/CategoryMenu';
+import UserCategoryPreferences from './src/screens/UserCategoryPreferences';
+import CategoryChannelPreferences from './src/screens/CategoryChannelPreferences';
+import CategoryChannelList from './src/screens/CategoryChannelList';
+import ChannelCategories from './src/screens/ChannelCategories';
 import User from './src/screens/User';
 import PushInbox from './src/screens/PushInbox';
 import Settings from './src/screens/Settings';
@@ -56,6 +61,11 @@ const RootStack = createNativeStackNavigator({
   screens: {
     Dashboard: {screen: Dashboard, options: headerOptions},
     Category: Category,
+    CategoryMenu: CategoryMenu,
+    UserCategoryPreferences: UserCategoryPreferences,
+    CategoryChannelPreferences: CategoryChannelPreferences,
+    CategoryChannelList: CategoryChannelList,
+    ChannelCategories: ChannelCategories,
     Coupons: Coupons,
     Events: Events,
     PushInbox: PushInbox,
