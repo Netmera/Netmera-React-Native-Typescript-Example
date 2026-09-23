@@ -2114,7 +2114,7 @@ PODS:
     - ReactCommon/turbomodule/core
     - ReactNativeDependencies
     - Yoga
-  - RNNetmera (2.2.0-beta01):
+  - RNNetmera (2.2.0-beta02):
     - hermes-engine
     - NetmeraAdvertisingId (= 4.26.0)
     - NetmeraAnalytic (= 4.26.0)
@@ -2586,7 +2586,7 @@ SPEC CHECKSUMS:
   RNFBApp: ab502c911e5203f22a56998b7ed22e5ecf436da4
   RNFBMessaging: 83417183855f6324900a28a0a007ff4be2f9c08c
   RNGestureHandler: 7ade813d6efb2b650e01afdd54d699bc435843fb
-  RNNetmera: 79a7095bf4e3820f583f155e336b6866c33385b1
+  RNNetmera: 88d3550e95ef85640dde2c0a807b12e8ec9f1a89
   RNScreens: 8d318eb8905fa1d3439a1ce5d567f82ae8245657
   Yoga: c30c859b7e9b75e547b600b486fe33165f60de00
 
