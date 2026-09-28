@@ -32,6 +32,7 @@ import PushInbox from './src/screens/PushInbox';
 import Settings from './src/screens/Settings';
 import Profile from './src/screens/Profile';
 import Permissions from './src/screens/Permissions';
+import InAppMessages from './src/screens/InAppMessages';
 import AutoTracking from './src/screens/AutoTracking';
 import AutoTrackTest from './src/screens/AutoTrackTest';
 import AutoTrackFlatListTest from './src/screens/AutoTrackFlatListTest';
@@ -73,6 +74,7 @@ const RootStack = createNativeStackNavigator({
     Profile: Profile,
     Settings: Settings,
     Permissions: Permissions,
+    InAppMessages: {screen: InAppMessages, options: {title: 'In App Messages'}},
     Autotracking: AutoTracking,
     AutoTrackTest: AutoTrackTest,
     AutoTrackFlatListTest: AutoTrackFlatListTest,

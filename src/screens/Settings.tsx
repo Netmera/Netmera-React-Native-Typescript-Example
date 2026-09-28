@@ -20,18 +20,9 @@ const enum PushState {
   PushDisabled = 'PushDisabled',
 }
 
-const enum PopUpPresentationState {
-  PopUpPresentationEnabled = 'PopUpPresentationEnabled',
-  PopUpPresentationDisabled = 'PopUpPresentationDisabled',
-}
-
 const Settings = () => {
   const [pushState, setPushState] = useState<PushState>(PushState.PushEnabled);
   const [pushTokenString, setPushTokenString] = useState<string>('');
-  const [popUpPresentationState, setPopUpPresentationState] =
-    useState<PopUpPresentationState>(
-      PopUpPresentationState.PopUpPresentationEnabled,
-    );
 
   useLayoutEffect(() => {
     Netmera.isPushEnabled().then(enabled => {
@@ -100,22 +91,6 @@ const Settings = () => {
         setPushState(PushState.PushDisabled);
       } 
     });
-  };
-
-  const disableOrEnablePopUpPresentation = () => {
-    if (
-      popUpPresentationState === PopUpPresentationState.PopUpPresentationEnabled
-    ) {
-      Netmera.disablePopupPresentation();
-      setPopUpPresentationState(
-        PopUpPresentationState.PopUpPresentationDisabled,
-      );
-    } else {
-      Netmera.enablePopupPresentation();
-      setPopUpPresentationState(
-        PopUpPresentationState.PopUpPresentationEnabled,
-      );
-    }
   };
 
   const enableLocationAndGeofence = () => {
@@ -190,20 +165,6 @@ const Settings = () => {
           onPress={requestPushNotificationAuthorization}>
           <Text style={styles.text}>REQUEST PUSH NOTIFICATION AUTHORIZATION</Text>
         </TouchableOpacity>
-
-        <View style={styles.row}>
-          <TouchableOpacity
-            style={[styles.button, {flex: 1}]}
-            activeOpacity={0.6}
-            onPress={disableOrEnablePopUpPresentation}>
-            <Text style={styles.text}>
-              {popUpPresentationState ===
-              PopUpPresentationState.PopUpPresentationDisabled
-                ? 'ENABLE POPUP PRES.'
-                : 'DISABLE POPUP PRES.'}
-            </Text>
-          </TouchableOpacity>
-        </View>
 
         <TouchableOpacity
           style={styles.button}

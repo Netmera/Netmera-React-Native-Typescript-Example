@@ -14,6 +14,7 @@ const Dashboard = () => {
     {name: 'PROFILE', route: 'Profile'},
     {name: 'EVENT', route: 'Events'},
     {name: 'SETTINGS', route: 'Settings'},
+    {name: 'IN APP MESSAGES', route: 'InAppMessages'},
     {name: 'PUSH INBOX', route: 'PushInbox'},
     {name: 'CATEGORY', route: 'CategoryMenu'},
     {name: 'PERMISSIONS', route: 'Permissions'},
