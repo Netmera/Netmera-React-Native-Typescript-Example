@@ -7,7 +7,7 @@
  */
 
 import React, {useEffect} from 'react';
-import {Linking, StatusBar, Text, View} from 'react-native';
+import {Linking, StatusBar, View} from 'react-native';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {createStaticNavigation, useNavigationContainerRef} from '@react-navigation/native';
@@ -15,14 +15,11 @@ import {
   createNativeStackNavigator,
   NativeStackNavigationOptions,
 } from '@react-navigation/native-stack';
-import Dashboard from './src/screens/Dashboard';
 import Coupons from './src/screens/Coupons';
-import Colors from './src/Colors';
 import Events from './src/screens/Events';
 import Toast from 'react-native-toast-message';
 import PushEventModal from './src/components/PushEventModal';
 import Category from './src/screens/Category';
-import CategoryMenu from './src/screens/CategoryMenu';
 import UserCategoryPreferences from './src/screens/UserCategoryPreferences';
 import CategoryChannelPreferences from './src/screens/CategoryChannelPreferences';
 import CategoryChannelList from './src/screens/CategoryChannelList';
@@ -38,43 +35,50 @@ import AutoTrackTest from './src/screens/AutoTrackTest';
 import AutoTrackFlatListTest from './src/screens/AutoTrackFlatListTest';
 import StackNavTest from './src/screens/StackNavTest';
 import {Netmera, NetmeraAnalyticProvider} from 'react-native-netmera';
-import {isAndroid, isIos} from './src/helpers/DeviceUtils';
+import {isAndroid} from './src/helpers/DeviceUtils';
+import MenuScreen from './src/menu/MenuScreen';
+import {menus} from './src/menu/menus';
+import AppColors from './src/ui/AppColors';
 import { getApp } from '@react-native-firebase/app';
 import { getMessaging, getToken, onMessage } from '@react-native-firebase/messaging';
 import {HmsPushEvent, HmsPushInstanceId, RNRemoteMessage} from '@hmscore/react-native-hms-push';
 import DeviceInfo from 'react-native-device-info';
 
-const headerOptions: NativeStackNavigationOptions = {
-  headerStyle: {
-    backgroundColor: Colors.primary,
-  },
-  headerTitle: () => (
-    <View style={{justifyContent: 'flex-start', flex: 1}}>
-      <Text style={{fontWeight: '500', fontSize: 18, color: Colors.white}}>
-        {'Netmera React Native Demo'}
-      </Text>
-    </View>
-  ),
+const screenOptions: NativeStackNavigationOptions = {
+  headerStyle: {backgroundColor: AppColors.surface},
+  headerTintColor: AppColors.primary,
+  headerTitleStyle: {color: AppColors.label},
 };
 
 const RootStack = createNativeStackNavigator({
-  initialRouteName: 'Dashboard',
+  initialRouteName: 'Home',
+  screenOptions,
+  screenLayout: ({route, children}) => (
+    <View testID={`screen.${route.name}`} style={{flex: 1}}>
+      {children}
+    </View>
+  ),
   screens: {
-    Dashboard: {screen: Dashboard, options: headerOptions},
-    Category: Category,
-    CategoryMenu: CategoryMenu,
-    UserCategoryPreferences: UserCategoryPreferences,
+    Home: {screen: MenuScreen, options: {title: menus.Home.title}},
+    NotificationMenu: {screen: MenuScreen, options: {title: menus.NotificationMenu.title}},
+    UserMenu: {screen: MenuScreen, options: {title: menus.UserMenu.title}},
+    InboxMenu: {screen: MenuScreen, options: {title: menus.InboxMenu.title}},
+    Category: {screen: Category, options: {title: 'Inbox Categories'}},
+    UserCategoryPreferences: {
+      screen: UserCategoryPreferences,
+      options: {title: 'Category Preferences'},
+    },
     CategoryChannelPreferences: CategoryChannelPreferences,
-    CategoryChannelList: CategoryChannelList,
+    CategoryChannelList: {screen: CategoryChannelList, options: {title: 'Channel Preferences'}},
     ChannelCategories: ChannelCategories,
     Coupons: Coupons,
     Events: Events,
-    PushInbox: PushInbox,
-    User: User,
-    Profile: Profile,
+    PushInbox: {screen: PushInbox, options: {title: 'Inbox'}},
+    User: {screen: User, options: {title: 'User Identify'}},
+    Profile: {screen: Profile, options: {title: 'User Update'}},
     Settings: Settings,
-    Permissions: Permissions,
-    InAppMessages: {screen: InAppMessages, options: {title: 'In App Messages'}},
+    Permissions: {screen: Permissions, options: {title: 'User Settings'}},
+    InAppMessages: {screen: InAppMessages, options: {title: 'In-App Messages'}},
     Autotracking: AutoTracking,
     AutoTrackTest: AutoTrackTest,
     AutoTrackFlatListTest: AutoTrackFlatListTest,
@@ -178,7 +182,7 @@ const App = () => {
     <GestureHandlerRootView style={{flex: 1}}>
       <SafeAreaProvider>
         <NetmeraAnalyticProvider navigationRef={navRef}>
-          <StatusBar barStyle={isIos() ? 'dark-content' : 'light-content'} />
+          <StatusBar barStyle="dark-content" backgroundColor={AppColors.surface} />
           <Navigation ref={navRef} />
           <PushEventModal />
           <Toast />
