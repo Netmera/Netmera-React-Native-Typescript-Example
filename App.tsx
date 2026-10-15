@@ -16,6 +16,7 @@ import {
   NativeStackNavigationOptions,
 } from '@react-navigation/native-stack';
 import Coupons from './src/screens/Coupons';
+import Core from './src/screens/Core';
 import Events from './src/screens/Events';
 import Toast from 'react-native-toast-message';
 import PushEventModal from './src/components/PushEventModal';
@@ -63,6 +64,7 @@ const RootStack = createNativeStackNavigator({
     NotificationMenu: {screen: MenuScreen, options: {title: menus.NotificationMenu.title}},
     UserMenu: {screen: MenuScreen, options: {title: menus.UserMenu.title}},
     InboxMenu: {screen: MenuScreen, options: {title: menus.InboxMenu.title}},
+    Core: Core,
     Category: {screen: Category, options: {title: 'Inbox Categories'}},
     UserCategoryPreferences: {
       screen: UserCategoryPreferences,
