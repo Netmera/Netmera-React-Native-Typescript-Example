@@ -26,6 +26,8 @@ android {
         buildConfigField "String", "NETMERA_API_KEY", "\"gFtyH_nz5WAWBrHDHVZGclG4W_qB0XRba1aqIfXpmXLuZtIs4D_CU0iIL-uUs-aw\""
         buildConfigField "String", "FIREBASE_SENDER_ID", "\"850720650930\""
         buildConfigField "String", "HMS_SENDER_ID", "\"111462617\""
+        testBuildType System.getProperty("testBuildType", "debug")
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     signingConfigs {
@@ -53,6 +55,7 @@ dependencies {
 
     // The version of react-native is set by the React Native Gradle Plugin
     implementation("com.facebook.react:react-android")
+    androidTestImplementation("com.wix:detox:+")
 
     if (hermesEnabled.toBoolean()) {
         implementation("com.facebook.react:hermes-android")

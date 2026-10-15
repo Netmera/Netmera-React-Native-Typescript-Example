@@ -29,6 +29,7 @@ allprojects {
         maven { url 'https://maven.google.com' }
         maven { url 'https://developer.huawei.com/repo/' }
         maven { url "https://release.netmera.com/release/android" }
+        maven { url "$rootDir/../node_modules/detox/Detox-android" }
     }
 }
 apply plugin: "com.facebook.react.rootproject"
