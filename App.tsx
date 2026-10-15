@@ -18,6 +18,7 @@ import {
 import Coupons from './src/screens/Coupons';
 import Core from './src/screens/Core';
 import Events from './src/screens/Events';
+import EventList from './src/screens/EventList';
 import Toast from 'react-native-toast-message';
 import PushEventModal from './src/components/PushEventModal';
 import Category from './src/screens/Category';
@@ -75,6 +76,9 @@ const RootStack = createNativeStackNavigator({
     ChannelCategories: ChannelCategories,
     Coupons: Coupons,
     Events: Events,
+    CommerceEvents: {screen: EventList, options: {title: 'Commerce Events'}},
+    MediaEvents: {screen: EventList, options: {title: 'Media Events'}},
+    GeneralEvents: {screen: EventList, options: {title: 'General Events'}},
     PushInbox: {screen: PushInbox, options: {title: 'Inbox'}},
     User: {screen: User, options: {title: 'User Identify'}},
     Profile: {screen: Profile, options: {title: 'User Update'}},
