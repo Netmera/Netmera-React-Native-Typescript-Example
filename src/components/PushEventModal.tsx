@@ -54,7 +54,7 @@ const PushEventModal = () => {
             <Pressable onPress={() => { setVisible(false); setEntries([]); }}>
               <Text style={styles.clearButton}>Temizle</Text>
             </Pressable>
-            <Pressable onPress={() => setVisible(false)}>
+            <Pressable testID="pushCallbacks.close" onPress={() => setVisible(false)}>
               <Text style={styles.closeButton}>✕</Text>
             </Pressable>
           </View>
