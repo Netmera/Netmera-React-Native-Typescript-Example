@@ -101,24 +101,12 @@ const Settings = () => {
     Netmera.setNetmeraMaxActiveRegions(10);
   };
 
-  const enableData = () => {
-    Netmera.startDataTransfer();
-  };
-
-  const disableData = () => {
-    Netmera.stopDataTransfer();
-  };
-
   const currentExternalId = async () => {
     Toast.show({
       type: 'info',
       text1: 'Current External Id: ' + (await Netmera.currentExternalId()),
       position: 'bottom',
     });
-  };
-
-  const kill = () => {
-    Netmera.kill();
   };
 
   const toastPushToken = () => {
@@ -180,33 +168,11 @@ const Settings = () => {
           <Text style={styles.text}>SET NETMERA MAX ACTIVE REGIONS</Text>
         </TouchableOpacity>
 
-        <View style={styles.row}>
-          <TouchableOpacity
-            style={[styles.button, {flex: 1}]}
-            activeOpacity={0.6}
-            onPress={enableData}>
-            <Text style={styles.text}>START DATA TRANSFER</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={[styles.button, {flex: 1}]}
-            activeOpacity={0.6}
-            onPress={disableData}>
-            <Text style={styles.text}>STOP DATA TRANSFER</Text>
-          </TouchableOpacity>
-        </View>
-
         <TouchableOpacity
           style={styles.button}
           activeOpacity={0.6}
           onPress={currentExternalId}>
           <Text style={styles.text}>CURRENT EXTERNAL ID</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={styles.button}
-          activeOpacity={0.6}
-          onPress={kill}>
-          <Text style={styles.text}>KILL NETMERA</Text>
         </TouchableOpacity>
 
         <View style={styles.deviceTokenContainer}>

@@ -6,6 +6,7 @@ type Screen =
   | 'NotificationMenu'
   | 'UserMenu'
   | 'InboxMenu'
+  | 'Core'
   | 'Settings'
   | 'InAppMessages'
   | 'User'
@@ -41,7 +42,7 @@ export const menus = {
         id: 'core',
         title: 'Core',
         subtitle: 'To manage SDK core configuration and initialization lifecycle.',
-        screen: 'Settings',
+        screen: 'Core',
       },
       {
         id: 'notification',

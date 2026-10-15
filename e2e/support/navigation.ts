@@ -1,4 +1,4 @@
-import {by, element, waitFor} from 'detox';
+import {by, device, element, expect, waitFor} from 'detox';
 
 const TIMEOUT_MS = 10000;
 
@@ -12,12 +12,27 @@ export async function openMenu(path: string[]): Promise<void> {
       throw new Error(`"${rowId}" is not a menu row id (<menu>.menu.<entry>)`);
     }
     const menuId = rowId.slice(0, separator);
+    await closePushCallbacks();
     await waitFor(element(by.id(rowId)))
       .toBeVisible()
       .whileElement(by.id(`${menuId}.menu`))
       .scroll(200, 'down');
     await element(by.id(rowId)).tap();
   }
+}
+
+/**
+ * The demo opens its Push Callbacks window whenever the SDK reports a push
+ * callback (e.g. registration), at a time the test cannot predict.
+ */
+export async function closePushCallbacks(): Promise<void> {
+  const closeButton = element(by.id('pushCallbacks.close'));
+  try {
+    await expect(closeButton).toBeVisible();
+  } catch {
+    return;
+  }
+  await closeButton.tap();
 }
 
 // `toExist` rather than `toBeVisible`: the screen wrapper is transparent, which
@@ -27,4 +42,15 @@ export async function expectScreen(routeName: string): Promise<void> {
   await waitFor(element(by.id(`screen.${routeName}`)))
     .toExist()
     .withTimeout(TIMEOUT_MS);
+}
+
+export async function goBack(): Promise<void> {
+  await closePushCallbacks();
+  if (device.getPlatform() === 'android') {
+    await device.pressBack();
+    return;
+  }
+  const backButton = element(by.label('Back').and(by.traits(['button'])));
+  await waitFor(backButton).toBeVisible().withTimeout(TIMEOUT_MS);
+  await backButton.tap();
 }

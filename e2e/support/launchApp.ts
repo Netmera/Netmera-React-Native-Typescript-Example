@@ -1,6 +1,7 @@
 import {execFileSync} from 'child_process';
 import path from 'path';
 import {device} from 'detox';
+import * as stub from './stubClient';
 import {STUB_PORT} from './stubServer';
 
 const ANDROID_PACKAGE = 'com.netmera.demo.reactnative';
@@ -18,16 +19,26 @@ const STUB_API_KEY = 'e2e';
 export async function launchAppWithStub(
   config: Detox.DeviceLaunchAppConfig = {},
 ): Promise<void> {
+  const after = await stub.requestCount();
   if (device.getPlatform() === 'ios') {
-    device.appLaunchArgs.modify({
-      environment: 'custom',
-      baseURL: STUB_BASE_URL,
-      APIKey: STUB_API_KEY,
-    });
-    await device.launchApp({newInstance: true, ...config});
-    return;
+    await launchIos(config);
+  } else {
+    await launchAndroid(config);
   }
+  // Tapping SDK actions before session/init races the SDK setup.
+  await stub.waitForRequest('session/init', {after});
+}
 
+async function launchIos(config: Detox.DeviceLaunchAppConfig): Promise<void> {
+  device.appLaunchArgs.modify({
+    environment: 'custom',
+    baseURL: STUB_BASE_URL,
+    APIKey: STUB_API_KEY,
+  });
+  await device.launchApp({newInstance: true, ...config});
+}
+
+async function launchAndroid(config: Detox.DeviceLaunchAppConfig): Promise<void> {
   // A reinstall wipes the preferences, so it has to happen before they are written.
   const {delete: reinstall, ...launchConfig} = config;
   await device.terminateApp();
