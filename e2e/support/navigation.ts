@@ -11,28 +11,55 @@ export async function openMenu(path: string[]): Promise<void> {
     if (separator < 0) {
       throw new Error(`"${rowId}" is not a menu row id (<menu>.menu.<entry>)`);
     }
-    const menuId = rowId.slice(0, separator);
-    await closePushCallbacks();
-    await waitFor(element(by.id(rowId)))
-      .toBeVisible()
-      .whileElement(by.id(`${menuId}.menu`))
-      .scroll(200, 'down');
-    await element(by.id(rowId)).tap();
+    await tapInScroll(rowId, `${rowId.slice(0, separator)}.menu`);
   }
+}
+
+/** Scrolls `scrollId` until the element is visible, then taps it. */
+export async function tapInScroll(id: string, scrollId: string): Promise<void> {
+  await withPushCallbacksClosed(async () => {
+    await waitFor(element(by.id(id)))
+      .toBeVisible()
+      .whileElement(by.id(scrollId))
+      .scroll(200, 'down');
+    await element(by.id(id)).tap();
+  });
+}
+
+export async function tap(id: string): Promise<void> {
+  await withPushCallbacksClosed(() => element(by.id(id)).tap());
+}
+
+export async function typeText(id: string, text: string): Promise<void> {
+  await withPushCallbacksClosed(() => element(by.id(id)).replaceText(text));
 }
 
 /**
  * The demo opens its Push Callbacks window whenever the SDK reports a push
- * callback (e.g. registration), at a time the test cannot predict.
+ * callback (e.g. registration), at a time the test cannot predict. A step it
+ * covered is retried once after closing it.
  */
-export async function closePushCallbacks(): Promise<void> {
+async function withPushCallbacksClosed(step: () => Promise<unknown>): Promise<void> {
+  await closePushCallbacks();
+  try {
+    await step();
+  } catch (error) {
+    if (!(await closePushCallbacks())) {
+      throw error;
+    }
+    await step();
+  }
+}
+
+async function closePushCallbacks(): Promise<boolean> {
   const closeButton = element(by.id('pushCallbacks.close'));
   try {
     await expect(closeButton).toBeVisible();
   } catch {
-    return;
+    return false;
   }
   await closeButton.tap();
+  return true;
 }
 
 // `toExist` rather than `toBeVisible`: the screen wrapper is transparent, which
@@ -51,6 +78,8 @@ export async function goBack(): Promise<void> {
     return;
   }
   const backButton = element(by.label('Back').and(by.traits(['button'])));
-  await waitFor(backButton).toBeVisible().withTimeout(TIMEOUT_MS);
-  await backButton.tap();
+  await withPushCallbacksClosed(async () => {
+    await waitFor(backButton).toBeVisible().withTimeout(TIMEOUT_MS);
+    await backButton.tap();
+  });
 }

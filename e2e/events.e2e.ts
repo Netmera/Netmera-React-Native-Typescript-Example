@@ -1,7 +1,6 @@
 import {expect as jestExpect} from '@jest/globals';
-import {by, element} from 'detox';
 import {launchAppWithStub} from './support/launchApp';
-import {closePushCallbacks, goBack, openMenu} from './support/navigation';
+import {goBack, openMenu, tap} from './support/navigation';
 import * as stub from './support/stubClient';
 
 async function sendEvent(rowId: string, code: string) {
@@ -36,8 +35,7 @@ describe('Events', () => {
   });
 
   it('Use Generic Method: events are still sent with their codes', async () => {
-    await closePushCallbacks();
-    await element(by.id('events.genericMethod')).tap();
+    await tap('events.genericMethod');
 
     await openMenu(['events.menu.general']);
     await sendEvent('general.menu.login', 'n:cl');

@@ -1,146 +1,130 @@
+/*
+ * Copyright (c) 2026 Netmera Research.
+ */
+
 import React, {useState} from 'react';
-import {
-  FlatList,
-  StyleSheet,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from 'react-native';
-import Colors from '../Colors';
+import {FlatList, StyleSheet, Text, View} from 'react-native';
 import {Netmera, NetmeraCouponObject} from 'react-native-netmera';
-import Toast from 'react-native-toast-message';
+import TextField from '../ui/TextField';
+import Button from '../ui/Button';
+import AppColors from '../ui/AppColors';
 
 const Coupons = () => {
-  const [page, setPage] = useState<string>('0');
-  const [max, setMax] = useState<string>('10');
+  const [page, setPage] = useState('0');
+  const [max, setMax] = useState('10');
   const [coupons, setCoupons] = useState<NetmeraCouponObject[]>([]);
+  const [result, setResult] = useState('No coupons fetched yet');
+  const [loading, setLoading] = useState(false);
 
-  const onFetchCouponsPress = () => {
-    if (page && max) {
-      Netmera.fetchCoupons(Number(page), Number(max))
-        .then(_coupons => {
-          console.log(_coupons);
-          setCoupons(_coupons);
-        })
-        .catch(error => {
-          console.log(error.code, error.message);
-          Toast.show({
-            type: 'error',
-            text1: error.message,
-          });
-        });
+  const fetchCoupons = () => {
+    if (!page || !max) {
+      return;
     }
+    setLoading(true);
+    Netmera.fetchCoupons(Number(page), Number(max))
+      .then(fetched => {
+        setCoupons(fetched);
+        setResult(fetched.length > 0 ? `Found ${fetched.length} coupons` : 'No coupons found');
+      })
+      .catch(error => {
+        setCoupons([]);
+        setResult(`Error: ${error.message}`);
+      })
+      .finally(() => setLoading(false));
   };
 
-  return (
-    <View>
-      <View style={styles.content}>
-        <View style={styles.inputArea}>
-          <Text style={styles.inputLabel}>Page</Text>
-          <TextInput
-            value={page}
-            onChangeText={setPage}
-            placeholder={'Page'}
-            placeholderTextColor={Colors.black}
-            style={styles.placeholder}
-          />
-          <View style={styles.divider} />
-        </View>
-        <View style={styles.inputArea}>
-          <Text style={styles.inputLabel}>Max</Text>
-          <TextInput
-            value={max}
-            onChangeText={setMax}
-            placeholder={'Max'}
-            placeholderTextColor={Colors.black}
-            style={styles.placeholder}
-          />
-          <View style={styles.divider} />
-        </View>
-      </View>
-      <TouchableOpacity style={styles.button} onPress={onFetchCouponsPress}>
-        <Text style={styles.buttonText}>FETCH COUPONS</Text>
-      </TouchableOpacity>
-      <FlatList
-        data={coupons}
-        ListEmptyComponent={
-          <Text style={{color: Colors.black}}>No coupon found</Text>
-        }
-        renderItem={({item, index}) => {
-          return (
-            <View key={index}>
-              <Text style={{color: Colors.black}}>
-                Coupon id: {item.couponId}
-              </Text>
-              <Text style={{color: Colors.black}}>
-                Coupon Name: {item.name}
-              </Text>
-              <Text style={{color: Colors.black}}>Code: {item.code}</Text>
-              <Text style={{color: Colors.black}}>
-                Assign Date: {item.assignDate}
-              </Text>
-              <Text style={{color: Colors.black}}>
-                Expire Date: {item.expireDate}
-              </Text>
-            </View>
-          );
-        }}
-        style={styles.couponList}
+  const header = (
+    <View style={styles.form}>
+      <Text style={styles.title}>Coupon Filter Parameters</Text>
+      <Text style={styles.label}>Page (index)</Text>
+      <TextField
+        testID="coupons.page.textField"
+        placeholder="Page index"
+        keyboardType="number-pad"
+        value={page}
+        onChangeText={setPage}
       />
+      <Text style={styles.label}>Page size (max count)</Text>
+      <TextField
+        testID="coupons.max.textField"
+        placeholder="Page size"
+        keyboardType="number-pad"
+        value={max}
+        onChangeText={setMax}
+      />
+      <Button
+        testID="coupons.fetch"
+        title={loading ? 'Fetching...' : 'Fetch Coupons'}
+        disabled={loading}
+        onPress={fetchCoupons}
+      />
+      <Text testID="coupons.result" style={styles.result}>
+        {result}
+      </Text>
     </View>
   );
+
+  return (
+    <FlatList
+      testID="coupons.list"
+      data={coupons}
+      keyExtractor={(item, index) => `${item.couponId}-${index}`}
+      ListHeaderComponent={header}
+      keyboardShouldPersistTaps="handled"
+      contentInsetAdjustmentBehavior="automatic"
+      style={styles.container}
+      renderItem={({item}) => (
+        <View style={styles.coupon}>
+          <Text style={styles.couponTitle}>
+            {item.code} - {item.name}
+          </Text>
+          <Text style={styles.couponDetail}>
+            ID: {item.couponId} | Expires: {item.expireDate} | Assigned: {item.assignDate}
+          </Text>
+        </View>
+      )}
+    />
+  );
 };
+
 const styles = StyleSheet.create({
-  button: {
-    marginTop: 20,
-    borderRadius: 4,
-    alignSelf: 'center',
-    paddingVertical: 10,
-    paddingHorizontal: 40,
-    backgroundColor: Colors.primary,
+  container: {
+    flex: 1,
+    backgroundColor: AppColors.surface,
   },
-
-  buttonText: {
+  form: {
+    padding: 16,
+    gap: 8,
+  },
+  title: {
+    fontSize: 17,
     fontWeight: '600',
-    fontSize: 13,
-    color: Colors.white,
+    color: AppColors.label,
   },
-
-  content: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-  },
-
-  couponList: {
-    marginTop: 10,
-    marginHorizontal: 10,
-  },
-
-  divider: {
-    height: 1,
-    backgroundColor: Colors.black,
-    opacity: 0.6,
-    paddingHorizontal: 50,
-  },
-
-  inputArea: {
-    marginTop: 20,
-    paddingHorizontal: 20,
-  },
-
-  inputLabel: {
-    fontWeight: '600',
-    fontSize: 13,
-    color: Colors.black,
-    opacity: 0.7,
-  },
-
-  placeholder: {
-    fontWeight: '400',
+  label: {
+    marginTop: 8,
     fontSize: 15,
-    color: Colors.black,
-    opacity: 0.7,
+    color: AppColors.label,
+  },
+  result: {
+    marginTop: 8,
+    fontSize: 15,
+    color: AppColors.mutedText,
+  },
+  coupon: {
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+    borderTopWidth: 1,
+    borderTopColor: AppColors.divider,
+  },
+  couponTitle: {
+    fontSize: 16,
+    color: AppColors.label,
+  },
+  couponDetail: {
+    marginTop: 2,
+    fontSize: 13,
+    color: AppColors.mutedText,
   },
 });
 
