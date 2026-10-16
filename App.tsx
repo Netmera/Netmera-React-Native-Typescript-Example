@@ -136,10 +136,12 @@ const App = () => {
 
     //FCM methods
     const fcmMessaging = getMessaging(getApp());
-    getToken(fcmMessaging).then((pushToken: string) => {
-      console.log('pushToken: ' + pushToken);
-      Netmera.onNetmeraNewToken(pushToken);
-    });
+    getToken(fcmMessaging)
+      .then((pushToken: string) => {
+        console.log('pushToken: ' + pushToken);
+        Netmera.onNetmeraNewToken(pushToken);
+      })
+      .catch(error => console.log('FCM token error: ', error));
 
     onMessage(fcmMessaging, async remoteMessage => {
       console.log(JSON.stringify(remoteMessage));
