@@ -8,19 +8,39 @@ import AppColors from './AppColors';
 
 interface Props {
   title: string;
+  subtitle?: string;
+  subtitleColor?: string;
   value: boolean;
+  disabled?: boolean;
   showDivider?: boolean;
   testID?: string;
   onValueChange: (value: boolean) => void;
 }
 
-const SwitchRow = ({title, value, showDivider = true, testID, onValueChange}: Props) => (
+const SwitchRow = ({
+  title,
+  subtitle,
+  subtitleColor,
+  value,
+  disabled,
+  showDivider = true,
+  testID,
+  onValueChange,
+}: Props) => (
   <View style={styles.row}>
-    <Text style={styles.title}>{title}</Text>
+    <View style={styles.text}>
+      <Text style={styles.title}>{title}</Text>
+      {subtitle ? (
+        <Text style={[styles.subtitle, subtitleColor ? {color: subtitleColor} : null]}>
+          {subtitle}
+        </Text>
+      ) : null}
+    </View>
     <Switch
       testID={testID}
       accessibilityLabel={title}
       value={value}
+      disabled={disabled}
       onValueChange={onValueChange}
     />
     {showDivider ? <View style={styles.divider} /> : null}
@@ -36,11 +56,18 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     backgroundColor: AppColors.surface,
   },
-  title: {
+  text: {
     flex: 1,
     marginRight: 12,
+  },
+  title: {
     fontSize: 16,
     color: AppColors.label,
+  },
+  subtitle: {
+    marginTop: 2,
+    fontSize: 12,
+    color: AppColors.mutedText,
   },
   divider: {
     position: 'absolute',

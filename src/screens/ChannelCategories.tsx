@@ -3,12 +3,12 @@
  */
 
 import React, {useCallback, useEffect, useRef, useState} from 'react';
-import {FlatList, RefreshControl, StyleSheet, Text, View} from 'react-native';
+import {FlatList, RefreshControl, StyleSheet, Text} from 'react-native';
 import {useRoute} from '@react-navigation/native';
 import Toast from 'react-native-toast-message';
 import {Netmera, NMCategoryChannel, NMCategoryPreferenceFilter, NMCategoryPreferenceUpdate} from 'react-native-netmera';
-import Colors from '../Colors';
-import SwitchStatusRow from '../components/SwitchStatusRow';
+import AppColors from '../ui/AppColors';
+import SwitchRow from '../ui/SwitchRow';
 import {errorMessage, IDLE_STATUS, RowSaveStatus} from '../helpers/CategoryChannelUtils';
 
 interface ChannelCategoryRow {
@@ -131,10 +131,10 @@ const ChannelCategories = () => {
       return {text: 'Saving…'};
     }
     if (row.status.kind === 'failed') {
-      return {text: `⚠ Could not save — ${row.status.reason}`, color: Colors.error};
+      return {text: `⚠ Could not save — ${row.status.reason}`, color: AppColors.destructive};
     }
     if (row.isEnabled === undefined) {
-      return {text: `id ${row.categoryId} · the server returned no value for this channel yet`, color: Colors.orange};
+      return {text: `id ${row.categoryId} · the server returned no value for this channel yet`, color: AppColors.warning};
     }
     return {text: `id ${row.categoryId}`};
   };
@@ -162,20 +162,20 @@ const ChannelCategories = () => {
           </Text>
         ) : undefined
       }
-      renderItem={({item}) => {
+      renderItem={({item, index}) => {
         const subtitle = rowSubtitle(item);
         return (
-          <SwitchStatusRow
+          <SwitchRow
             title={item.name}
             subtitle={subtitle.text}
             subtitleColor={subtitle.color}
             value={rowSwitchValue(item)}
             disabled={item.status.kind === 'saving'}
             onValueChange={value => setPreference(item.categoryId, value)}
+            showDivider={index < rows.length - 1}
           />
         );
       }}
-      ItemSeparatorComponent={() => <View style={styles.separator} />}
     />
   );
 };
@@ -183,29 +183,30 @@ const ChannelCategories = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.white,
+    backgroundColor: AppColors.groupedBackground,
   },
   headerText: {
-    padding: 16,
+    paddingHorizontal: 16,
+    paddingTop: 16,
+    paddingBottom: 6,
     fontSize: 13,
-    fontWeight: '600',
-    color: Colors.dark,
+    color: AppColors.mutedText,
+    backgroundColor: AppColors.groupedBackground,
   },
   footerText: {
-    padding: 16,
+    paddingHorizontal: 16,
+    paddingTop: 8,
+    paddingBottom: 20,
     fontSize: 12,
-    color: Colors.dark,
+    color: AppColors.mutedText,
+    backgroundColor: AppColors.groupedBackground,
   },
   emptyText: {
+    backgroundColor: AppColors.surface,
     padding: 16,
     fontSize: 13,
-    color: Colors.dark,
+    color: AppColors.mutedText,
     textAlign: 'center',
-  },
-  separator: {
-    height: 1,
-    backgroundColor: Colors.light,
-    marginHorizontal: 16,
   },
 });
 

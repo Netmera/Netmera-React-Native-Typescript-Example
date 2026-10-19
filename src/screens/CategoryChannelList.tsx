@@ -6,7 +6,7 @@ import React from 'react';
 import {FlatList, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {NMCategoryChannel} from 'react-native-netmera';
-import Colors from '../Colors';
+import AppColors from '../ui/AppColors';
 import {ALL_CATEGORY_CHANNELS} from '../helpers/CategoryChannelUtils';
 
 const CategoryChannelList = () => {
@@ -45,20 +45,26 @@ const CategoryChannelList = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.white,
+    backgroundColor: AppColors.groupedBackground,
   },
   headerText: {
-    padding: 16,
+    paddingHorizontal: 16,
+    paddingTop: 16,
+    paddingBottom: 6,
     fontSize: 13,
-    fontWeight: '600',
-    color: Colors.dark,
+    color: AppColors.mutedText,
+    backgroundColor: AppColors.groupedBackground,
   },
   footerText: {
-    padding: 16,
+    paddingHorizontal: 16,
+    paddingTop: 8,
+    paddingBottom: 20,
     fontSize: 12,
-    color: Colors.dark,
+    color: AppColors.mutedText,
+    backgroundColor: AppColors.groupedBackground,
   },
   row: {
+    backgroundColor: AppColors.surface,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
@@ -67,16 +73,18 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 16,
-    color: Colors.black,
+    color: AppColors.label,
   },
   chevron: {
     fontSize: 20,
-    color: Colors.dark,
+    color: AppColors.mutedText,
   },
+  // The left border keeps the 16pt inset white on the grouped background.
   separator: {
     height: 1,
-    backgroundColor: Colors.light,
-    marginHorizontal: 16,
+    borderLeftWidth: 16,
+    borderLeftColor: AppColors.surface,
+    backgroundColor: AppColors.divider,
   },
 });
 

@@ -44,7 +44,6 @@ src/
     ChannelCategories.tsx          # Per-channel detail: category list toggled for that channel only
   components/
     PushEventModal.tsx    # In-app modal shown for incoming push events
-    SwitchStatusRow.tsx   # Shared title/subtitle/Switch row used by the category-channel screens
   models/
     Events.tsx            # CustomPurchaseEvent (code: cjpnl), TestEvent (code: qlhov)
     MyNetmeraUser.tsx     # Extended NetmeraUser with custom attributes (testName, testGender)
