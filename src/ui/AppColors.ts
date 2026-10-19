@@ -15,6 +15,8 @@ const AppColors = {
   placeholder: '#C4C4C6',
   selected: '#3D82D41A',
   success: '#34C759',
+  warning: '#FF9500',
+  destructive: '#FF3B30',
 };
 
 export default AppColors;

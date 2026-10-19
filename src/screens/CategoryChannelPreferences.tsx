@@ -12,8 +12,8 @@ import {
   NMCategoryPreferenceFilter,
   NMCategoryPreferenceUpdate,
 } from 'react-native-netmera';
-import Colors from '../Colors';
-import SwitchStatusRow from '../components/SwitchStatusRow';
+import AppColors from '../ui/AppColors';
+import SwitchRow from '../ui/SwitchRow';
 import {
   ALL_CATEGORY_CHANNELS,
   ChannelPreferenceEntry,
@@ -144,8 +144,9 @@ const CategoryChannelPreferences = () => {
             : {...row, isEnabled: enabled, status: IDLE_STATUS},
         ),
       );
+      // No reload here: right after the write the server can still return the old values,
+      // which would flip the rows (and the switch) back.
       Toast.show({type: 'success', text1: 'Preference updated.'});
-      reloadCategory();
     } catch (error) {
       isWritingAllChannelsRef.current = false;
       setCategoryEnabled(previousValue);
@@ -195,7 +196,7 @@ const CategoryChannelPreferences = () => {
       return {text: 'Saving…'};
     }
     if (allChannelsStatus.kind === 'failed') {
-      return {text: `⚠ Could not save — ${allChannelsStatus.reason}`, color: Colors.error};
+      return {text: `⚠ Could not save — ${allChannelsStatus.reason}`, color: AppColors.destructive};
     }
     return {
       text:
@@ -210,13 +211,13 @@ const CategoryChannelPreferences = () => {
       return {text: 'Saving…'};
     }
     if (row.status.kind === 'failed') {
-      return {text: `⚠ Could not save — ${row.status.reason}`, color: Colors.error};
+      return {text: `⚠ Could not save — ${row.status.reason}`, color: AppColors.destructive};
     }
     if (!isKnownCategoryChannel(row.channel)) {
       return {text: 'This app version does not support this channel, so it cannot be changed here.'};
     }
     if (row.isEnabled === undefined) {
-      return {text: 'The server returned no value for this channel yet.', color: Colors.orange};
+      return {text: 'The server returned no value for this channel yet.', color: AppColors.warning};
     }
     return {};
   };
@@ -234,7 +235,7 @@ const CategoryChannelPreferences = () => {
           <Text style={styles.headerText}>
             “{categoryName}” · category id {categoryId}
           </Text>
-          <SwitchStatusRow
+          <SwitchRow
             title="All channels"
             subtitle={allChannelsSubtitleInfo.text}
             subtitleColor={allChannelsSubtitleInfo.color}
@@ -243,6 +244,7 @@ const CategoryChannelPreferences = () => {
             }
             disabled={allChannelsStatus.kind === 'saving'}
             onValueChange={setAllChannels}
+            showDivider={false}
           />
           <Text style={styles.footerText}>
             Switching this off turns every channel of this category off in one go, and switching it
@@ -254,20 +256,20 @@ const CategoryChannelPreferences = () => {
           )}
         </View>
       }
-      renderItem={({item}) => {
+      renderItem={({item, index}) => {
         const subtitle = channelSubtitle(item);
         return (
-          <SwitchStatusRow
+          <SwitchRow
             title={isKnownCategoryChannel(item.channel) ? item.channel : 'UNKNOWN CHANNEL'}
             subtitle={subtitle.text}
             subtitleColor={subtitle.color}
             value={rowSwitchValue(item)}
             disabled={!rowIsInteractive(item)}
             onValueChange={value => item.channel && setChannelPreference(item.channel, value)}
+            showDivider={index < channelRows.length - 1}
           />
         );
       }}
-      ItemSeparatorComponent={() => <View style={styles.separator} />}
       ListFooterComponent={
         <Text style={styles.footerText}>
           {channelRows.length === 0
@@ -282,31 +284,31 @@ const CategoryChannelPreferences = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.white,
+    backgroundColor: AppColors.groupedBackground,
   },
   headerText: {
-    padding: 16,
+    paddingHorizontal: 16,
+    paddingTop: 16,
+    paddingBottom: 6,
     fontSize: 13,
-    fontWeight: '600',
-    color: Colors.dark,
+    color: AppColors.mutedText,
+    backgroundColor: AppColors.groupedBackground,
   },
   sectionHeaderText: {
     paddingHorizontal: 16,
-    paddingTop: 12,
-    paddingBottom: 4,
+    paddingTop: 16,
+    paddingBottom: 6,
     fontSize: 13,
-    fontWeight: '600',
-    color: Colors.dark,
+    color: AppColors.mutedText,
+    backgroundColor: AppColors.groupedBackground,
   },
   footerText: {
-    padding: 16,
+    paddingHorizontal: 16,
+    paddingTop: 8,
+    paddingBottom: 20,
     fontSize: 12,
-    color: Colors.dark,
-  },
-  separator: {
-    height: 1,
-    backgroundColor: Colors.light,
-    marginHorizontal: 16,
+    color: AppColors.mutedText,
+    backgroundColor: AppColors.groupedBackground,
   },
 });
 
