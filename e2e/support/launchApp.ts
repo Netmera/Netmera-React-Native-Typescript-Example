@@ -4,7 +4,7 @@ import {device} from 'detox';
 import * as stub from './stubClient';
 import {STUB_PORT} from './stubServer';
 
-const ANDROID_PACKAGE = 'com.netmera.demo.reactnative';
+export const ANDROID_PACKAGE = 'com.netmera.demo.reactnative';
 const STUB_BASE_URL = `http://127.0.0.1:${STUB_PORT}`;
 const STUB_API_KEY = 'e2e';
 
@@ -57,11 +57,21 @@ function writeAndroidCustomEnvironment(): void {
     `<string name="baseUrl">${STUB_BASE_URL}</string>` +
     `<string name="apiKey">${STUB_API_KEY}</string>` +
     '</map>';
-  const sdkRoot = process.env.ANDROID_SDK_ROOT ?? process.env.ANDROID_HOME ?? '';
-  execFileSync(
-    path.join(sdkRoot, 'platform-tools', 'adb'),
-    ['-s', device.id, 'shell', 'run-as', ANDROID_PACKAGE, 'sh', '-c',
-      "'mkdir -p shared_prefs && cat > shared_prefs/Preferences.xml'"],
-    {input: preferences},
+  adbShell(
+    [
+      'run-as',
+      ANDROID_PACKAGE,
+      'sh',
+      '-c',
+      "'mkdir -p shared_prefs && cat > shared_prefs/Preferences.xml'",
+    ],
+    preferences,
   );
+}
+
+export function adbShell(args: string[], input?: string): void {
+  const sdkRoot = process.env.ANDROID_SDK_ROOT ?? process.env.ANDROID_HOME ?? '';
+  execFileSync(path.join(sdkRoot, 'platform-tools', 'adb'), ['-s', device.id, 'shell', ...args], {
+    input,
+  });
 }

@@ -6,6 +6,7 @@ type Screen =
   | 'NotificationMenu'
   | 'UserMenu'
   | 'Core'
+  | 'Location'
   | 'Settings'
   | 'InAppMessages'
   | 'User'
@@ -78,7 +79,7 @@ export const menus = {
         title: 'Location',
         subtitle:
           'To manage location authorization status and location-based features.',
-        screen: 'Settings',
+        screen: 'Location',
       },
       {
         id: 'deviceInfo',

@@ -93,14 +93,6 @@ const Settings = () => {
     });
   };
 
-  const enableLocationAndGeofence = () => {
-    Netmera.requestPermissionsForLocation();
-  };
-
-  const setNetmeraMaxActiveRegion = () => {
-    Netmera.setNetmeraMaxActiveRegions(10);
-  };
-
   const currentExternalId = async () => {
     Toast.show({
       type: 'info',
@@ -152,20 +144,6 @@ const Settings = () => {
           activeOpacity={0.6}
           onPress={requestPushNotificationAuthorization}>
           <Text style={styles.text}>REQUEST PUSH NOTIFICATION AUTHORIZATION</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={styles.button}
-          activeOpacity={0.6}
-          onPress={enableLocationAndGeofence}>
-          <Text style={styles.text}>REQUEST PERMISSION FOR LOCATION</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={styles.button}
-          activeOpacity={0.6}
-          onPress={setNetmeraMaxActiveRegion}>
-          <Text style={styles.text}>SET NETMERA MAX ACTIVE REGIONS</Text>
         </TouchableOpacity>
 
         <TouchableOpacity
