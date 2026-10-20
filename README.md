@@ -493,7 +493,7 @@ You can call the `checkNotificationPermission()` method if you need to know the 
 
 ##### Netmera Inbox Examples
 
-You can fetch the Netmera inbox as following. For more detailed usage, please see the [PushInbox screen](src/screens/PushInbox.tsx) in this example project.
+You can fetch the Netmera inbox as following. For more detailed usage, please see the [Inbox screen](src/screens/Inbox.tsx) in this example project.
 
 ```
  const fetchInbox = async () => {
@@ -511,7 +511,7 @@ You can fetch the Netmera inbox as following. For more detailed usage, please se
 
 ##### Netmera Inbox Category Examples
 
-You can fetch the Netmera category as following. For more detailed usage, please see the [Category screen](src/screens/Category.tsx) in this example project.
+You can fetch the Netmera category as following. For more detailed usage, please see the [Inbox screen](src/screens/Inbox.tsx) in this example project.
 
 ```
  const fetchCategory = async () => {
