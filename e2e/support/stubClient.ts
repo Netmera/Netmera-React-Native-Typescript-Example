@@ -50,13 +50,16 @@ export async function requestCount(): Promise<number> {
 
 export async function expectNoRequest(
   pathContains: string,
-  {after = 0, windowMs = 5000} = {},
+  {after = 0, bodyContains = '', windowMs = 5000} = {},
 ): Promise<void> {
   await new Promise(resolve => setTimeout(resolve, windowMs));
   const received = (await requests())
     .slice(after)
-    .filter(request => request.path.includes(pathContains));
+    .filter(
+      request => request.path.includes(pathContains) && request.body.includes(bodyContains),
+    );
   if (received.length > 0) {
-    throw new Error(`Unexpected request to "${pathContains}" (${received.length} received)`);
+    const body = bodyContains ? ` with "${bodyContains}"` : '';
+    throw new Error(`Unexpected request to "${pathContains}"${body} (${received.length} received)`);
   }
 }
