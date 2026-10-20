@@ -8,7 +8,7 @@ import AppColors from './AppColors';
 
 interface Props {
   title: string;
-  variant?: 'primary' | 'callback';
+  variant?: 'primary' | 'callback' | 'destructive';
   disabled?: boolean;
   testID?: string;
   onPress: () => void;
@@ -24,6 +24,7 @@ const Button = ({title, variant = 'primary', disabled, testID, onPress}: Props) 
     style={({pressed}) => [
       styles.button,
       variant === 'callback' && styles.callback,
+      variant === 'destructive' && styles.destructive,
       (pressed || disabled) && styles.dimmed,
     ]}>
     <Text style={styles.title}>{title}</Text>
@@ -41,6 +42,9 @@ const styles = StyleSheet.create({
   },
   callback: {
     backgroundColor: AppColors.success,
+  },
+  destructive: {
+    backgroundColor: AppColors.destructive,
   },
   dimmed: {
     opacity: 0.6,

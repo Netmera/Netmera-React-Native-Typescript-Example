@@ -16,6 +16,7 @@ export type RecordedRequest = {
  */
 export function startStubServer(port = STUB_PORT): Promise<http.Server> {
   const requests: RecordedRequest[] = [];
+  const responses = new Map<string, string>();
 
   const server = http.createServer((request, response) => {
     const chunks: Buffer[] = [];
@@ -29,7 +30,18 @@ export function startStubServer(port = STUB_PORT): Promise<http.Server> {
         response.end(JSON.stringify(requests));
       } else if (url.pathname === '/__stub/reset' && request.method === 'POST') {
         requests.length = 0;
+        responses.clear();
         response.end('{}');
+      } else if (url.pathname === '/__stub/responses' && request.method === 'POST') {
+        try {
+          const {pathContains, body: stubbed} = JSON.parse(body);
+          responses.delete(pathContains);
+          responses.set(pathContains, JSON.stringify(stubbed));
+          response.end('{}');
+        } catch {
+          response.statusCode = 400;
+          response.end('{}');
+        }
       } else {
         const headers: Record<string, string> = {};
         for (const [name, value] of Object.entries(request.headers)) {
@@ -42,7 +54,10 @@ export function startStubServer(port = STUB_PORT): Promise<http.Server> {
           headers,
           body,
         });
-        response.end('{}');
+        const stubbed = [...responses.entries()]
+          .reverse()
+          .find(([pathContains]) => url.pathname.includes(pathContains));
+        response.end(stubbed?.[1] ?? '{}');
       }
     });
   });

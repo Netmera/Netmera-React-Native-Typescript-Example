@@ -21,13 +21,13 @@ import Events from './src/screens/Events';
 import EventList from './src/screens/EventList';
 import Toast from 'react-native-toast-message';
 import PushEventModal from './src/components/PushEventModal';
-import Category from './src/screens/Category';
 import UserCategoryPreferences from './src/screens/UserCategoryPreferences';
 import CategoryChannelPreferences from './src/screens/CategoryChannelPreferences';
 import CategoryChannelList from './src/screens/CategoryChannelList';
 import ChannelCategories from './src/screens/ChannelCategories';
 import User from './src/screens/User';
-import PushInbox from './src/screens/PushInbox';
+import Inbox from './src/screens/Inbox';
+import InboxDetail from './src/screens/InboxDetail';
 import Settings from './src/screens/Settings';
 import Profile from './src/screens/Profile';
 import Permissions from './src/screens/Permissions';
@@ -64,9 +64,7 @@ const RootStack = createNativeStackNavigator({
     Home: {screen: MenuScreen, options: {title: menus.Home.title}},
     NotificationMenu: {screen: MenuScreen, options: {title: menus.NotificationMenu.title}},
     UserMenu: {screen: MenuScreen, options: {title: menus.UserMenu.title}},
-    InboxMenu: {screen: MenuScreen, options: {title: menus.InboxMenu.title}},
     Core: Core,
-    Category: {screen: Category, options: {title: 'Inbox Categories'}},
     UserCategoryPreferences: {
       screen: UserCategoryPreferences,
       options: {title: 'Category Preferences'},
@@ -79,7 +77,8 @@ const RootStack = createNativeStackNavigator({
     CommerceEvents: {screen: EventList, options: {title: 'Commerce Events'}},
     MediaEvents: {screen: EventList, options: {title: 'Media Events'}},
     GeneralEvents: {screen: EventList, options: {title: 'General Events'}},
-    PushInbox: {screen: PushInbox, options: {title: 'Inbox'}},
+    Inbox: Inbox,
+    InboxDetail: {screen: InboxDetail, options: {title: 'Message', presentation: 'modal'}},
     User: {screen: User, options: {title: 'User Identify'}},
     Profile: {screen: Profile, options: {title: 'User Update'}},
     Settings: Settings,

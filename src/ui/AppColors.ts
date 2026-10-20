@@ -17,6 +17,7 @@ const AppColors = {
   success: '#34C759',
   warning: '#FF9500',
   destructive: '#FF3B30',
+  destructiveBackground: '#FF3B301A',
 };
 
 export default AppColors;

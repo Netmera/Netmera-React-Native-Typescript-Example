@@ -5,7 +5,6 @@
 type Screen =
   | 'NotificationMenu'
   | 'UserMenu'
-  | 'InboxMenu'
   | 'Core'
   | 'Settings'
   | 'InAppMessages'
@@ -17,8 +16,7 @@ type Screen =
   | 'Coupons'
   | 'Events'
   | 'Autotracking'
-  | 'PushInbox'
-  | 'Category';
+  | 'Inbox';
 
 export interface MenuEntry {
   id: string;
@@ -73,7 +71,7 @@ export const menus = {
         id: 'inbox',
         title: 'Inbox',
         subtitle: 'To view and manage inbox messages with filtering options.',
-        screen: 'InboxMenu',
+        screen: 'Inbox',
       },
       {
         id: 'location',
@@ -116,14 +114,6 @@ export const menus = {
         screen: 'CategoryChannelList',
       },
       {id: 'coupons', title: 'Coupons', screen: 'Coupons'},
-    ],
-  },
-  InboxMenu: {
-    id: 'inbox',
-    title: 'Inbox',
-    entries: [
-      {id: 'messages', title: 'Inbox', screen: 'PushInbox'},
-      {id: 'categories', title: 'Inbox Categories', screen: 'Category'},
     ],
   },
 } satisfies Record<string, Menu>;
