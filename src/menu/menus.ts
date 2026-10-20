@@ -17,6 +17,10 @@ type Screen =
   | 'Coupons'
   | 'Events'
   | 'Autotracking'
+  | 'AutoTrackingAutomation'
+  | 'AutoTrackTest'
+  | 'AutoTrackFlatListTest'
+  | 'StackNavTest'
   | 'Inbox';
 
 export interface MenuEntry {
@@ -115,6 +119,20 @@ export const menus = {
         screen: 'CategoryChannelList',
       },
       {id: 'coupons', title: 'Coupons', screen: 'Coupons'},
+    ],
+  },
+  Autotracking: {
+    id: 'autotracking',
+    title: 'Autotracking',
+    entries: [
+      {
+        id: 'automation',
+        title: 'Autotracking Automation Tests',
+        screen: 'AutoTrackingAutomation',
+      },
+      {id: 'autotrackTest', title: 'Autotrack Test', screen: 'AutoTrackTest'},
+      {id: 'flatListTest', title: 'FlatList Test', screen: 'AutoTrackFlatListTest'},
+      {id: 'stackNavTest', title: 'Stack Navigation Test', screen: 'StackNavTest'},
     ],
   },
 } satisfies Record<string, Menu>;

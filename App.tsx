@@ -33,7 +33,10 @@ import Settings from './src/screens/Settings';
 import Profile from './src/screens/Profile';
 import Permissions from './src/screens/Permissions';
 import InAppMessages from './src/screens/InAppMessages';
-import AutoTracking from './src/screens/AutoTracking';
+import AutoTrackingAutomation, {
+  AutoTrackingAutomationModal,
+  AutoTrackingAutomationPlain,
+} from './src/screens/AutoTrackingAutomation';
 import AutoTrackTest from './src/screens/AutoTrackTest';
 import AutoTrackFlatListTest from './src/screens/AutoTrackFlatListTest';
 import StackNavTest from './src/screens/StackNavTest';
@@ -86,7 +89,19 @@ const RootStack = createNativeStackNavigator({
     Location: Location,
     Permissions: {screen: Permissions, options: {title: 'User Settings'}},
     InAppMessages: {screen: InAppMessages, options: {title: 'In-App Messages'}},
-    Autotracking: AutoTracking,
+    Autotracking: {screen: MenuScreen, options: {title: menus.Autotracking.title}},
+    AutoTrackingAutomation: {
+      screen: AutoTrackingAutomation,
+      options: {title: 'Autotracking Automation'},
+    },
+    AutoTrackingAutomationPlain: {
+      screen: AutoTrackingAutomationPlain,
+      options: {title: 'Plain Screen'},
+    },
+    AutoTrackingAutomationModal: {
+      screen: AutoTrackingAutomationModal,
+      options: {presentation: 'fullScreenModal', headerShown: false},
+    },
     AutoTrackTest: AutoTrackTest,
     AutoTrackFlatListTest: AutoTrackFlatListTest,
     StackNavTest: {screen: StackNavTest, options: {headerShown: false}},
