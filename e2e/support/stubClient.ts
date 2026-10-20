@@ -11,6 +11,16 @@ export async function reset(): Promise<void> {
   await fetch(`${baseUrl}/__stub/reset`, {method: 'POST'});
 }
 
+export async function respond(pathContains: string, body: unknown): Promise<void> {
+  const response = await fetch(`${baseUrl}/__stub/responses`, {
+    method: 'POST',
+    body: JSON.stringify({pathContains, body}),
+  });
+  if (!response.ok) {
+    throw new Error(`Stub rejected the response for "${pathContains}"`);
+  }
+}
+
 export async function waitForRequest(
   pathContains: string,
   {after = 0, bodyContains = '', timeoutMs = 20000} = {},
