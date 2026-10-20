@@ -19,6 +19,7 @@ import Coupons from './src/screens/Coupons';
 import Core from './src/screens/Core';
 import Events from './src/screens/Events';
 import EventList from './src/screens/EventList';
+import Location from './src/screens/Location';
 import Toast from 'react-native-toast-message';
 import PushEventModal from './src/components/PushEventModal';
 import UserCategoryPreferences from './src/screens/UserCategoryPreferences';
@@ -82,6 +83,7 @@ const RootStack = createNativeStackNavigator({
     User: {screen: User, options: {title: 'User Identify'}},
     Profile: {screen: Profile, options: {title: 'User Update'}},
     Settings: Settings,
+    Location: Location,
     Permissions: {screen: Permissions, options: {title: 'User Settings'}},
     InAppMessages: {screen: InAppMessages, options: {title: 'In-App Messages'}},
     Autotracking: AutoTracking,
