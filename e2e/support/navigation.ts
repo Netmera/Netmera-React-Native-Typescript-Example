@@ -51,7 +51,7 @@ async function withPushCallbacksClosed(step: () => Promise<unknown>): Promise<vo
   }
 }
 
-async function closePushCallbacks(): Promise<boolean> {
+export async function closePushCallbacks(): Promise<boolean> {
   const closeButton = element(by.id('pushCallbacks.close'));
   try {
     await expect(closeButton).toBeVisible();

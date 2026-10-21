@@ -43,6 +43,7 @@ import AutoTrackFlatListTest from './src/screens/AutoTrackFlatListTest';
 import StackNavTest from './src/screens/StackNavTest';
 import {Netmera, NetmeraAnalyticProvider} from 'react-native-netmera';
 import {isAndroid} from './src/helpers/DeviceUtils';
+import {deliverTestPush} from './src/helpers/TestPush';
 import MenuScreen from './src/menu/MenuScreen';
 import {menus} from './src/menu/menus';
 import AppColors from './src/ui/AppColors';
@@ -136,6 +137,9 @@ const App = () => {
     });
 
     Linking.addEventListener('url', event => {
+      if (deliverTestPush(event.url)) {
+        return;
+      }
       console.log('Linking foreground url: ', event.url);
       Toast.show({
         type: 'success',
