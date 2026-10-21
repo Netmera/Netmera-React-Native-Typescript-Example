@@ -1,8 +1,8 @@
 import {by, device, system} from 'detox';
+import {tapAndroidSystemElement} from './androidSystemUi';
 import {ANDROID_PACKAGE, adbShell, launchAppWithStub} from './launchApp';
 
 const POST_NOTIFICATIONS = 'android.permission.POST_NOTIFICATIONS';
-const PROMPT_TIMEOUT_MS = 10000;
 
 const IOS_PROMPT_BUTTONS = {allow: 'Allow', deny: 'Don’t Allow'};
 const ANDROID_PROMPT_BUTTONS = {
@@ -45,47 +45,8 @@ export async function answerNotificationPrompt(
   await device.disableSynchronization();
   try {
     await openPrompt();
-    // Detox cannot reach system windows on Android; UiAutomator finds the button by its stable id.
-    const [x, y] = await waitForAndroidButtonCenter(ANDROID_PROMPT_BUTTONS[answer]);
-    adbShell(['input', 'tap', String(x), String(y)]);
+    await tapAndroidSystemElement('resource-id', ANDROID_PROMPT_BUTTONS[answer]);
   } finally {
     await device.enableSynchronization();
-  }
-}
-
-async function waitForAndroidButtonCenter(resourceId: string): Promise<[number, number]> {
-  const bounds = new RegExp(
-    `resource-id="${resourceId}"[^>]*bounds="\\[(\\d+),(\\d+)\\]\\[(\\d+),(\\d+)\\]"`,
-  );
-  const deadline = Date.now() + PROMPT_TIMEOUT_MS;
-  while (Date.now() < deadline) {
-    const match = bounds.exec(dumpAndroidScreen());
-    if (match) {
-      const [left, top, right, bottom] = match.slice(1).map(Number);
-      return [Math.round((left + right) / 2), Math.round((top + bottom) / 2)];
-    }
-    await new Promise(resolve => setTimeout(resolve, 500));
-  }
-  throw new Error(`The system prompt button "${resourceId}" did not appear`);
-}
-
-// A dump taken during an animation fails, and an older file must not be read instead.
-function dumpAndroidScreen(): string {
-  try {
-    return adbShell([
-      'rm',
-      '-f',
-      '/sdcard/ui.xml',
-      '&&',
-      'uiautomator',
-      'dump',
-      '/sdcard/ui.xml',
-      '>/dev/null',
-      '&&',
-      'cat',
-      '/sdcard/ui.xml',
-    ]);
-  } catch {
-    return '';
   }
 }
