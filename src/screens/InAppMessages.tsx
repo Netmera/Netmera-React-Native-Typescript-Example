@@ -3,140 +3,81 @@
  */
 
 import React, {useState} from 'react';
-import {
-  ScrollView,
-  StyleSheet,
-  TextInput,
-  TouchableOpacity,
-  Text,
-  View,
-} from 'react-native';
-import Colors from '../Colors';
+import {ScrollView, StyleSheet, View} from 'react-native';
 import {Netmera} from 'react-native-netmera';
+import Button from '../ui/Button';
+import SectionHeader from '../ui/SectionHeader';
+import SwitchRow from '../ui/SwitchRow';
+import TextField from '../ui/TextField';
+import AppColors from '../ui/AppColors';
 
-const enum PopUpPresentationState {
-  PopUpPresentationEnabled = 'PopUpPresentationEnabled',
-  PopUpPresentationDisabled = 'PopUpPresentationDisabled',
-}
+const FULLSCREEN_WIDGET_URL = 'https://ntm.netmera-web.com/container/androidsdk-widget-2_5.html';
+const POPUP_WIDGET_URL = 'https://ntm.netmera-web.com/container/androidsdk-widget-3_1.html';
 
 const InAppMessages = () => {
-  const [popUpPresentationState, setPopUpPresentationState] =
-    useState<PopUpPresentationState>(
-      PopUpPresentationState.PopUpPresentationEnabled,
-    );
-  const [widgetUrl, setWidgetUrl] = useState<string>('');
+  // index.js enables popup presentation at launch.
+  const [popupEnabled, setPopupEnabled] = useState(true);
+  const [widgetUrl, setWidgetUrl] = useState('');
 
-  const disableOrEnablePopUpPresentation = () => {
-    if (
-      popUpPresentationState === PopUpPresentationState.PopUpPresentationEnabled
-    ) {
-      Netmera.disablePopupPresentation();
-      setPopUpPresentationState(
-        PopUpPresentationState.PopUpPresentationDisabled,
-      );
-    } else {
+  const changePopupPresentation = (enabled: boolean) => {
+    if (enabled) {
       Netmera.enablePopupPresentation();
-      setPopUpPresentationState(
-        PopUpPresentationState.PopUpPresentationEnabled,
-      );
+    } else {
+      Netmera.disablePopupPresentation();
     }
+    setPopupEnabled(enabled);
   };
 
-  const displayWidgetFullscreen = () => {
-    Netmera.displayWidgetContent(
-      widgetUrl.trim() ||
-        'https://ntm.netmera-web.com/container/androidsdk-widget-2_5.html',
-    );
-  };
-
-  const displayWidgetPopup = () => {
-    Netmera.displayWidgetContent(
-      widgetUrl.trim() ||
-        'https://ntm.netmera-web.com/container/androidsdk-widget-3_1.html',
-    );
+  const displayWidget = (defaultUrl: string) => {
+    Netmera.displayWidgetContent(widgetUrl.trim() || defaultUrl);
   };
 
   return (
-    <View style={styles.container}>
-      <ScrollView contentContainerStyle={styles.content}>
-        <View style={styles.row}>
-          <TouchableOpacity
-            style={[styles.button, {flex: 1}]}
-            activeOpacity={0.6}
-            onPress={disableOrEnablePopUpPresentation}>
-            <Text style={styles.text}>
-              {popUpPresentationState ===
-              PopUpPresentationState.PopUpPresentationDisabled
-                ? 'ENABLE POPUP PRES.'
-                : 'DISABLE POPUP PRES.'}
-            </Text>
-          </TouchableOpacity>
-        </View>
-
-        <TextInput
-          style={styles.input}
+    <ScrollView
+      testID="inAppMessages"
+      contentInsetAdjustmentBehavior="automatic"
+      keyboardShouldPersistTaps="handled"
+      style={styles.container}>
+      <SwitchRow
+        testID="inAppMessages.popupPresentation"
+        title="Popup Presentation"
+        value={popupEnabled}
+        showDivider={false}
+        onValueChange={changePopupPresentation}
+      />
+      <SectionHeader title="Widget" />
+      <View style={styles.group}>
+        <TextField
+          testID="inAppMessages.widgetUrl"
           placeholder="Widget URL"
-          placeholderTextColor={Colors.dark}
+          keyboardType="url"
           value={widgetUrl}
           onChangeText={setWidgetUrl}
-          autoCapitalize="none"
-          autoCorrect={false}
         />
-
-        <View style={styles.row}>
-          <TouchableOpacity
-            style={[styles.button, {flex: 1}]}
-            activeOpacity={0.6}
-            onPress={displayWidgetFullscreen}>
-            <Text style={styles.text}>DISPLAY WIDGET FULLSCREEN</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={[styles.button, {flex: 1}]}
-            activeOpacity={0.6}
-            onPress={displayWidgetPopup}>
-            <Text style={styles.text}>DISPLAY WIDGET POPUP</Text>
-          </TouchableOpacity>
-        </View>
-      </ScrollView>
-    </View>
+        <Button
+          testID="inAppMessages.displayWidgetFullscreen"
+          title="Display Widget Fullscreen"
+          onPress={() => displayWidget(FULLSCREEN_WIDGET_URL)}
+        />
+        <Button
+          testID="inAppMessages.displayWidgetPopup"
+          title="Display Widget Popup"
+          onPress={() => displayWidget(POPUP_WIDGET_URL)}
+        />
+      </View>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: AppColors.groupedBackground,
   },
-  content: {
-    paddingHorizontal: 16,
-    paddingVertical: 12,
-  },
-  button: {
-    marginBottom: 10,
-    borderRadius: 4,
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingVertical: 10,
-    backgroundColor: Colors.primary,
-  },
-  text: {
-    fontWeight: '600',
-    fontSize: 13,
-    color: Colors.white,
-  },
-  row: {
-    flexDirection: 'row',
-    gap: 8,
-  },
-  input: {
-    borderWidth: 1,
-    borderColor: Colors.light,
-    borderRadius: 4,
-    paddingHorizontal: 12,
-    paddingVertical: 8,
-    marginBottom: 10,
-    fontSize: 13,
-    color: Colors.black,
-    backgroundColor: Colors.lighter,
+  group: {
+    gap: 12,
+    padding: 16,
+    backgroundColor: AppColors.surface,
   },
 });
 

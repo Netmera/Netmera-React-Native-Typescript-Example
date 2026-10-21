@@ -3,12 +3,11 @@
  */
 
 type Screen =
-  | 'NotificationMenu'
+  | 'Notification'
   | 'UserMenu'
   | 'Core'
   | 'Location'
   | 'Settings'
-  | 'InAppMessages'
   | 'User'
   | 'Profile'
   | 'Permissions'
@@ -52,7 +51,7 @@ export const menus = {
         title: 'Notification',
         subtitle:
           'To manage notification permissions and handle push notification delegation.',
-        screen: 'NotificationMenu',
+        screen: 'Notification',
       },
       {
         id: 'user',
@@ -91,14 +90,6 @@ export const menus = {
         subtitle: 'NetmeraIdentifiers, NetmeraDeviceInfo and Token.',
         screen: 'Settings',
       },
-    ],
-  },
-  NotificationMenu: {
-    id: 'notification',
-    title: 'Notification',
-    entries: [
-      {id: 'settings', title: 'Settings', screen: 'Settings'},
-      {id: 'inAppMessages', title: 'In-App Messages', screen: 'InAppMessages'},
     ],
   },
   UserMenu: {

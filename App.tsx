@@ -20,6 +20,7 @@ import Core from './src/screens/Core';
 import Events from './src/screens/Events';
 import EventList from './src/screens/EventList';
 import Location from './src/screens/Location';
+import Notification from './src/screens/Notification';
 import Toast from 'react-native-toast-message';
 import PushEventModal from './src/components/PushEventModal';
 import UserCategoryPreferences from './src/screens/UserCategoryPreferences';
@@ -66,7 +67,7 @@ const RootStack = createNativeStackNavigator({
   ),
   screens: {
     Home: {screen: MenuScreen, options: {title: menus.Home.title}},
-    NotificationMenu: {screen: MenuScreen, options: {title: menus.NotificationMenu.title}},
+    Notification: Notification,
     UserMenu: {screen: MenuScreen, options: {title: menus.UserMenu.title}},
     Core: Core,
     UserCategoryPreferences: {
