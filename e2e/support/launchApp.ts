@@ -69,9 +69,11 @@ function writeAndroidCustomEnvironment(): void {
   );
 }
 
-export function adbShell(args: string[], input?: string): void {
+export function adbShell(args: string[], input?: string): string {
   const sdkRoot = process.env.ANDROID_SDK_ROOT ?? process.env.ANDROID_HOME ?? '';
-  execFileSync(path.join(sdkRoot, 'platform-tools', 'adb'), ['-s', device.id, 'shell', ...args], {
-    input,
-  });
+  return execFileSync(
+    path.join(sdkRoot, 'platform-tools', 'adb'),
+    ['-s', device.id, 'shell', ...args],
+    {input},
+  ).toString();
 }
