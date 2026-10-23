@@ -2,64 +2,91 @@
  * Copyright (c) 2026 Netmera Research.
  */
 
-import React, {useState} from 'react';
-import {
-  ScrollView,
-  StyleSheet,
-  Switch,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import React, {ReactNode, useState} from 'react';
+import {ScrollView, StyleSheet, Switch, Text, View} from 'react-native';
 import Toast from 'react-native-toast-message';
-import Colors from '../Colors';
 import {Netmera, Gender} from 'react-native-netmera';
 import {MyNetmeraUserProfile} from '../models/MyNetmeraUserProfile';
+import TextField from '../ui/TextField';
+import Button from '../ui/Button';
+import SectionHeader from '../ui/SectionHeader';
+import OperationSelector, {Operation} from '../ui/OperationSelector';
+import AppColors from '../ui/AppColors';
 
-type FieldOperation = 'none' | 'set' | 'unset';
-type CollectionOperation = 'none' | 'set' | 'unset' | 'add' | 'remove';
+const FIELD_OPS: Operation[] = ['set', 'unset'];
+const COLLECTION_OPS: Operation[] = ['set', 'unset', 'add', 'remove'];
+
+const toSegments = (text: string): string[] =>
+  text
+    .split(',')
+    .map(s => s.trim())
+    .filter(s => s.length > 0);
+
+const toNumbers = (text: string): number[] =>
+  text
+    .split(',')
+    .map(s => Number(s.trim()))
+    .filter(n => !isNaN(n));
+
+interface AttributeInputProps {
+  id: string;
+  title: string;
+  options: Operation[];
+  operation: Operation | null;
+  onOperationChange: (operation: Operation | null) => void;
+  children: ReactNode;
+}
+
+const AttributeInput = ({
+  id,
+  title,
+  options,
+  operation,
+  onOperationChange,
+  children,
+}: AttributeInputProps) => (
+  <View style={styles.attribute}>
+    <Text style={styles.attributeTitle}>{title}</Text>
+    <OperationSelector
+      label={title}
+      testID={`userProfile.${id}.operation`}
+      options={options}
+      selected={operation}
+      onChange={onOperationChange}
+    />
+    {children}
+  </View>
+);
 
 const Profile = () => {
   const [name, setName] = useState('');
-  const [nameOp, setNameOp] = useState<FieldOperation>('none');
+  const [nameOp, setNameOp] = useState<Operation | null>(null);
 
   const [surname, setSurname] = useState('');
-  const [surnameOp, setSurnameOp] = useState<FieldOperation>('none');
+  const [surnameOp, setSurnameOp] = useState<Operation | null>(null);
 
   const [gender, setGender] = useState('');
-  const [genderOp, setGenderOp] = useState<FieldOperation>('none');
+  const [genderOp, setGenderOp] = useState<Operation | null>(null);
 
   const [segments1, setSegments1] = useState('');
-  const [segments1Op, setSegments1Op] = useState<CollectionOperation>('none');
+  const [segments1Op, setSegments1Op] = useState<Operation | null>(null);
 
   const [segments2, setSegments2] = useState('');
-  const [segments2Op, setSegments2Op] = useState<CollectionOperation>('none');
+  const [segments2Op, setSegments2Op] = useState<Operation | null>(null);
 
   const [lastLoginPlatform, setLastLoginPlatform] = useState('');
-  const [lastLoginPlatformOp, setLastLoginPlatformOp] = useState<FieldOperation>('none');
+  const [lastLoginPlatformOp, setLastLoginPlatformOp] = useState<Operation | null>(null);
 
   const [loginCount, setLoginCount] = useState('');
-  const [loginCountOp, setLoginCountOp] = useState<FieldOperation>('none');
+  const [loginCountOp, setLoginCountOp] = useState<Operation | null>(null);
 
   const [isLuckyNumbersEnabled, setIsLuckyNumbersEnabled] = useState(false);
-  const [isLuckyNumbersEnabledOp, setIsLuckyNumbersEnabledOp] =
-    useState<FieldOperation>('none');
+  const [isLuckyNumbersEnabledOp, setIsLuckyNumbersEnabledOp] = useState<Operation | null>(
+    null,
+  );
 
   const [luckyNumbers, setLuckyNumbers] = useState('');
-  const [luckyNumbersOp, setLuckyNumbersOp] = useState<CollectionOperation>('none');
-
-  const toSegments = (text: string): string[] =>
-    text
-      .split(',')
-      .map(s => s.trim())
-      .filter(s => s.length > 0);
-
-  const toNumbers = (text: string): number[] =>
-    text
-      .split(',')
-      .map(s => Number(s.trim()))
-      .filter(n => !isNaN(n));
+  const [luckyNumbersOp, setLuckyNumbersOp] = useState<Operation | null>(null);
 
   const buildProfile = (): MyNetmeraUserProfile => {
     const profile = new MyNetmeraUserProfile();
@@ -141,7 +168,11 @@ const Profile = () => {
     return profile;
   };
 
-  const updateProfileWithCallback = () => {
+  const updateUser = () => {
+    Netmera.updateUserProfile(buildProfile());
+  };
+
+  const updateUserWithCallback = () => {
     Netmera.updateUserProfile(buildProfile(), (success, error) => {
       if (success) {
         Toast.show({type: 'success', text1: 'User profile updated successfully!'});
@@ -154,254 +185,164 @@ const Profile = () => {
     });
   };
 
-  const updateProfileAsync = () => {
-    Netmera.updateUserProfile(buildProfile());
-  };
-
-  const OpButtons = ({
-    value,
-    onChange,
-    options,
-  }: {
-    value: string;
-    onChange: (v: any) => void;
-    options: string[];
-  }) => (
-    <View style={styles.opRow}>
-      {options.map(op => (
-        <TouchableOpacity
-          key={op}
-          style={[styles.opButton, value === op && styles.opButtonActive]}
-          onPress={() => onChange(value === op ? 'none' : op)}>
-          <Text
-            style={[styles.opButtonText, value === op && styles.opButtonTextActive]}>
-            {op.toUpperCase()}
-          </Text>
-        </TouchableOpacity>
-      ))}
-    </View>
-  );
-
   return (
-    <View style={styles.container}>
-      <ScrollView contentContainerStyle={styles.content}>
-        <Text style={styles.sectionLabel}>Name</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Name"
-          placeholderTextColor={Colors.dark}
-          value={name}
-          onChangeText={setName}
-        />
-        <OpButtons value={nameOp} onChange={setNameOp} options={['set', 'unset']} />
+    <ScrollView
+      testID="userProfile.scroll"
+      contentInsetAdjustmentBehavior="automatic"
+      keyboardShouldPersistTaps="handled"
+      style={styles.container}>
+      <View style={styles.section}>
+        <AttributeInput
+          id="name"
+          title="Name"
+          options={FIELD_OPS}
+          operation={nameOp}
+          onOperationChange={setNameOp}>
+          <TextField
+            testID="userProfile.name.value"
+            placeholder="Value..."
+            value={name}
+            onChangeText={setName}
+          />
+        </AttributeInput>
+        <AttributeInput
+          id="surname"
+          title="Surname"
+          options={FIELD_OPS}
+          operation={surnameOp}
+          onOperationChange={setSurnameOp}>
+          <TextField
+            testID="userProfile.surname.value"
+            placeholder="Value..."
+            value={surname}
+            onChangeText={setSurname}
+          />
+        </AttributeInput>
+        <AttributeInput
+          id="gender"
+          title="Gender (MALE:0, FEMALE:1, NOT_SPECIFIED:2)"
+          options={FIELD_OPS}
+          operation={genderOp}
+          onOperationChange={setGenderOp}>
+          <TextField
+            testID="userProfile.gender.value"
+            placeholder="Value..."
+            keyboardType="numeric"
+            value={gender}
+            onChangeText={setGender}
+          />
+        </AttributeInput>
+        <AttributeInput
+          id="externalSegments1"
+          title="External Segments"
+          options={COLLECTION_OPS}
+          operation={segments1Op}
+          onOperationChange={setSegments1Op}>
+          <TextField
+            testID="userProfile.externalSegments1.value"
+            placeholder="seg1,seg2"
+            value={segments1}
+            onChangeText={setSegments1}
+          />
+        </AttributeInput>
+        <AttributeInput
+          id="externalSegments2"
+          title="External Segments"
+          options={COLLECTION_OPS}
+          operation={segments2Op}
+          onOperationChange={setSegments2Op}>
+          <TextField
+            testID="userProfile.externalSegments2.value"
+            placeholder="seg1,seg2"
+            value={segments2}
+            onChangeText={setSegments2}
+          />
+        </AttributeInput>
+      </View>
 
-        <Text style={styles.sectionLabel}>Surname</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Surname"
-          placeholderTextColor={Colors.dark}
-          value={surname}
-          onChangeText={setSurname}
-        />
-        <OpButtons value={surnameOp} onChange={setSurnameOp} options={['set', 'unset']} />
-
-        <Text style={styles.sectionLabel}>MALE:0, FEMALE:1, NOT_SPECIFIED:2</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Gender"
-          placeholderTextColor={Colors.dark}
-          keyboardType="numeric"
-          value={gender}
-          onChangeText={setGender}
-        />
-        <OpButtons value={genderOp} onChange={setGenderOp} options={['set', 'unset']} />
-
-        <Text style={styles.sectionLabel}>Segments e.g. seg1,seg2</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Segments"
-          placeholderTextColor={Colors.dark}
-          value={segments1}
-          onChangeText={setSegments1}
-        />
-        <OpButtons
-          value={segments1Op}
-          onChange={setSegments1Op}
-          options={['set', 'unset', 'add', 'remove']}
-        />
-
-        <Text style={styles.sectionLabel}>Segments e.g. seg1,seg2</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Segments"
-          placeholderTextColor={Colors.dark}
-          value={segments2}
-          onChangeText={setSegments2}
-        />
-        <OpButtons
-          value={segments2Op}
-          onChange={setSegments2Op}
-          options={['set', 'unset', 'add', 'remove']}
-        />
-
-        <View style={styles.divider} />
-        <Text style={styles.groupLabel}>Custom Attributes</Text>
-
-        <Text style={styles.sectionLabel}>Last Login Platform (string)</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Last Login Platform"
-          placeholderTextColor={Colors.dark}
-          value={lastLoginPlatform}
-          onChangeText={setLastLoginPlatform}
-        />
-        <OpButtons
-          value={lastLoginPlatformOp}
-          onChange={setLastLoginPlatformOp}
-          options={['set', 'unset']}
-        />
-
-        <Text style={styles.sectionLabel}>Login Count (number)</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Login Count"
-          placeholderTextColor={Colors.dark}
-          keyboardType="numeric"
-          value={loginCount}
-          onChangeText={setLoginCount}
-        />
-        <OpButtons
-          value={loginCountOp}
-          onChange={setLoginCountOp}
-          options={['set', 'unset']}
-        />
-
-        <View style={styles.switchRow}>
-          <Text style={styles.switchLabel}>Is Lucky Numbers Enabled (boolean)</Text>
+      <SectionHeader title="Custom Attributes" />
+      <View style={styles.section}>
+        <AttributeInput
+          id="lastLoginPlatform"
+          title="Last Login Platform (string)"
+          options={FIELD_OPS}
+          operation={lastLoginPlatformOp}
+          onOperationChange={setLastLoginPlatformOp}>
+          <TextField
+            testID="userProfile.lastLoginPlatform.value"
+            placeholder="Value..."
+            value={lastLoginPlatform}
+            onChangeText={setLastLoginPlatform}
+          />
+        </AttributeInput>
+        <AttributeInput
+          id="loginCount"
+          title="Login Count (number)"
+          options={FIELD_OPS}
+          operation={loginCountOp}
+          onOperationChange={setLoginCountOp}>
+          <TextField
+            testID="userProfile.loginCount.value"
+            placeholder="Value..."
+            keyboardType="numeric"
+            value={loginCount}
+            onChangeText={setLoginCount}
+          />
+        </AttributeInput>
+        <AttributeInput
+          id="isLuckyNumbersEnabled"
+          title="Is Lucky Numbers Enabled (boolean)"
+          options={FIELD_OPS}
+          operation={isLuckyNumbersEnabledOp}
+          onOperationChange={setIsLuckyNumbersEnabledOp}>
           <Switch
+            testID="userProfile.isLuckyNumbersEnabled.value"
+            accessibilityLabel="Is Lucky Numbers Enabled"
             value={isLuckyNumbersEnabled}
             onValueChange={setIsLuckyNumbersEnabled}
           />
-        </View>
-        <OpButtons
-          value={isLuckyNumbersEnabledOp}
-          onChange={setIsLuckyNumbersEnabledOp}
-          options={['set', 'unset']}
-        />
+        </AttributeInput>
+        <AttributeInput
+          id="luckyNumbers"
+          title="Lucky Numbers e.g. 0,1,2 (number[])"
+          options={COLLECTION_OPS}
+          operation={luckyNumbersOp}
+          onOperationChange={setLuckyNumbersOp}>
+          <TextField
+            testID="userProfile.luckyNumbers.value"
+            placeholder="0,1,2"
+            value={luckyNumbers}
+            onChangeText={setLuckyNumbers}
+          />
+        </AttributeInput>
 
-        <Text style={styles.sectionLabel}>Lucky Numbers e.g. 0,1,2 (number[])</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Lucky Numbers"
-          placeholderTextColor={Colors.dark}
-          value={luckyNumbers}
-          onChangeText={setLuckyNumbers}
+        <Button testID="userProfile.submit" title="Update User" onPress={updateUser} />
+        <Button
+          testID="userProfile.submitWithCallback"
+          title="Update User With Callback"
+          variant="callback"
+          onPress={updateUserWithCallback}
         />
-        <OpButtons
-          value={luckyNumbersOp}
-          onChange={setLuckyNumbersOp}
-          options={['set', 'unset', 'add', 'remove']}
-        />
-
-        <TouchableOpacity
-          style={[styles.button, {marginTop: 16}]}
-          activeOpacity={0.6}
-          onPress={updateProfileWithCallback}>
-          <Text style={styles.buttonText}>UPDATE PROFILE ATTRIBUTES</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={styles.button}
-          activeOpacity={0.6}
-          onPress={updateProfileAsync}>
-          <Text style={styles.buttonText}>UPDATE PROFILE ATTRIBUTES (No Callback)</Text>
-        </TouchableOpacity>
-      </ScrollView>
-    </View>
+      </View>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: AppColors.surface,
   },
-  content: {
-    paddingHorizontal: 24,
-    paddingVertical: 16,
+  section: {
+    padding: 16,
+    gap: 20,
   },
-  sectionLabel: {
-    fontSize: 14,
-    fontWeight: '500',
-    color: Colors.black,
-    marginTop: 12,
-    marginBottom: 4,
-  },
-  divider: {
-    marginTop: 16,
-    marginBottom: 4,
-    height: 1,
-    backgroundColor: Colors.light,
-  },
-  groupLabel: {
-    fontSize: 16,
-    fontWeight: '700',
-    color: Colors.black,
-    marginBottom: 4,
-  },
-  input: {
-    color: Colors.black,
-    borderColor: Colors.primary,
-    borderWidth: 1,
-    borderRadius: 4,
-    height: 44,
-    paddingHorizontal: 10,
-    marginBottom: 4,
-  },
-  opRow: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
+  attribute: {
     gap: 8,
-    marginBottom: 8,
   },
-  opButton: {
-    borderWidth: 1,
-    borderColor: Colors.primary,
-    borderRadius: 4,
-    paddingHorizontal: 12,
-    paddingVertical: 6,
-  },
-  opButtonActive: {
-    backgroundColor: Colors.primary,
-  },
-  opButtonText: {
-    fontSize: 12,
-    color: Colors.primary,
-  },
-  opButtonTextActive: {
-    color: Colors.white,
-  },
-  switchRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    marginVertical: 12,
-  },
-  switchLabel: {
-    fontSize: 14,
-    color: Colors.black,
-  },
-  button: {
-    marginBottom: 12,
-    borderRadius: 4,
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingVertical: 12,
-    backgroundColor: Colors.primary,
-  },
-  buttonText: {
-    fontWeight: '600',
-    fontSize: 13,
-    color: Colors.white,
+  attributeTitle: {
+    fontSize: 15,
+    color: AppColors.label,
   },
 });
 

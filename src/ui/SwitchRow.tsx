@@ -4,7 +4,7 @@
 
 import React from 'react';
 import {StyleSheet, Switch, Text, View} from 'react-native';
-import Colors from '../Colors';
+import AppColors from './AppColors';
 
 interface Props {
   title: string;
@@ -12,19 +12,23 @@ interface Props {
   subtitleColor?: string;
   value: boolean;
   disabled?: boolean;
+  showDivider?: boolean;
+  testID?: string;
   onValueChange: (value: boolean) => void;
 }
 
-const SwitchStatusRow = ({
+const SwitchRow = ({
   title,
   subtitle,
   subtitleColor,
   value,
   disabled,
+  showDivider = true,
+  testID,
   onValueChange,
 }: Props) => (
   <View style={styles.row}>
-    <View style={styles.textContainer}>
+    <View style={styles.text}>
       <Text style={styles.title}>{title}</Text>
       {subtitle ? (
         <Text style={[styles.subtitle, subtitleColor ? {color: subtitleColor} : null]}>
@@ -32,32 +36,47 @@ const SwitchStatusRow = ({
         </Text>
       ) : null}
     </View>
-    <Switch value={value} disabled={disabled} onValueChange={onValueChange} />
+    <Switch
+      testID={testID}
+      accessibilityLabel={title}
+      value={value}
+      disabled={disabled}
+      onValueChange={onValueChange}
+    />
+    {showDivider ? <View style={styles.divider} /> : null}
   </View>
 );
 
 const styles = StyleSheet.create({
   row: {
+    minHeight: 56,
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',
     paddingHorizontal: 16,
-    paddingVertical: 12,
-    backgroundColor: Colors.white,
+    paddingVertical: 10,
+    backgroundColor: AppColors.surface,
   },
-  textContainer: {
+  text: {
     flex: 1,
-    paddingRight: 12,
+    marginRight: 12,
   },
   title: {
     fontSize: 16,
-    color: Colors.black,
+    color: AppColors.label,
   },
   subtitle: {
     marginTop: 2,
     fontSize: 12,
-    color: Colors.dark,
+    color: AppColors.mutedText,
+  },
+  divider: {
+    position: 'absolute',
+    left: 16,
+    right: 0,
+    bottom: 0,
+    height: 1,
+    backgroundColor: AppColors.divider,
   },
 });
 
-export default SwitchStatusRow;
+export default SwitchRow;

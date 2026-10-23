@@ -2,7 +2,7 @@
  * Copyright (c) 2026 Netmera Research.
  */
 
-import React, {useEffect, useLayoutEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   ScrollView,
   StyleSheet,
@@ -12,23 +12,11 @@ import {
 } from 'react-native';
 import Toast from 'react-native-toast-message';
 import Colors from '../Colors';
-import {Netmera, NotificationPermissionStatus} from 'react-native-netmera';
+import {Netmera} from 'react-native-netmera';
 import {pushToken} from '../../NetmeraPushHeadlessTask';
 
-const enum PushState {
-  PushEnabled = 'PushEnabled',
-  PushDisabled = 'PushDisabled',
-}
-
 const Settings = () => {
-  const [pushState, setPushState] = useState<PushState>(PushState.PushEnabled);
   const [pushTokenString, setPushTokenString] = useState<string>('');
-
-  useLayoutEffect(() => {
-    Netmera.isPushEnabled().then(enabled => {
-      setPushState(enabled ? PushState.PushEnabled : PushState.PushDisabled);
-    });
-  }, []);
 
   useEffect(() => {
     setTimeout(() => {
@@ -36,89 +24,12 @@ const Settings = () => {
     }, 1000);
   }, []);
 
-  const isPushEnabled = async () => {
-    const enabled = await Netmera.isPushEnabled();
-    Toast.show({
-      type: 'info',
-      text1: 'Is Push Enabled: ' + enabled,
-      position: 'bottom',
-    });
-  };
-
-  const changePushState = () => {
-    if (pushState === PushState.PushEnabled) {
-      setPushState(PushState.PushDisabled);
-      Netmera.disablePush();
-    } else {
-      setPushState(PushState.PushEnabled);
-      Netmera.enablePush();
-    }
-  };
-
-  const checkNotificationPermission = () => {
-    Netmera.checkNotificationPermission().then(status => {
-      let statusString;
-      switch (status) {
-        case NotificationPermissionStatus.NotDetermined:
-          statusString = 'NOT DETERMINED';
-          break;
-        case NotificationPermissionStatus.Blocked:
-          statusString = 'BLOCKED';
-          break;
-        case NotificationPermissionStatus.Denied:
-          statusString = 'DENIED';
-          break;
-        case NotificationPermissionStatus.Granted:
-          statusString = 'GRANTED';
-          break;
-        default:
-          statusString = 'UNDEFINED';
-          break;
-      }
-      Toast.show({
-        type: 'info',
-        text1: `Permission status :: ${statusString}`,
-        position: 'bottom',
-      });
-    });
-  };
-
-  const requestPushNotificationAuthorization = () => {
-    Netmera.requestPushNotificationAuthorization().then(status => {
-      if (status) {
-        setPushState(PushState.PushEnabled);
-      } else {
-        setPushState(PushState.PushDisabled);
-      } 
-    });
-  };
-
-  const enableLocationAndGeofence = () => {
-    Netmera.requestPermissionsForLocation();
-  };
-
-  const setNetmeraMaxActiveRegion = () => {
-    Netmera.setNetmeraMaxActiveRegions(10);
-  };
-
-  const enableData = () => {
-    Netmera.startDataTransfer();
-  };
-
-  const disableData = () => {
-    Netmera.stopDataTransfer();
-  };
-
   const currentExternalId = async () => {
     Toast.show({
       type: 'info',
       text1: 'Current External Id: ' + (await Netmera.currentExternalId()),
       position: 'bottom',
     });
-  };
-
-  const kill = () => {
-    Netmera.kill();
   };
 
   const toastPushToken = () => {
@@ -135,78 +46,8 @@ const Settings = () => {
         <TouchableOpacity
           style={styles.button}
           activeOpacity={0.6}
-          onPress={isPushEnabled}>
-          <Text style={styles.text}>IS PUSH ENABLED</Text>
-        </TouchableOpacity>
-
-        <View style={styles.row}>
-          <TouchableOpacity
-            style={[styles.button, {flex: 1}]}
-            activeOpacity={0.6}
-            onPress={changePushState}>
-            <Text style={styles.text}>
-              {pushState === PushState.PushEnabled
-                ? 'DISABLE PUSH'
-                : 'ENABLE PUSH'}
-            </Text>
-          </TouchableOpacity>
-        </View>
-
-        <TouchableOpacity
-          style={styles.button}
-          activeOpacity={0.6}
-          onPress={checkNotificationPermission}>
-          <Text style={styles.text}>CHECK NOTIFICATION PERMISSION</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={styles.button}
-          activeOpacity={0.6}
-          onPress={requestPushNotificationAuthorization}>
-          <Text style={styles.text}>REQUEST PUSH NOTIFICATION AUTHORIZATION</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={styles.button}
-          activeOpacity={0.6}
-          onPress={enableLocationAndGeofence}>
-          <Text style={styles.text}>REQUEST PERMISSION FOR LOCATION</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={styles.button}
-          activeOpacity={0.6}
-          onPress={setNetmeraMaxActiveRegion}>
-          <Text style={styles.text}>SET NETMERA MAX ACTIVE REGIONS</Text>
-        </TouchableOpacity>
-
-        <View style={styles.row}>
-          <TouchableOpacity
-            style={[styles.button, {flex: 1}]}
-            activeOpacity={0.6}
-            onPress={enableData}>
-            <Text style={styles.text}>START DATA TRANSFER</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={[styles.button, {flex: 1}]}
-            activeOpacity={0.6}
-            onPress={disableData}>
-            <Text style={styles.text}>STOP DATA TRANSFER</Text>
-          </TouchableOpacity>
-        </View>
-
-        <TouchableOpacity
-          style={styles.button}
-          activeOpacity={0.6}
           onPress={currentExternalId}>
           <Text style={styles.text}>CURRENT EXTERNAL ID</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={styles.button}
-          activeOpacity={0.6}
-          onPress={kill}>
-          <Text style={styles.text}>KILL NETMERA</Text>
         </TouchableOpacity>
 
         <View style={styles.deviceTokenContainer}>
@@ -244,10 +85,6 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     fontSize: 13,
     color: Colors.white,
-  },
-  row: {
-    flexDirection: 'row',
-    gap: 8,
   },
   deviceTokenContainer: {
     marginTop: 5,
