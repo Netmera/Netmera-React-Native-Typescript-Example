@@ -54,6 +54,62 @@ export async function answerIosLocationPrompt(
   await system.element(by.system.label(button)).tap();
 }
 
+export type Coordinate = {latitude: number; longitude: number};
+
+const ANDROID_TEST_PROVIDER = 'gps';
+
+/**
+ * Android: a platform test provider, which GMS geofencing picks up
+ * (same as android-demo's MockLocationProvider).
+ */
+export function installAndroidTestLocationProvider(): void {
+  adbShell(['appops', 'set', 'com.android.shell', 'android:mock_location', 'allow']);
+  adbShell(['cmd', 'location', 'providers', 'add-test-provider', ANDROID_TEST_PROVIDER]);
+  adbShell([
+    'cmd',
+    'location',
+    'providers',
+    'set-test-provider-enabled',
+    ANDROID_TEST_PROVIDER,
+    'true',
+  ]);
+}
+
+export function removeAndroidTestLocationProvider(): void {
+  adbShell(['cmd', 'location', 'providers', 'remove-test-provider', ANDROID_TEST_PROVIDER]);
+  adbShell(['appops', 'set', 'com.android.shell', 'android:mock_location', 'default']);
+}
+
+export function setAndroidTestLocation({latitude, longitude}: Coordinate): void {
+  adbShell([
+    'cmd',
+    'location',
+    'providers',
+    'set-test-provider-location',
+    ANDROID_TEST_PROVIDER,
+    '--location',
+    `${latitude},${longitude}`,
+    '--accuracy',
+    '5',
+  ]);
+}
+
+/**
+ * Moves the simulator along a route; region monitoring reacts to this,
+ * not reliably to an instant `set` (same as swift-demo's geofence tests).
+ */
+export function moveIosSimulator(from: Coordinate, to: Coordinate): void {
+  execFileSync('xcrun', [
+    'simctl',
+    'location',
+    device.id,
+    'start',
+    '--speed=150',
+    `${from.latitude},${from.longitude}`,
+    `${to.latitude},${to.longitude}`,
+  ]);
+}
+
 function revokeOnAndroid(permission: LocationPermission): void {
   REVOKED_ON_ANDROID[permission].forEach(name =>
     adbShell(['pm', 'revoke', ANDROID_PACKAGE, `android.permission.${name}`]),
