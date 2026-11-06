@@ -30,6 +30,7 @@ import AppColors from '../ui/AppColors';
 import {errorMessage} from '../helpers/CategoryChannelUtils';
 
 type Chip = {kind: 'all'} | {kind: 'unread'} | {kind: 'category'; name: string};
+type UpdateStatus = Parameters<typeof Netmera.inboxUpdateStatusForPushObjects>[1];
 
 interface Counts {
   total: number;
@@ -64,21 +65,6 @@ const formatDate = (sendDate?: string) => {
 const distinctCategoryCount = (categories: NetmeraCategory[]) =>
   new Set(categories.map(category => category.categoryName)).size;
 
-const toRanges = (indexes: number[]): [number, number][] => {
-  const ranges: [number, number][] = [];
-  [...indexes]
-    .sort((a, b) => a - b)
-    .forEach(index => {
-      const last = ranges[ranges.length - 1];
-      if (last && last[1] === index) {
-        last[1] = index + 1;
-      } else {
-        ranges.push([index, index + 1]);
-      }
-    });
-  return ranges;
-};
-
 const Inbox = () => {
   const navigation = useNavigation<any>();
 
@@ -90,14 +76,12 @@ const Inbox = () => {
   const [messages, setMessages] = useState<NetmeraPushObject[]>([]);
   const [hasNextPage, setHasNextPage] = useState(false);
   const [counts, setCounts] = useState<Counts>();
-  const [preferenceCategories, setPreferenceCategories] = useState<{id?: number; name: string}[]>(
-    [],
-  );
+  const [preferenceCategories, setPreferenceCategories] = useState<string[]>([]);
   const [summary, setSummary] = useState<NetmeraCategory[]>([]);
   const [loading, setLoading] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
   const [error, setError] = useState<string>();
-  // Only the latest request may write: index-based updates point into the SDK's last list.
+  // Only the latest request may write: the SDK keeps just the list of its last fetch.
   const fetchGeneration = useRef(0);
   const summaryGeneration = useRef(0);
 
@@ -105,7 +89,6 @@ const Inbox = () => {
   const [menuVisible, setMenuVisible] = useState(false);
 
   const selectedCategory = chip.kind === 'category' ? chip.name : undefined;
-  const selectedCategoryId = preferenceCategories.find(c => c.name === selectedCategory)?.id;
   const listStatus =
     chip.kind === 'unread'
       ? NMInboxStatus.STATUS_UNREAD
@@ -117,8 +100,8 @@ const Inbox = () => {
     const filter = new NMInboxStatusCountFilter();
     filter.nmInboxStatus = NMInboxStatus.STATUS_ALL;
     filter.includeExpired = includeExpired;
-    if (selectedCategoryId !== undefined) {
-      filter.categoryList = [selectedCategoryId];
+    if (selectedCategory) {
+      filter.categoryList = [selectedCategory];
     }
     try {
       const result = await Netmera.getInboxCountForStatus(filter);
@@ -131,7 +114,7 @@ const Inbox = () => {
     } catch {
       setCounts(undefined);
     }
-  }, [includeExpired, selectedCategoryId]);
+  }, [includeExpired, selectedCategory]);
 
   const loadCategorySummary = useCallback(async () => {
     const filter = new NetmeraCategoryFilter();
@@ -206,9 +189,7 @@ const Inbox = () => {
     try {
       const preferences = await Netmera.getUserCategoryPreferenceList();
       setPreferenceCategories(
-        preferences
-          .filter(preference => preference.categoryName)
-          .map(preference => ({id: preference.categoryId, name: preference.categoryName!})),
+        preferences.flatMap(preference => (preference.categoryName ? [preference.categoryName] : [])),
       );
     } catch {
       setPreferenceCategories([]);
@@ -294,14 +275,10 @@ const Inbox = () => {
     );
   };
 
-  const updateSelection = (status: NMInboxStatus) => {
-    const ranges = toRanges([...(selection ?? [])]);
+  const updateSelection = (status: UpdateStatus) => {
+    const selected = [...(selection ?? [])].map(index => messages[index]);
     setSelection(null);
-    runUpdate(async () => {
-      for (const [from, to] of ranges) {
-        await Netmera.inboxUpdateStatus(from, to, status);
-      }
-    });
+    runUpdate(() => Netmera.inboxUpdateStatusForPushObjects(selected, status));
   };
 
   const toggleSelected = (index: number) => {
@@ -316,17 +293,17 @@ const Inbox = () => {
     });
   };
 
-  const openMessage = async (message: NetmeraPushObject, index: number) => {
+  const openMessage = async (message: NetmeraPushObject) => {
     let opened = message;
     if (message.inboxStatus === NMInboxStatus.STATUS_UNREAD) {
       try {
-        await Netmera.inboxUpdateStatus(index, index + 1, NMInboxStatus.STATUS_READ);
+        await Netmera.inboxUpdateStatusForPushObjects([message], NMInboxStatus.STATUS_READ);
         opened = {...message, inboxStatus: NMInboxStatus.STATUS_READ};
       } catch (e) {
         Toast.show({type: 'error', text1: 'Something went wrong', text2: errorMessage(e)});
       }
     }
-    navigation.navigate('InboxDetail', {message: opened, index});
+    navigation.navigate('InboxDetail', {message: opened});
   };
 
   useLayoutEffect(() => {
@@ -365,7 +342,7 @@ const Inbox = () => {
     {kind: 'unread'},
     ...[
       ...new Set([
-        ...preferenceCategories.map(category => category.name),
+        ...preferenceCategories,
         ...summary
           .map(category => category.categoryName ?? '')
           .filter(Boolean)
@@ -456,7 +433,7 @@ const Inbox = () => {
             selected={selection?.has(index) ?? false}
             selecting={selection !== null}
             disabled={loading}
-            onPress={() => (selection ? toggleSelected(index) : openMessage(item, index))}
+            onPress={() => (selection ? toggleSelected(index) : openMessage(item))}
             onLongPress={() => setSelection(current => current ?? new Set([index]))}
           />
         )}
@@ -549,7 +526,7 @@ interface InboxRowProps {
   onLongPress: () => void;
 }
 
-// Disabled while fetching: actions go by index into the SDK's list, which may already differ.
+// Disabled while fetching: the SDK is replacing its list, which may no longer hold the message.
 const InboxRow = ({
   message,
   index,

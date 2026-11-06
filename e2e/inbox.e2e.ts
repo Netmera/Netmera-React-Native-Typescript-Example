@@ -12,7 +12,7 @@ const SET = 'inbox/set';
 const pushInstanceId = (n: number) =>
   device.getPlatform() === 'ios' ? `piid-${n}` : `ui-test-piid-${n}`;
 
-// Android messages carry an empty `prms` as the server sends it; see the skipped test below.
+// Android messages carry an empty `prms` as the server sends it; one test below leaves it out.
 const messages = (count: number) => ({
   msgs: Array.from({length: count}, (_, i) =>
     device.getPlatform() === 'ios'
@@ -80,16 +80,15 @@ describe('Inbox', () => {
     jestExpect((await bodyOf(COUNT, after)).st).toBe(7);
   });
 
-  // Bridge reads `includeExpiredObjects`; NMInboxStatusCountFilter sets `includeExpired`.
-  it.skip('the count carries Include expired [bridge bug]', async () => {
+  it('the count carries Include expired', async () => {
     const after = await stub.requestCount();
     await openInbox();
 
     jestExpect((await bodyOf(COUNT, after)).ie).toBe(true);
   });
 
-  // RN Android maps `prms` without a null check; the server always sends one today.
-  it.skip('a message without custom JSON is listed [bridge bug, Android]', async () => {
+  // The message below is in the Android format.
+  (device.getPlatform() === 'android' ? it : it.skip)('a message without custom JSON is listed', async () => {
     await stub.respond(FETCH, {
       msgs: [{pid: 'pid-1', piid: pushInstanceId(1), sts: 0, st: 2}],
       cnts: {},
@@ -121,8 +120,7 @@ describe('Inbox', () => {
     jestExpect((await bodyOf(FETCH, after)).cats).toEqual(['General']);
   });
 
-  // `categoryList` is typed as numbers: Android sends ids, iOS drops non-strings.
-  it.skip('a category chip sends the category to count [bridge bug]', async () => {
+  it('a category chip sends the category to count', async () => {
     await stub.respond('user/getCategoryPreferences', GENERAL_PREFERENCE);
     await openInbox();
     await waitFor(element(by.id('inbox.list.chip.General')))
@@ -183,28 +181,24 @@ describe('Inbox', () => {
     jestExpect(body.all).toBe(true);
   });
 
-  // iOS bridge expects (categoryNames, status); TS sends (fromIndex, toIndex, status).
-  (device.getPlatform() === 'ios' ? it.skip : it)(
-    'Mark all as read on a category chip updates that category [bridge bug on iOS]',
-    async () => {
-      await stub.respond('user/getCategoryPreferences', GENERAL_PREFERENCE);
-      await stub.respond(CATEGORY_COUNT, GENERAL_WITH_UNREAD);
-      await openInbox();
-      await waitFor(element(by.id('inbox.list.chip.General')))
-        .toExist()
-        .withTimeout(10000);
-      let after = await stub.requestCount();
-      await tap('inbox.list.chip.General');
-      await stub.waitForRequest(CATEGORY_COUNT, {after});
-      after = await stub.requestCount();
-      await chooseMenuItem('markAllRead');
+  it('Mark all as read on a category chip updates that category', async () => {
+    await stub.respond('user/getCategoryPreferences', GENERAL_PREFERENCE);
+    await stub.respond(CATEGORY_COUNT, GENERAL_WITH_UNREAD);
+    await openInbox();
+    await waitFor(element(by.id('inbox.list.chip.General')))
+      .toExist()
+      .withTimeout(10000);
+    let after = await stub.requestCount();
+    await tap('inbox.list.chip.General');
+    await stub.waitForRequest(CATEGORY_COUNT, {after});
+    after = await stub.requestCount();
+    await chooseMenuItem('markAllRead');
 
-      const body = await bodyOf(SET, after);
-      jestExpect(body.st).toBe(1);
-      jestExpect(body.cats).toEqual(['General']);
-      jestExpect(body.all).toBe(false);
-    },
-  );
+    const body = await bodyOf(SET, after);
+    jestExpect(body.st).toBe(1);
+    jestExpect(body.cats).toEqual(['General']);
+    jestExpect(body.all).toBe(false);
+  });
 
   it('two selected rows are marked read together', async () => {
     await stub.respond(FETCH, messages(2));
@@ -247,8 +241,8 @@ describe('Inbox', () => {
     jestExpect(body.piids).toEqual([pushInstanceId(1)]);
   });
 
-  // Updates go by index; marking read drops the message from the Unread list and shifts it.
-  it.skip('Delete in the detail of an Unread chip message deletes that message [bridge bug]', async () => {
+  // Marking read drops the message from the SDK's Unread list, so the delete is rejected (2021).
+  it.skip('Delete in the detail of an Unread chip message deletes that message [SDK limitation]', async () => {
     await stub.respond(FETCH, messages(2));
     await openInbox();
     let after = await stub.requestCount();
@@ -265,8 +259,7 @@ describe('Inbox', () => {
     jestExpect(body.piids).toEqual([pushInstanceId(1)]);
   });
 
-  // Same index shift: the first delete drops a row, so the second range points past it.
-  it.skip('deleting two separate selected rows deletes exactly those messages [bridge bug]', async () => {
+  it('deleting two separate selected rows deletes exactly those messages', async () => {
     await stub.respond(FETCH, messages(3));
     await openInbox();
     await element(by.id('inbox.list.cell.0')).longPress();

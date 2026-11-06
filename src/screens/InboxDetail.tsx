@@ -14,12 +14,13 @@ import {errorMessage} from '../helpers/CategoryChannelUtils';
 
 interface RouteParams {
   message: NetmeraPushObject;
-  index: number;
 }
+
+type UpdateStatus = Parameters<typeof Netmera.inboxUpdateStatusForPushObjects>[1];
 
 const InboxDetail = () => {
   const navigation = useNavigation<any>();
-  const {message, index} = useRoute<any>().params as RouteParams;
+  const {message} = useRoute<any>().params as RouteParams;
   const [status, setStatus] = useState(message.inboxStatus);
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -29,9 +30,9 @@ const InboxDetail = () => {
     });
   }, [navigation]);
 
-  const updateStatus = async (next: NMInboxStatus) => {
+  const updateStatus = async (next: UpdateStatus) => {
     try {
-      await Netmera.inboxUpdateStatus(index, index + 1, next);
+      await Netmera.inboxUpdateStatusForPushObjects([message], next);
       setStatus(next);
       return true;
     } catch (e) {
